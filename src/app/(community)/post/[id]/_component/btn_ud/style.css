@@ -1,0 +1,15 @@
+.ud {
+  position: absolute;
+  bottom: -15px;
+  display: flex;
+  gap: 3px;
+}
+
+.ud__span {
+  font-size: var(--font-size-vsm);
+  font-weight: 500;
+}
+
+.ud__btn {
+  cursor: pointer;
+}

@@ -1,0 +1,256 @@
+.board {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  position: relative;
+}
+
+.board__title {
+  padding-left: 5px;
+  margin-bottom: 10px;
+  font-size: var(--font-size-md);
+}
+
+.board__btn-layout {
+  width: 23px;
+  height: 23px;
+  position: absolute;
+  top: 6px;
+  right: 5px;
+  border: none;
+  filter: invert(60%);
+}
+
+.board__btn-layout--grid {
+  background: url(/image/icon/grid.svg);
+}
+
+.board__btn-layout--list {
+  background: url(/image/icon/list.svg);
+}
+
+.board__ul {
+  position: relative;
+}
+
+.board__ul--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 50%);
+}
+
+.board__ul--grid::after {
+  content: "";
+  width: 0px;
+  height: 100%;
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-right: 1px dashed var(--color-smoke-b);
+}
+
+.board__ul::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  display: inline-block;
+  position: absolute;
+  border-top: 1px dashed var(--color-smoke-b);
+}
+
+.board-item {
+  width: 100%;
+  padding: 6px;
+  display: block;
+  position: relative;
+  border-bottom: 1px dashed var(--color-smoke-b);
+  cursor: pointer;
+  list-style: none;
+}
+
+.board-item:hover {
+  background-color: var(--color-smoke-a);
+}
+
+.board-item__data-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.board-item__data {
+  display: flex;
+  align-items: center;
+}
+
+.board-item__data span {
+  margin: 0 7px;
+  font-size: var(--font-size-vsm);
+}
+
+.board-item__category {
+  padding: 1px 3px;
+  background-color: var(--color-main);
+  border-radius: 0px;
+  font-size: var(--font-size-vsm);
+  text-align: center;
+  font-weight: 650;
+  color: var(--color-body);
+}
+
+.board-item__title {
+  margin: 8px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: var(--font-size-md);
+}
+
+.board-item__nick {
+  margin-left: 5px;
+  position: relative;
+  bottom: -1px;
+  font-size: var(--font-size-vsm);
+}
+
+.board-item__date {
+  position: absolute;
+  right: 6px;
+  bottom: 5.5px;
+  font-size: var(--font-size-vsm);
+}
+
+.board-item__view::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  background: url(/image/icon/eye.svg);
+  filter: invert(70%);
+}
+
+.board-item__like::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  background: url(/image/icon/thumbs-up.svg);
+  filter: invert(70%);
+}
+
+.board-item__comment::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  position: relative;
+  top: 1.5px;
+  background: url(/image/icon/chatbox.svg);
+  filter: invert(70%);
+}
+
+.board__nav {
+  height: 30px;
+  margin: 7px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  border-radius: 6px;
+  transition: 0.3s;
+  z-index: 10;
+}
+
+.board__nav li {
+  list-style: none;
+}
+
+.board__nav-btn {
+  width: var(--font-size-md);
+  height: var(--font-size-md);
+  position: relative;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  text-align: center;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  color: var(--color-font);
+}
+
+.board__nav-btn-direction {
+  font-size: var(--font-size-lg);
+}
+
+.board__nav-btn--focus::after {
+  content: "";
+  width: 2px;
+  height: 2px;
+  display: block;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  border-radius: 12px;
+  background-color: green;
+}
+
+.board-empty {
+  height: 76vh;
+  border-radius: 4px;
+  background-color: var(--color-smoke-a);
+}
+
+.board-empty__notif {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-body);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+}
+
+@media screen and (max-width: 1200px) {
+  .board__btn-layout {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    border: none;
+    filter: invert(60%);
+  }
+
+  .board-item__view::before,
+  .board-item__like::before,
+  .board-item__comment::before {
+    margin-right: 3px;
+  }
+
+  .board__nav-btn {
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 17px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .board__btn-layout {
+    width: 18px;
+    height: 18px;
+    top: 0px;
+  }
+
+  .board__ul--grid .board-item__nick {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+  }
+
+  .board__nav-btn {
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 17px;
+  }
+}

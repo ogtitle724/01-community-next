@@ -1,0 +1,46 @@
+.loading {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--color-body);
+  z-index: 100;
+}
+
+.svg {
+  width: 180px;
+  height: 180px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateZ(40deg);
+}
+
+.draw {
+  stroke-width: 20px;
+  stroke: var(--color-smoke-a);
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: draw 1.5s ease-in infinite normal;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 1400;
+  }
+  25% {
+    stroke-dashoffset: 0;
+  }
+  55% {
+    stroke-dashoffset: 0;
+  }
+  85% {
+    stroke-dashoffset: -1400;
+  }
+  100% {
+    stroke-dashoffset: -1400;
+  }
+}

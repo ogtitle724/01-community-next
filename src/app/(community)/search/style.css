@@ -1,0 +1,29 @@
+.search-result__main {
+  width: 100vw;
+  height: auto;
+}
+
+.search-result__content {
+  width: min(1020px, 98vw);
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 20px 10px;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: initial;
+}
+
+.search-result__title {
+  width: 100%;
+  height: 4.54%;
+  padding-top: 3px;
+  border-radius: 3px;
+  font-size: var(--font-size-md);
+  text-align: center;
+}
+
+.search-result__board-pre {
+  width: 100%;
+  height: 100%;
+  padding: 10px 0;
+}

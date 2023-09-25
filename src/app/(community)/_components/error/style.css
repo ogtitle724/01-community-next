@@ -1,0 +1,19 @@
+.server-error__wrapper {
+  margin: 20px 0;
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--font-size-title);
+  color: var(--color-font);
+  font-weight: 650;
+}
+
+.server-error__icon {
+  width: 160px;
+  height: 160px;
+  margin: 5px auto;
+  display: block;
+  background: url(/image/icon/cloud-offline.svg);
+  filter: invert(var(--icon-invert));
+}

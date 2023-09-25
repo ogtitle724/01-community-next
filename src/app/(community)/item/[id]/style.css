@@ -1,0 +1,143 @@
+.item-detail__main {
+  width: 640px;
+  position: relative;
+  margin: 30px auto;
+  position: relative;
+}
+
+.item-detail__no-img {
+  width: 640px;
+  height: 480px;
+  margin: 10px auto;
+  position: relative;
+  border-radius: 4px;
+  background: var(--color-smoke-a);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.item-detail__no-img::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: url(/image/clip.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20%;
+}
+
+.item-detail__title {
+  margin: 30px 0 10px 0;
+  font-size: var(--font-size-md);
+  font-weight: 650;
+}
+
+.item-detail__description {
+  min-height: 100px;
+  margin: 10px 0;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid var(--color-smoke-a);
+  font-size: var(--font-size-sm);
+  font-weight: 650;
+}
+
+.suged-list {
+  margin: 30px 0;
+}
+
+.suged-list__title {
+  display: inline-block;
+  margin: 20px 0 20px 0;
+  font-size: var(--font-size-md);
+}
+
+.suged-list__ul {
+  width: 100%;
+  height: 160px;
+  padding: 0px 10px;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid var(--color-smoke-a);
+  overflow-y: scroll;
+}
+
+.suged-list__ul::-webkit-scrollbar {
+  width: 0;
+}
+
+.suged-item {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-smoke-a);
+}
+
+.suged-item:last-child {
+  border: none;
+}
+
+.suged-item__img {
+  width: 50px;
+  height: 29px;
+  border-radius: 4px;
+  background-color: var(--color-smoke-a);
+}
+
+.suged-item__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: var(--font-size-sm);
+  font-weight: 650;
+}
+
+.suged-item__nick {
+  font-size: var(--font-size-sm);
+  font-weight: 650;
+}
+
+@media screen and (max-width: 768px) {
+  .item-detail__main {
+    width: 480px;
+  }
+
+  .item-detail__no-img {
+    width: 480px;
+    height: 360px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .item-detail__main {
+    margin: 0 auto 30px auto;
+    width: 100%;
+  }
+
+  .item-detail__no-img {
+    width: 100%;
+    height: 240px;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .item-detail__title {
+    margin: 28px 10px 18px 10px;
+  }
+
+  .item-detail__description {
+    margin: 10px;
+  }
+
+  .item-detail__info {
+    margin: 10px 10px 30px 10px;
+  }
+
+  .suged-list {
+    margin: 10px;
+  }
+}
