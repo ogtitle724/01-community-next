@@ -7,6 +7,7 @@ export const signSlice = createSlice({
     loginDeadline: null,
     isDarkMode: false,
     user: null,
+    isChatConnect: false,
   },
   reducers: {
     login: (state) => {
@@ -14,6 +15,10 @@ export const signSlice = createSlice({
     },
     logout: (state) => {
       state.isLogIn = false;
+    },
+    chatConnect: (state, action) => {
+      let { sign } = action.payload;
+      state.isChatConnect = sign;
     },
     clickModeBtn: (state) => {
       let sign = !state.isDarkMode;
@@ -31,9 +36,16 @@ export const signSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { login, logout, clickModeBtn, setUser, setLoginDeadline } =
-  signSlice.actions;
+export const {
+  login,
+  logout,
+  chatConnect,
+  clickModeBtn,
+  setUser,
+  setLoginDeadline,
+} = signSlice.actions;
 export const selectIsLogIn = (state) => state.sign.isLogIn;
+export const selectIsChatConnect = (state) => state.sign.isChatConnect;
 export const selectIsDarkMode = (state) => state.sign.isDarkMode;
 export const selectUser = (state) => state.sign.user;
 export const selectLoginDeadline = (state) => state.sign.loginDeadline;

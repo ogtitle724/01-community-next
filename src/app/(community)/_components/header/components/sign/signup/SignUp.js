@@ -1,6 +1,7 @@
 "use client";
+import Fetch from "@/util/fetch";
+import socket from "@/util/socket";
 import { useCallback, useEffect, useState, useMemo } from "react";
-import axios from "axios";
 import { checkUid, checkNick, checkEmail, checkPwd } from "@/util/validation";
 import "./style.css";
 
@@ -34,12 +35,12 @@ export default function SignUp({ setShowSignUpForm }) {
   const handleCheckDuplication = useCallback(async (value, type) => {
     try {
       if (type === "nick") {
-        await axios.post(process.env.NEXT_PUBLIC_PATH_CHECK_NICK, {
+        await Fetch.post(process.env.NEXT_PUBLIC_PATH_CHECK_NICK, {
           nick: value,
         });
         setCanUseNick(true);
       } else if (type === "uid") {
-        await axios.post(process.env.NEXT_PUBLIC_PATH_CHECK_UID, {
+        await Fetch.post(process.env.NEXT_PUBLIC_PATH_CHECK_UID, {
           uid: value,
         });
         setCanUseUid(true);
@@ -61,17 +62,18 @@ export default function SignUp({ setShowSignUpForm }) {
 
   const handleClickBtnConfrim = useCallback(async () => {
     try {
-      await axios.post(process.env.NEXT_PUBLIC_PATH_EMAIL_VERIFY, {
+      await Fetch.post(process.env.NEXT_PUBLIC_PATH_EMAIL_VERIFY, {
         email,
         authCode: Number(authCode),
       });
+      console.log("valid");
       setIsCodeVaild(true);
     } catch (err) {
       console.log(err);
       setIsFail(true);
       setTimeout(() => setIsFail(false), 3000);
     }
-  }, [authCode]);
+  }, [authCode, email]);
 
   const handleClickBtnAuth = useCallback(async () => {
     setIsClickBtnAuth(true);
@@ -79,7 +81,7 @@ export default function SignUp({ setShowSignUpForm }) {
     setCount(180);
 
     try {
-      await axios.post(process.env.NEXT_PUBLIC_PATH_EMAIL_AUTHCODE, {
+      await Fetch.post(process.env.NEXT_PUBLIC_PATH_EMAIL_AUTHCODE, {
         email,
       });
     } catch (err) {
@@ -91,15 +93,19 @@ export default function SignUp({ setShowSignUpForm }) {
     e.preventDefault();
 
     try {
-      const res = await axios.post(process.env.NEXT_PUBLIC_PATH_USER, {
+      const res = await Fetch.post(process.env.NEXT_PUBLIC_PATH_USER, {
         uid: uid,
         nick: nick,
         email: email,
         pwd: pwd,
       });
 
-      if (res.data) setShowSignUpForm(false);
-      else throw new Error("singin rejected");
+      if (res.data) {
+        setShowSignUpForm(false);
+        //TODO: 회원가입과 함께 DDB USERS TABLE에 회원 추가
+      } else {
+        throw new Error("singin rejected");
+      }
     } catch (err) {
       console.log(err);
       alert("ERROR:", err);

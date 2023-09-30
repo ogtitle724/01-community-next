@@ -1,13 +1,8 @@
 "use client";
+import Link from "next/link";
 import { memo } from "react";
-import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setPage,
-  setCategory,
-  setScrollY,
-  selectWidth,
-} from "@/redux/slice/pageSlice";
+import { useSelector } from "react-redux";
+import { selectWidth } from "@/redux/slice/pageSlice";
 import { selectIsLogIn } from "@/redux/slice/signSlice";
 import ThemeToggle from "@/components/themetoggle/ThemeToggle";
 import SearchBar from "../search_bar/SearchBar";
@@ -18,29 +13,18 @@ import "./style.css";
 
 function Header() {
   console.log("header rendered");
-  const router = useRouter();
-  const dispatch = useDispatch();
   const isLogIn = useSelector(selectIsLogIn);
   const width = useSelector(selectWidth);
-
-  const handleClickLogo = (e) => {
-    e.preventDefault();
-    dispatch(setPage({ nextPage: 1 }));
-    dispatch(setScrollY({ scrollY: 0 }));
-    dispatch(setCategory({ category: "홈" }));
-    router.push(process.env.NEXT_PUBLIC_ROUTE_HOME);
-  };
 
   return (
     <>
       <header className="header">
-        <a
+        <Link
           className="header__logo"
           href={process.env.NEXT_PUBLIC_ROUTE_HOME}
-          onClick={(e) => handleClickLogo(e)}
         >
           {width < 480 ? <i className="header__logo-img"></i> : "CLiPmArKET"}
-        </a>
+        </Link>
         {width > 1024 ? (
           <>
             <SearchBar />

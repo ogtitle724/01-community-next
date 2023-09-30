@@ -26,14 +26,18 @@
   background-color: var(--color-smoke-b);
 }
 
+.chat-wrapper {
+  margin: 30px 0;
+  position: relative;
+  list-style: none;
+}
+
 .chat {
   width: fit-content;
   max-width: 56%;
   min-height: 40px;
-  margin: 20px 0;
-  padding: 10px;
+  padding: 10px 14px;
   position: relative;
-  list-style: none;
   word-break: break-all;
   font-size: var(--font-size-md);
 }
@@ -46,11 +50,38 @@
   color: white;
 }
 
+.chat--me * {
+  color: white;
+}
+
 .chat--opponent {
   align-self: flex-start;
   border-radius: 23px 23px 23px 0px;
   background-color: var(--color-smoke-a);
+}
+
+.chat--opponent * {
   color: var(--color-font);
+}
+
+.chat__date {
+  width: 40px;
+  display: block;
+  position: absolute;
+  bottom: -16px;
+  font-size: var(--font-size-vsm);
+  color: var(--color-smoke-b);
+  scale: 0.8;
+}
+
+.chat__date--me {
+  right: -3px;
+  text-align: right;
+}
+
+.chat__date--opponent {
+  left: -3px;
+  text-align: left;
 }
 
 .chat-detail__keyboard {
@@ -67,6 +98,7 @@
 }
 
 .chat-detail__label-input-img {
+  flex-shrink: 0;
   width: 37.5px;
   height: 37.5px;
   display: block;
@@ -76,10 +108,12 @@
 }
 
 .chat-detail__input-img {
+  flex-shrink: 0;
   display: none;
 }
 
 .chat-detail__btn-wrapper-scroll {
+  flex-shrink: 0;
   width: 25px;
   height: 37.5px;
   display: flex;
@@ -107,6 +141,7 @@
 }
 
 .chat-detail__btn-submit {
+  flex-shrink: 0;
   width: 30px;
   height: 37.5px;
   position: relative;

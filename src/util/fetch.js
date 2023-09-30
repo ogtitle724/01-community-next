@@ -11,26 +11,28 @@ class Fetch {
   }
 
   //intercept response and set auth header
-  async setAuthHeader(res) {
+  async interceptRes(res) {
     const authHeader = res.headers.get("Authorization");
     const accessToken = authHeader && authHeader.split(" ")[1];
 
     if (accessToken) {
-      console.log(authHeader);
       this.defaultOptions.headers.Authorization = `Bearer ${accessToken}`;
+      //TODO: 토크 파싱한담에 소켓 연결
     }
     return res;
   }
 
   async request(path, options = {}) {
     const url = this.domain + path;
-
+    console.log(url);
     options.headers = { ...this.defaultOptions.headers, ...options.headers };
-    console.log(options);
 
     try {
       let res = await fetch(url, options);
-      res = await this.setAuthHeader(res);
+      if (!res.ok) {
+        throw new Error(`HTTP Error: ${res.status} ${res.statusText}`);
+      }
+      res = await this.interceptRes(res);
       return res;
     } catch (err) {
       throw new Error(err);

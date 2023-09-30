@@ -7,7 +7,7 @@ import {
   setUser,
   selectUser,
   setLoginDeadline,
-  selectIsLogIn,
+  selectIsChatConnect,
 } from "@/redux/slice/signSlice";
 import "./style.css";
 
@@ -23,6 +23,7 @@ export default function UserBoard() {
       dispatch(logout());
       dispatch(setUser({ user: null }));
       dispatch(setLoginDeadline({ deadline: null }));
+      dispatch(selectIsChatConnect({ sign: false }));
     } catch (err) {
       alert("Error:", err);
     }

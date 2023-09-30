@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux";
 import {
   login,
   logout,
+  chatConnect,
   setLoginDeadline,
   setUser,
 } from "@/redux/slice/signSlice";
+import socket from "@/util/socket";
 import Fetch from "@/util/fetch";
 import { blindInput, jwtDecode } from "@/util/secure";
 import "./style.css";
@@ -42,9 +44,12 @@ export default function SignIn() {
       let afterAWeek = new Date();
       afterAWeek.setDate(now.getUTCDate() + 7);
 
+      socket.connect(~~(Math.random() * 10));
+      dispatch(chatConnect({ sign: true }));
+
       dispatch(login());
-      dispatch(setLoginDeadline({ deadline: afterAWeek.toString() }));
       dispatch(setUser({ user }));
+      dispatch(setLoginDeadline({ deadline: afterAWeek.toString() }));
       setTimeout(silentRenew, process.env.NEXT_PUBLIC_TOKEN_REGENERATE_TIME);
     } catch (err) {
       setIsFail(true);

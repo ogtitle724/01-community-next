@@ -1,14 +1,22 @@
 "use client";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
-import ThemeToggle from "@/components//themetoggle/ThemeToggle";
-import Fetch from "@/util/fetch";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import socket from "@/util/socket";
+import ThemeToggle from "@/components//themetoggle/ThemeToggle";
+import timeConverter from "@/util/time_converter";
+import { sanitize } from "@/util/secure";
 import "./style.css";
 
-export default function ChatNav() {
-  const [searchTerm, setSearchTerm] = useState();
+export default function ChatNav({
+  rooms,
+  curChatRoom,
+  setCurChatRoom,
+  setOpponentId,
+  tempId,
+}) {
+  const [searchTerm, setSearchTerm] = useState("");
   const [isShowNav, setIsShowNav] = useState(true);
   const nav = useRef();
   const width = useSelector(selectWidth);
@@ -18,8 +26,15 @@ export default function ChatNav() {
     else nav.current.style = "left: -300px";
   }, [isShowNav]);
 
-  const handleClkChat = async (roomId) => {
+  const handleClkChat = async (roomId, opponentId) => {
     try {
+      setCurChatRoom(roomId);
+      setOpponentId(opponentId);
+      socket.send({
+        action: "joinRoom",
+        senderId: tempId,
+        roomId,
+      });
       //채팅 데이터 받아온 다음에 chatList에 세팅
     } catch (err) {
       console.error(err);
@@ -53,57 +68,54 @@ export default function ChatNav() {
           />
         </nav>
         <ul className="chatlist">
-          <li className="chatitem" onClick={handleClkChat}>
-            <div className="chatitem__img-wrapper">
-              <div className="chatitem__img"></div>
-              <div className="chatitem__img"></div>
-            </div>
-            <div className="chatitem__info">
-              <span className="chatitem__nick">돌돔</span>
-              <span className="chatitem__time">1시간전</span>
-            </div>
-            <span className="chatitem__preview">ㅇㅇ</span>
-          </li>
-          <li className="chatitem chatitem--active" onClick={handleClkChat}>
-            <div className="chatitem__img-wrapper">
-              <div className="chatitem__img"></div>
-              <div className="chatitem__img"></div>
-            </div>
-            <div className="chatitem__info">
-              <span className="chatitem__nick">JOHN</span>
-              <span className="chatitem__time">1시간전</span>
-            </div>
-            <span className="chatitem__preview">
-              Hellow there! can i ask u someting?
-            </span>
-          </li>
-          <li className="chatitem" onClick={handleClkChat}>
-            <div className="chatitem__img-wrapper">
-              <div className="chatitem__img"></div>
-              <div className="chatitem__img"></div>
-            </div>
-            <div className="chatitem__info">
-              <span className="chatitem__nick">후라이팬</span>
-              <span className="chatitem__time">1시간전</span>
-            </div>
-            <span className="chatitem__preview">네고 가능한가요?</span>
-          </li>
-          <li className="chatitem" onClick={handleClkChat}>
-            <div className="chatitem__img-wrapper">
-              <div className="chatitem__img"></div>
-              <div className="chatitem__img"></div>
-            </div>
-            <div className="chatitem__info">
-              <span className="chatitem__nick">famous</span>
-              <span className="chatitem__time">1시간전</span>
-            </div>
-            <span className="chatitem__preview">
-              가나다라마바사아자차카타파하아야어여우유오요
-            </span>
-          </li>
+          {rooms &&
+            Object.entries(rooms)
+              .sort((a, b) => b[1]["re_date"] - a[1]["re_date"])
+              .map((entry, idx) => {
+                const roomId = entry[0];
+                const isFocus = roomId === curChatRoom;
+
+                return (
+                  <ChatItem
+                    key={"chatRoom_" + idx}
+                    roomEntry={entry}
+                    isFocus={isFocus}
+                    handleClkChat={handleClkChat}
+                  />
+                );
+              })}
         </ul>
         <h2 className="chatlist__title">clip-chat</h2>
       </nav>
     </>
+  );
+}
+
+function ChatItem({ roomEntry, isFocus, handleClkChat }) {
+  return (
+    <li
+      className={"chatitem" + (isFocus ? " chatitem--active" : "")}
+      onClick={() => handleClkChat(roomEntry[0], roomEntry[1]["opponent_id"])}
+    >
+      <div className="chatitem__img-wrapper">
+        <div className="chatitem__img"></div>
+        <div className="chatitem__img"></div>
+      </div>
+      <div className="chatitem__info">
+        <span className="chatitem__nick">{roomEntry[1]["opponent_nick"]}</span>
+        <span className="chatitem__time">
+          {timeConverter(roomEntry[1]["re_date"])}
+        </span>
+      </div>
+      <span
+        className="chatitem__preview"
+        dangerouslySetInnerHTML={{ __html: sanitize(roomEntry[1]["preview"]) }}
+      ></span>
+      {roomEntry[1]["relay_cnt"] ? (
+        <p className="chatitem__relay-cnt">{roomEntry[1]["relay_cnt"]}</p>
+      ) : (
+        ""
+      )}
+    </li>
   );
 }

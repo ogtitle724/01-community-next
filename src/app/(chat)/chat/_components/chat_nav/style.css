@@ -75,6 +75,7 @@
   width: 95%;
   margin: 5px auto;
   padding: 7px 10px;
+  position: relative;
   display: grid;
   grid-template-columns: 55px 1fr;
   grid-template-rows: 1fr 1fr;
@@ -149,11 +150,11 @@
 }
 
 .chatitem__preview {
+  width: 90%;
+  height: var(--font-size-sm);
   font-size: var(--font-size-vsm);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .chatlist__title {
@@ -163,4 +164,19 @@
   transform: translateX(-50%);
   font-size: var(--font-size-sm);
   color: var(--color-smoke-a);
+}
+
+.chatitem__relay-cnt {
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 100%;
+  background-color: red;
+  color: white;
+  font-size: var(--font-size-vsm);
+  font-weight: 650;
+  text-align: center;
+  line-height: 15px;
 }

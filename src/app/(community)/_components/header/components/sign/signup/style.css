@@ -98,7 +98,7 @@
 }
 
 .signup__input-auth--fail {
-  border: 2px solid var(--color-red);
+  border: 2px solid red;
   animation: fail linear 0.8s 1;
 }
 
