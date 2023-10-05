@@ -32,7 +32,7 @@ function Gnb() {
     <nav ref={gnb} className="gnb">
       <Link
         className="gnb__btn"
-        href={process.env.NEXT_PUBLIC_DOMAIN_CLI}
+        href={process.env.NEXT_PUBLIC_ROUTE_HOME}
         onClick={() => handleClkLink("홈")}
         scroll={false}
       >
@@ -43,10 +43,7 @@ function Gnb() {
           <Link
             key={"gnb-category_" + idx}
             className="gnb__btn"
-            href={
-              process.env.NEXT_PUBLIC_DOMAIN_CLI +
-              `/${categoriesKO2EN[category]}`
-            }
+            href={`/${categoriesKO2EN[category]}`}
             onClick={() => handleClkLink(category)}
             scroll={false}
           >
@@ -56,7 +53,7 @@ function Gnb() {
       })}
       <Link
         className="gnb__btn"
-        href={process.env.NEXT_PUBLIC_DOMAIN_CLI + "/showcase"}
+        href={"/showcase"}
         onClick={() => handleClkLink("물물교환")}
         scroll={false}
       >

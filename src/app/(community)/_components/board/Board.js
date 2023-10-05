@@ -122,11 +122,7 @@ function Nav({ posts }) {
                   ? " board__nav-btn--focus"
                   : "")
               }
-              href={
-                process.env.NEXT_PUBLIC_DOMAIN_CLI +
-                path +
-                (ele - 1 ? `?page=${ele}` : "")
-              }
+              href={path + (ele - 1 ? `?page=${ele}` : "")}
             >
               {ele}
             </Link>
