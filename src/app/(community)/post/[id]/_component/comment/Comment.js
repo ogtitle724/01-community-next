@@ -6,16 +6,10 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
 
 import Fetch from "@/util/fetch";
+import timeConverter from "@/util/time_converter";
 import { selectIsDarkMode, selectUser } from "@/redux/slice/signSlice";
 import { sanitize } from "@/util/secure";
 import { changeP2Span, deleteEnter } from "@/util/textProcess";
-import timeConverter from "@/util/time_converter";
-/* import thumbsUp from "@/asset/icons/thumbs-up.svg";
-import thumbsDown from "@/asset/icons/thumbs-down.svg";
-import chatBox from "@/asset/icons/chatbox.svg";
-import edit from "@/asset/icons/edit.svg";
-import trash from "@/asset/icons/trash.svg";
-import close from "@/asset/icons/close.svg"; */
 import "./style.css";
 
 export default function CommentBoard({ postId, comments }) {
@@ -99,7 +93,7 @@ export default function CommentBoard({ postId, comments }) {
           }}
           onChange={(event, editor) => {
             let data = editor.getData();
-            console.log(data);
+
             if (data === "<p>댓글을 입력해주세요...</p>") {
               setContent("");
             } else {

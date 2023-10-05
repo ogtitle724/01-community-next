@@ -5,7 +5,7 @@ import { selectIsLogIn } from "@/redux/slice/signSlice";
 import Sign from "../sign/Sign";
 import UserBoard from "../user_board/UserBoard";
 import SearchBar from "../../../search_bar/SearchBar";
-import ThemeToggle from "../../../../../_components/themetoggle/ThemeToggle";
+import ThemeToggle from "@components/theme_toggle/ThemeToggle";
 import "./style.css";
 
 export default function MenuBtn() {

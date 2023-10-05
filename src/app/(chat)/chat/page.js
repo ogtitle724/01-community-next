@@ -20,7 +20,6 @@ export default function ChatLayout() {
       const message = JSON.parse(e.data);
       const action = message.action;
       console.log(message);
-
       if (action === "setRooms") {
         setRooms(message.data);
       }

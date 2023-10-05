@@ -1,5 +1,5 @@
 .chat-detail {
-  width: calc(100vw - 280px);
+  width: calc(100vw - 250px);
   height: 100vh;
   position: fixed;
   right: 0;
@@ -10,7 +10,7 @@
 
 .chat-detail__contents {
   flex-grow: 1;
-  padding: 5px 10px;
+  padding: 5px 13px;
   position: relative;
   overflow-y: scroll;
 }
@@ -65,7 +65,7 @@
 }
 
 .chat__date {
-  width: 40px;
+  width: 80px;
   display: block;
   position: absolute;
   bottom: -16px;
@@ -82,6 +82,19 @@
 .chat__date--opponent {
   left: -3px;
   text-align: left;
+}
+
+.chat-detail__default {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url(/image/icon/chatbubbles-filled.svg);
+  background-size: contain;
+  background-position: center;
+  filter: invert(var(--icon-invert));
 }
 
 .chat-detail__keyboard {
@@ -186,4 +199,10 @@
 
 .chat-detail__keyboard .ck.ck-editor__editable_inline > p {
   margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .chat-detail {
+    width: 100vw;
+  }
 }

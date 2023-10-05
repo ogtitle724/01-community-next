@@ -4,7 +4,7 @@ import { memo } from "react";
 import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
 import { selectIsLogIn } from "@/redux/slice/signSlice";
-import ThemeToggle from "@/components/themetoggle/ThemeToggle";
+import ThemeToggle from "@components/theme_toggle/ThemeToggle";
 import SearchBar from "../search_bar/SearchBar";
 import Sign from "./components/sign/Sign";
 import UserBoard from "./components/user_board/UserBoard";

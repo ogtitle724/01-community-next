@@ -1,12 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+
 import { selectIsLogIn, selectUser } from "@/redux/slice/signSlice";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
 import Fetch from "@/util/fetch";
 import "./style.css";
+const Editor = dynamic(() => import("@components/editor/editor"), {
+  ssr: false,
+});
 
 export default function WritePage({ params }) {
   const router = useRouter();
@@ -16,8 +19,6 @@ export default function WritePage({ params }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [category, setCategory] = useState("");
-  //이미지 저장처리할때 썸네일관련 설정
-  const [thumbnail, setThumbnail] = useState("");
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
@@ -107,7 +108,7 @@ export default function WritePage({ params }) {
 
       router.back();
     } catch (err) {
-      console.log(err);
+      console.error(err);
       alert("게시글 작성 혹은 수정을 완료하지 못했습니다.");
     }
   };
@@ -122,31 +123,7 @@ export default function WritePage({ params }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <CKEditor
-          editor={ClassicEditor}
-          config={{
-            placeholder: "내용을 입력하세요.",
-          }}
-          data=""
-          onReady={(editor) => {
-            // You can store the "editor" and use when it is needed.
-            console.log("Editor is ready to use!", editor);
-            if (isUpdate && ogData) {
-              editor.setData(ogData);
-            }
-          }}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            setBody(data);
-            console.log({ event, editor, data });
-          }}
-          onBlur={(event, editor) => {
-            /* console.log("Blur.", editor); */
-          }}
-          onFocus={(event, editor) => {
-            /* console.log("Focus.", editor); */
-          }}
-        />
+        <Editor onChange={setBody} />
         <section className="write-page__board">
           <select
             name="category"

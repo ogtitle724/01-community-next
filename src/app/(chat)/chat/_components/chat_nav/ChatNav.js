@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
 import Link from "next/link";
 import socket from "@/util/socket";
-import ThemeToggle from "@/components//themetoggle/ThemeToggle";
+import ThemeToggle from "@components/theme_toggle/ThemeToggle";
 import timeConverter from "@/util/time_converter";
 import { sanitize } from "@/util/secure";
 import "./style.css";
@@ -22,9 +22,12 @@ export default function ChatNav({
   const width = useSelector(selectWidth);
 
   useEffect(() => {
-    if (isShowNav) nav.current.style = "left: 0px";
-    else nav.current.style = "left: -300px";
-  }, [isShowNav]);
+    if (isShowNav || width >= 768)
+      nav.current.style = "left: 0px; box-shadow: 0 0 0 100vw rgba(0,0,0,0.8)";
+    else {
+      nav.current.style = "left: -250px";
+    }
+  }, [isShowNav, width]);
 
   const handleClkChat = async (roomId, opponentId) => {
     try {
@@ -51,7 +54,10 @@ export default function ChatNav({
       <nav ref={nav} className="chatnav">
         {width < 768 && (
           <button
-            className="chatnav__btn-shownav"
+            className={
+              "chatnav__btn" +
+              (isShowNav ? " chatnav__btn--show" : " chatnav__btn--hide")
+            }
             onClick={handleClkBtnShowNav}
           ></button>
         )}
@@ -70,7 +76,7 @@ export default function ChatNav({
         <ul className="chatlist">
           {rooms &&
             Object.entries(rooms)
-              .sort((a, b) => b[1]["re_date"] - a[1]["re_date"])
+              .sort((a, b) => b[1]["recent_active"] - a[1]["recent_active"])
               .map((entry, idx) => {
                 const roomId = entry[0];
                 const isFocus = roomId === curChatRoom;
@@ -104,15 +110,15 @@ function ChatItem({ roomEntry, isFocus, handleClkChat }) {
       <div className="chatitem__info">
         <span className="chatitem__nick">{roomEntry[1]["opponent_nick"]}</span>
         <span className="chatitem__time">
-          {timeConverter(roomEntry[1]["re_date"])}
+          {timeConverter(roomEntry[1]["recent_active"])}
         </span>
       </div>
       <span
         className="chatitem__preview"
         dangerouslySetInnerHTML={{ __html: sanitize(roomEntry[1]["preview"]) }}
       ></span>
-      {roomEntry[1]["relay_cnt"] ? (
-        <p className="chatitem__relay-cnt">{roomEntry[1]["relay_cnt"]}</p>
+      {roomEntry[1]["alarm_cnt"] ? (
+        <p className="chatitem__relay-cnt">{roomEntry[1]["alarm_cnt"]}</p>
       ) : (
         ""
       )}

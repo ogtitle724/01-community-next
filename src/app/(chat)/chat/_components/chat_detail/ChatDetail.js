@@ -1,13 +1,16 @@
 "use client";
-import socket from "@/util/socket";
-import { useEffect, useInsertionEffect, useRef, useState } from "react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
-import "./style.css";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectUser } from "@/redux/slice/signSlice";
+
+import socket from "@/util/socket";
 import timeConverter from "@/util/time_converter";
+import { selectUser } from "@/redux/slice/signSlice";
 import { sanitize } from "@/util/secure";
+import "./style.css";
+const Editor = dynamic(() => import("@components/editor/editor"), {
+  ssr: false,
+});
 
 export default function ChatDetail({
   chats,
@@ -19,7 +22,7 @@ export default function ChatDetail({
   const [inputData, setInputData] = useState("");
   const chatWrapper = useRef();
   const user = useSelector(selectUser);
-  const ckeditor = useRef();
+  const ckRef = useRef();
 
   useEffect(() => {
     const offsetHeight = chatWrapper.current.offsetHeight;
@@ -41,7 +44,7 @@ export default function ChatDetail({
       receiver_id: opponentId,
       sender_id: tempId,
     };
-    console.log(curChatRoom, message);
+
     try {
       socket.send({
         action: "message",
@@ -51,7 +54,7 @@ export default function ChatDetail({
 
       setChats((chat) => [...chat, message]);
       setInputData("");
-      ckeditor.current.editor.setData("");
+      ckRef.current.editor.setData("");
     } catch (err) {
       console.error(err);
     }
@@ -78,45 +81,38 @@ export default function ChatDetail({
   return (
     <main className="chat-detail">
       <ul ref={chatWrapper} className="chat-detail__contents">
-        {chats.map((chat, idx) => {
-          return (
-            <li key={"chat_" + idx} className="chat-wrapper">
-              <p
-                className={
-                  "chat" +
-                  (chat.sender_id === tempId ? " chat--me" : " chat--opponent")
-                }
-                dangerouslySetInnerHTML={{ __html: sanitize(chat.content) }}
-              ></p>
-              <span
-                className={
-                  "chat__date" +
-                  (chat.sender_id === tempId
-                    ? " chat__date--me"
-                    : " chat__date--opponent")
-                }
-              >
-                {timeConverter(chat.timestamp)}
-              </span>
-            </li>
-          );
-        })}
+        {curChatRoom ? (
+          chats.map((chat, idx) => {
+            return (
+              <li key={"chat_" + idx} className="chat-wrapper">
+                <p
+                  className={
+                    "chat" +
+                    (chat.sender_id === tempId
+                      ? " chat--me"
+                      : " chat--opponent")
+                  }
+                  dangerouslySetInnerHTML={{ __html: sanitize(chat.content) }}
+                ></p>
+                <span
+                  className={
+                    "chat__date" +
+                    (chat.sender_id === tempId
+                      ? " chat__date--me"
+                      : " chat__date--opponent")
+                  }
+                >
+                  {timeConverter(chat.timestamp)}
+                </span>
+              </li>
+            );
+          })
+        ) : (
+          <div className="chat-detail__default"></div>
+        )}
       </ul>
       <section className="chat-detail__keyboard">
-        <CKEditor
-          ref={ckeditor}
-          editor={ClassicEditor}
-          config={{
-            placeholder: "내용을 입력하세요.",
-          }}
-          data=""
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            setInputData(data);
-          }}
-          onBlur={(event, editor) => {}}
-          onFocus={(event, editor) => {}}
-        />
+        <Editor ckRef={ckRef} onChange={setInputData} />
         <label className="chat-detail__label-input-img">
           <input type="file" className="chat-detail__input-img"></input>
         </label>

@@ -32,7 +32,7 @@ export default function BtnUd({ writerId, postId }) {
         await Fetch.delete(path);
         router.back();
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   };

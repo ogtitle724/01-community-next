@@ -11,14 +11,13 @@
   height: 100%;
   border-radius: 100%;
   background-repeat: no-repeat;
+  filter: invert(var(--icon-invert));
 }
 
 .themetoggle__icon--light {
-  filter: invert(60%);
   background-image: url(/image/icon/light.svg);
 }
 
 .themetoggle__icon--dark {
-  filter: invert(60%);
   background-image: url(/image/icon/dark.svg);
 }

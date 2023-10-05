@@ -68,7 +68,7 @@ export default function SignIn() {
       dispatch(logout());
       dispatch(setUser({ user: null }));
       dispatch(setLoginDeadline({ deadline: null }));
-      console.log(err);
+      console.error(err);
     }
   };
 

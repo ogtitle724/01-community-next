@@ -51,7 +51,7 @@ export default function SignUp({ setShowSignUpForm }) {
       } else if (type === "uid") {
         setCanUseUid(false);
       }
-      console.log(err);
+      console.error(err);
     }
   }, []);
 
@@ -66,10 +66,9 @@ export default function SignUp({ setShowSignUpForm }) {
         email,
         authCode: Number(authCode),
       });
-      console.log("valid");
       setIsCodeVaild(true);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       setIsFail(true);
       setTimeout(() => setIsFail(false), 3000);
     }
@@ -85,7 +84,7 @@ export default function SignUp({ setShowSignUpForm }) {
         email,
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }, [email]);
 
@@ -107,7 +106,7 @@ export default function SignUp({ setShowSignUpForm }) {
         throw new Error("singin rejected");
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       alert("ERROR:", err);
     }
   };
