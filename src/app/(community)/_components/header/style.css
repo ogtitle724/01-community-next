@@ -41,6 +41,7 @@
     justify-content: center;
     align-items: center;
   }
+
   .header__logo {
     margin: 0;
     padding-top: 3px;
@@ -49,6 +50,7 @@
   .header__logo-img {
     width: calc(var(--header-height) - 6px);
     height: calc(var(--header-height) - 6px);
+    display: block;
     background: url(/image/icon/clip.svg);
     filter: invert(60%);
     transform: rotateZ(36deg);

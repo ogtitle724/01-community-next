@@ -93,7 +93,6 @@ export default function WritePage({ params }) {
       title,
       category,
       content: body,
-      thumbnail,
     };
 
     try {

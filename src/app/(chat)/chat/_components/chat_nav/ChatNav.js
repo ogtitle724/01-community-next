@@ -22,10 +22,14 @@ export default function ChatNav({
   const width = useSelector(selectWidth);
 
   useEffect(() => {
-    if (isShowNav || width >= 768)
-      nav.current.style = "left: 0px; box-shadow: 0 0 0 100vw rgba(0,0,0,0.8)";
+    if (width >= 768) nav.current.style = "left: 0px;";
     else {
-      nav.current.style = "left: -250px";
+      if (isShowNav) {
+        nav.current.style =
+          "left: 0px; box-shadow: 0 0 0 100vw rgba(0,0,0,0.8)";
+      } else {
+        nav.current.style = "left: -250px";
+      }
     }
   }, [isShowNav, width]);
 

@@ -66,7 +66,7 @@
   border-radius: 12px;
   border: 1px solid var(--color-smoke-a);
   background-color: var(--color-body);
-  box-shadow: 0 0 13px var(--color-shadow);
+  box-shadow: 0 0 3px var(--color-shadow);
   font-weight: 600;
 }
 
@@ -158,16 +158,16 @@
 }
 
 .showcase__btn-to-top {
-  width: 55px;
-  height: 55px;
+  width: 45px;
+  height: 45px;
   position: fixed;
-  bottom: 15px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 100%;
   border: 1px solid var(--color-smoke-a);
   background-color: var(--color-body);
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 3px var(--color-shadow);
 }
 
 .showcase__btn-to-top::before {
@@ -176,7 +176,7 @@
   height: 100%;
   display: block;
   background-image: url(/image/icon/up.svg);
-  background-position: center top 10px;
+  background-position: center top 7px;
   background-repeat: no-repeat;
   background-size: 50%;
   filter: invert(70%);
