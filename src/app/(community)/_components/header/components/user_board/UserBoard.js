@@ -1,5 +1,5 @@
 "use client";
-import axios from "axios";
+import Fetch from "@/util/fetch";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,14 +18,13 @@ export default function UserBoard() {
 
   const handleClickLogOut = async () => {
     try {
-      await axios.get(process.env.NEXT_PUBLIC_PATH_LOGOUT);
-      delete axios.defaults.headers.common["Authorization"];
+      await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGOUT);
+      delete Fetch.defaultOptions.headers["Authorization"];
       dispatch(logout());
       dispatch(setUser({ user: null }));
       dispatch(setLoginDeadline({ deadline: null }));
-      dispatch(selectIsChatConnect({ sign: false }));
     } catch (err) {
-      alert("Error:", err);
+      console.error("Error:", err);
     }
   };
 

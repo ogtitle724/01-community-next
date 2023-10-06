@@ -37,15 +37,11 @@ export default function SignIn() {
       const user = {
         id: +payload.sub,
         nick: payload.user_nick,
-        email: payload.email,
       };
 
       let now = new Date();
       let afterAWeek = new Date();
       afterAWeek.setDate(now.getUTCDate() + 7);
-
-      socket.connect(~~(Math.random() * 10));
-      dispatch(chatConnect({ sign: true }));
 
       dispatch(login());
       dispatch(setUser({ user }));

@@ -2,8 +2,10 @@ class Fetch {
   constructor() {
     this.defaultOptions = {
       mode: "cors",
-      credentials: "same-origin",
+      credentials: "include",
+      xhrFields: { withCredentials: true },
       headers: {
+        Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
     };
@@ -14,6 +16,7 @@ class Fetch {
   async interceptRes(res) {
     const authHeader = res.headers.get("Authorization");
     const accessToken = authHeader && authHeader.split(" ")[1];
+    console.log("access:", accessToken);
 
     if (accessToken) {
       this.defaultOptions.headers.Authorization = `Bearer ${accessToken}`;
@@ -24,26 +27,30 @@ class Fetch {
 
   async request(path, options = {}) {
     const url = this.domain + path;
-    console.log(url);
-    options.headers = { ...this.defaultOptions.headers, ...options.headers };
+    const newOptions = JSON.parse(JSON.stringify(this.defaultOptions));
+    console.log(newOptions);
+    Object.keys(options).forEach((attr) => {
+      if (typeof options[attr] === "object") {
+        newOptions[attr] = { ...newOptions[attr], ...options[attr] };
+      } else {
+        newOptions[attr] = options[attr];
+      }
+    });
 
+    console.log("req:", newOptions);
     try {
-      let res = await fetch(url, options);
+      let res = await fetch(url, newOptions);
       if (!res.ok) {
-        throw new Error(`HTTP Error: ${res.status} ${res.statusText}`);
+        throw new Error(`${res.status} ${res.statusText}`);
       }
       res = await this.interceptRes(res);
       return res;
     } catch (err) {
-      throw new Error(err);
+      console.error(err);
     }
   }
 
   async get(path, options = {}) {
-    options.headers = {
-      Accept: "application/json",
-      ...options.headers,
-    };
     return this.request(path, { ...options, method: "GET" });
   }
 
