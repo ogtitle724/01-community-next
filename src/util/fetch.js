@@ -3,7 +3,6 @@ class Fetch {
     this.defaultOptions = {
       mode: "cors",
       credentials: "include",
-      xhrFields: { withCredentials: true },
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
