@@ -35,7 +35,7 @@ class Socket {
       const message = JSON.parse(e.data);
       const action = message.action;
 
-      if (action === "setRooms") {
+      if (action === "getConnectionData") {
         const alarmCnt = Object.values(message.data).reduce((acc, cur) => {
           acc += cur.alarm_cnt;
           return acc;

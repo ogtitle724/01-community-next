@@ -47,7 +47,7 @@ export default function SignIn() {
       setTimeout(silentRenew, process.env.NEXT_PUBLIC_TOKEN_REGENERATE_TIME);
 
       socket.connect(String(user.id));
-      socket.send({ action: "getRooms", senderId: String(user.id) });
+      socket.send({ action: "getConnectionData", senderId: String(user.id) });
       dispatch(chatConnect({ sign: true }));
     } catch (err) {
       setIsFail(true);
