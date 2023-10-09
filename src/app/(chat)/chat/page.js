@@ -13,13 +13,12 @@ export default function ChatLayout() {
   const [curChatRoom, setCurChatRoom] = useState(null);
   const [chats, setChats] = useState([]);
   const [opponentId, setOpponentId] = useState(null);
-  const [tempId, setTempId] = useState("");
 
   useEffect(() => {
     const callback = (e) => {
       const message = JSON.parse(e.data);
       const action = message.action;
-      console.log(message);
+
       if (action === "setRooms") {
         setRooms(message.data);
       }
@@ -32,13 +31,12 @@ export default function ChatLayout() {
         setChats((chats) => [...chats, message.data]);
       }
     };
-    const id = prompt("아이디를 입력하시오");
-    setTempId(id);
-    socket.connect(id);
+
     socket.on("message", callback);
+    socket.send({ action: "getRooms", senderId: String(user.id) });
 
     return () => socket.off("message", callback);
-  }, []);
+  }, [user.id]);
 
   return (
     <main className="chat__wrapper">
@@ -47,14 +45,12 @@ export default function ChatLayout() {
         curChatRoom={curChatRoom}
         setCurChatRoom={setCurChatRoom}
         setOpponentId={setOpponentId}
-        tempId={tempId}
       />
       <ChatDetail
         chats={chats}
         setChats={setChats}
         opponentId={opponentId}
         curChatRoom={curChatRoom}
-        tempId={tempId}
       />
     </main>
   );

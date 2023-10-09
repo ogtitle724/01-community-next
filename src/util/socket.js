@@ -1,56 +1,94 @@
+import { store } from "@/redux/store";
+import { setChatAlarm } from "@/redux/slice/signSlice";
+
 class Socket {
   constructor() {
-    this.senderId = null;
-    this.senderNick = null;
     this.url = process.env.NEXT_PUBLIC_SOCKET_URL;
     this.socket = null;
+    this.listeners = { close: [], open: [], message: [], error: [] };
   }
 
-  connect(senderId, senderNick = null) {
-    if (!this.socket) {
-      this.socket = new WebSocket(this.url);
-      this.socket.addEventListener("open", () => {
-        console.log("socket connect");
-        this.senderId = senderId;
-        this.senderNick = senderNick;
-        this.socket.addEventListener("close", () => this.socket.close());
+  setListeners(senderId, senderNick = null) {
+    this.socket.addEventListener("open", () => {
+      console.log("socket connect");
 
-        if (senderNick) {
-          this.send({
-            action: "createUser",
-            senderId: this.senderId,
-            senderNick: this.senderNick,
-          });
-        } else {
-          this.send({
-            action: "setConnection",
-            senderId: this.senderId,
-          });
-        }
+      if (senderNick) {
+        this.send({
+          action: "createUser",
+          senderId,
+          senderNick,
+        });
+      } else {
+        this.send({
+          action: "setConnection",
+          senderId,
+        });
+      }
+    });
+
+    this.socket.addEventListener("close", () => {
+      console.log("socket closed => reconnect...");
+      setTimeout(() => this.connect(senderId, senderNick), 1000);
+    });
+
+    const countAlarm = (e) => {
+      const message = JSON.parse(e.data);
+      const action = message.action;
+
+      if (action === "setRooms") {
+        const alarmCnt = Object.values(message.data).reduce((acc, cur) => {
+          acc += cur.alarm_cnt;
+          return acc;
+        }, 0);
+        store.dispatch(setChatAlarm({ num: alarmCnt }));
+      }
+    };
+
+    this.socket.addEventListener("message", countAlarm);
+
+    for (let eventName in this.listeners) {
+      this.listeners[eventName].forEach((callback) => {
+        this.socket.addEventListener(eventName, callback);
       });
     }
   }
 
+  connect(senderId, senderNick = null) {
+    if (!this.socket || this.socket.readyState === WebSocket.CLOSED) {
+      this.socket = new WebSocket(this.url);
+      this.setListeners(senderId, (senderNick = null));
+    }
+  }
+
   send(message) {
-    if (!this.socket) return;
+    if (!this.socket || this.socket.readyState !== WebSocket.OPEN) return;
+
     try {
       this.socket.send(JSON.stringify(message));
-      console.log("send success");
+      console.log("send success", message);
     } catch (err) {
-      throw new Error(err);
+      console.error("Failed to send message:", err);
     }
   }
 
   on(eventName, callback) {
-    if (!this.socket) return;
-    console.log("message event added", callback);
-    this.socket.addEventListener(eventName, callback);
+    this.listeners[eventName].push(callback);
+
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+      this.socket.addEventListener(eventName, callback);
+    }
   }
 
   off(eventName, callback) {
-    if (!this.socket) return;
-    console.log("message event deleted", callback);
-    this.socket.removeEventListener(eventName, callback);
+    const eventIdx = this.listeners[eventName].indexOf(callback);
+
+    if (eventIdx) {
+      this.listeners[eventName].splice(eventIdx, 1);
+    }
+
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+      this.socket.removeEventListener(eventName, callback);
+    }
   }
 }
 

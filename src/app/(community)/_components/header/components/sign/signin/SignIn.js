@@ -1,5 +1,4 @@
 "use client";
-import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -28,7 +27,6 @@ export default function SignIn() {
         uid,
         pwd,
       });
-
       const authHeader = res.headers.get("Authorization", {
         cache: "no-store",
       });
@@ -47,6 +45,10 @@ export default function SignIn() {
       dispatch(setUser({ user }));
       dispatch(setLoginDeadline({ deadline: afterAWeek.toString() }));
       setTimeout(silentRenew, process.env.NEXT_PUBLIC_TOKEN_REGENERATE_TIME);
+
+      socket.connect(String(user.id));
+      socket.send({ action: "getRooms", senderId: String(user.id) });
+      dispatch(chatConnect({ sign: true }));
     } catch (err) {
       setIsFail(true);
       setTimeout(() => setIsFail(false), 3000);
@@ -57,7 +59,7 @@ export default function SignIn() {
 
   const silentRenew = async () => {
     try {
-      await axios.get(process.env.NEXT_PUBLIC_PATH_LOGIN_SILENCE);
+      await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGIN_SILENCE);
       setTimeout(silentRenew, process.env.NEXT_PUBLIC_TOKEN_REGENERATE_TIME);
       console.log("token regenerated(silent)");
     } catch (err) {

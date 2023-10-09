@@ -15,9 +15,9 @@ class Fetch {
   async interceptRes(res) {
     const authHeader = res.headers.get("Authorization");
     const accessToken = authHeader && authHeader.split(" ")[1];
-    console.log("access:", accessToken);
 
     if (accessToken) {
+      console.log("access");
       this.defaultOptions.headers.Authorization = `Bearer ${accessToken}`;
       //TODO: 토크 파싱한담에 소켓 연결
     }
@@ -27,7 +27,7 @@ class Fetch {
   async request(path, options = {}) {
     const url = this.domain + path;
     const newOptions = JSON.parse(JSON.stringify(this.defaultOptions));
-    console.log(newOptions);
+
     Object.keys(options).forEach((attr) => {
       if (typeof options[attr] === "object") {
         newOptions[attr] = { ...newOptions[attr], ...options[attr] };
@@ -36,7 +36,6 @@ class Fetch {
       }
     });
 
-    console.log("req:", newOptions);
     try {
       let res = await fetch(url, newOptions);
       if (!res.ok) {

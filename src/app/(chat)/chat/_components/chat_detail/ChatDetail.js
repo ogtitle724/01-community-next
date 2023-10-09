@@ -17,7 +17,6 @@ export default function ChatDetail({
   setChats,
   opponentId,
   curChatRoom,
-  tempId,
 }) {
   const [inputData, setInputData] = useState("");
   const chatWrapper = useRef();
@@ -42,7 +41,7 @@ export default function ChatDetail({
       content: inputData,
       timestamp: new Date().getTime(),
       receiver_id: opponentId,
-      sender_id: tempId,
+      sender_id: String(user.id),
     };
 
     try {
@@ -88,7 +87,7 @@ export default function ChatDetail({
                 <p
                   className={
                     "chat" +
-                    (chat.sender_id === tempId
+                    (chat.sender_id === String(user.id)
                       ? " chat--me"
                       : " chat--opponent")
                   }
@@ -97,7 +96,7 @@ export default function ChatDetail({
                 <span
                   className={
                     "chat__date" +
-                    (chat.sender_id === tempId
+                    (chat.sender_id === String(user.id)
                       ? " chat__date--me"
                       : " chat__date--opponent")
                   }
