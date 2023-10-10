@@ -1,15 +1,17 @@
 "use client";
 import dynamic from "next/dynamic";
+import { S3 } from 'aws-sdk';
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
 import { selectIsLogIn, selectUser } from "@/redux/slice/signSlice";
+import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Fetch from "@/util/fetch";
 import "./style.css";
-const Editor = dynamic(() => import("@components/editor/editor"), {
-  ssr: false,
-});
+// const Editor = dynamic(() => import("@components/editor/editor"), {
+//   ssr: false,
+// });
 
 export default function WritePage({ params }) {
   const router = useRouter();
@@ -19,6 +21,28 @@ export default function WritePage({ params }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [category, setCategory] = useState("");
+
+  const customUploadAdapter = (loader) => {
+    return {
+      upload() {
+        return new Promise((resolve, reject) => {
+          const formData = new FormData();
+          loader.file.then((file) => {
+            formData.append("file", file);
+
+            axios
+              .post("http://localhost:8080/board/s3/upload", formData)
+              .then((res) => {
+                resolve({
+                  default: res.data.data.uri,
+                });
+              })
+              .catch((err) => reject(err));
+          });
+        });
+      },
+    };
+  };
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
@@ -77,6 +101,35 @@ export default function WritePage({ params }) {
     setCategory(e.target.value);
   };
 
+  function uploadPlugin(editor) {
+    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+      return customUploadAdapter(loader);
+    };
+  }
+
+  const handleImageUpload = async (file, callback) => {
+    const s3 = new S3({
+      accessKeyId: 'AKIA2PBNMT4WDBYXO2PL',
+      secretAccessKey: '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',
+    });
+
+    const params = {
+      Bucket: 'front-server',
+      Key: `images/${file.name}`,
+      Body: file,
+      ContentType: file.type,
+      ACL: 'public-read',
+    };
+
+    try {
+      const data = await s3.upload(params).promise();
+      const imageUrl = data.Location;
+      callback(imageUrl);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleClickBtnComplete = async () => {
     if (!title) {
       alert("제목을 입력해주세요");
@@ -122,7 +175,20 @@ export default function WritePage({ params }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <Editor onChange={setBody} />
+        {/* <Editor onChange={setBody} handleImageUpload={handleImageUpload}/> */}
+        <CKEditor
+          ref={{ssr:false}}
+          editor={ClassicEditor}
+          config={{
+            placeholder: "내용을 입력하세요.",
+            extraPlugins: [uploadPlugin]
+          }}
+          data=""
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setBody(data);
+          }}
+        />
         <section className="write-page__board">
           <select
             name="category"
