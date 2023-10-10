@@ -1,6 +1,5 @@
 "use client";
 import dynamic from "next/dynamic";
-import { S3 } from 'aws-sdk';
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -25,24 +24,46 @@ export default function WritePage({ params }) {
   const customUploadAdapter = (loader) => {
     return {
       upload() {
-        return new Promise((resolve, reject) => {
-          const formData = new FormData();
-          loader.file.then((file) => {
-            formData.append("file", file);
-
-            axios
-              .post("http://localhost:8080/board/s3/upload", formData)
-              .then((res) => {
-                resolve({
-                  default: res.data.data.uri,
-                });
-              })
-              .catch((err) => reject(err));
-          });
+        return new Promise(async (resolve, reject) => {
+          try {
+            
+            const image = await loader.file;
+            if (!image) {
+              reject(new Error("No file selected"));
+              return;
+            }
+        
+            const formData = new FormData();
+            formData.append("image", image, image.name);
+            
+            const requestOptions = {
+              method: "POST",
+              body: formData,
+              headers: {
+                Accept: "application/json, text/plain, */*",
+              },
+            };
+  
+            
+            const res = await fetch(
+              'http://localhost:8080/board/s3/upload',
+              requestOptions,
+            );
+            
+            if(res.ok){
+              const data = await res.json();
+              resolve({
+                default: data.url,
+              });
+            }
+          } catch (err) {
+            reject(err);
+          }
         });
       },
     };
   };
+  
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
@@ -106,29 +127,6 @@ export default function WritePage({ params }) {
       return customUploadAdapter(loader);
     };
   }
-
-  const handleImageUpload = async (file, callback) => {
-    const s3 = new S3({
-      accessKeyId: 'AKIA2PBNMT4WDBYXO2PL',
-      secretAccessKey: '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',
-    });
-
-    const params = {
-      Bucket: 'front-server',
-      Key: `images/${file.name}`,
-      Body: file,
-      ContentType: file.type,
-      ACL: 'public-read',
-    };
-
-    try {
-      const data = await s3.upload(params).promise();
-      const imageUrl = data.Location;
-      callback(imageUrl);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const handleClickBtnComplete = async () => {
     if (!title) {
