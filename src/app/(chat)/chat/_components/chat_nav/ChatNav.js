@@ -8,18 +8,19 @@ import ThemeToggle from "@components/theme_toggle/ThemeToggle";
 import timeConverter from "@/util/time_converter";
 import { sanitize } from "@/util/secure";
 import "./style.css";
+import { selectUser } from "@/redux/slice/signSlice";
 
 export default function ChatNav({
   rooms,
   curChatRoom,
   setCurChatRoom,
   setOpponentId,
-  tempId,
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isShowNav, setIsShowNav] = useState(true);
   const nav = useRef();
   const width = useSelector(selectWidth);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
     if (width >= 768) nav.current.style = "left: 0px;";
@@ -39,7 +40,7 @@ export default function ChatNav({
       setOpponentId(opponentId);
       socket.send({
         action: "joinRoom",
-        senderId: tempId,
+        senderId: String(user.id),
         roomId,
       });
       //채팅 데이터 받아온 다음에 chatList에 세팅

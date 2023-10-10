@@ -163,6 +163,9 @@
   font-size: var(--font-size-vsm);
   cursor: pointer;
   overflow: hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .chatlist__title {

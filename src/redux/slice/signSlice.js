@@ -8,6 +8,7 @@ export const signSlice = createSlice({
     isDarkMode: false,
     user: null,
     isChatConnect: false,
+    chatAlarm: 0,
   },
   reducers: {
     login: (state) => {
@@ -23,6 +24,10 @@ export const signSlice = createSlice({
     clickModeBtn: (state) => {
       let sign = !state.isDarkMode;
       state.isDarkMode = sign;
+    },
+    setChatAlarm: (state, action) => {
+      const { num } = action.payload;
+      state.chatAlarm = num;
     },
     setUser: (state, action) => {
       const { user } = action.payload;
@@ -43,11 +48,13 @@ export const {
   clickModeBtn,
   setUser,
   setLoginDeadline,
+  setChatAlarm,
 } = signSlice.actions;
 export const selectIsLogIn = (state) => state.sign.isLogIn;
 export const selectIsChatConnect = (state) => state.sign.isChatConnect;
 export const selectIsDarkMode = (state) => state.sign.isDarkMode;
 export const selectUser = (state) => state.sign.user;
 export const selectLoginDeadline = (state) => state.sign.loginDeadline;
+export const selectChatAlarm = (state) => state.sign.chatAlarm;
 
 export default signSlice.reducer;

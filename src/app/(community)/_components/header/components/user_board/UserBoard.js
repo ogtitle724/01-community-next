@@ -7,7 +7,7 @@ import {
   setUser,
   selectUser,
   setLoginDeadline,
-  selectIsChatConnect,
+  selectChatAlarm,
 } from "@/redux/slice/signSlice";
 import "./style.css";
 
@@ -15,6 +15,7 @@ export default function UserBoard() {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector(selectUser);
+  const alarmCnt = useSelector(selectChatAlarm);
 
   const handleClickLogOut = async () => {
     try {
@@ -63,10 +64,13 @@ export default function UserBoard() {
         className="user-board__btn-write"
         onClick={handleClickBtnWrite}
       ></button>
-      <button
-        className="user-board__btn-chat"
-        onClick={handleClkBtnChat}
-      ></button>
+      <button className="user-board__btn-chat" onClick={handleClkBtnChat}>
+        {alarmCnt ? (
+          <div className="user-board__alram-cnt">{alarmCnt}</div>
+        ) : (
+          ""
+        )}
+      </button>
       <button className="user-board__btn-alram">
         <div className="user-board__alram-cnt">3</div>
       </button>
