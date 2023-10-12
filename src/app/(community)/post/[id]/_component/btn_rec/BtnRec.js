@@ -1,11 +1,14 @@
 "use client";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/slice/signSlice";
+import { useRouter } from "next/navigation";
 import Fetch from "@/util/fetch";
 import "./style.css";
 
 export default function BtnRec(props) {
+  const router = useRouter();
   const user = useSelector(selectUser);
+
   const handleClickRecommend = async (value) => {
     if (user) {
       try {
@@ -13,7 +16,10 @@ export default function BtnRec(props) {
           "{post-id}",
           props.postId
         );
-        const option = { headers: { "Content-Type": "application/json" } };
+        const option = {
+          headers: { "Content-Type": "application/json" },
+          next: { revalidate: 0 },
+        };
         const body = JSON.stringify({ value });
         await Fetch.patch(path, body, option);
         router.refresh();

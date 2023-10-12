@@ -21,7 +21,10 @@ export default function CommentBoard({ postId, comments }) {
 
   const handleClkBtnOk = async () => {
     if (content) {
-      const option = { headers: { "Content-Type": "application/json" } };
+      const option = {
+        headers: { "Content-Type": "application/json" },
+        next: { revalidate: 0 },
+      };
       let contentArg = changeP2Span(content);
       contentArg = deleteEnter(contentArg);
 
@@ -193,7 +196,10 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
     if (!user) {
       return alert("로그인이 필요합니다!");
     }
-    const option = { headers: { "Content-Type": "application/json" } };
+    const option = {
+      headers: { "Content-Type": "application/json" },
+      next: { revalidate: 0 },
+    };
     const body = JSON.stringify({ value });
     const path = process.env.NEXT_PUBLIC_PATH_COMMENT_REC.replace(
       "{comment-id}",
@@ -215,7 +221,10 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
 
   const handleClkBtnUpdate = async () => {
     const path = process.env.NEXT_PUBLIC_PATH_COMMENT + `/${comment.id}`;
-    const option = { headers: { "Content-Type": "application/json" } };
+    const option = {
+      headers: { "Content-Type": "application/json" },
+      next: { revalidate: 0 },
+    };
     const contentArg = changeP2Span(content);
     const body = JSON.stringify({ content: deleteEnter(contentArg) });
 

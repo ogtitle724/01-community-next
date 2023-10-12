@@ -1,12 +1,13 @@
 "use client";
 import dynamic from "next/dynamic";
+import Fetch from "@/util/fetch";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
 import { selectIsLogIn, selectUser } from "@/redux/slice/signSlice";
-import Fetch from "@/util/fetch";
+import { categoriesKO2EN } from "@/config/config";
 import "./style.css";
+
 const Editor = dynamic(() => import("@components/editor/editor"), {
   ssr: false,
 });
@@ -42,6 +43,7 @@ export default function WritePage({ params }) {
 
   const handleSelectCategory = (e) => {
     setCategory(e.target.value);
+    console.log(categoriesKO2EN[e.target.value]);
   };
 
   const handleClickBtnComplete = async () => {
@@ -55,7 +57,10 @@ export default function WritePage({ params }) {
       alert("카테고리를 정해주세요");
       return;
     }
-    const option = { headers: { "Content-Type": "application/json" } };
+    const option = {
+      headers: { "Content-Type": "application/json" },
+      next: { revalidate: 0 },
+    };
     const payload = JSON.stringify({
       title,
       category,
@@ -65,7 +70,8 @@ export default function WritePage({ params }) {
     try {
       const path = process.env.NEXT_PUBLIC_PATH_POST;
       await Fetch.post(path, payload, option);
-      router.back();
+      router.refresh();
+      router.push(`/${categoriesKO2EN[category]}`);
     } catch (err) {
       console.error(err);
       alert("게시글 작성 혹은 수정을 완료하지 못했습니다.");
@@ -91,12 +97,12 @@ export default function WritePage({ params }) {
           >
             <option value="없음">카테고리</option>
             <option value="유머">유머</option>
-            <option value="게임/스포츠">게임/스포츠</option>
-            <option value="연예/방송">연예/방송</option>
+            <option value="게임·스포츠">게임·스포츠</option>
+            <option value="연예·방송">연예·방송</option>
             <option value="여행">여행</option>
             <option value="취미">취미</option>
-            <option value="경제/금융">경제/금융</option>
-            <option value="시사/이슈">시사/이슈</option>
+            <option value="경제·금융">경제·금융</option>
+            <option value="시사·이슈">시사·이슈</option>
           </select>
           <button
             className="write-page__btn-complete"
