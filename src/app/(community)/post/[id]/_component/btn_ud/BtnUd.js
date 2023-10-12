@@ -1,4 +1,5 @@
 "use client";
+import Fetch from "@/util/fetch";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -33,6 +34,7 @@ export default function BtnUd({ writerId, postId }) {
       try {
         const path = process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`;
         await Fetch.delete(path);
+        router.refresh();
         router.push(`/${categoriesKO2EN[category]}`);
       } catch (err) {
         console.error(err);
