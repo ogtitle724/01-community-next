@@ -22,6 +22,41 @@ export default function WritePage({ params }) {
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
+    const getUpdateData = async () => {
+      const postId = params?.id;
+      try {
+        const res = await Fetch.get(
+          process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`
+        );
+        const postDetail = await res.json();
+        return postDetail;
+      } catch (err) {
+        alert("서버와 연결이 불안정합니다 :(");
+        console.error(err);
+        return router.back();
+      }
+    };
+
+    const fetchDataAndUpdate = async () => {
+      if (isUpdate) {
+        try {
+          const postDetail = await getUpdateData();
+
+          if (postDetail.user_id !== user.id) throw new Error("No permission");
+
+          setTitle(postDetail.title);
+          setCategory(postDetail.category);
+          setBody(postDetail.content);
+        } catch (err) {
+          console.error(err);
+          alert("넌 수정 안되는거 알지???");
+          router.back();
+        }
+      }
+    };
+
+    fetchDataAndUpdate();
+
     window.addEventListener("error", (e) => {
       if (e.message === "ResizeObserver loop limit exceeded") {
         const resizeObserverErrDiv = document.getElementById(
@@ -55,6 +90,7 @@ export default function WritePage({ params }) {
       alert("카테고리를 정해주세요");
       return;
     }
+
     const option = { headers: { "Content-Type": "application/json" } };
     const payload = JSON.stringify({
       title,
@@ -63,12 +99,12 @@ export default function WritePage({ params }) {
     });
 
     try {
-      const path = process.env.NEXT_PUBLIC_PATH_POST;
-      await Fetch.post(path, payload, option);
+      const path = process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`;
+      await Fetch.patch(path, payload, option);
       router.back();
     } catch (err) {
       console.error(err);
-      alert("게시글 작성 혹은 수정을 완료하지 못했습니다.");
+      alert("게시글 수정을 완료하지 못했습니다.");
     }
   };
 
@@ -82,7 +118,7 @@ export default function WritePage({ params }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <Editor onChange={setBody} />
+        <Editor onChange={setBody} data={isUpdate && body} />
         <section className="write-page__board">
           <select
             name="category"

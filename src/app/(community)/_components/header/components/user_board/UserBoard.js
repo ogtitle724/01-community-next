@@ -1,5 +1,6 @@
 "use client";
 import Fetch from "@/util/fetch";
+import socket from "@/util/socket";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -24,6 +25,7 @@ export default function UserBoard() {
       dispatch(logout());
       dispatch(setUser({ user: null }));
       dispatch(setLoginDeadline({ deadline: null }));
+      socket.disconnect();
     } catch (err) {
       console.error("Error:", err);
     }
@@ -35,6 +37,10 @@ export default function UserBoard() {
 
   const handleClickBtnWrite = () => {
     router.push(process.env.NEXT_PUBLIC_ROUTE_WRITE);
+  };
+
+  const handleClkBtnAdd = () => {
+    router.push(process.env.NEXT_PUBLIC_ROUTE_ADD_ITEM);
   };
 
   const handleClkBtnChat = () => {
@@ -63,6 +69,10 @@ export default function UserBoard() {
       <button
         className="user-board__btn-write"
         onClick={handleClickBtnWrite}
+      ></button>
+      <button
+        className="user-board__btn-add"
+        onClick={handleClkBtnAdd}
       ></button>
       <button className="user-board__btn-chat" onClick={handleClkBtnChat}>
         {alarmCnt ? (

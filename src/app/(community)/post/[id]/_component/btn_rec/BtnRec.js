@@ -1,6 +1,7 @@
 "use client";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/slice/signSlice";
+import Fetch from "@/util/fetch";
 import "./style.css";
 
 export default function BtnRec(props) {
@@ -12,8 +13,9 @@ export default function BtnRec(props) {
           "{post-id}",
           props.postId
         );
-
-        await Fetch.patch(path, { value });
+        const option = { headers: { "Content-Type": "application/json" } };
+        const body = JSON.stringify({ value });
+        await Fetch.patch(path, body, option);
         router.refresh();
       } catch (err) {
         console.error(err);

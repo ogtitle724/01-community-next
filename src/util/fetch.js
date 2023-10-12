@@ -5,7 +5,6 @@ class Fetch {
       credentials: "include",
       headers: {
         Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
       },
     };
     this.domain = process.env.NEXT_PUBLIC_DOMAIN;
@@ -29,23 +28,20 @@ class Fetch {
     const newOptions = JSON.parse(JSON.stringify(this.defaultOptions));
 
     Object.keys(options).forEach((attr) => {
-      if (typeof options[attr] === "object") {
+      if (attr === "body") {
+        newOptions.body = options[attr];
+      } else if (typeof options[attr] === "object") {
         newOptions[attr] = { ...newOptions[attr], ...options[attr] };
       } else {
         newOptions[attr] = options[attr];
       }
     });
 
-    try {
-      let res = await fetch(url, newOptions);
-      if (!res.ok) {
-        throw new Error(`${res.status} ${res.statusText}`);
-      }
-      res = await this.interceptRes(res);
-      return res;
-    } catch (err) {
-      console.error(err);
-    }
+    let res = await fetch(url, newOptions);
+    if (!res.ok) throw Error(`${res.status} ${res.statusText}`);
+
+    res = await this.interceptRes(res);
+    return res;
   }
 
   async get(path, options = {}) {
@@ -56,7 +52,7 @@ class Fetch {
     return this.request(path, {
       ...options,
       method: "POST",
-      body: JSON.stringify(data),
+      body: data,
     });
   }
 
@@ -64,7 +60,7 @@ class Fetch {
     return this.request(path, {
       ...options,
       method: "PUT",
-      body: JSON.stringify(data),
+      body: data,
     });
   }
 
@@ -72,7 +68,7 @@ class Fetch {
     return this.request(path, {
       ...options,
       method: "PATCH",
-      body: JSON.stringify(data),
+      body: data,
     });
   }
 

@@ -23,10 +23,12 @@ export default function SignIn() {
     e.preventDefault();
 
     try {
-      const res = await Fetch.post(process.env.NEXT_PUBLIC_PATH_LOGIN, {
-        uid,
-        pwd,
-      });
+      const body = { uid, pwd };
+      const res = await Fetch.post(
+        process.env.NEXT_PUBLIC_PATH_LOGIN,
+        JSON.stringify(body),
+        { headers: { "Content-Type": "application/json" } }
+      );
       const authHeader = res.headers.get("Authorization", {
         cache: "no-store",
       });
@@ -47,7 +49,6 @@ export default function SignIn() {
       setTimeout(silentRenew, process.env.NEXT_PUBLIC_TOKEN_REGENERATE_TIME);
 
       socket.connect(String(user.id));
-      socket.send({ action: "getRooms", senderId: String(user.id) });
       dispatch(chatConnect({ sign: true }));
     } catch (err) {
       setIsFail(true);

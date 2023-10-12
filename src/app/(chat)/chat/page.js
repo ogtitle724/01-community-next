@@ -19,7 +19,7 @@ export default function ChatLayout() {
       const message = JSON.parse(e.data);
       const action = message.action;
 
-      if (action === "setRooms") {
+      if (action === "getConnectionData") {
         setRooms(message.data);
       }
 
@@ -33,7 +33,7 @@ export default function ChatLayout() {
     };
 
     socket.on("message", callback);
-    socket.send({ action: "getRooms", senderId: String(user.id) });
+    socket.send({ action: "getConnectionData", senderId: String(user.id) });
 
     return () => socket.off("message", callback);
   }, [user.id]);

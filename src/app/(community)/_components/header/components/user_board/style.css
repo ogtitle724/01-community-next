@@ -1,7 +1,7 @@
 .user-board {
-  width: 270px;
+  width: 290px;
   height: 26px;
-  margin: 0 20px;
+  margin-right: 20px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .user-board__profile-img {
@@ -29,7 +29,7 @@
 }
 
 .user-board__nickname {
-  width: 60px;
+  width: auto;
   max-width: 85px;
   position: relative;
   bottom: 1.5px;
@@ -38,6 +38,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-align: center;
   color: black;
   cursor: pointer;
 }
@@ -87,10 +88,18 @@
   background: url(/image/icon/pencil-sharp.svg);
 }
 
+.user-board__btn-add {
+  width: 17px;
+  height: 17px;
+  margin-left: 2px;
+  position: relative;
+  background: url(/image/icon/bag-add.svg);
+}
+
 .user-board__btn-chat {
   width: 16px;
   height: 16px;
-  margin-left: 3px;
+  margin-left: 1px;
   position: relative;
   background: url(/image/icon/chatbubble.svg);
 }
@@ -119,8 +128,9 @@
 }
 
 .user-board__btn-logout {
-  width: 18px;
+  width: 16px;
   height: 18px;
+  margin-right: 2px;
   border: none;
   border-radius: 4px;
   background-size: contain;

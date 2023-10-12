@@ -33,25 +33,41 @@ export default function SignUp({ setShowSignUpForm }) {
   }, [count, isClickBtnAuth]);
 
   const handleCheckDuplication = useCallback(async (value, type) => {
-    try {
-      if (type === "nick") {
-        await Fetch.post(process.env.NEXT_PUBLIC_PATH_CHECK_NICK, {
-          nick: value,
-        });
-        setCanUseNick(true);
-      } else if (type === "uid") {
-        await Fetch.post(process.env.NEXT_PUBLIC_PATH_CHECK_UID, {
-          uid: value,
-        });
-        setCanUseUid(true);
+    if (value.length >= 3) {
+      try {
+        const option = { headers: { "Content-Type": "application/json" } };
+        let body;
+        if (type === "nick") {
+          body = JSON.stringify({ nick: value });
+          await Fetch.post(
+            process.env.NEXT_PUBLIC_PATH_CHECK_NICK,
+            body,
+            option
+          );
+          setCanUseNick(true);
+        } else if (type === "uid") {
+          body = JSON.stringify({ uid: value });
+          await Fetch.post(
+            process.env.NEXT_PUBLIC_PATH_CHECK_UID,
+            body,
+            option
+          );
+          setCanUseUid(true);
+        }
+      } catch (err) {
+        if (type === "nick") {
+          setCanUseNick(false);
+        } else if (type === "uid") {
+          setCanUseUid(false);
+        }
+        console.error(err);
       }
-    } catch (err) {
+    } else {
       if (type === "nick") {
         setCanUseNick(false);
       } else if (type === "uid") {
         setCanUseUid(false);
       }
-      console.error(err);
     }
   }, []);
 
@@ -62,10 +78,9 @@ export default function SignUp({ setShowSignUpForm }) {
 
   const handleClickBtnConfrim = useCallback(async () => {
     try {
-      await Fetch.post(process.env.NEXT_PUBLIC_PATH_EMAIL_VERIFY, {
-        email,
-        authCode: Number(authCode),
-      });
+      const option = { headers: { "Content-Type": "application/json" } };
+      const body = JSON.stringify({ email, authCode: Number(authCode) });
+      await Fetch.post(process.env.NEXT_PUBLIC_PATH_EMAIL_VERIFY, body, option);
       setIsCodeVaild(true);
     } catch (err) {
       console.error(err);
@@ -80,9 +95,13 @@ export default function SignUp({ setShowSignUpForm }) {
     setCount(180);
 
     try {
-      await Fetch.post(process.env.NEXT_PUBLIC_PATH_EMAIL_AUTHCODE, {
-        email,
-      });
+      const option = { headers: { "Content-Type": "application/json" } };
+      const body = JSON.stringify({ email });
+      await Fetch.post(
+        process.env.NEXT_PUBLIC_PATH_EMAIL_AUTHCODE,
+        body,
+        option
+      );
     } catch (err) {
       console.error(err);
     }
@@ -92,12 +111,18 @@ export default function SignUp({ setShowSignUpForm }) {
     e.preventDefault();
 
     try {
-      const res = await Fetch.post(process.env.NEXT_PUBLIC_PATH_USER, {
+      const option = { headers: { "Content-Type": "application/json" } };
+      const body = JSON.stringify({
         uid: uid,
         nick: nick,
         email: email,
         pwd: pwd,
       });
+      const res = await Fetch.post(
+        process.env.NEXT_PUBLIC_PATH_USER,
+        body,
+        option
+      );
 
       if (res.data) {
         setShowSignUpForm(false);
@@ -144,7 +169,7 @@ export default function SignUp({ setShowSignUpForm }) {
               (checkUid(uid)
                 ? canUseUid
                   ? "사용 가능한 아이디입니다."
-                  : "이미 사용중인 아이디입니다."
+                  : "사용할 수 없는 아이디입니다."
                 : "아이디가 양식에 맞지 않습니다.")}
           </p>
         </SectionInput>
@@ -166,7 +191,7 @@ export default function SignUp({ setShowSignUpForm }) {
               (checkNick(nick)
                 ? canUseNick
                   ? "사용 가능한 닉네임입니다."
-                  : "이미 사용중인 닉네임입니다."
+                  : "사용할 수 없는 닉네임입니다."
                 : "닉네임이 양식에 맞지 않습니다.")}
           </p>
         </SectionInput>
