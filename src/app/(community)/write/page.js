@@ -8,9 +8,9 @@ import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Fetch from "@/util/fetch";
 import "./style.css";
-// const Editor = dynamic(() => import("@components/editor/editor"), {
-//   ssr: false,
-// });
+const Editor = dynamic(() => import("@components/editor/editor"), {
+  ssr: false,
+});
 
 export default function WritePage({ params }) {
   const router = useRouter();
@@ -20,50 +20,6 @@ export default function WritePage({ params }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [category, setCategory] = useState("");
-
-  const customUploadAdapter = (loader) => {
-    return {
-      upload() {
-        return new Promise(async (resolve, reject) => {
-          try {
-            
-            const image = await loader.file;
-            if (!image) {
-              reject(new Error("No file selected"));
-              return;
-            }
-        
-            const formData = new FormData();
-            formData.append("image", image, image.name);
-            
-            const requestOptions = {
-              method: "POST",
-              body: formData,
-              headers: {
-                Accept: "application/json, text/plain, */*",
-              },
-            };
-  
-            
-            const res = await fetch(
-              'http://localhost:8080/board/s3/upload',
-              requestOptions,
-            );
-            
-            if(res.ok){
-              const data = await res.json();
-              resolve({
-                default: data.url,
-              });
-            }
-          } catch (err) {
-            reject(err);
-          }
-        });
-      },
-    };
-  };
-  
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
@@ -99,34 +55,33 @@ export default function WritePage({ params }) {
       setCategory(postDetail.category);
       setBody(postDetail.content);
     }
-
-    window.addEventListener("error", (e) => {
-      if (e.message === "ResizeObserver loop limit exceeded") {
-        const resizeObserverErrDiv = document.getElementById(
-          "webpack-dev-server-client-overlay-div"
-        );
-        const resizeObserverErr = document.getElementById(
-          "webpack-dev-server-client-overlay"
-        );
-        if (resizeObserverErr) {
-          resizeObserverErr.setAttribute("style", "display: none");
+    if (typeof window !== 'undefined'){
+      window.addEventListener("error", (e) => {
+        if (e.message === "ResizeObserver loop limit exceeded") {
+          const resizeObserverErrDiv = document.getElementById(
+            "webpack-dev-server-client-overlay-div"
+          );
+          const resizeObserverErr = document.getElementById(
+            "webpack-dev-server-client-overlay"
+          );
+          if (resizeObserverErr) {
+            resizeObserverErr.setAttribute("style", "display: none");
+          }
+          if (resizeObserverErrDiv) {
+            resizeObserverErrDiv.setAttribute("style", "display: none");
+          }
         }
-        if (resizeObserverErrDiv) {
-          resizeObserverErrDiv.setAttribute("style", "display: none");
-        }
-      }
-    });
+      });
+    }
   }, [isLogIn, isUpdate, params?.id, router, user.id]);
 
   const handleSelectCategory = (e) => {
     setCategory(e.target.value);
   };
 
-  function uploadPlugin(editor) {
-    editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
-      return customUploadAdapter(loader);
-    };
-  }
+  const handleEditorChange = (data) => {
+    setBody(data);
+  };
 
   const handleClickBtnComplete = async () => {
     if (!title) {
@@ -174,18 +129,14 @@ export default function WritePage({ params }) {
           onChange={(e) => setTitle(e.target.value)}
         ></input>
         {/* <Editor onChange={setBody} handleImageUpload={handleImageUpload}/> */}
-        <CKEditor
-          ref={{ssr:false}}
-          editor={ClassicEditor}
-          config={{
-            placeholder: "내용을 입력하세요.",
-            extraPlugins: [uploadPlugin]
-          }}
-          data=""
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            setBody(data);
-          }}
+        <Editor
+          data={body}
+          onEditorChange={handleEditorChange}
+          // data=""
+          // onChange={(event, editor) => {
+          //   const data = editor.getData();
+          //   setBody(data);
+          // }}
         />
         <section className="write-page__board">
           <select
