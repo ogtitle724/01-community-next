@@ -14,6 +14,7 @@ export default async function TopicPage(props) {
         `/${category}?page=${page - 1}&size=30`
     );
     const postData = await res.json();
+    console.log(postData.content);
     return <Board posts={postData} title={category ?? "홈"}></Board>;
   } catch (err) {
     console.error(err);

@@ -39,7 +39,7 @@ export default function UserBoard() {
     router.push(process.env.NEXT_PUBLIC_ROUTE_WRITE);
   };
 
-  const handleClkBtnAdd = () => {
+  const handleClkBtnAddItem = () => {
     router.push(process.env.NEXT_PUBLIC_ROUTE_ADD_ITEM);
   };
 
@@ -72,7 +72,7 @@ export default function UserBoard() {
       ></button>
       <button
         className="user-board__btn-add"
-        onClick={handleClkBtnAdd}
+        onClick={handleClkBtnAddItem}
       ></button>
       <button className="user-board__btn-chat" onClick={handleClkBtnChat}>
         {alarmCnt ? (

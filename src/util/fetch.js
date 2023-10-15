@@ -1,3 +1,6 @@
+import socket from "./socket";
+import { store } from "@/redux/store";
+
 class Fetch {
   constructor() {
     this.defaultOptions = {
@@ -18,7 +21,10 @@ class Fetch {
     if (accessToken) {
       console.log("access");
       this.defaultOptions.headers.Authorization = `Bearer ${accessToken}`;
-      //TODO: 토크 파싱한담에 소켓 연결
+
+      const state = store.getState();
+      console.log(state);
+      if (state.sign.user) socket.connect(String(state.sign.user.id));
     }
     return res;
   }

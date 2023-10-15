@@ -126,9 +126,7 @@ export default function SignUp({ setShowSignUpForm }) {
 
       if (res.data) {
         setShowSignUpForm(false);
-        //res에 백단에서 할당한 id를 보내주면 그걸로 socket user 생성
         socket.connect(res.data.id, nick);
-        //TODO: 회원가입과 함께 DDB USERS TABLE에 회원 추가
       } else {
         throw new Error("singin rejected");
       }

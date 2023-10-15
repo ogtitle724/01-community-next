@@ -1,5 +1,6 @@
 import ReduxProvider from "@/redux/reduxProvider";
 import "./globals.css";
+import GoogleAnalytics from "./GoogleAnalytics";
 
 export const metadata = {
   title: "클립마켓",
@@ -11,6 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body>
+        <GoogleAnalytics />
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
