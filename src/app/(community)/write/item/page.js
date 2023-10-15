@@ -1,11 +1,14 @@
 "use client";
 import { useState } from "react";
-import Editor from "@/app/_components/editor/editor";
 import ImgReceiver from "@/app/_components/img_receiver/ImgReceiver";
 import { s3upload } from "@/util/bucket";
 import Fetch from "@/util/fetch";
 import "./style.css";
 import { useRouter } from "next/navigation";
+
+const Editor = dynamic(() => import("@components/editor/editor"), {
+  ssr: false,
+});
 
 export default function ItemUpload({ setIsSug }) {
   const [imgs, setImgs] = useState([]);
