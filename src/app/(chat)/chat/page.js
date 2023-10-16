@@ -29,28 +29,31 @@ export default function ChatLayout() {
       }
     };
 
+    const establishConnection = () => {
+      socket.connect(JSON.stringify(user.id));
+
+      socket.on("open", () => {
+        socket.on("message", callback);
+        socket.send({
+          action: "getConnectionData",
+          senderId: String(user.id),
+        });
+      });
+
+      socket.on("error", (err) => {
+        console.error("Socket encountered an error:", err);
+      });
+    };
+
     if (
       isLogIn &&
       (socket.readyState === WebSocket.CLOSED || !socket.isConnect)
     ) {
-      const promise = new Promise((resolve, reject) => {
-        socket.connect(JSON.stringify(user.id));
-        socket.on("open", () => resolve());
-        socket.on("error", (err) => reject(err));
-      });
-      promise
-        .then(() => {
-          socket.on("message", callback);
-          socket.send({
-            action: "getConnectionData",
-            senderId: String(user.id),
-          });
-        })
-        .catch((err) => console.error(err));
+      establishConnection();
+    } else if (socket.readyState === WebSocket.OPEN) {
+      socket.on("message", callback);
+      socket.send({ action: "getConnectionData", senderId: String(user.id) });
     }
-
-    socket.on("message", callback);
-    socket.send({ action: "getConnectionData", senderId: String(user.id) });
 
     return () => socket.off("message", callback);
   }, [isLogIn, user.id]);
