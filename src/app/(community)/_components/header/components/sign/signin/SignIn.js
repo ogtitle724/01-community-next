@@ -48,7 +48,6 @@ export default function SignIn() {
       dispatch(setLoginDeadline({ deadline: afterAWeek.toString() }));
       setTimeout(silentRenew, process.env.NEXT_PUBLIC_TOKEN_REGENERATE_TIME);
 
-      socket.connect(String(user.id));
       dispatch(chatConnect({ sign: true }));
     } catch (err) {
       setIsFail(true);
