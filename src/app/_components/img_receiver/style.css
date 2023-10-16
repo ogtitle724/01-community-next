@@ -1,0 +1,113 @@
+.img-receiver {
+  width: 100%;
+  height: auto;
+  margin: 20px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.img-receiver__input {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.img-receiver__label {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  position: absolute;
+  bottom: -20px;
+  right: 10px;
+  border-radius: 100%;
+  background: url(/image/icon/duplicate.svg) var(--color-body);
+  background-repeat: no-repeat;
+  background-size: 18px;
+  background-position: center top 8px;
+  box-shadow: 0 0 5px var(--color-shadow);
+  filter: invert(var(--icon-invert));
+  z-index: 2;
+}
+
+.img-receiver__count {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.7);
+  font-size: var(--font-size-vsm);
+  font-weight: 650;
+}
+
+.img-receiver__default-img,
+.img-receiver__img-wrapper {
+  width: 92px;
+  height: 69px;
+  position: relative;
+  border-radius: 4px;
+  border: 1px solid var(--color-smoke-a);
+  background: var(--color-smoke-a);
+  overflow: hidden;
+}
+
+.img-receiver__default-img::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: url(/image/clip.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20%;
+}
+
+.img-receiver__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.img-receiver__btn-delete {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border-radius: 0 0 0 4px;
+  background-color: var(--color-font);
+  line-height: var(--font-size-vsm);
+  font-size: var(--font-size-vsm);
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .img-receiver__default-img,
+  .img-receiver__img-wrapper {
+    width: 64px;
+    height: 48px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .img-receivere {
+    height: 50px;
+    gap: 5px;
+  }
+
+  .img-receiver__count {
+    bottom: -2%;
+  }
+
+  .img-receiver__label {
+    width: 44px;
+    height: 44px;
+    background-size: 24px;
+  }
+  .img-receiver__default-img,
+  .img-receiver__img-wrapper {
+    width: 48px;
+    height: 36px;
+  }
+}

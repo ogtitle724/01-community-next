@@ -21,14 +21,18 @@ export default function CommentBoard({ postId, comments }) {
 
   const handleClkBtnOk = async () => {
     if (content) {
-      let payload, path;
+      const option = {
+        headers: { "Content-Type": "application/json" },
+        next: { revalidate: 0 },
+      };
       let contentArg = changeP2Span(content);
       contentArg = deleteEnter(contentArg);
 
-      payload = {
+      const payload = JSON.stringify({
         content: contentArg,
         postId,
-      };
+      });
+      let path;
 
       if (target) {
         path = process.env.NEXT_PUBLIC_PATH_REPLY;
@@ -39,7 +43,7 @@ export default function CommentBoard({ postId, comments }) {
       }
 
       try {
-        await Fetch.post(path, payload);
+        await Fetch.post(path, payload, option);
         let ck = editorRef.current.editor;
 
         ck.setData("댓글을 입력해주세요...");
@@ -192,14 +196,18 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
     if (!user) {
       return alert("로그인이 필요합니다!");
     }
-
-    let path = process.env.NEXT_PUBLIC_PATH_COMMENT_REC.replace(
+    const option = {
+      headers: { "Content-Type": "application/json" },
+      next: { revalidate: 0 },
+    };
+    const body = JSON.stringify({ value });
+    const path = process.env.NEXT_PUBLIC_PATH_COMMENT_REC.replace(
       "{comment-id}",
       comment.id
     );
 
     try {
-      await Fetch.patch(path, { value });
+      await Fetch.patch(path, body, option);
       router.refresh();
     } catch (err) {
       console.error(err);
@@ -212,12 +220,16 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
   };
 
   const handleClkBtnUpdate = async () => {
-    let path = process.env.NEXT_PUBLIC_PATH_COMMENT + `/${comment.id}`;
-    let contentArg = changeP2Span(content);
-    contentArg = deleteEnter(contentArg);
+    const path = process.env.NEXT_PUBLIC_PATH_COMMENT + `/${comment.id}`;
+    const option = {
+      headers: { "Content-Type": "application/json" },
+      next: { revalidate: 0 },
+    };
+    const contentArg = changeP2Span(content);
+    const body = JSON.stringify({ content: deleteEnter(contentArg) });
 
     try {
-      await Fetch.patch(path, { content: contentArg });
+      await Fetch.patch(path, body, option);
       setIsEdit(false);
       router.refresh();
     } catch (err) {

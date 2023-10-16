@@ -1,9 +1,9 @@
 import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import { useState, useEffect } from "react";
+import Fetch from "@/util/fetch";
 
-export default function Editor({ onEditorChange, data }) {
-  const [editorData, setEditorData] = useState(data);
+export default function Editor({ ckRef, onChange, data }) {
+  let initialData = data ? data : "";
 
   function uploadPlugin(editor) {
     editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
@@ -11,51 +11,27 @@ export default function Editor({ onEditorChange, data }) {
     };
   }
 
-  useEffect(() => {
-    setEditorData(data);
-  }, [data]);
-
-  const handleEditorChange = (event, editor) => {
-    const data = editor.getData();
-    setEditorData(data);
-    onEditorChange(data);
-  };
-
   const customUploadAdapter = (loader) => {
     return {
       upload() {
         return new Promise(async (resolve, reject) => {
           try {
-            
             const image = await loader.file;
             if (!image) {
               reject(new Error("No file selected"));
               return;
             }
-        
+
             const formData = new FormData();
             formData.append("image", image, image.name);
-            
-            const requestOptions = {
-              method: "POST",
-              body: formData,
-              headers: {
-                Accept: "application/json, text/plain, */*",
-              },
-            };
-  
-            
-            const res = await fetch(
-              process.env.NEXT_PUBLIC_DOMAIN+process.env.NEXT_PUBLIC_PATH_UPLOAD_MEDIA,
-              requestOptions,
-            );
-            
-            if(res.ok){
-              const data = await res.json();
-              resolve({
-                default: data.url,
-              });
-            }
+
+            const path = process.env.NEXT_PUBLIC_PATH_UPLOAD_MEDIA;
+            const res = await Fetch.post(path, formData);
+            const data = await res.json();
+
+            resolve({
+              default: data.url,
+            });
           } catch (err) {
             reject(err);
           }
@@ -69,10 +45,13 @@ export default function Editor({ onEditorChange, data }) {
       editor={ClassicEditor}
       config={{
         placeholder: "내용을 입력하세요.",
-        extraPlugins: [uploadPlugin]
+        extraPlugins: [uploadPlugin],
       }}
-      data=""
-      onChange={handleEditorChange }
+      data={initialData}
+      onChange={(event, editor) => {
+        const data = editor.getData();
+        onChange(data);
+      }}
     />
   );
 }

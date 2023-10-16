@@ -25,7 +25,7 @@ function Header() {
         >
           {width < 480 ? <i className="header__logo-img"></i> : "CLiPmArKET"}
         </Link>
-        {width > 1024 ? (
+        {width > 1200 ? (
           <>
             <SearchBar />
             <ThemeToggle />

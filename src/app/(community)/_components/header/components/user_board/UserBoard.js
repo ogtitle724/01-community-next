@@ -1,13 +1,16 @@
 "use client";
-import Fetch from "@/util/fetch";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+import Fetch from "@/util/fetch";
+import socket from "@/util/socket";
 import {
   logout,
   setUser,
   selectUser,
   setLoginDeadline,
   selectChatAlarm,
+  selectIsLogIn,
 } from "@/redux/slice/signSlice";
 import "./style.css";
 
@@ -15,7 +18,20 @@ export default function UserBoard() {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector(selectUser);
+  const isLogIn = useSelector(selectIsLogIn);
   const alarmCnt = useSelector(selectChatAlarm);
+
+  useEffect(() => {
+    console.log("resdy:", socket.readyState);
+    console.log(socket.readyState === WebSocket.CLOSED);
+    console.log(socket.isConnect);
+    if (
+      isLogIn &&
+      (socket.readyState === WebSocket.CLOSED || !socket.isConnect)
+    ) {
+      socket.connect(JSON.stringify(user.id));
+    }
+  }, [isLogIn, user.id]);
 
   const handleClickLogOut = async () => {
     try {
@@ -24,6 +40,7 @@ export default function UserBoard() {
       dispatch(logout());
       dispatch(setUser({ user: null }));
       dispatch(setLoginDeadline({ deadline: null }));
+      socket.disconnect();
     } catch (err) {
       console.error("Error:", err);
     }
@@ -35,6 +52,10 @@ export default function UserBoard() {
 
   const handleClickBtnWrite = () => {
     router.push(process.env.NEXT_PUBLIC_ROUTE_WRITE);
+  };
+
+  const handleClkBtnAddItem = () => {
+    router.push(process.env.NEXT_PUBLIC_ROUTE_ADD_ITEM);
   };
 
   const handleClkBtnChat = () => {
@@ -63,6 +84,10 @@ export default function UserBoard() {
       <button
         className="user-board__btn-write"
         onClick={handleClickBtnWrite}
+      ></button>
+      <button
+        className="user-board__btn-add"
+        onClick={handleClkBtnAddItem}
       ></button>
       <button className="user-board__btn-chat" onClick={handleClkBtnChat}>
         {alarmCnt ? (

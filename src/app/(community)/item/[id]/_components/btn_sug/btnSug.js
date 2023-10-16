@@ -1,11 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import socket from "@/util/socket";
 import "./style.css";
 
-export default function BtnSug() {
+export default function BtnSug({ itemDetail }) {
   const [isSug, setIsSug] = useState(false);
-  const handleClkBtnSug = () => setIsSug((isSug) => !isSug);
+  const handleClkBtnSug = () => {
+    socket.send({
+      action: "suggest",
+      senderId: String(user.id),
+      receiverId: String(itemDetail.user_id),
+      receiverNick: itemDetail.user_nick,
+      sugItemId: itemDetail.id,
+      thumbnail: itemDeteail.imgs[0],
+      //썸네일도 보내는게 나을까? => 어차피 아이템 조회할때 src 받아오니까
+      //첫번째거 보내자 이걸 제안시작하는 채팅에 보내고 아이템 아이디도
+      //같이 보내서 채팅 누르면 제안받은 아이템 디테일 페이지로 이동할 수
+      //있도록 하면 될 듯
+    });
+
+    setIsSug((isSug) => !isSug);
+  };
+
   return (
     <>
       <button className="item-detail__btn-ask" onClick={handleClkBtnSug}>
@@ -17,16 +35,9 @@ export default function BtnSug() {
 }
 
 function SugForm({ setIsSug }) {
-  /**
-   * 자기 자신이 올려둔 아이템 데이터 받아옴
-   * 체크 가능하도록
-   * 아이템 별 상태가 있어야 할듯 / 거래제안됨, 거래완료, 일반 => 제안된 상태는 추가적인 제안 가능??
-   * 제안 창에서 바로 거래 포스팅 올리도록 하는게 좋을까? 아니면 제안용과 제안받을 용을 나누는게 좋을까?
-   * 채팅은 어느타이밍에 넘어가야하지? 제안시 바로 연결은 해야될듯 => 채팅창을 따로 라우팅하는게 맞겠다
-   */
   const [selecteItemId, setSelectedItemId] = useState(null);
   const [isCreate, setIsCreate] = useState(false);
-  const [imgs, setImgs] = useState([]);
+  const router = useRouter();
 
   const handleClkBtnSubmit = (e) => {
     e.preventDefault();
@@ -54,159 +65,42 @@ function SugForm({ setIsSug }) {
 
   const handleClkBtnCreate = (e) => {
     e.preventDefault();
-    setIsCreate(true);
-  };
-
-  const handleClickUploadBtn = (e) => {
-    const files = e.target.files;
-    let temp = [];
-
-    const loadFile = (fileIndex) => {
-      if (files[fileIndex] && fileIndex < 5) {
-        const reader = new FileReader();
-
-        reader.addEventListener("load", (event) => {
-          temp.push(event.target.result);
-          loadFile(fileIndex + 1);
-        });
-        reader.readAsDataURL(files[fileIndex]);
-      } else {
-        setImgs(temp);
-      }
-    };
-
-    // Start reading the first file
-    loadFile(0);
-  };
-
-  const handleClkBtnDel = (e, idx) => {
-    e.preventDefault();
-    let newImgs = imgs.slice();
-    newImgs.splice(idx, 1);
-
-    setImgs(newImgs);
-  };
-
-  const getImgs = () => {
-    let eles = [];
-    for (let i = 0; i < 5; i++) {
-      if (imgs?.[i]) {
-        eles.push(
-          <div className="create-field__img-wrapper">
-            <img src={imgs[i]} alt="imgs" className="create-field__img"></img>
-            <button
-              className="create-filed__btn-delete-img"
-              onClick={(e) => handleClkBtnDel(e, i)}
-            >
-              ✖
-            </button>
-          </div>
-        );
-      } else {
-        eles.push(<div className="create-field__default-img"></div>);
-      }
-    }
-
-    return eles;
+    router.push(process.env.NEXT_PUBLIC_ROUTE_ADD_ITEM);
   };
 
   return (
-    <form className="sug-form" onSubmit={handleClkBtnSubmit}>
-      {isCreate ? (
-        <>
-          <div className="create-field">
-            <div className="create-field__img-receive">
-              <label
-                className="create-field__img-label"
-                for="create-field__img-input"
-              >
-                <input
-                  id="create-field__img-input"
-                  className="create-field__img-input"
-                  type="file"
-                  multiple="multiple"
-                  capture="environment"
-                  ccept="image/*"
-                  onChange={handleClickUploadBtn}
-                />
-                <span className="create-field__img-count">{`${imgs.length}/5`}</span>
-              </label>
-              {getImgs(imgs)}
-            </div>
+    <form
+      className="sug-form"
+      onSubmit={handleClkBtnSubmit}
+      onScroll={(e) => e.stopPropagation()}
+      onWheel={(e) => e.stopPropagation()}
+    >
+      <ul className="sug-form__items">
+        <button className="sug-from__btn-new" onClick={handleClkBtnCreate}>
+          + 새로 만들기
+        </button>
+        <li>
+          <label htmlFor="sub-form__radio-id" className="sug-form__item">
             <input
-              type="text"
-              className="create-field__title"
-              placeholder="제목을 입력하세요"
+              type="radio"
+              name="sug-from__radio"
+              id="sub-form__radio-id"
+              className="sug-form__radio-btn"
+              value="id1"
+              onChange={handleClkRadio}
             ></input>
-            <div className="create-field__description"></div>
-          </div>
-          <div className="create-field__btn-wrapper">
-            <button className="create-field__btn" onClick={handleClkBtnCancel}>
-              취 소
-            </button>
-            <button className="create-field__btn">확 인</button>
-          </div>
-        </>
-      ) : (
-        <>
-          <ul className="sug-form__items">
-            <button className="sug-from__btn-new" onClick={handleClkBtnCreate}>
-              + 새로 만들기
-            </button>
-            <li>
-              <label for="sub-form__radio-id" className="sug-form__item">
-                <input
-                  type="radio"
-                  name="sug-from__radio"
-                  id="sub-form__radio-id"
-                  className="sug-form__radio-btn"
-                  value="id1"
-                  onChange={handleClkRadio}
-                ></input>
-                <div className="sug-form__item-img"></div>
-                <span className="sug-form__item-title">샘플 데이터 타이틀</span>
-                <span className="sug-form__item-nick">유저123</span>
-              </label>
-            </li>
-            <li>
-              <label for="sub-form__radio-id" className="sug-form__item">
-                <input
-                  type="radio"
-                  name="sug-from__radio"
-                  id="sub-form__radio-id"
-                  className="sug-form__radio-btn"
-                  value="id1"
-                  onChange={handleClkRadio}
-                ></input>
-                <div className="sug-form__item-img"></div>
-                <span className="sug-form__item-title">샘플 데이터 타이틀</span>
-                <span className="sug-form__item-nick">유저123</span>
-              </label>
-            </li>
-            <li>
-              <label for="sub-form__radio-id" className="sug-form__item">
-                <input
-                  type="radio"
-                  name="sug-from__radio"
-                  id="sub-form__radio-id"
-                  className="sug-form__radio-btn"
-                  value="id1"
-                  onChange={handleClkRadio}
-                ></input>
-                <div className="sug-form__item-img"></div>
-                <span className="sug-form__item-title">샘플 데이터 타이틀</span>
-                <span className="sug-form__item-nick">유저123</span>
-              </label>
-            </li>
-          </ul>
-          <div className="sug-form__btn-wrapper">
-            <button className="sug-form__btn" onClick={handleClkBtnCancel}>
-              취 소
-            </button>
-            <button className="sug-form__btn">확 인</button>
-          </div>
-        </>
-      )}
+            <div className="sug-form__item-img"></div>
+            <span className="sug-form__item-title">샘플 데이터 타이틀</span>
+            <span className="sug-form__item-nick">유저123</span>
+          </label>
+        </li>
+      </ul>
+      <div className="sug-form__btn-wrapper">
+        <button className="sug-form__btn" onClick={handleClkBtnCancel}>
+          취 소
+        </button>
+        <button className="sug-form__btn">확 인</button>
+      </div>
     </form>
   );
 }

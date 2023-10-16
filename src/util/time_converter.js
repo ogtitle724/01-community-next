@@ -11,7 +11,7 @@ export default function timeConverter(wr_date) {
   } else if (diffMinutes < 60 * 48) {
     timeDisplay = `어제`;
   } else {
-    timeDisplay = date.toString().slice(0, 10);
+    timeDisplay = JSON.stringify(date).slice(1, 11);
   }
 
   return timeDisplay;
