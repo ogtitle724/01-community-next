@@ -33,11 +33,21 @@ export default function ChatLayout() {
       isLogIn &&
       (socket.readyState === WebSocket.CLOSED || !socket.isConnect)
     ) {
-      socket.connect(JSON.stringify(user.id));
+      const promise = new Promise((resolve, reject) => {
+        socket.connect(JSON.stringify(user.id));
+        socket.on("open", () => {
+          socket.on("message", callback);
+          socket.send({
+            action: "getConnectionData",
+            senderId: String(user.id),
+          });
+          resolve();
+        });
+        socket.on("error", (err) => reject(err));
+      });
     }
 
     socket.on("message", callback);
-
     socket.send({ action: "getConnectionData", senderId: String(user.id) });
 
     return () => socket.off("message", callback);
