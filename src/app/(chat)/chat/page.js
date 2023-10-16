@@ -16,28 +16,10 @@ export default function ChatLayout() {
   const [opponentId, setOpponentId] = useState(null);
 
   useEffect(() => {
-    const chatQuit = () => {
-      if (document.visibilityState === "hidden" && curChatRoom) {
-        socket.send({ action: "quitRoom", senderId: JSON.stringify(user.id) });
-      }
-      if (document.visibilityState === "visible" && curChatRoom) {
-        socket.send({
-          action: "joinRoom",
-          senderId: String(user.id),
-          roomId: curChatRoom,
-        });
-      }
-    };
-
-    document.addEventListener("visibilitychange", chatQuit);
-    return () => document.removeEventListener("visibilitychange", chatQuit);
-  }, [curChatRoom, user.id]);
-
-  useEffect(() => {
     const callback = (e) => {
       const message = JSON.parse(e.data);
       const action = message.action;
-
+      console.log("callbackkkkkkk");
       if (action === "getConnectionData") {
         setRooms(message.data);
       } else if (action === "joinRoom") {
@@ -55,10 +37,29 @@ export default function ChatLayout() {
     }
 
     socket.on("message", callback);
+
     socket.send({ action: "getConnectionData", senderId: String(user.id) });
 
     return () => socket.off("message", callback);
   }, [isLogIn, user.id]);
+
+  useEffect(() => {
+    const chatQuit = () => {
+      if (document.visibilityState === "hidden" && curChatRoom) {
+        socket.send({ action: "quitRoom", senderId: JSON.stringify(user.id) });
+      }
+      if (document.visibilityState === "visible" && curChatRoom) {
+        socket.send({
+          action: "joinRoom",
+          senderId: String(user.id),
+          roomId: curChatRoom,
+        });
+      }
+    };
+
+    document.addEventListener("visibilitychange", chatQuit);
+    return () => document.removeEventListener("visibilitychange", chatQuit);
+  }, [curChatRoom, user.id]);
 
   return (
     <main className="chat__wrapper">
