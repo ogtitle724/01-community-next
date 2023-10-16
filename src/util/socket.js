@@ -112,6 +112,10 @@ class Socket {
     }
   }
 
+  get readyState() {
+    return this.socket.readyState;
+  }
+
   on(eventName, callback) {
     this.listeners[eventName].push(callback);
 

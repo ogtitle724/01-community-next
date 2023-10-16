@@ -30,11 +30,12 @@ export default function ChatLayout() {
     };
 
     document.addEventListener("visibilitychange", chatQuit);
-    return document.removeEventListener("visibilitychange", chatQuit);
+    return () => document.removeEventListener("visibilitychange", chatQuit);
   }, [curChatRoom, user.id]);
 
   useEffect(() => {
-    if (isLogIn) socket.connect(JSON.stringify(user.id));
+    if (isLogIn && socket.readyState === WebSocket.CLOSED)
+      socket.connect(JSON.stringify(user.id));
   }, [isLogIn, user.id]);
 
   useEffect(() => {
