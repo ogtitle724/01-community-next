@@ -24,7 +24,6 @@ class Fetch {
 
       const state = store.getState();
       console.log(state);
-      if (state.sign.user) socket.connect(String(state.sign.user.id));
     }
     return res;
   }

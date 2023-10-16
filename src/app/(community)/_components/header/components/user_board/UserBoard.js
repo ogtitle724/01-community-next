@@ -1,14 +1,16 @@
 "use client";
-import Fetch from "@/util/fetch";
-import socket from "@/util/socket";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+import Fetch from "@/util/fetch";
+import socket from "@/util/socket";
 import {
   logout,
   setUser,
   selectUser,
   setLoginDeadline,
   selectChatAlarm,
+  selectIsLogIn,
 } from "@/redux/slice/signSlice";
 import "./style.css";
 
@@ -16,7 +18,12 @@ export default function UserBoard() {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector(selectUser);
+  const isLogIn = useSelector(selectIsLogIn);
   const alarmCnt = useSelector(selectChatAlarm);
+
+  useEffect(() => {
+    if (isLogIn) socket.connect();
+  }, [isLogIn]);
 
   const handleClickLogOut = async () => {
     try {
