@@ -32,15 +32,7 @@ export default function ChatLayout() {
     const establishConnection = () => {
       socket.connect(JSON.stringify(user.id));
 
-      setTimeout(() => {
-        socket.on("message", callback);
-        socket.send({
-          action: "getConnectionData",
-          senderId: String(user.id),
-        });
-      }, 1000);
-
-      /* socket.on("open", () => {
+      socket.socket.addEventListener("open", () => {
         socket.on("message", callback);
         socket.send({
           action: "getConnectionData",
@@ -48,9 +40,9 @@ export default function ChatLayout() {
         });
       });
 
-      socket.on("error", (err) => {
+      socket.socket.on("error", (err) => {
         console.error("Socket encountered an error:", err);
-      }); */
+      });
     };
 
     if (
