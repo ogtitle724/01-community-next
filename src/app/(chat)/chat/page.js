@@ -35,16 +35,18 @@ export default function ChatLayout() {
     ) {
       const promise = new Promise((resolve, reject) => {
         socket.connect(JSON.stringify(user.id));
-        socket.on("open", () => {
+        socket.on("open", () => resolve());
+        socket.on("error", (err) => reject(err));
+      });
+      promise
+        .then(() => {
           socket.on("message", callback);
           socket.send({
             action: "getConnectionData",
             senderId: String(user.id),
           });
-          resolve();
-        });
-        socket.on("error", (err) => reject(err));
-      });
+        })
+        .catch((err) => console.error(err));
     }
 
     socket.on("message", callback);
