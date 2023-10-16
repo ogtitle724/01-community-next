@@ -9,6 +9,7 @@ import timeConverter from "@/util/time_converter";
 import { sanitize } from "@/util/secure";
 import "./style.css";
 import { selectUser } from "@/redux/slice/signSlice";
+import { useRouter } from "next/navigation";
 
 export default function ChatNav({
   rooms,
@@ -21,6 +22,7 @@ export default function ChatNav({
   const nav = useRef();
   const width = useSelector(selectWidth);
   const user = useSelector(selectUser);
+  const router = useRouter();
 
   useEffect(() => {
     if (width >= 768) nav.current.style = "left: 0px;";
@@ -33,6 +35,14 @@ export default function ChatNav({
       }
     }
   }, [isShowNav, width]);
+
+  const handleClkBtnHome = (e) => {
+    e.preventDefault();
+    setCurChatRoom(null);
+    setOpponentId(null);
+    socket.send({ action: "quitRoom", senderId: JSON.stringify(user.id) });
+    router.push(proccess.env.NEXT_PUBLIC_ROUTE_HOME);
+  };
 
   const handleClkChat = async (roomId, opponentId) => {
     try {
@@ -67,9 +77,10 @@ export default function ChatNav({
           ></button>
         )}
         <nav className="chatnav__gnb">
-          <Link href={process.env.NEXT_PUBLIC_ROUTE_HOME}>
-            <button className="chatnav__btn-home"></button>
-          </Link>
+          <button
+            className="chatnav__btn-home"
+            onClick={handleClkBtnHome}
+          ></button>
           <ThemeToggle />
           <input
             placeholder="검색"
