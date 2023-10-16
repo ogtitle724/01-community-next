@@ -17,14 +17,14 @@ export default function ChatLayout() {
 
   useEffect(() => {
     const chatQuit = () => {
-      if (document.visibilityState === "hidden") {
-        socket.send({ action: "quitRoom", senderId: user.id });
+      if (document.visibilityState === "hidden" && curChatRoom) {
+        socket.send({ action: "quitRoom", senderId: JSON.stringify(user.id) });
       }
       if (document.visibilityState === "visible" && curChatRoom) {
         socket.send({
           action: "joinRoom",
           senderId: String(user.id),
-          roomId,
+          roomId: curChatRoom,
         });
       }
     };
@@ -34,8 +34,12 @@ export default function ChatLayout() {
   }, [curChatRoom, user.id]);
 
   useEffect(() => {
-    if (isLogIn && socket.readyState === WebSocket.CLOSED)
+    if (
+      isLogIn &&
+      (socket.readyState === WebSocket.CLOSED || socket.isConnect)
+    ) {
       socket.connect(JSON.stringify(user.id));
+    }
   }, [isLogIn, user.id]);
 
   useEffect(() => {

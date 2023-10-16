@@ -9,6 +9,14 @@ class Socket {
     this.intentionalClose = false;
   }
 
+  get readyState() {
+    if (this.socket) return this.socket.readyState;
+  }
+
+  get isConnect() {
+    return this.socket;
+  }
+
   setListeners(senderId, senderNick = null) {
     this.socket.addEventListener("open", () => {
       console.log("socket connect");
@@ -110,10 +118,6 @@ class Socket {
     } catch (err) {
       console.error("Failed to send message:", err);
     }
-  }
-
-  get readyState() {
-    return this.socket.readyState;
   }
 
   on(eventName, callback) {

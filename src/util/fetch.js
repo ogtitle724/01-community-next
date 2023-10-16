@@ -21,9 +21,6 @@ class Fetch {
     if (accessToken) {
       console.log("access");
       this.defaultOptions.headers.Authorization = `Bearer ${accessToken}`;
-
-      const state = store.getState();
-      console.log(state);
     }
     return res;
   }
