@@ -36,7 +36,7 @@ export default function ChatLayout() {
   useEffect(() => {
     if (
       isLogIn &&
-      (socket.readyState === WebSocket.CLOSED || socket.isConnect)
+      (socket.readyState === WebSocket.CLOSED || !socket.isConnect)
     ) {
       socket.connect(JSON.stringify(user.id));
     }

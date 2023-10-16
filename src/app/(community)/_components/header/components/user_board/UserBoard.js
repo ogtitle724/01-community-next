@@ -22,11 +22,15 @@ export default function UserBoard() {
   const alarmCnt = useSelector(selectChatAlarm);
 
   useEffect(() => {
+    console.log("resdy:", socket.readyState);
+    console.log(socket.readyState === WebSocket.CLOSED);
+    console.log(socket.isConnect);
     if (
       isLogIn &&
       (socket.readyState === WebSocket.CLOSED || !socket.isConnect)
-    )
+    ) {
       socket.connect(JSON.stringify(user.id));
+    }
   }, [isLogIn, user.id]);
 
   const handleClickLogOut = async () => {
