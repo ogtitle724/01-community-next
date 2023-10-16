@@ -22,8 +22,8 @@ export default function UserBoard() {
   const alarmCnt = useSelector(selectChatAlarm);
 
   useEffect(() => {
-    if (isLogIn) socket.connect();
-  }, [isLogIn]);
+    if (isLogIn) socket.connect(user.id);
+  }, [isLogIn, user.id]);
 
   const handleClickLogOut = async () => {
     try {
