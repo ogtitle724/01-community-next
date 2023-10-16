@@ -41,7 +41,7 @@ export default function ChatNav({
     setCurChatRoom(null);
     setOpponentId(null);
     socket.send({ action: "quitRoom", senderId: JSON.stringify(user.id) });
-    router.push(proccess.env.NEXT_PUBLIC_ROUTE_HOME);
+    router.push(process.env.NEXT_PUBLIC_ROUTE_HOME);
   };
 
   const handleClkChat = async (roomId, opponentId) => {
