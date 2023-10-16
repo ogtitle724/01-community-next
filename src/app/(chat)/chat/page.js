@@ -34,37 +34,31 @@ export default function ChatLayout() {
   }, [curChatRoom, user.id]);
 
   useEffect(() => {
-    if (
-      isLogIn &&
-      (socket.readyState === WebSocket.CLOSED || !socket.isConnect)
-    ) {
-      socket.connect(JSON.stringify(user.id));
-    }
-  }, [isLogIn, user.id]);
-
-  useEffect(() => {
     const callback = (e) => {
       const message = JSON.parse(e.data);
       const action = message.action;
 
       if (action === "getConnectionData") {
         setRooms(message.data);
-      }
-
-      if (action === "joinRoom") {
+      } else if (action === "joinRoom") {
         setChats(message.data.reverse());
-      }
-
-      if (action === "message") {
+      } else if (action === "message") {
         setChats((chats) => [...chats, message.data]);
       }
     };
+
+    if (
+      isLogIn &&
+      (socket.readyState === WebSocket.CLOSED || !socket.isConnect)
+    ) {
+      socket.connect(JSON.stringify(user.id));
+    }
 
     socket.on("message", callback);
     socket.send({ action: "getConnectionData", senderId: String(user.id) });
 
     return () => socket.off("message", callback);
-  }, [user.id]);
+  }, [isLogIn, user.id]);
 
   return (
     <main className="chat__wrapper">
