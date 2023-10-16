@@ -40,7 +40,7 @@ export default function ChatLayout() {
         });
       });
 
-      socket.socket.on("error", (err) => {
+      socket.socket.addEventListener("error", (err) => {
         console.error("Socket encountered an error:", err);
       });
     };
