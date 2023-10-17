@@ -57,6 +57,7 @@ function SugForm({ setIsSug, itemDetail }) {
         sugItemImg: null,
         date: new Date().getTime(),
       });
+      console.log(itemDetail);
       console.log({
         action: "suggest",
         senderId: JSON.stringify(user.id),
