@@ -13,7 +13,7 @@ import { changeP2Span, deleteEnter } from "@/util/textProcess";
 import "./style.css";
 
 export default function CommentBoard({ postId, comments }) {
-  console.log("comment rendered");
+  console.log("COMMENT");
   const [content, setContent] = useState("");
   const [target, setTarget] = useState(null);
   const editorRef = useRef();

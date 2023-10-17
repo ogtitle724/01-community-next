@@ -18,12 +18,6 @@ export default function ItemUpload() {
 
   const handleClkBtnUpload = async () => {
     try {
-      /* let res = await fetch("http://localhost:3000", {
-        method: "POST",
-        body: JSON.stringify(imgs),
-      });
-      const rres = await res.json();
-      console.log(rres); */
       const option = { headers: { "Content-Type": "application/json" } };
       const body = JSON.stringify({
         title,

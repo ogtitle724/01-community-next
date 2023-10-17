@@ -12,7 +12,7 @@ import MenuBtn from "./components/menu/menu";
 import "./style.css";
 
 function Header() {
-  console.log("header rendered");
+  console.log("HAEDER");
   const isLogIn = useSelector(selectIsLogIn);
   const width = useSelector(selectWidth);
 

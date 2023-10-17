@@ -57,18 +57,7 @@ function SugForm({ setIsSug, itemDetail }) {
         sugItemImg: null,
         date: new Date().getTime(),
       });
-      console.log(itemDetail);
-      console.log({
-        action: "suggest",
-        senderId: JSON.stringify(user.id),
-        senderNick: user.nick,
-        itemId: JSON.stringify(itemDetail.id),
-        receiverId: JSON.stringify(itemDetail.user_id),
-        receiverNick: itemDetail.user_nick,
-        sugItemId: JSON.stringify(selectedItem.id),
-        sugItemImg: null,
-        date: new Date().getTime(),
-      });
+
       setIsSug(false);
     } else {
       alert("제안할 물건을 선택해주세요");

@@ -27,7 +27,7 @@ function Gnb() {
   }, [width, category]);
 
   const handleClkLink = (category) => dispatch(setCategory({ category }));
-  console.log("gnb rendered");
+  console.log("GNB");
   return (
     <nav ref={gnb} className="gnb">
       <Link
