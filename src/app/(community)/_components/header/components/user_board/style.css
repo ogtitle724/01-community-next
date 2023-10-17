@@ -75,6 +75,7 @@
   height: 16px;
   position: relative;
   background: url(/image/icon/reader.svg);
+  cursor: pointer;
 }
 
 .user-board__btn-write::after {
@@ -94,6 +95,7 @@
   margin-left: 2px;
   position: relative;
   background: url(/image/icon/bag-add.svg);
+  cursor: pointer;
 }
 
 .user-board__btn-chat {
@@ -102,6 +104,7 @@
   margin-left: 1px;
   position: relative;
   background: url(/image/icon/chatbubble.svg);
+  cursor: pointer;
 }
 
 .user-board__btn-alram {
@@ -109,6 +112,7 @@
   height: 17px;
   position: relative;
   background: url(/image/icon/notifications.svg);
+  cursor: pointer;
 }
 
 .user-board__alram-cnt {
