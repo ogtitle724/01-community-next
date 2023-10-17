@@ -18,7 +18,7 @@ export const checkEmail = (email) => {
 };
 
 export const checkPwd = (pwd) => {
-  const pattern = /^(?!.*\s)(?=.*[@#$%^&+=])(?=.*[A-Za-z])(?=.*[0-9]).{8,16}$/;
+  const pattern = /^(?!.*\s)(?=.*[@#$%^&+=!])(?=.*[A-Za-z])(?=.*[0-9]).{8,16}$/;
 
   if (pattern.test(pwd)) return true;
   else return false;

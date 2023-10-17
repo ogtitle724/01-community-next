@@ -29,7 +29,6 @@ export default function ImgReceiver({ setImgs }) {
 
   const handleClickUploadBtn = (e) => {
     const files = e.target.files;
-    console.log("file", files);
     let temp = [];
 
     const loadFile = (fileIndex) => {

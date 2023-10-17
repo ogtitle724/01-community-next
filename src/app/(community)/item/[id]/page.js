@@ -12,6 +12,7 @@ export default async function ItemDetailPage({ params }) {
     let path = process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemId}`;
     const res = await Fetch.get(path);
     const itemDetail = await res.json();
+    console.log("itemDetail------------------------------------");
     console.log(itemDetail);
 
     return (

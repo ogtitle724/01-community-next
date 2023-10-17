@@ -32,7 +32,7 @@ export default function ChatDetail({
       behavior: "auto",
     });
   }, [chats]);
-  1;
+
   const handleClkBtnSubmit = (e) => {
     e.preventDefault();
     if (!inputData) return;

@@ -75,7 +75,7 @@ class Socket {
       const message = JSON.parse(e.data);
       const action = message.action;
 
-      if (action === "getConnectionData") {
+      if (action === "getConnectionData" && message.data) {
         const alarmCnt = Object.values(message.data).reduce((acc, cur) => {
           acc += cur.alarm_cnt;
           return acc;
@@ -85,6 +85,7 @@ class Socket {
     };
 
     this.socket.addEventListener("message", countAlarm);
+    this.socket.addEventListener("message", (e) => console.log(e));
 
     for (let eventName in this.listeners) {
       this.listeners[eventName].forEach((callback) => {

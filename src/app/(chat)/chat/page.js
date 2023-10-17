@@ -29,6 +29,8 @@ export default function ChatLayout() {
       }
     };
 
+    //TODO: socket.js 수정해서 연결시 기본적으로 수행될 이벤트리스너 connection에 arg로 줄
+    //수 있도록 수정할 것
     const establishConnection = () => {
       socket.connect(JSON.stringify(user.id));
 

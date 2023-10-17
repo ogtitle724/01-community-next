@@ -1,50 +1,55 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { selectUser } from "@/redux/slice/signSlice";
 import socket from "@/util/socket";
 import "./style.css";
 
 export default function BtnSug({ itemDetail }) {
   const [isSug, setIsSug] = useState(false);
-  const handleClkBtnSug = () => {
-    socket.send({
-      action: "suggest",
-      senderId: String(user.id),
-      receiverId: String(itemDetail.user_id),
-      receiverNick: itemDetail.user_nick,
-      sugItemId: itemDetail.id,
-      thumbnail: itemDeteail.imgs[0],
-      //썸네일도 보내는게 나을까? => 어차피 아이템 조회할때 src 받아오니까
-      //첫번째거 보내자 이걸 제안시작하는 채팅에 보내고 아이템 아이디도
-      //같이 보내서 채팅 누르면 제안받은 아이템 디테일 페이지로 이동할 수
-      //있도록 하면 될 듯
-    });
-
-    setIsSug((isSug) => !isSug);
-  };
+  const handleClkBtnSug = () => setIsSug(true);
 
   return (
     <>
       <button className="item-detail__btn-ask" onClick={handleClkBtnSug}>
         제안하기
       </button>
-      {isSug && <SugForm setIsSug={setIsSug} />}
+      {isSug && <SugForm setIsSug={setIsSug} itemDetail={itemDetail} />}
     </>
   );
 }
 
-function SugForm({ setIsSug }) {
-  const [selecteItemId, setSelectedItemId] = useState(null);
+function SugForm({ setIsSug, itemDetail }) {
+  const [selectedItem, setSelectedItem] = useState(null);
   const [isCreate, setIsCreate] = useState(false);
   const router = useRouter();
+  const user = useSelector(selectUser);
 
+  useEffect(() => {
+    /**
+     * 로그인한 유저가 올린 아이템 페이징
+     * 각 객체는 itemId, thumbnail, user_nick, title을 기본적으로 포함해야됨
+     */
+  }, []);
   const handleClkBtnSubmit = (e) => {
     e.preventDefault();
-    if (selecteItemId) {
+    if (selectedItem) {
+      socket.send({
+        action: "suggest",
+        senderId: JSON.stringify(user.id),
+        senderNick: JSON.stringify(user.nick),
+        itemId: JSON.stringify(itemDetail.id),
+        receiverId: JSON.stringify(itemDetail.user_id),
+        receiverNick: JSON.stringify(itemDetail.user_nick),
+        sugItemId: selectedItem.id,
+        sugItemImg: null,
+        date: new Date().getTime(),
+      });
       setIsSug(false);
     } else {
-      alert("품목을 선택해주세요");
+      alert("제안할 물건을 선택해주세요");
     }
   };
 
@@ -55,12 +60,12 @@ function SugForm({ setIsSug }) {
       setImgs([]);
     } else {
       setIsSug(false);
-      setSelectedItemId(null);
+      setSelectedItem(null);
     }
   };
 
   const handleClkRadio = (e) => {
-    setSelectedItemId(e.target.value);
+    setSelectedItem(e.target.value);
   };
 
   const handleClkBtnCreate = (e) => {

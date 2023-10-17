@@ -35,7 +35,7 @@ export default function BtnUd({ writerId, postId }) {
         const path = process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`;
         await Fetch.delete(path);
         router.refresh();
-        router.push(`/${categoriesKO2EN[category]}`);
+        router.back();
       } catch (err) {
         console.error(err);
       }
