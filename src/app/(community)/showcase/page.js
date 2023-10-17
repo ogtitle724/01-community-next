@@ -6,7 +6,9 @@ export default async function showCasePage({ searchParams }) {
   const order = searchParams?.order ?? "최신순";
 
   try {
-    const res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_ITEM_PAGING);
+    const res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_ITEM_PAGING, {
+      next: { revalidate: 0 },
+    });
     const itemData = await res.json();
 
     return <Showcase itemData={itemData} />;

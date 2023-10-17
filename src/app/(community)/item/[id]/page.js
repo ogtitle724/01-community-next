@@ -10,7 +10,7 @@ export default async function ItemDetailPage({ params }) {
 
   try {
     let path = process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemId}`;
-    const res = await Fetch.get(path);
+    const res = await Fetch.get(path, { next: { revalidate: 0 } });
     const itemDetail = await res.json();
 
     return (

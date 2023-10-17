@@ -10,7 +10,8 @@ export default async function SearchPage({ searchParams }) {
   try {
     const res = await Fetch.get(
       process.env.REACT_APP_PATH_SEARCH +
-        `?page=${page - 1}&size=30&searchTerm=${term}`
+        `?page=${page - 1}&size=30&searchTerm=${term}`,
+      { next: { revalidate: 0 } }
     );
     const postData = res.json();
     return <Board posts={postData} title={`'${term}' 관련 게시물`} />;

@@ -32,7 +32,9 @@ function SugForm({ setIsSug, itemDetail }) {
   useEffect(() => {
     const fetchUserItems = async () => {
       try {
-        const res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_USER_ITEMS);
+        const res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_USER_ITEMS, {
+          next: { revalidate: 0 },
+        });
         const data = await res.json();
         setContents(data.content);
       } catch (err) {

@@ -27,7 +27,8 @@ export default function WritePage({ params }) {
       const postId = params?.id;
       try {
         const res = await Fetch.get(
-          process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`
+          process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`,
+          { next: { revalidate: 0 } }
         );
         const postDetail = await res.json();
         return postDetail;
@@ -94,7 +95,6 @@ export default function WritePage({ params }) {
 
     const option = {
       headers: { "Content-Type": "application/json" },
-      next: { revalidate: 0 },
     };
     const payload = JSON.stringify({
       title,
@@ -105,7 +105,7 @@ export default function WritePage({ params }) {
     try {
       const path = process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`;
       await Fetch.patch(path, payload, option);
-      router.push(`/${categoriesKO2EN[category]}`);
+      router.back();
     } catch (err) {
       console.error(err);
       alert("게시글 수정을 완료하지 못했습니다.");

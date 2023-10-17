@@ -4,13 +4,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/slice/signSlice";
-import { categoriesKO2EN } from "@/config/config";
 import { selectCategory } from "@/redux/slice/pageSlice";
 import "./style.css";
 
 export default function BtnUd({ writerId, postId }) {
   const [isWriter, setIsWriter] = useState(false);
-  const category = useSelector(selectCategory);
   const user = useSelector(selectUser);
   const router = useRouter();
 

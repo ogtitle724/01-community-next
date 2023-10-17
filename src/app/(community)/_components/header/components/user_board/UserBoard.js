@@ -32,7 +32,9 @@ export default function UserBoard() {
 
   const handleClickLogOut = async () => {
     try {
-      await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGOUT);
+      await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGOUT, {
+        next: { revalidate: 0 },
+      });
       delete Fetch.defaultOptions.headers["Authorization"];
       dispatch(logout());
       dispatch(setUser({ user: null }));

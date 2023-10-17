@@ -23,7 +23,6 @@ export default function CommentBoard({ postId, comments }) {
     if (content) {
       const option = {
         headers: { "Content-Type": "application/json" },
-        next: { revalidate: 0 },
       };
       let contentArg = changeP2Span(content);
       contentArg = deleteEnter(contentArg);
@@ -198,7 +197,6 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
     }
     const option = {
       headers: { "Content-Type": "application/json" },
-      next: { revalidate: 0 },
     };
     const body = JSON.stringify({ value });
     const path = process.env.NEXT_PUBLIC_PATH_COMMENT_REC.replace(
@@ -223,7 +221,6 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
     const path = process.env.NEXT_PUBLIC_PATH_COMMENT + `/${comment.id}`;
     const option = {
       headers: { "Content-Type": "application/json" },
-      next: { revalidate: 0 },
     };
     const contentArg = changeP2Span(content);
     const body = JSON.stringify({ content: deleteEnter(contentArg) });

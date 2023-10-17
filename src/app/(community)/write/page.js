@@ -56,7 +56,6 @@ export default function WritePage({ params }) {
     }
     const option = {
       headers: { "Content-Type": "application/json" },
-      next: { revalidate: 0 },
     };
     const payload = JSON.stringify({
       title,
