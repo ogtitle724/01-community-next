@@ -41,10 +41,7 @@ export default function WritePage({ params }) {
     });
   }, [isLogIn, isUpdate, params?.id, router, user.id]);
 
-  const handleSelectCategory = (e) => {
-    setCategory(e.target.value);
-    console.log(categoriesKO2EN[e.target.value]);
-  };
+  const handleSelectCategory = (e) => setCategory(e.target.value);
 
   const handleClickBtnComplete = async () => {
     if (!title) {
@@ -88,7 +85,7 @@ export default function WritePage({ params }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <Editor onChange={setBody} />
+        <Editor onChange={setBody} isImg={true} />
         <section className="write-page__board">
           <select
             name="category"

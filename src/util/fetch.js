@@ -16,7 +16,7 @@ class Fetch {
     const accessToken = authHeader && authHeader.split(" ")[1];
 
     if (accessToken) {
-      console.log("access");
+      console.log("access token generated");
       this.defaultOptions.headers.Authorization = `Bearer ${accessToken}`;
     }
     return res;

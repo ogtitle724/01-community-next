@@ -122,7 +122,7 @@ export default function WritePage({ params }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <Editor onChange={setBody} data={isUpdate && body} />
+        <Editor onChange={setBody} data={isUpdate && body} isImg={true} />
         <section className="write-page__board">
           <select
             name="category"

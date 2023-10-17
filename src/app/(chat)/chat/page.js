@@ -19,7 +19,7 @@ export default function ChatLayout() {
     const callback = (e) => {
       const message = JSON.parse(e.data);
       const action = message.action;
-      console.log("callbackkkkkkk");
+      console.log("message", message);
       if (action === "getConnectionData") {
         setRooms(message.data);
       } else if (action === "joinRoom") {

@@ -18,20 +18,20 @@ export default function ItemUpload() {
 
   const handleClkBtnUpload = async () => {
     try {
-      let res = await fetch("http://localhost:3000", {
+      /* let res = await fetch("http://localhost:3000", {
         method: "POST",
         body: JSON.stringify(imgs),
       });
       const rres = await res.json();
-      console.log(rres);
-      /* const option = { headers: { "Content-Type": "application/json" } };
-      const body = JSON.stringify({W
+      console.log(rres); */
+      const option = { headers: { "Content-Type": "application/json" } };
+      const body = JSON.stringify({
         title,
         content,
       });
 
       await Fetch.post(process.env.NEXT_PUBLIC_PATH_ITEM, body, option);
-      router.back(); */
+      router.back();
     } catch (err) {
       console.error(err);
     }
@@ -46,7 +46,7 @@ export default function ItemUpload() {
         placeholder="제목을 입력하세요"
         onChange={(e) => setTitle(e.target.value)}
       ></input>
-      <Editor onChange={setContent} />
+      <Editor onChange={setContent} isImg={false} />
       <button className="item-upload__btn-submit" onClick={handleClkBtnUpload}>
         완료
       </button>
