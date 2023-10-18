@@ -1,11 +1,11 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import ImgReceiver from "@/app/_components/img_receiver/ImgReceiver";
 import Fetch from "@/util/fetch";
 import "./style.css";
-import { dataURLtoBlob } from "@/util/img_process";
+
 const Editor = dynamic(() => import("@components/editor/editor"), {
   ssr: false,
 });
@@ -18,6 +18,13 @@ export default function ItemUpload() {
 
   const handleClkBtnUpload = async () => {
     try {
+      if (!title.length) {
+        alert("제목을 작성을 주세요!");
+        return;
+      } else if (!content.length) {
+        alert("내용을 작성해 주세요!");
+        return;
+      }
       const option = { headers: { "Content-Type": "application/json" } };
       const body = JSON.stringify({
         title,
@@ -25,6 +32,7 @@ export default function ItemUpload() {
       });
 
       await Fetch.post(process.env.NEXT_PUBLIC_PATH_ITEM, body, option);
+      router.refresh();
       router.back();
     } catch (err) {
       console.error(err);
@@ -38,6 +46,7 @@ export default function ItemUpload() {
         type="text"
         className="item-upload__title"
         placeholder="제목을 입력하세요"
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
       ></input>
       <Editor onChange={setContent} isImg={false} />

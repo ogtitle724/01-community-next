@@ -14,7 +14,6 @@ const Editor = dynamic(() => import("@components/editor/editor"), {
 
 export default function WritePage({ params }) {
   const router = useRouter();
-  const isUpdate = params?.id && true;
   const user = useSelector(selectUser);
   const isLogIn = useSelector(selectIsLogIn);
   const [title, setTitle] = useState("");
@@ -40,20 +39,18 @@ export default function WritePage({ params }) {
     };
 
     const fetchDataAndUpdate = async () => {
-      if (isUpdate) {
-        try {
-          const postDetail = await getUpdateData();
+      try {
+        const postDetail = await getUpdateData();
 
-          if (postDetail.user_id !== user.id) throw new Error("No permission");
+        if (postDetail.user_id !== user.id) throw new Error("No permission");
 
-          setTitle(postDetail.title);
-          setCategory(postDetail.category);
-          setBody(postDetail.content);
-        } catch (err) {
-          console.error(err);
-          alert("넌 수정 안되는거 알지???");
-          router.back();
-        }
+        setTitle(postDetail.title);
+        setCategory(postDetail.category);
+        setBody(postDetail.content);
+      } catch (err) {
+        console.error(err);
+        alert("넌 수정 안되는거 알지???");
+        router.back();
       }
     };
 
@@ -75,7 +72,7 @@ export default function WritePage({ params }) {
         }
       }
     });
-  }, [isLogIn, isUpdate, params?.id, router, user.id]);
+  }, [isLogIn, params?.id, router, user.id]);
 
   const handleSelectCategory = (e) => {
     setCategory(e.target.value);
@@ -122,7 +119,7 @@ export default function WritePage({ params }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <Editor onChange={setBody} data={isUpdate && body} isImg={true} />
+        <Editor onChange={setBody} data={body} isImg={true} />
         <section className="write-page__board">
           <select
             name="category"

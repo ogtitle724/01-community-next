@@ -101,7 +101,7 @@ export default function ChatDetail({
                       : " chat__date--opponent")
                   }
                 >
-                  {timeConverter(chat.timestamp)}
+                  {timeConverter(chat.timestamp, true)}
                 </span>
               </li>
             );

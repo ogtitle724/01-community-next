@@ -9,9 +9,10 @@ export default async function showCasePage({ searchParams }) {
     const res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_ITEM_PAGING, {
       next: { revalidate: 0 },
     });
-    const itemData = await res.json();
+    const itemPagingData = await res.json();
+    console.log(itemPagingData);
 
-    return <Showcase itemData={itemData} />;
+    return <Showcase itemPagingData={itemPagingData} />;
   } catch (err) {
     console.error(err);
     return <ServerError />;

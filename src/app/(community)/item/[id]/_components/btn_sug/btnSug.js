@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectUser } from "@/redux/slice/signSlice";
 import Fetch from "@/util/fetch";
 import socket from "@/util/socket";
@@ -10,13 +10,51 @@ import "./style.css";
 
 export default function BtnSug({ itemDetail }) {
   const [isSug, setIsSug] = useState(false);
+  const [isWriter, setIsWriter] = useState(false);
   const handleClkBtnSug = () => setIsSug(true);
+  const user = useSelector(selectUser);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user && user.id === itemDetail.user_id) setIsWriter(true);
+    console.log(isWriter);
+  }, [user]);
+
+  const handleClkBtnUpdate = async (e) => {
+    e.preventDefault();
+    router.push(process.env.NEXT_PUBLIC_ROUTE_ADD_ITEM + `/${itemDetail.id}`);
+  };
+
+  const handleClkBtnDelete = async (e) => {
+    e.preventDefault();
+    try {
+      await Fetch.delete(
+        process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemDetail.id}`
+      );
+    } catch (err) {
+      alert("게시물을 삭제할 수 없습니다 :(");
+      console.error(err);
+    }
+  };
 
   return (
     <>
-      <button className="item-detail__btn-ask" onClick={handleClkBtnSug}>
-        제안하기
-      </button>
+      <div className="item-detail__btn-ud">
+        {user && isWriter ? (
+          <>
+            <button className="item-detail__btn" onClick={handleClkBtnUpdate}>
+              수정
+            </button>
+            <button className="item-detail__btn" onClick={handleClkBtnDelete}>
+              삭제
+            </button>
+          </>
+        ) : (
+          <button className="item-detail__btn" onClick={handleClkBtnSug}>
+            제안하기
+          </button>
+        )}
+      </div>
       {isSug && <SugForm setIsSug={setIsSug} itemDetail={itemDetail} />}
     </>
   );
@@ -79,6 +117,7 @@ function SugForm({ setIsSug, itemDetail }) {
 
   const handleClkItem = (sugedItem) => {
     setSelectedItem(sugedItem);
+    console.log(sugedItem);
   };
 
   const handleClkBtnCreate = (e) => {
@@ -105,6 +144,7 @@ function SugForm({ setIsSug, itemDetail }) {
                 handleClkItem={handleClkItem}
                 sugedItem={sugedItem}
                 setSelectedItem={setSelectedItem}
+                idx={idx}
               />
             );
           })}
@@ -119,17 +159,20 @@ function SugForm({ setIsSug, itemDetail }) {
   );
 }
 
-function ItemList({ handleClkItem, sugedItem }) {
+function ItemList({ handleClkItem, sugedItem, idx }) {
   return (
     <li>
-      <label htmlFor="sub-form__radio-id" className="sug-form__item">
+      <label
+        htmlFor={"sub-form__radio-id-" + idx}
+        className="sug-form__item"
+        onChange={(e) => handleClkItem(sugedItem)}
+      >
         <input
           type="radio"
           name="sug-from__radio"
-          id="sub-form__radio-id"
+          id={"sub-form__radio-id-" + idx}
           className="sug-form__radio-btn"
           value="id1"
-          onChange={(e) => handleClkItem(sugedItem)}
         ></input>
         <i className="sug-form__item-img"></i>
         <span className="sug-form__item-title">{sugedItem.title}</span>

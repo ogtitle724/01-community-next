@@ -23,7 +23,7 @@ export default function ChatLayout() {
       if (action === "getConnectionData") {
         setRooms(message.data);
       } else if (action === "joinRoom") {
-        setChats(message.data.reverse());
+        setChats(message.data);
       } else if (action === "message") {
         setChats((chats) => [...chats, message.data]);
       }

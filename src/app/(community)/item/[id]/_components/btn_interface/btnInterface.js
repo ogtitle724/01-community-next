@@ -19,9 +19,13 @@ export default function BtnInterface({ itemDetail }) {
       <span className="item-detail__figure">99+</span>
       <button className="item-detail__btn-chat"></button>
       <span className="item-detail__figure">99+</span>
-      <span className="item-detail__time">
-        {timeConverter(itemDetail.wr_date)}
-      </span>
+      <div className="item-detail__static-wrapper">
+        <span className="item-detail__nick">{itemDetail.user_nick}</span>
+        <div className="item-detail__wrapper-border">|</div>
+        <span className="item-detail__time">
+          {timeConverter(itemDetail.wr_date)}
+        </span>
+      </div>
     </div>
   );
 }

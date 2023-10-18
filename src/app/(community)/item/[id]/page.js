@@ -16,9 +16,7 @@ export default async function ItemDetailPage({ params }) {
     return (
       <main className="item-detail__main">
         {false ? <i></i> : <div className="item-detail__no-img"></div>}
-        <h2 className="item-detail__title">
-          {itemDetail.title ?? "(미개봉) 뉴발 993 트리플 블랙"}
-        </h2>
+        <h2 className="item-detail__title">{itemDetail.title}</h2>
 
         <div
           className="item-detail__description"
