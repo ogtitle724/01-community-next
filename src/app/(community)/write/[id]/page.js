@@ -14,7 +14,6 @@ const Editor = dynamic(() => import("@components/editor/editor"), {
 
 export default function WritePage({ params }) {
   const router = useRouter();
-  const isUpdate = params?.id && true;
   const user = useSelector(selectUser);
   const isLogIn = useSelector(selectIsLogIn);
   const [title, setTitle] = useState("");
@@ -27,7 +26,8 @@ export default function WritePage({ params }) {
       const postId = params?.id;
       try {
         const res = await Fetch.get(
-          process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`
+          process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`,
+          { next: { revalidate: 0 } }
         );
         const postDetail = await res.json();
         return postDetail;
@@ -39,20 +39,18 @@ export default function WritePage({ params }) {
     };
 
     const fetchDataAndUpdate = async () => {
-      if (isUpdate) {
-        try {
-          const postDetail = await getUpdateData();
+      try {
+        const postDetail = await getUpdateData();
 
-          if (postDetail.user_id !== user.id) throw new Error("No permission");
+        if (postDetail.user_id !== user.id) throw new Error("No permission");
 
-          setTitle(postDetail.title);
-          setCategory(postDetail.category);
-          setBody(postDetail.content);
-        } catch (err) {
-          console.error(err);
-          alert("넌 수정 안되는거 알지???");
-          router.back();
-        }
+        setTitle(postDetail.title);
+        setCategory(postDetail.category);
+        setBody(postDetail.content);
+      } catch (err) {
+        console.error(err);
+        alert("넌 수정 안되는거 알지???");
+        router.back();
       }
     };
 
@@ -74,7 +72,7 @@ export default function WritePage({ params }) {
         }
       }
     });
-  }, [isLogIn, isUpdate, params?.id, router, user.id]);
+  }, [isLogIn, params?.id, router, user.id]);
 
   const handleSelectCategory = (e) => {
     setCategory(e.target.value);
@@ -94,7 +92,6 @@ export default function WritePage({ params }) {
 
     const option = {
       headers: { "Content-Type": "application/json" },
-      next: { revalidate: 0 },
     };
     const payload = JSON.stringify({
       title,
@@ -105,7 +102,7 @@ export default function WritePage({ params }) {
     try {
       const path = process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`;
       await Fetch.patch(path, payload, option);
-      router.push(`/${categoriesKO2EN[category]}`);
+      router.back();
     } catch (err) {
       console.error(err);
       alert("게시글 수정을 완료하지 못했습니다.");
@@ -122,7 +119,7 @@ export default function WritePage({ params }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        <Editor onChange={setBody} data={isUpdate && body} />
+        <Editor onChange={setBody} data={body} isImg={true} />
         <section className="write-page__board">
           <select
             name="category"

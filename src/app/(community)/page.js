@@ -3,14 +3,15 @@ import Fetch from "@/util/fetch";
 import { categoriesEN2KO } from "@/config/config";
 import ServerError from "./_components/error/Error";
 
-export default async function TopicPage(props) {
+export default async function HomePage(props) {
   const category = categoriesEN2KO[props.params.topic];
   const querys = props.searchParams;
   const page = querys.page ?? 1;
 
   try {
     const res = await Fetch.get(
-      process.env.NEXT_PUBLIC_PATH_PAGING + `/best?page=${page - 1}&size=30`
+      process.env.NEXT_PUBLIC_PATH_PAGING + `/best?page=${page - 1}&size=30`,
+      { next: { revalidate: 0 } }
     );
     const postData = await res.json();
     return <Board posts={postData} title={category ?? "홈"}></Board>;

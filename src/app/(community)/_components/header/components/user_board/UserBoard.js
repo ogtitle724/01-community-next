@@ -22,9 +22,6 @@ export default function UserBoard() {
   const alarmCnt = useSelector(selectChatAlarm);
 
   useEffect(() => {
-    console.log("resdy:", socket.readyState);
-    console.log(socket.readyState === WebSocket.CLOSED);
-    console.log(socket.isConnect);
     if (
       isLogIn &&
       (socket.readyState === WebSocket.CLOSED || !socket.isConnect)
@@ -35,7 +32,9 @@ export default function UserBoard() {
 
   const handleClickLogOut = async () => {
     try {
-      await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGOUT);
+      await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGOUT, {
+        next: { revalidate: 0 },
+      });
       delete Fetch.defaultOptions.headers["Authorization"];
       dispatch(logout());
       dispatch(setUser({ user: null }));

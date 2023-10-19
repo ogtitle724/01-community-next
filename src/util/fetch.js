@@ -1,6 +1,3 @@
-import socket from "./socket";
-import { store } from "@/redux/store";
-
 class Fetch {
   constructor() {
     this.defaultOptions = {
@@ -19,7 +16,7 @@ class Fetch {
     const accessToken = authHeader && authHeader.split(" ")[1];
 
     if (accessToken) {
-      console.log("access");
+      console.log("access token generated");
       this.defaultOptions.headers.Authorization = `Bearer ${accessToken}`;
     }
     return res;
@@ -40,6 +37,7 @@ class Fetch {
     });
 
     let res = await fetch(url, newOptions);
+    console.log("res:", res);
     if (!res.ok) throw Error(`${res.status} ${res.statusText}`);
 
     res = await this.interceptRes(res);

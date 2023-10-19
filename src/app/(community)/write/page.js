@@ -34,14 +34,11 @@ export default function WritePage({ params }) {
         if (resizeObserverErr) {
           resizeObserverErr.setAttribute("style", "display: none");
         }
-      });
-    }
+      }
+    })
   }, [isLogIn, isUpdate, params?.id, router, user.id]);
 
-  const handleSelectCategory = (e) => {
-    setCategory(e.target.value);
-    console.log(categoriesKO2EN[e.target.value]);
-  };
+  const handleSelectCategory = (e) => setCategory(e.target.value);
 
   const handleEditorChange = (data) => {
     setBody(data);
@@ -60,7 +57,6 @@ export default function WritePage({ params }) {
     }
     const option = {
       headers: { "Content-Type": "application/json" },
-      next: { revalidate: 0 },
     };
     const payload = JSON.stringify({
       title,
@@ -89,16 +85,7 @@ export default function WritePage({ params }) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
-        {/* <Editor onChange={setBody} handleImageUpload={handleImageUpload}/> */}
-        <Editor
-          data={body}
-          onEditorChange={handleEditorChange}
-          // data=""
-          // onChange={(event, editor) => {
-          //   const data = editor.getData();
-          //   setBody(data);
-          // }}
-        />
+        <Editor onChange={setBody} isImg={true} />
         <section className="write-page__board">
           <select
             name="category"

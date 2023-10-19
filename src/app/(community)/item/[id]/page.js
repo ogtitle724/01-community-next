@@ -10,16 +10,13 @@ export default async function ItemDetailPage({ params }) {
 
   try {
     let path = process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemId}`;
-    const res = await Fetch.get(path);
+    const res = await Fetch.get(path, { next: { revalidate: 0 } });
     const itemDetail = await res.json();
-    console.log(itemDetail);
 
     return (
       <main className="item-detail__main">
         {false ? <i></i> : <div className="item-detail__no-img"></div>}
-        <h2 className="item-detail__title">
-          {itemDetail.title ?? "(미개봉) 뉴발 993 트리플 블랙"}
-        </h2>
+        <h2 className="item-detail__title">{itemDetail.title}</h2>
 
         <div
           className="item-detail__description"

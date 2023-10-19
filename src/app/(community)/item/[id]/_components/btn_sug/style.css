@@ -1,8 +1,13 @@
-.item-detail__btn-ask {
-  padding: 7px 18px;
-  margin-bottom: 40px;
+.item-detail__btn-ud {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.item-detail__btn {
+  padding: 5px 18px;
   display: block;
-  margin-left: auto;
   position: relative;
   background-color: var(--color-main);
   font-size: var(--font-size-md);

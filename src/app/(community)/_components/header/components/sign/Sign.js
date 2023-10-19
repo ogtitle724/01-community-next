@@ -5,7 +5,7 @@ import SignIn from "./signin/SignIn";
 import "./style.css";
 
 export default function Sign() {
-  console.log("sign renderd");
+  console.log("SIGN");
   const [showSignUpForm, setShowSignUpForm] = useState(false);
 
   return (

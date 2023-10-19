@@ -19,16 +19,18 @@ export default function ChatLayout() {
     const callback = (e) => {
       const message = JSON.parse(e.data);
       const action = message.action;
-      console.log("callbackkkkkkk");
+
       if (action === "getConnectionData") {
         setRooms(message.data);
       } else if (action === "joinRoom") {
-        setChats(message.data.reverse());
+        setChats(message.data);
       } else if (action === "message") {
         setChats((chats) => [...chats, message.data]);
       }
     };
 
+    //TODO: socket.js 수정해서 연결시 기본적으로 수행될 이벤트리스너 connection에 arg로 줄
+    //수 있도록 수정할 것
     const establishConnection = () => {
       socket.connect(JSON.stringify(user.id));
 

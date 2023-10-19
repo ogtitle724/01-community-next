@@ -18,7 +18,6 @@ export default function BtnRec(props) {
         );
         const option = {
           headers: { "Content-Type": "application/json" },
-          next: { revalidate: 0 },
         };
         const body = JSON.stringify({ value });
         await Fetch.patch(path, body, option);

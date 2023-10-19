@@ -11,7 +11,8 @@ export default async function TopicPage(props) {
   try {
     const res = await Fetch.get(
       process.env.NEXT_PUBLIC_PATH_PAGING +
-        `/${category}?page=${page - 1}&size=30`
+        `/${category}?page=${page - 1}&size=30`,
+      { next: { revalidate: 0 } }
     );
     const postData = await res.json();
     console.log(postData.content);

@@ -1,50 +1,106 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { selectUser } from "@/redux/slice/signSlice";
+import Fetch from "@/util/fetch";
 import socket from "@/util/socket";
 import "./style.css";
 
 export default function BtnSug({ itemDetail }) {
   const [isSug, setIsSug] = useState(false);
-  const handleClkBtnSug = () => {
-    socket.send({
-      action: "suggest",
-      senderId: String(user.id),
-      receiverId: String(itemDetail.user_id),
-      receiverNick: itemDetail.user_nick,
-      sugItemId: itemDetail.id,
-      thumbnail: itemDeteail.imgs[0],
-      //썸네일도 보내는게 나을까? => 어차피 아이템 조회할때 src 받아오니까
-      //첫번째거 보내자 이걸 제안시작하는 채팅에 보내고 아이템 아이디도
-      //같이 보내서 채팅 누르면 제안받은 아이템 디테일 페이지로 이동할 수
-      //있도록 하면 될 듯
-    });
+  const [isWriter, setIsWriter] = useState(false);
+  const handleClkBtnSug = () => setIsSug(true);
+  const user = useSelector(selectUser);
+  const router = useRouter();
 
-    setIsSug((isSug) => !isSug);
+  useEffect(() => {
+    if (user && user.id === itemDetail.user_id) setIsWriter(true);
+    console.log(isWriter);
+  }, [user]);
+
+  const handleClkBtnUpdate = async (e) => {
+    e.preventDefault();
+    router.push(process.env.NEXT_PUBLIC_ROUTE_ADD_ITEM + `/${itemDetail.id}`);
+  };
+
+  const handleClkBtnDelete = async (e) => {
+    e.preventDefault();
+    try {
+      await Fetch.delete(
+        process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemDetail.id}`
+      );
+    } catch (err) {
+      alert("게시물을 삭제할 수 없습니다 :(");
+      console.error(err);
+    }
   };
 
   return (
     <>
-      <button className="item-detail__btn-ask" onClick={handleClkBtnSug}>
-        제안하기
-      </button>
-      {isSug && <SugForm setIsSug={setIsSug} />}
+      <div className="item-detail__btn-ud">
+        {user && isWriter ? (
+          <>
+            <button className="item-detail__btn" onClick={handleClkBtnUpdate}>
+              수정
+            </button>
+            <button className="item-detail__btn" onClick={handleClkBtnDelete}>
+              삭제
+            </button>
+          </>
+        ) : (
+          <button className="item-detail__btn" onClick={handleClkBtnSug}>
+            제안하기
+          </button>
+        )}
+      </div>
+      {isSug && <SugForm setIsSug={setIsSug} itemDetail={itemDetail} />}
     </>
   );
 }
 
-function SugForm({ setIsSug }) {
-  const [selecteItemId, setSelectedItemId] = useState(null);
+function SugForm({ setIsSug, itemDetail }) {
+  const [selectedItem, setSelectedItem] = useState(null);
   const [isCreate, setIsCreate] = useState(false);
+  const [contents, setContents] = useState([]);
   const router = useRouter();
+  const user = useSelector(selectUser);
 
+  useEffect(() => {
+    const fetchUserItems = async () => {
+      try {
+        const res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_USER_ITEMS, {
+          next: { revalidate: 0 },
+        });
+        const data = await res.json();
+        setContents(data.content);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchUserItems();
+  }, []);
   const handleClkBtnSubmit = (e) => {
     e.preventDefault();
-    if (selecteItemId) {
+
+    if (selectedItem) {
+      socket.send({
+        action: "suggest",
+        senderId: JSON.stringify(user.id),
+        senderNick: user.nick,
+        itemId: JSON.stringify(itemDetail.id),
+        receiverId: JSON.stringify(itemDetail.user_id),
+        receiverNick: itemDetail.user_nick,
+        sugItemId: JSON.stringify(selectedItem.id),
+        sugItemImg: null,
+        date: new Date().getTime(),
+      });
+
       setIsSug(false);
     } else {
-      alert("품목을 선택해주세요");
+      alert("제안할 물건을 선택해주세요");
     }
   };
 
@@ -55,12 +111,13 @@ function SugForm({ setIsSug }) {
       setImgs([]);
     } else {
       setIsSug(false);
-      setSelectedItemId(null);
+      setSelectedItem(null);
     }
   };
 
-  const handleClkRadio = (e) => {
-    setSelectedItemId(e.target.value);
+  const handleClkItem = (sugedItem) => {
+    setSelectedItem(sugedItem);
+    console.log(sugedItem);
   };
 
   const handleClkBtnCreate = (e) => {
@@ -79,21 +136,18 @@ function SugForm({ setIsSug }) {
         <button className="sug-from__btn-new" onClick={handleClkBtnCreate}>
           + 새로 만들기
         </button>
-        <li>
-          <label htmlFor="sub-form__radio-id" className="sug-form__item">
-            <input
-              type="radio"
-              name="sug-from__radio"
-              id="sub-form__radio-id"
-              className="sug-form__radio-btn"
-              value="id1"
-              onChange={handleClkRadio}
-            ></input>
-            <div className="sug-form__item-img"></div>
-            <span className="sug-form__item-title">샘플 데이터 타이틀</span>
-            <span className="sug-form__item-nick">유저123</span>
-          </label>
-        </li>
+        {contents.length &&
+          contents.map((sugedItem, idx) => {
+            return (
+              <ItemList
+                key={"sug-item_" + idx}
+                handleClkItem={handleClkItem}
+                sugedItem={sugedItem}
+                setSelectedItem={setSelectedItem}
+                idx={idx}
+              />
+            );
+          })}
       </ul>
       <div className="sug-form__btn-wrapper">
         <button className="sug-form__btn" onClick={handleClkBtnCancel}>
@@ -102,5 +156,28 @@ function SugForm({ setIsSug }) {
         <button className="sug-form__btn">확 인</button>
       </div>
     </form>
+  );
+}
+
+function ItemList({ handleClkItem, sugedItem, idx }) {
+  return (
+    <li>
+      <label
+        htmlFor={"sub-form__radio-id-" + idx}
+        className="sug-form__item"
+        onChange={(e) => handleClkItem(sugedItem)}
+      >
+        <input
+          type="radio"
+          name="sug-from__radio"
+          id={"sub-form__radio-id-" + idx}
+          className="sug-form__radio-btn"
+          value="id1"
+        ></input>
+        <i className="sug-form__item-img"></i>
+        <span className="sug-form__item-title">{sugedItem.title}</span>
+        <span className="sug-form__item-nick">{sugedItem.nick}</span>
+      </label>
+    </li>
   );
 }

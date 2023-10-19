@@ -32,7 +32,7 @@ export default function ChatDetail({
       behavior: "auto",
     });
   }, [chats]);
-  1;
+
   const handleClkBtnSubmit = (e) => {
     e.preventDefault();
     if (!inputData) return;
@@ -101,7 +101,7 @@ export default function ChatDetail({
                       : " chat__date--opponent")
                   }
                 >
-                  {timeConverter(chat.timestamp)}
+                  {timeConverter(chat.timestamp, true)}
                 </span>
               </li>
             );
@@ -111,7 +111,7 @@ export default function ChatDetail({
         )}
       </ul>
       <section className="chat-detail__keyboard">
-        <Editor ckRef={ckRef} onChange={setInputData} />
+        <Editor ckRef={ckRef} onChange={setInputData} isImg={false} />
         <label className="chat-detail__label-input-img">
           <input type="file" className="chat-detail__input-img"></input>
         </label>

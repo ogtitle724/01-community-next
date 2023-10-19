@@ -19,17 +19,17 @@ class Socket {
 
   setListeners(senderId, senderNick = null) {
     this.socket.addEventListener("open", () => {
-      console.log("socket connect");
+      console.log("socket => OPEN");
 
       if (senderNick) {
         const checkCreateUser = (e) => {
-          console.log("create user...");
+          console.log("progress: create user(socket).");
           const message = JSON.parse(e.data);
           const action = message.action;
 
           if (action === "createUser") {
             if (message.isSuccess) {
-              console.log("create chat user success");
+              console.log("complete: create user(socket)");
               this.disconnect();
             } else {
               //생성 실패시 처리 다시볼것
@@ -65,17 +65,17 @@ class Socket {
 
     this.socket.addEventListener("close", () => {
       if (!this.intentionalClose) {
-        console.log("socket closed => reconnect...");
+        console.log("socket => CLOSED");
+        console.log("reconnecting...");
         setTimeout(() => this.connect(senderId, senderNick), 1000);
       }
     });
 
     const countAlarm = (e) => {
-      console.log("set alarm cnt");
       const message = JSON.parse(e.data);
       const action = message.action;
 
-      if (action === "getConnectionData") {
+      if (action === "getConnectionData" && message.data) {
         const alarmCnt = Object.values(message.data).reduce((acc, cur) => {
           acc += cur.alarm_cnt;
           return acc;
@@ -85,6 +85,9 @@ class Socket {
     };
 
     this.socket.addEventListener("message", countAlarm);
+    this.socket.addEventListener("message", (e) => {
+      console.log("SOCKET // receive message", JSON.parse(e.data));
+    });
 
     for (let eventName in this.listeners) {
       this.listeners[eventName].forEach((callback) => {
@@ -114,7 +117,7 @@ class Socket {
 
     try {
       this.socket.send(JSON.stringify(message));
-      console.log("send success", message);
+      console.log("SOCKET // send success", message);
     } catch (err) {
       console.error("Failed to send message:", err);
     }

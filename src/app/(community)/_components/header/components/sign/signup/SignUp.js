@@ -124,11 +124,14 @@ export default function SignUp({ setShowSignUpForm }) {
         option
       );
 
-      if (res.data) {
-        setShowSignUpForm(false);
-        socket.connect(res.data.id, nick);
+      const createdId = await res.json();
+      setShowSignUpForm(false);
+
+      //소켓 유저 생성
+      if (createdId) {
+        socket.connect(JSON.stringify(createdId), nick);
       } else {
-        throw new Error("singin rejected");
+        throw new Error("소켓 유저 생성에 실패했습니다.");
       }
     } catch (err) {
       console.error(err);

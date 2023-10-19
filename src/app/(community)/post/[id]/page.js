@@ -12,7 +12,8 @@ export default async function PostDetailPage({ params }) {
 
   try {
     const res = await Fetch.get(
-      process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`
+      process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`,
+      { next: { revalidate: 0 } }
     );
     const postDetail = await res.json();
 

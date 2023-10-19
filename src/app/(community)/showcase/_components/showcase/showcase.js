@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import timeConverter from "@/util/time_converter";
 import "./style.css";
 
-export default function Showcase({ itemData }) {
+export default function Showcase({ itemPagingData }) {
   const [order, setOrder] = useState("최신순");
   const [searchTerm, setSearchTerm] = useState(null);
 
@@ -33,8 +34,8 @@ export default function Showcase({ itemData }) {
         </select>
       </div>
       <ul className="showcase__item-wrapper">
-        {itemData.content.map((data, idx) => (
-          <ItemCard key={"showcase-item-" + idx} data={data} />
+        {itemPagingData.content.map((item, idx) => (
+          <ItemCard key={"showcase-item-" + idx} item={item} />
         ))}
       </ul>
       <button
@@ -45,28 +46,34 @@ export default function Showcase({ itemData }) {
   );
 }
 
-function ItemCard({ data }) {
+function ItemCard({ item }) {
   return (
-    <div className="item-card">
-      <Link href={process.env.NEXT_PUBLIC_ROUTE_ITEM + `/${data.id}`}>
-        {false ? (
-          <i className="item-card__img"></i>
-        ) : (
-          <div className="item-card__no-img"></div>
-        )}
-        <div className="item-card__info">
-          <div className="item-card__title">{data.title}</div>
-          <div className="item-card__indicator">
-            <i className="item-card__i-like"></i>
-            <span className="item-card__n-like">{data.interested_cnt}</span>
-            <i className="item-card__i-chat"></i>
-            <span className="item-card__n-chat">99+</span>
-            <span className="item-card__time">
-              {timeConverter(data.wr_date)}
-            </span>
-          </div>
+    <section className="item-card">
+      <Link
+        className="item-card__a"
+        href={process.env.NEXT_PUBLIC_ROUTE_ITEM + `/${item.id}`}
+      >
+        <div
+          className={
+            "item-card__img" + (item.thumbnail ? "" : " item-card__no-img")
+          }
+        >
+          <Image
+            src={item.thumbnail ?? "/image/no-img.png"}
+            width={180}
+            height={135}
+            alt="item image"
+          />
+        </div>
+        <h3 className="item-card__title">{item.title}</h3>
+        <div className="item-card__indicator">
+          <i className="item-card__i-like"></i>
+          <span className="item-card__n-like">{item.interested_cnt}</span>
+          <i className="item-card__i-chat"></i>
+          <span className="item-card__n-chat">99+</span>
+          <span className="item-card__nick">{item.nick}</span>
         </div>
       </Link>
-    </div>
+    </section>
   );
 }

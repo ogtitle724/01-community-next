@@ -2,7 +2,7 @@ import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Fetch from "@/util/fetch";
 
-export default function Editor({ ckRef, onChange, data }) {
+export default function Editor({ ckRef, onChange, data, isImg }) {
   let initialData = data ? data : "";
 
   function uploadPlugin(editor) {
@@ -45,7 +45,7 @@ export default function Editor({ ckRef, onChange, data }) {
       editor={ClassicEditor}
       config={{
         placeholder: "내용을 입력하세요.",
-        extraPlugins: [uploadPlugin],
+        extraPlugins: isImg && [uploadPlugin],
       }}
       data={initialData}
       onChange={(event, editor) => {

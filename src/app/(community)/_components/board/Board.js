@@ -33,7 +33,7 @@ export default function Board({ posts, title }) {
     );
   }
 
-  console.log("board rendere");
+  console.log("BOARD");
   return (
     <>
       <section className="board">
