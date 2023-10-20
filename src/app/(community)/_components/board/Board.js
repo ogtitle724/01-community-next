@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { setCategory } from "@/redux/slice/pageSlice";
+import { setTable } from "@/redux/slice/pageSlice";
 import timeConverter from "@/util/time_converter";
 import "./style.css";
 
@@ -12,7 +12,7 @@ export default function Board({ posts, title }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setCategory({ category: title }));
+    dispatch(setTable({ table: title }));
   }, [dispatch, title]);
 
   const handleChangeLayout = () => {
@@ -64,7 +64,7 @@ function Post({ post }) {
       className="board-item"
       href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${post.id}`}
     >
-      <span className="board-item__category">{post.category}</span>
+      <span className="board-item__table">{post.table}</span>
       <h3 className="board-item__title">{post.title}</h3>
       <div className="board-item__data-wrapper">
         <div className="board-item__data board-item__view">

@@ -87,7 +87,7 @@
   font-size: var(--font-size-vsm);
 }
 
-.board-item__category {
+.board-item__table {
   padding: 1px 3px;
   background-color: var(--color-main);
   border-radius: 0px;

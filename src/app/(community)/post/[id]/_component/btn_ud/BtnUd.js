@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/slice/signSlice";
-import { selectCategory } from "@/redux/slice/pageSlice";
+import { selectTable } from "@/redux/slice/pageSlice";
 import "./style.css";
 
 export default function BtnUd({ writerId, postId }) {

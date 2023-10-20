@@ -1,10 +1,10 @@
 import Board from "./_components/board/Board";
 import Fetch from "@/util/fetch";
-import { categoriesEN2KO } from "@/config/config";
+import { tablesEN2KO } from "@/config/config";
 import ServerError from "./_components/error/Error";
 
 export default async function HomePage(props) {
-  const category = categoriesEN2KO[props.params.topic];
+  const table = tablesEN2KO[props.params.topic];
   const querys = props.searchParams;
   const page = querys.page ?? 1;
 
@@ -14,7 +14,7 @@ export default async function HomePage(props) {
       { next: { revalidate: 0 } }
     );
     const postData = await res.json();
-    return <Board posts={postData} title={category ?? "홈"}></Board>;
+    return <Board posts={postData} title={table ?? "홈"}></Board>;
   } catch (err) {
     console.error(err);
     return <ServerError />;

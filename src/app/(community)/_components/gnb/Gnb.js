@@ -4,29 +4,33 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import {
-  selectCategory,
+  selectTable,
   selectWidth,
-  setCategory,
+  setTable,
 } from "@/redux/slice/pageSlice";
-import { categories, categoriesKO2EN } from "@/config/config";
+import { tables, tablesKO2EN } from "@/config/config";
+import Group from "./components/group/Group";
 import "./style.css";
 
 function Gnb() {
   const dispatch = useDispatch();
-  const category = useSelector(selectCategory);
+  const table = useSelector(selectTable);
   const width = useSelector(selectWidth);
   const marker = useRef();
   const gnb = useRef();
   const btnFocus = useRef();
 
   useEffect(() => {
-    btnFocus.current = Object.values(gnb.current.children).filter(
-      (btn) => btn.innerHTML === category
-    )[0];
-    marker.current.style = `width:${btnFocus.current.offsetWidth}px; left:${btnFocus.current.offsetLeft}px;`;
-  }, [width, category]);
+    const validButton = Object.values(gnb.current.children).find(
+      (btn) => btn.innerHTML === table
+    );
+    if (validButton) {
+      btnFocus.current = validButton;
+      marker.current.style = `width:${btnFocus.current.offsetWidth}px; left:${btnFocus.current.offsetLeft}px;`;
+    }
+  }, [width, table]);
 
-  const handleClkLink = (category) => dispatch(setCategory({ category }));
+  const handleClkLink = (table) => dispatch(setTable({ table }));
   console.log("GNB");
   return (
     <nav ref={gnb} className="gnb">
@@ -38,21 +42,21 @@ function Gnb() {
       >
         홈
       </Link>
-      {categories.map((category, idx) => {
+      {tables.map((table, idx) => {
         return (
           <Link
-            key={"gnb-category_" + idx}
+            key={"gnb-table_" + idx}
             className="gnb__btn"
-            href={`/${categoriesKO2EN[category]}`}
-            onClick={() => handleClkLink(category)}
+            href={`/${tablesKO2EN[table]}`}
+            onClick={() => handleClkLink(table)}
             scroll={false}
           >
-            {category}
+            {table}
           </Link>
         );
       })}
       <Link
-        className="gnb__btn"
+        className="gnb__btn barter__btn"
         href={"/showcase"}
         onClick={() => handleClkLink("물물교환")}
         scroll={false}
@@ -60,7 +64,9 @@ function Gnb() {
         물물교환
       </Link>
       <div ref={marker} className="gnb__mark"></div>
+      <Group table={table} handleClkLink={handleClkLink} />
     </nav>
+    
   );
 }
 

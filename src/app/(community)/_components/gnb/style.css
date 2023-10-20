@@ -23,7 +23,7 @@
   color: var(--color-font);
 }
 
-.gnb__btn:nth-last-child(2) {
+.barter__btn {
   width: 20px;
   height: 20px;
   background: url(/image/icon/cart.svg);

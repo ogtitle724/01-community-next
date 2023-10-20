@@ -8,9 +8,9 @@ export const pageview = (url) => {
   });
 };
 
-export const event = ({ action, category, label, value }) => {
+export const event = ({ action, table, label, value }) => {
   window.gtag("event", action, {
-    event_category: category,
+    event_table: table,
     event_label: label,
     value: value,
   });

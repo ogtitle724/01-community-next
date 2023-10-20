@@ -1,0 +1,16 @@
+.gnb__groups {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  column-gap: 18px;
+}
+
+.gnb__group_btn {
+  position: relative;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  text-align: center;
+  line-height: var(--gnb-height);
+  color: var(--color-font);
+}

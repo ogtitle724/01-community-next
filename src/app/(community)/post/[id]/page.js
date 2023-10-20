@@ -30,8 +30,8 @@ export default async function PostDetailPage({ params }) {
                 {timeConverter(postDetail.wr_date)}
               </span>
               <div>
-                <span className="content-board__category">
-                  {postDetail.category ? postDetail.category : "카테고리 없음"}
+                <span className="content-board__table">
+                  {postDetail.table ? postDetail.table : "카테고리 없음"}
                 </span>
                 <span> | </span>
                 <span className="content-board__writer">
