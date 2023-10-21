@@ -37,7 +37,7 @@
   left: 50%;
   transform: translateX(-50%) scale(0.7);
   font-size: var(--font-size-vsm);
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .img-receiver__default-img,

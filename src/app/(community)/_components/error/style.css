@@ -6,7 +6,7 @@
   transform: translate(-50%, -50%);
   font-size: var(--font-size-title);
   color: var(--color-font);
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .server-error__icon {

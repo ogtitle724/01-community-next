@@ -1,0 +1,52 @@
+.modal {
+  width: 100vw;
+  max-width: 100vw !important;
+  height: 83vh !important;
+  padding: 20px;
+  position: relative;
+  inset-block-start: 17vh;
+  border: none;
+  border-radius: 12px 12px 0 0;
+  opacity: 0;
+  background-color: var(--color-body);
+  animation: opacity 0.5s forwards;
+}
+
+@keyframes opacity {
+  100% {
+    opacity: 1;
+  }
+}
+
+.modal::backdrop {
+  background: linear-gradient(0deg, rgb(67, 67, 67) 50%, rgb(33, 33, 33) 100%);
+  opacity: 0.75;
+}
+
+.modal-container {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  position: relative;
+  border-radius: 12px;
+  animation: modalUp 0.5s forwards;
+}
+
+@keyframes modalUp {
+  0% {
+    top: 4px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+.modal__btn-close {
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  top: -13px;
+  right: -13px;
+  background-image: url(/image/icon/close.svg);
+  filter: invert(var(--icon-invert));
+}

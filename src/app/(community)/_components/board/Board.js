@@ -26,7 +26,7 @@ export default function Board({ posts, title }) {
         <h2 className="board__title">{title}</h2>
         <div className="board-empty">
           <span className="board-empty__notif">
-            {"게시물이 존재하지 않습니다 :("}
+            {"첫 게시물을 등록해 주세요!"}
           </span>
         </div>
       </section>

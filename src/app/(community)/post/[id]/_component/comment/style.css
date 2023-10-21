@@ -70,7 +70,7 @@
   position: absolute;
   top: -8px;
   font-size: var(--font-size-sm);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .comment-board__btn-wrapper {
@@ -138,7 +138,7 @@
 .comment__nickname {
   margin-left: 2px;
   font-size: var(--font-size-sm);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .comment__date {
@@ -173,7 +173,7 @@
   flex-grow: 1;
   height: 18px;
   font-size: var(--font-size-vsm);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .comment__descripition {

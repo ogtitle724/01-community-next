@@ -1,24 +1,29 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SignUp from "./signup/SignUp";
 import SignIn from "./signin/SignIn";
+import Modal from "../../../modal/Modal";
 import "./style.css";
 
 export default function Sign() {
   console.log("SIGN");
-  const [showSignUpForm, setShowSignUpForm] = useState(false);
+  const dialogRef = useRef();
+
+  const handleClkBtnSignup = (e) => {
+    e.preventDefault();
+    dialogRef.current.showModal();
+  };
 
   return (
     <section className="sign">
       <h3 hidden>Sign</h3>
       <SignIn />
-      <button
-        className="sign__btn-submit"
-        onClick={() => setShowSignUpForm(true)}
-      >
+      <button className="sign__btn-signup" onClick={handleClkBtnSignup}>
         +
       </button>
-      {showSignUpForm && <SignUp setShowSignUpForm={setShowSignUpForm} />}
+      <Modal dialogRef={dialogRef}>
+        <SignUp dialogRef={dialogRef} />
+      </Modal>
     </section>
   );
 }

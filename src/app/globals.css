@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --header-height: 50px;
   --gnb-height: 30px;
@@ -31,10 +39,10 @@
   --color-font: rgb(195, 195, 195);
   --color-main: rgb(197, 118, 43);
   --color-opposite: rgb(38, 66, 130);
-  --color-body: rgb(24, 24, 24);
+  --color-body: rgb(32, 32, 32);
   --color-smoke-a: #3b3b3b;
   --color-smoke-b: rgb(82, 82, 82);
-  --color-shadow: rgba(205, 205, 205, 0.15);
+  --color-shadow: rgba(199, 199, 199, 0.15);
   --icon-invert: 80%;
   --icon-invert-b: 0%;
 }
@@ -53,9 +61,10 @@
 
 body {
   min-height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    sans-serif; */
+  font-family: "GmarketSansMedium";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-body);

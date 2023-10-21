@@ -37,7 +37,6 @@ class Fetch {
     });
 
     let res = await fetch(url, newOptions);
-    console.log("res:", res);
     if (!res.ok) throw Error(`${res.status} ${res.statusText}`);
 
     res = await this.interceptRes(res);

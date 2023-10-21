@@ -1,7 +1,8 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+import Link from "next/navigation";
 import Fetch from "@/util/fetch";
 import socket from "@/util/socket";
 import {
@@ -20,6 +21,7 @@ export default function UserBoard() {
   const user = useSelector(selectUser);
   const isLogIn = useSelector(selectIsLogIn);
   const alarmCnt = useSelector(selectChatAlarm);
+  const alarmDialog = useRef();
 
   useEffect(() => {
     if (
@@ -61,6 +63,11 @@ export default function UserBoard() {
     router.push(process.env.NEXT_PUBLIC_ROUTE_CHAT);
   };
 
+  const handleClkBtnAlarm = (e) => {
+    e.preventDefault();
+    alarmDialog.current.show();
+  };
+
   return (
     <div className="user-board">
       <div className="user-board__profile">
@@ -95,12 +102,54 @@ export default function UserBoard() {
           ""
         )}
       </button>
-      <button className="user-board__btn-alram">
+      <button
+        className="user-board__btn-alram"
+        onCanPlayThrough={handleClkBtnAlarm}
+      >
         <div className="user-board__alram-cnt">3</div>
       </button>
+      <AlarmDialog alarmDialog={alarmDialog}></AlarmDialog>
       <button className="user-board__btn-logout" onClick={handleClickLogOut}>
         ✖
       </button>
     </div>
+  );
+}
+
+function AlarmDialog({ alarmDialog }) {
+  const handleClkBtnErase = (e) => {
+    e.preventDefault();
+    //알람다지우기
+  };
+
+  const handleClkBtnDel = (e) => {
+    e.preventDefault();
+    //알람 스플라이싱
+  };
+
+  return (
+    <dialog ref={alarmDialog}>
+      <form method="dialog">
+        <ul>
+          <Link>
+            <i className="alarm__icon"></i>
+            <span className="alarm__content"></span>
+            <span className="alarm__nick"></span>
+            <span className="alarm__time"></span>
+            <button
+              className="alarm__btn-delete"
+              onClick={handleClkBtnDel}
+            ></button>
+          </Link>
+        </ul>
+        <div className="alarm__btn-wrapper">
+          <button
+            className="alarm__btn__erase-all"
+            onClick={handleClkBtnErase}
+          ></button>
+          <button className="alarm__btn__close"></button>
+        </div>
+      </form>
+    </dialog>
   );
 }

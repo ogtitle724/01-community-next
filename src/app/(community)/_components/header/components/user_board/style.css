@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-radius: 30px;
+  border-radius: 4px;
   background-color: var(--color-smoke-a);
 }
 
@@ -34,7 +34,7 @@
   position: relative;
   bottom: 1.5px;
   font-size: var(--font-size-vsm);
-  font-weight: 650;
+  font-weight: 500;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -66,7 +66,7 @@
   position: relative;
   bottom: 1px;
   font-size: var(--font-size-vsm);
-  font-weight: 650;
+  font-weight: 500;
   color: black;
 }
 
@@ -140,7 +140,7 @@
   background-size: contain;
   line-height: 15px;
   font-size: var(--font-size-vsm);
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-font);
 }
 

@@ -10,7 +10,7 @@ export default async function showCasePage({ searchParams }) {
       next: { revalidate: 0 },
     });
     const itemPagingData = await res.json();
-    console.log(itemPagingData);
+    console.log("itemDetail:", itemPagingData);
 
     return <Showcase itemPagingData={itemPagingData} />;
   } catch (err) {

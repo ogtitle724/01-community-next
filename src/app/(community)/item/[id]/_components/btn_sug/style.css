@@ -12,41 +12,23 @@
   background-color: var(--color-main);
   font-size: var(--font-size-md);
   color: var(--color-body);
-  font-weight: 650;
+  font-weight: 500;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 
 .sug-form {
   width: 100%;
-  height: 80vh;
-  padding: 0px 10px;
-  position: fixed;
-  bottom: -20px;
-  left: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  border-radius: 30px 30px 0 0;
-  border: 1px solid;
-  border-color: var(--color-smoke-a) var(--color-smoke-a) transparent
-    var(--color-smoke-a);
   overflow: hidden;
-  background-color: var(--color-body);
-  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.05);
-  animation: showup 0.2s forwards;
-  opacity: 0;
+  overscroll-behavior: none;
 }
 
 .sug-from li {
   list-style: none;
-}
-
-@keyframes showup {
-  100% {
-    opacity: 1;
-    bottom: 0px;
-  }
 }
 
 .sug-form__items {
@@ -72,6 +54,12 @@
   box-shadow: 0 0 0 10px var(--color-body);
 }
 
+.sug-form__no-item {
+  text-align: center;
+  font-size: var(--font-size-md);
+  font-weight: 500;
+}
+
 .sug-form__items li {
   list-style: none;
 }
@@ -93,7 +81,7 @@
 .sug-form__item-nick,
 .sug-from__btn-new {
   font-size: var(--font-size-md);
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .sug-form__radio-btn {
@@ -139,7 +127,7 @@
   height: 30px;
   font-size: var(--font-size-lg);
   color: var(--color-body);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .sug-form__btn:nth-child(1),
@@ -197,7 +185,7 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: var(--font-size-vsm);
-  font-weight: 650;
+  font-weight: 500;
 }
 
 .create-field__default-img,

@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import timeConverter from "@/util/time_converter";
 import "./style.css";
 
 export default function Showcase({ itemPagingData }) {
@@ -34,9 +33,13 @@ export default function Showcase({ itemPagingData }) {
         </select>
       </div>
       <ul className="showcase__item-wrapper">
-        {itemPagingData.content.map((item, idx) => (
-          <ItemCard key={"showcase-item-" + idx} item={item} />
-        ))}
+        {itemPagingData.content.length ? (
+          itemPagingData.content.map((item, idx) => (
+            <ItemCard key={"showcase-item-" + idx} item={item} />
+          ))
+        ) : (
+          <p className="showcase__no-data">첫 게시물을 등록해 주세요!</p>
+        )}
       </ul>
       <button
         className="showcase__btn-to-top"
