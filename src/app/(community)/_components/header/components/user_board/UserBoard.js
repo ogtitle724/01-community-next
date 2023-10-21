@@ -108,7 +108,6 @@ export default function UserBoard() {
       >
         <div className="user-board__alram-cnt">3</div>
       </button>
-      <AlarmDialog alarmDialog={alarmDialog}></AlarmDialog>
       <button className="user-board__btn-logout" onClick={handleClickLogOut}>
         ✖
       </button>
@@ -116,7 +115,7 @@ export default function UserBoard() {
   );
 }
 
-function AlarmDialog({ alarmDialog }) {
+/* function AlarmDialog({ alarmDialog }) {
   const handleClkBtnErase = (e) => {
     e.preventDefault();
     //알람다지우기
@@ -153,3 +152,4 @@ function AlarmDialog({ alarmDialog }) {
     </dialog>
   );
 }
+ */

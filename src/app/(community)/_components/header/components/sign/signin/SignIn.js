@@ -8,7 +8,6 @@ import {
   setLoginDeadline,
   setUser,
 } from "@/redux/slice/signSlice";
-import socket from "@/util/socket";
 import Fetch from "@/util/fetch";
 import { blindInput, jwtDecode } from "@/util/secure";
 import "./style.css";

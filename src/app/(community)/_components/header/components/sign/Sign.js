@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import SignUp from "./signup/SignUp";
 import SignIn from "./signin/SignIn";
 import Modal from "../../../modal/Modal";
