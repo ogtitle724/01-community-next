@@ -3,13 +3,9 @@ import { memo, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import {
-  selectTable,
-  selectWidth,
-  setTable,
-} from "@/redux/slice/pageSlice";
+import { selectTable, selectWidth, setTable } from "@/redux/slice/pageSlice";
 import { tables, tablesKO2EN } from "@/config/config";
-import Group from "./components/group/Group";
+import Group from "./components/group/group";
 import "./style.css";
 
 function Gnb() {
@@ -66,7 +62,6 @@ function Gnb() {
       <div ref={marker} className="gnb__mark"></div>
       <Group table={table} handleClkLink={handleClkLink} />
     </nav>
-    
   );
 }
 

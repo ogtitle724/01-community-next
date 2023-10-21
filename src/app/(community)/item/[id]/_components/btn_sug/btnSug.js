@@ -18,7 +18,7 @@ export default function BtnSug({ itemDetail }) {
   useEffect(() => {
     if (user && user.id === itemDetail.user_id) setIsWriter(true);
     console.log(isWriter);
-  }, [user]);
+  }, [isWriter, itemDetail.user_id, user]);
 
   const handleClkBtnUpdate = async (e) => {
     e.preventDefault();
