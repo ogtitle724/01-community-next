@@ -1,23 +1,19 @@
+import Link from "next/link";
 import { memo, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import Link from "next/link";
-import { useDispatch } from "react-redux";
-import {
-  selectCategory,
-  selectWidth,
-  setCategory,
-} from "@/redux/slice/pageSlice";
+import { selectWidth } from "@/redux/slice/pageSlice";
 import { categories, categoryEN2KO, categoryKO2EN } from "@/config/config";
+import { useParams } from "next/navigation";
 import "./style.css";
 
 function Gnb() {
   console.log("GNB");
-  const dispatch = useDispatch();
-  const category = useSelector(selectCategory);
   const width = useSelector(selectWidth);
   const marker = useRef();
   const gnb = useRef();
   const btnFocus = useRef();
+  const params = useParams();
+  const category = categoryEN2KO[params.topic] ?? "홈";
 
   useEffect(() => {
     btnFocus.current = Object.values(gnb.current.children).filter(
@@ -26,15 +22,12 @@ function Gnb() {
     marker.current.style = `width:${btnFocus.current.offsetWidth}px; left:${btnFocus.current.offsetLeft}px;`;
   }, [width, category]);
 
-  const handleClkLink = (category) => dispatch(setCategory({ category }));
-
   return (
     <>
       <nav ref={gnb} className="gnb">
         <Link
           className="gnb__item"
           href={process.env.NEXT_PUBLIC_ROUTE_HOME}
-          onClick={() => handleClkLink("홈")}
           scroll={false}
         >
           홈
@@ -45,7 +38,6 @@ function Gnb() {
               key={"gnb-category_" + idx}
               className="gnb__item"
               href={`/${categoryKO2EN[category]}`}
-              onClick={() => handleClkLink(category)}
               scroll={false}
             >
               {category}

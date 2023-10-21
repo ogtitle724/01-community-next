@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { setPage } from "@/redux/slice/pageSlice";
 import "./style.css";
 
 export default function SearchBar() {
@@ -14,7 +13,6 @@ export default function SearchBar() {
     e.preventDefault();
 
     if (searchTerm) {
-      dispatch(setPage({ nextPage: 1 }));
       router.push(
         process.env.NEXT_PUBLIC_ROUTE_SEARCH + `?term=${searchTerm}&page=1`
       );

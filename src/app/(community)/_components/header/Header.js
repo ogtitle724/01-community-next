@@ -4,7 +4,6 @@ import { memo } from "react";
 import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
 import { selectIsLogIn } from "@/redux/slice/signSlice";
-import { useParams } from "next/navigation";
 import ThemeToggle from "@components/theme_toggle/ThemeToggle";
 import Gnb from "./components/gnb/Gnb";
 import SearchBar from "../search_bar/SearchBar";
@@ -18,8 +17,6 @@ function Header() {
   console.log("HAEDER");
   const isLogIn = useSelector(selectIsLogIn);
   const width = useSelector(selectWidth);
-  const params = useParams();
-  const category = params.topic;
 
   return (
     <>
@@ -45,7 +42,7 @@ function Header() {
         </section>
         <Gnb />
       </header>
-      {category && <GnbGroup category={category} />}
+      <GnbGroup />
     </>
   );
 }
