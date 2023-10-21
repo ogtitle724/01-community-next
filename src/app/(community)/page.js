@@ -1,10 +1,10 @@
 import Board from "./_components/board/Board";
 import Fetch from "@/util/fetch";
-import { categoriesEN2KO } from "@/config/config";
+import { categoryEN2KO } from "@/config/config";
 import ServerError from "./_components/error/Error";
 
 export default async function HomePage(props) {
-  const category = categoriesEN2KO[props.params.topic];
+  const category = categoryEN2KO[props.params.topic];
   const querys = props.searchParams;
   const page = querys.page ?? 1;
 

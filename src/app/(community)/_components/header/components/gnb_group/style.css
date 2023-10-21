@@ -1,0 +1,31 @@
+.gnb-group {
+  width: 70vw;
+  margin-top: 10px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gnb-group__item {
+  padding: 5px 7px;
+  border-radius: 12px;
+  box-shadow: 0 0 5px var(--color-shadow);
+
+  font-size: var(--font-size-vsm);
+}
+
+.gnb-group__item--cur {
+  background: rgb(38, 66, 130);
+  background: linear-gradient(
+    142deg,
+    rgba(38, 66, 130, 1) 0%,
+    rgba(168, 81, 171, 1) 44%,
+    rgba(188, 94, 151, 1) 56%,
+    rgba(197, 118, 43, 1) 100%
+  );
+  color: white;
+}

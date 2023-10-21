@@ -4,7 +4,7 @@ import Fetch from "@/util/fetch";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { categoriesKO2EN } from "@/config/config";
+import { categories } from "@/config/config";
 import { selectIsLogIn, selectUser } from "@/redux/slice/signSlice";
 import "./style.css";
 
@@ -18,7 +18,8 @@ export default function WritePage({ params }) {
   const isLogIn = useSelector(selectIsLogIn);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("유머");
+  const [group, setGroup] = useState("");
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
@@ -78,6 +79,10 @@ export default function WritePage({ params }) {
     setCategory(e.target.value);
   };
 
+  const handleSelectGroup = (e) => {
+    setGroup(e.target.value);
+  };
+
   const handleClickBtnComplete = async () => {
     if (!title) {
       alert("제목을 입력해주세요");
@@ -95,7 +100,8 @@ export default function WritePage({ params }) {
     };
     const payload = JSON.stringify({
       title,
-      category,
+      table: category,
+      group,
       content: body,
     });
 
@@ -126,14 +132,27 @@ export default function WritePage({ params }) {
             className="write-page__select"
             onChange={(e) => handleSelectCategory(e)}
           >
-            <option value="없음">카테고리</option>
-            <option value="유머">유머</option>
-            <option value="게임·스포츠">게임·스포츠</option>
-            <option value="연예·방송">연예·방송</option>
-            <option value="여행">여행</option>
-            <option value="취미">취미</option>
-            <option value="경제·금융">경제·금융</option>
-            <option value="시사·이슈">시사·이슈</option>
+            {Object.keys(categories).map((category, idx) => {
+              return (
+                <option key={"select-opt-category" + idx} value={category}>
+                  {category}
+                </option>
+              );
+            })}
+          </select>
+          <select
+            name="category-grp"
+            className="write-page__select"
+            onChange={(e) => handleSelectGroup(e)}
+          >
+            <option value={""}>{"옵션/선택사항"}</option>
+            {categories[category].map((group, idx) => {
+              return (
+                <option key={"select-opt-category-grp" + idx} value={group}>
+                  {group}
+                </option>
+              );
+            })}
           </select>
           <button
             className="write-page__btn-complete"

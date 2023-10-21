@@ -32,7 +32,10 @@ export default async function PostDetailPage({ params }) {
               </span>
               <div>
                 <span className="content-board__category">
-                  {postDetail.category ? postDetail.category : "카테고리 없음"}
+                  {postDetail.tbl
+                    ? postDetail.tbl +
+                      (postDetail.grp ? `/${postDetail.grp}` : "")
+                    : "카테고리 없음"}
                 </span>
                 <span> | </span>
                 <span className="content-board__writer">

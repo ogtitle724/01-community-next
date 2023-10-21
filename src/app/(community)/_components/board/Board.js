@@ -2,18 +2,12 @@
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { setCategory } from "@/redux/slice/pageSlice";
 import timeConverter from "@/util/time_converter";
 import "./style.css";
 
 export default function Board({ posts, title }) {
+  console.log("BOARD");
   const [isDivide, setIsDivide] = useState(false);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(setCategory({ category: title }));
-  }, [dispatch, title]);
 
   const handleChangeLayout = () => {
     setIsDivide((isDivide) => !isDivide);
@@ -33,7 +27,6 @@ export default function Board({ posts, title }) {
     );
   }
 
-  console.log("BOARD");
   return (
     <>
       <section className="board">
@@ -64,7 +57,9 @@ function Post({ post }) {
       className="board-item"
       href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${post.id}`}
     >
-      <span className="board-item__category">{post.category}</span>
+      <span className="board-item__category">
+        {post.tbl + (post.grp ? `/${post.grp}` : "")}
+      </span>
       <h3 className="board-item__title">{post.title}</h3>
       <div className="board-item__data-wrapper">
         <div className="board-item__data board-item__view">
@@ -89,6 +84,7 @@ function Nav({ posts }) {
   const path = usePathname();
   const searchParams = useSearchParams();
   const page = +searchParams.get("page");
+  const group = searchParams.get("group");
 
   navItems.current = Array(posts.totalPages)
     .fill(1)
@@ -122,7 +118,7 @@ function Nav({ posts }) {
                   ? " board__nav-btn--focus"
                   : "")
               }
-              href={path + (ele - 1 ? `?page=${ele}` : "")}
+              href={path + (ele - 1 ? `?group=${group}&page=${ele}` : "")}
             >
               {ele}
             </Link>

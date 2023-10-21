@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   login,
@@ -12,7 +12,8 @@ import Fetch from "@/util/fetch";
 import { blindInput, jwtDecode } from "@/util/secure";
 import "./style.css";
 
-export default function SignIn() {
+function SignIn() {
+  console.log("SIGN-IN");
   const dispatch = useDispatch();
   const [uid, setUid] = useState("");
   const [pwd, setPwd] = useState("");
@@ -72,7 +73,7 @@ export default function SignIn() {
   };
 
   return (
-    <form className={"signin" + (isFail ? " signin--fail" : "")}>
+    <fieldset className={"signin" + (isFail ? " signin--fail" : "")}>
       <input
         value={uid}
         className="signin__input"
@@ -103,6 +104,8 @@ export default function SignIn() {
       <button className="signin__btn-submit" onClick={handleClickBtnLogIn}>
         ✔
       </button>
-    </form>
+    </fieldset>
   );
 }
+
+export default memo(SignIn);

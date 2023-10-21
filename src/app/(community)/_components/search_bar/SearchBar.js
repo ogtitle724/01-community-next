@@ -22,7 +22,7 @@ export default function SearchBar() {
   };
 
   return (
-    <form onSubmit={(e) => handleOnSubmit(e)} className="search-bar">
+    <div onSubmit={(e) => handleOnSubmit(e)} className="search-bar">
       <input
         className="search-bar__input"
         name="searchTerm"
@@ -34,6 +34,6 @@ export default function SearchBar() {
         autoComplete="off"
       />
       <button className="search-bar__btn" onClick={handleOnSubmit}></button>
-    </form>
+    </div>
   );
 }

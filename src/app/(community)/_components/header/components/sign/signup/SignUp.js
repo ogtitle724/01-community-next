@@ -1,11 +1,12 @@
-"use client";
 import Fetch from "@/util/fetch";
 import socket from "@/util/socket";
+import { memo } from "react";
 import { useCallback, useEffect, useState } from "react";
 import { checkUid, checkNick, checkEmail, checkPwd } from "@/util/validation";
 import "./style.css";
 
-export default function SignUp({ dialogRef }) {
+function SignUp({ dialogRef }) {
+  console.log("SIGN-UP");
   const [uid, setUid] = useState("");
   const [nick, setNick] = useState("");
   const [email, setEmail] = useState("");
@@ -306,3 +307,5 @@ function SectionInput({ placeholder, target, handleOnChange, children }) {
     </section>
   );
 }
+
+export default memo(SignUp);

@@ -1,34 +1,30 @@
 .gnb {
-  width: 100vw;
+  width: 100%;
+  padding-bottom: 5px;
   height: var(--gnb-height);
   position: sticky;
   top: var(--header-height);
   display: flex;
   justify-content: center;
-  align-items: center;
-  align-content: center;
+  align-items: flex-end;
   flex-wrap: wrap;
-  column-gap: 18px;
-  box-shadow: 0 0px 5px var(--color-shadow);
-  background-color: var(--color-body);
+  gap: 18px;
   z-index: 2;
 }
 
-.gnb__btn {
+.gnb__item {
   position: relative;
   cursor: pointer;
   font-size: var(--font-size-sm);
   text-align: center;
-  line-height: var(--gnb-height);
   color: var(--color-font);
 }
 
-.gnb__btn:nth-last-child(2) {
+.gnb__item:nth-last-child(2) {
   width: 20px;
   height: 20px;
   background: url(/image/icon/cart.svg);
   background-size: contain;
-  transform: scale(-1, 1);
   filter: invert(var(--icon-invert));
   font-size: 0;
   overflow-x: hidden;
@@ -41,11 +37,12 @@
   bottom: 0px;
   border-radius: 2px 2px 0 0;
   background-color: var(--color-main);
-  transition: 0.4s;
+  transition-property: left, width;
+  transition-duration: 0.4s;
 }
 
 @media screen and (max-width: 768px) {
   .gnb {
-    column-gap: 10px;
+    gap: 10px;
   }
 }

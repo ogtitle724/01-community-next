@@ -1,7 +1,6 @@
 .user-board {
   width: 290px;
   height: 26px;
-  margin-right: 20px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -32,14 +31,14 @@
   width: auto;
   max-width: 85px;
   position: relative;
-  bottom: 1.5px;
   font-size: var(--font-size-vsm);
   font-weight: 500;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   text-align: center;
-  color: black;
+  line-height: var(--font-size-vsm);
+  color: var(--color-font);
   cursor: pointer;
 }
 
@@ -47,14 +46,14 @@
   min-width: 40px;
   height: 20px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  gap: 2px;
 }
 
 .user-board__img-clip {
   width: 10px;
   height: 19px;
-  margin-right: 2px;
   display: inline-block;
   background: url(/image/icon/clip.svg);
   background-size: cover;
@@ -67,7 +66,7 @@
   bottom: 1px;
   font-size: var(--font-size-vsm);
   font-weight: 500;
-  color: black;
+  color: var(--color-font);
 }
 
 .user-board__btn-write {

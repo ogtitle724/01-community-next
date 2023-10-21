@@ -1,5 +1,4 @@
-"use client";
-import { useRef, useState } from "react";
+import { useRef, memo } from "react";
 import { useSelector } from "react-redux";
 import { selectIsLogIn } from "@/redux/slice/signSlice";
 import Sign from "../sign/Sign";
@@ -9,7 +8,8 @@ import ThemeToggle from "@components/theme_toggle/ThemeToggle";
 import Modal from "../../../modal/Modal";
 import "./style.css";
 
-export default function MenuBtn() {
+function MenuBtn() {
+  console.log("MENU");
   const dialogRef = useRef();
   const isLogIn = useSelector(selectIsLogIn);
   return (
@@ -18,7 +18,7 @@ export default function MenuBtn() {
         className="btn-menu"
         onClick={() => dialogRef.current.showModal()}
       ></button>
-      <Modal dialogRef={dialogRef}>
+      <Modal dialogRef={dialogRef} isForm={true}>
         <div className="menu">
           <div className="menu__sign">
             <SearchBar />
@@ -31,3 +31,5 @@ export default function MenuBtn() {
     </>
   );
 }
+
+export default memo(MenuBtn);

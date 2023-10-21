@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectIsLogIn, selectUser } from "@/redux/slice/signSlice";
-import { categoriesKO2EN } from "@/config/config";
+import { categories, categoryKO2EN } from "@/config/config";
 import "./style.css";
 
 const Editor = dynamic(() => import("@components/editor/editor"), {
@@ -19,7 +19,8 @@ export default function WritePage({ params }) {
   const isLogIn = useSelector(selectIsLogIn);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("유머");
+  const [group, setGroup] = useState("");
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
@@ -34,14 +35,12 @@ export default function WritePage({ params }) {
         if (resizeObserverErr) {
           resizeObserverErr.setAttribute("style", "display: none");
         }
-        if (resizeObserverErrDiv) {
-          resizeObserverErrDiv.setAttribute("style", "display: none");
-        }
       }
     });
   }, [isLogIn, isUpdate, params?.id, router, user.id]);
 
   const handleSelectCategory = (e) => setCategory(e.target.value);
+  const handleSelectGroup = (e) => setGroup(e.target.value);
 
   const handleClickBtnComplete = async () => {
     if (!title) {
@@ -59,7 +58,8 @@ export default function WritePage({ params }) {
     };
     const payload = JSON.stringify({
       title,
-      category,
+      table: category,
+      group,
       content: body,
     });
 
@@ -67,7 +67,7 @@ export default function WritePage({ params }) {
       const path = process.env.NEXT_PUBLIC_PATH_POST;
       await Fetch.post(path, payload, option);
       router.refresh();
-      router.push(`/${categoriesKO2EN[category]}`);
+      router.push(`/${categoryKO2EN[category]}`);
     } catch (err) {
       console.error(err);
       alert("게시글 작성 혹은 수정을 완료하지 못했습니다.");
@@ -91,14 +91,27 @@ export default function WritePage({ params }) {
             className="write-page__select"
             onChange={(e) => handleSelectCategory(e)}
           >
-            <option value="없음">카테고리</option>
-            <option value="유머">유머</option>
-            <option value="게임·스포츠">게임·스포츠</option>
-            <option value="연예·방송">연예·방송</option>
-            <option value="여행">여행</option>
-            <option value="취미">취미</option>
-            <option value="경제·금융">경제·금융</option>
-            <option value="시사·이슈">시사·이슈</option>
+            {Object.keys(categories).map((category, idx) => {
+              return (
+                <option key={"select-opt-" + idx} value={category}>
+                  {category}
+                </option>
+              );
+            })}
+          </select>
+          <select
+            name="category-grp"
+            className="write-page__select"
+            onChange={(e) => handleSelectGroup(e)}
+          >
+            <option value={""}>{"카테고리"}</option>
+            {categories[category].map((group, idx) => {
+              return (
+                <option key={"select-opt-category-grp" + idx} value={group}>
+                  {group}
+                </option>
+              );
+            })}
           </select>
           <button
             className="write-page__btn-complete"

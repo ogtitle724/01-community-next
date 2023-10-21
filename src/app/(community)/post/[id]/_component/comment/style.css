@@ -44,6 +44,7 @@
   border-color: var(--color-opposite) var(--color-body) var(--color-opposite)
     var(--color-body);
   overflow-y: scroll;
+  overscroll-behavior: none;
 }
 
 .comment-board__form {
@@ -167,11 +168,13 @@
   justify-content: center;
   align-items: center;
   gap: 6px;
+  background-color: pink;
 }
 
 .comment__edit-btn {
   flex-grow: 1;
   height: 18px;
+  background-color: var(---color);
   font-size: var(--font-size-vsm);
   font-weight: 500;
 }
@@ -275,16 +278,24 @@
 }
 
 .comment__reply-target {
+  display: inline-block;
   position: relative;
   bottom: 1.5px;
   margin-right: 6px;
-  padding: 0px 5px 3px 5px;
-  border-radius: 12px;
-  background-color: var(--color-smoke-a);
-  transform: translateY(-100px);
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: rgb(42, 42, 213);
+  background: linear-gradient(
+    142deg,
+    rgba(42, 42, 213, 1) 0%,
+    rgba(168, 81, 171, 1) 44%,
+    rgba(188, 94, 151, 1) 56%,
+    rgba(247, 133, 10, 1) 100%
+  );
   font-size: 10px;
   line-height: 20px;
   font-size: var(--font-size-vsm);
+  color: white;
 }
 
 @media screen and (max-width: 1200px) {

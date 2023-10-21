@@ -42,11 +42,11 @@
 }
 
 .modal__btn-close {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   position: absolute;
-  top: -13px;
-  right: -13px;
+  top: 3px;
+  right: 3px;
   background-image: url(/image/icon/close.svg);
-  filter: invert(var(--icon-invert));
+  filter: invert(70%);
 }

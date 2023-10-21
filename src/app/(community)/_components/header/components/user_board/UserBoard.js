@@ -1,8 +1,6 @@
-"use client";
-import { useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { memo, useEffect, useRef } from "react";
+import { useRouter } from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import Link from "next/navigation";
 import Fetch from "@/util/fetch";
 import socket from "@/util/socket";
 import {
@@ -15,7 +13,8 @@ import {
 } from "@/redux/slice/signSlice";
 import "./style.css";
 
-export default function UserBoard() {
+function UserBoard() {
+  console.log("USERBOARD");
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useSelector(selectUser);
@@ -32,7 +31,9 @@ export default function UserBoard() {
     }
   }, [isLogIn, user.id]);
 
-  const handleClickLogOut = async () => {
+  const handleClickLogOut = async (e) => {
+    e.preventDefault();
+
     try {
       await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGOUT, {
         next: { revalidate: 0 },
@@ -75,27 +76,25 @@ export default function UserBoard() {
           className="user-board__profile-img"
           onClick={handleNavigateMypage}
         ></i>
-        <div>
-          <p className="user-board__nickname" onClick={handleNavigateMypage}>
-            {user.nick ?? "unknown"}
-          </p>
-        </div>
+        <p className="user-board__nickname" onClick={handleNavigateMypage}>
+          {user.nick ?? "unknown"}
+        </p>
       </div>
       <div className="divider"></div>
       <div className="user-board__clip">
-        <i className="user-board__img-clip"></i>
+        <i className="user-board__img-clip icon"></i>
         <span>123</span>
       </div>
       <div className="divider"></div>
       <button
-        className="user-board__btn-write"
+        className="user-board__btn-write icon"
         onClick={handleClickBtnWrite}
       ></button>
       <button
-        className="user-board__btn-add"
+        className="user-board__btn-add icon"
         onClick={handleClkBtnAddItem}
       ></button>
-      <button className="user-board__btn-chat" onClick={handleClkBtnChat}>
+      <button className="user-board__btn-chat icon" onClick={handleClkBtnChat}>
         {alarmCnt ? (
           <div className="user-board__alram-cnt">{alarmCnt}</div>
         ) : (
@@ -103,7 +102,7 @@ export default function UserBoard() {
         )}
       </button>
       <button
-        className="user-board__btn-alram"
+        className="user-board__btn-alram icon"
         onCanPlayThrough={handleClkBtnAlarm}
       >
         <div className="user-board__alram-cnt">3</div>
@@ -153,3 +152,5 @@ export default function UserBoard() {
   );
 }
  */
+
+export default memo(UserBoard);

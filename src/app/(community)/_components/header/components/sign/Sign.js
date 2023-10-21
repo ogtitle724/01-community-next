@@ -1,11 +1,10 @@
-"use client";
-import { useRef } from "react";
+import { memo, useRef } from "react";
 import SignUp from "./signup/SignUp";
 import SignIn from "./signin/SignIn";
 import Modal from "../../../modal/Modal";
 import "./style.css";
 
-export default function Sign() {
+function Sign() {
   console.log("SIGN");
   const dialogRef = useRef();
 
@@ -21,9 +20,11 @@ export default function Sign() {
       <button className="sign__btn-signup" onClick={handleClkBtnSignup}>
         +
       </button>
-      <Modal dialogRef={dialogRef}>
+      <Modal dialogRef={dialogRef} isFrom={false}>
         <SignUp dialogRef={dialogRef} />
       </Modal>
     </section>
   );
 }
+
+export default memo(Sign);

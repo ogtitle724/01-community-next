@@ -27,10 +27,10 @@ export default function CommentBoard({ postId, comments }) {
       let contentArg = changeP2Span(content);
       contentArg = deleteEnter(contentArg);
 
-      const payload = JSON.stringify({
+      const payload = {
         content: contentArg,
         postId,
-      });
+      };
       let path;
 
       if (target) {
@@ -42,7 +42,7 @@ export default function CommentBoard({ postId, comments }) {
       }
 
       try {
-        await Fetch.post(path, payload, option);
+        await Fetch.post(path, JSON.stringify(payload), option);
         let ck = editorRef.current.editor;
 
         ck.setData("댓글을 입력해주세요...");
@@ -268,7 +268,7 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
       <div className="comment__content">
         {!isEdit && cName ? (
           <span className="comment__reply-target">
-            {comment.parent_nick ? "🔗" + comment.parent_nick : "🔗targetNick"}
+            {comment.parent_nick ? "@." + comment.parent_nick : "🔗targetNick"}
           </span>
         ) : (
           ""
@@ -286,15 +286,15 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
                 setContent(data);
               }}
             />
-            <div className="comment__edit-btn-wrapper">
+            <div className="comment-board__btn-wrapper">
               <button
-                className="btn-ok comment__edit-btn btn--good"
+                className="comment-board__btn"
                 onClick={handleClkBtnUpdate}
               >
                 ✔
               </button>
               <button
-                className="btn-cancel comment__edit-btn btn--bad"
+                className="comment-board__btn"
                 onClick={handleClkBtnCancel}
               >
                 ✖
@@ -337,20 +337,20 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
           </div>
           <div className="comment__btn-wrapper">
             {isWriter && (
-              <button
-                className="comment__btn comment__btn-edit"
-                onClick={() => handleClickBtnEdit()}
-              >
-                <i className="comment__i comment__i-edit"></i>
-              </button>
-            )}
-            {isWriter && (
-              <button
-                className="comment__btn comment__btn-delete"
-                onClick={() => handleClickBtnDelete()}
-              >
-                <i className="comment__i comment__i-delete"></i>
-              </button>
+              <>
+                <button
+                  className="comment__btn comment__btn-edit"
+                  onClick={() => handleClickBtnEdit()}
+                >
+                  <i className="comment__i comment__i-edit"></i>
+                </button>
+                <button
+                  className="comment__btn comment__btn-delete"
+                  onClick={() => handleClickBtnDelete()}
+                >
+                  <i className="comment__i comment__i-delete"></i>
+                </button>
+              </>
             )}
             <button
               className="comment__btn comment__btn-reply"

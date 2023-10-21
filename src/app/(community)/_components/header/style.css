@@ -1,19 +1,26 @@
 .header {
   width: 100vw;
-  height: var(--header-height);
   position: sticky;
   top: 0;
+  padding: 10px 16px 0 16px;
+  box-shadow: 0 0px 14px var(--color-shadow);
+  background-color: var(--color-body);
+  z-index: 2;
+}
+
+.header__interface {
+  width: 100%;
+  height: auto;
+  top: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 40px;
-  background-color: var(--color-body);
-  z-index: 3;
 }
 
 .header__logo {
   height: auto;
-  margin-left: 20px;
   padding-bottom: 3px;
   font-weight: 700;
   font-size: var(--font-size-title);
