@@ -27,9 +27,9 @@ export default function ReduxProvider({ children }) {
     }
 
     //set eventlistener for browser width
-    store.dispatch(setWidth({ width: window.innerWidth }));
+    store.dispatch(setWidth(window.innerWidth));
     window.addEventListener("resize", () =>
-      store.dispatch(setWidth({ width: window.innerWidth }))
+      store.dispatch(setWidth(window.innerWidth))
     );
   };
 

@@ -1,7 +1,8 @@
 .item-detail__info {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  gap: 5px;
 }
 
 .item-detail__btn-like {
@@ -20,7 +21,7 @@
 }
 
 .item-detail__figure {
-  width: 29px;
+  width: 30px;
   margin-left: 2px;
   display: flex;
   align-items: center;

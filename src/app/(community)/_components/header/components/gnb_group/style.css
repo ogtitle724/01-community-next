@@ -1,6 +1,6 @@
 .gnb-group {
-  width: 70vw;
-  margin-top: 10px;
+  width: 80vw;
+  margin-top: 16px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -13,19 +13,28 @@
 .gnb-group__item {
   padding: 5px 7px;
   border-radius: 12px;
-  box-shadow: 0 0 5px var(--color-shadow);
-
+  border-radius: 50px;
+  box-shadow: -1px -1px 2px var(--color-shadow-lu),
+    1px 1px 2px var(--color-shadow-rd);
   font-size: var(--font-size-vsm);
 }
 
 .gnb-group__item--cur {
-  background: rgb(38, 66, 130);
+  transition: 0.4s background;
   background: linear-gradient(
     142deg,
-    rgba(38, 66, 130, 1) 0%,
-    rgba(168, 81, 171, 1) 44%,
+    rgba(42, 42, 213, 1) 8%,
+    rgba(168, 81, 171, 1) 48%,
     rgba(188, 94, 151, 1) 56%,
-    rgba(197, 118, 43, 1) 100%
+    rgba(247, 133, 10, 1) 100%
   );
-  color: white;
+  box-shadow: 0px 4px 3px var(--color-shadow-rd);
+  color: whitesmoke;
+}
+
+@media screen and (max-width: 768px) {
+  .gnb-group {
+    width: 100vw;
+    padding: 0 5px;
+  }
 }

@@ -1,20 +1,24 @@
 import Link from "next/link";
 import { memo } from "react";
-import { categories, categoryEN2KO, categoryKO2EN } from "@/config/config";
-import { useParams, useSearchParams } from "next/navigation";
+import { categories, categoryKO2EN } from "@/config/config";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCategory, selectGroup, setGroup } from "@/redux/slice/pageSlice";
 import "./style.css";
 
 function GnbGroup() {
   console.log("GNBGROUP");
-  const params = useParams();
-  const category = params.topic;
-  const searchParams = useSearchParams();
-  const grp = searchParams.get("group");
+  const category = useSelector(selectCategory);
+  const grp = useSelector(selectGroup);
+  const dispatch = useDispatch();
+
+  const handleClkBtnGroup = (arg) => {
+    dispatch(setGroup(arg));
+  };
 
   if (category) {
     return (
       <nav className="gnb-group">
-        {categories[categoryEN2KO[category]].map((group, idx) => {
+        {categories[category]?.map((group, idx) => {
           return (
             <Link
               key={"gnb-group_" + idx}
@@ -22,7 +26,8 @@ function GnbGroup() {
                 "gnb-group__item" +
                 (group === grp ? " gnb-group__item--cur" : "")
               }
-              href={`/${category}?group=${group}`}
+              href={`/${categoryKO2EN[category]}?group=${group}`}
+              onClick={() => handleClkBtnGroup(group)}
             >
               {group}
             </Link>

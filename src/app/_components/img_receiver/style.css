@@ -22,11 +22,24 @@
   bottom: -20px;
   right: 10px;
   border-radius: 100%;
-  background: url(/image/icon/duplicate.svg) var(--color-body);
+  background: var(--color-main);
+  box-shadow: 0 0 5px var(--color-shadow);
+  z-index: 2;
+}
+
+.img-receiver__label::after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  display: block;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url(/image/icon/duplicate.svg);
   background-repeat: no-repeat;
   background-size: 18px;
   background-position: center top 8px;
-  box-shadow: 0 0 5px var(--color-shadow);
   filter: invert(var(--icon-invert));
   z-index: 2;
 }

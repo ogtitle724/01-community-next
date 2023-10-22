@@ -1,13 +1,11 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
 import "./style.css";
 
 export default function SearchBar() {
   const [searchTerm, setsearchTerm] = useState("");
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +28,7 @@ export default function SearchBar() {
           setsearchTerm(e.target.value);
         }}
         autoComplete="off"
+        placeholder=" · · · · "
       />
       <button className="search-bar__btn" onClick={handleOnSubmit}></button>
     </div>

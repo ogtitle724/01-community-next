@@ -55,7 +55,20 @@ export default async function PostDetailPage({ params }) {
             />
             <section className="content-board__related">
               <h3 className="content-board__title-related">추천 컨텐츠</h3>
-              <div className="content-board__best"></div>
+              <div className="content-board__rec-posts">
+                <div className="content-board__rec-post">
+                  <div className="content-board__rec-post-img"></div>
+                </div>
+                <div className="content-board__rec-post">
+                  <div className="content-board__rec-post-img"></div>
+                </div>
+                <div className="content-board__rec-post">
+                  <div className="content-board__rec-post-img"></div>
+                </div>
+                <div className="content-board__rec-post">
+                  <div className="content-board__rec-post-img"></div>
+                </div>
+              </div>
             </section>
           </article>
         </section>

@@ -44,7 +44,6 @@ export default function BtnRec(props) {
         ></i>
         <span className="content-board__span">{props.rec_cnt}</span>
       </button>
-      <div className="content-board__divider"></div>
       <button
         className="content-board__btn content-board__btn-dislike"
         onClick={() => handleClickRecommend(-1)}

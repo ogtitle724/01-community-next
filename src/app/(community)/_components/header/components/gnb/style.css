@@ -21,14 +21,53 @@
 }
 
 .gnb__item:nth-last-child(2) {
-  width: 20px;
+  width: 48px;
   height: 20px;
-  background: url(/image/icon/cart.svg);
-  background-size: contain;
-  filter: invert(var(--icon-invert));
   font-size: 0;
-  overflow-x: hidden;
-  color: black;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.gnb__item:nth-last-child(2)::before {
+  content: "";
+  width: 60px;
+  height: 60px;
+  display: block;
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  background: linear-gradient(
+    142deg,
+    rgba(42, 42, 213, 1) 8%,
+    rgba(168, 81, 171, 1) 48%,
+    rgba(188, 94, 151, 1) 56%,
+    rgba(247, 133, 10, 1) 100%
+  );
+  animation: rotate 3s infinite linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotatez(360deg);
+  }
+}
+
+.gnb__item:nth-last-child(2)::after {
+  content: "store";
+  width: 42px;
+  height: 14px;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--font-size-vsm);
+  color: var(--color-font);
+  border-radius: 12px;
+  background-color: var(--color-body);
 }
 
 .gnb__mark {

@@ -1,26 +1,33 @@
 import Link from "next/link";
 import { memo, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { selectCategory, setCategory, setGroup } from "@/redux/slice/pageSlice";
 import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
-import { categories, categoryEN2KO, categoryKO2EN } from "@/config/config";
-import { useParams } from "next/navigation";
+import { categories, categoryKO2EN } from "@/config/config";
 import "./style.css";
 
 function Gnb() {
   console.log("GNB");
   const width = useSelector(selectWidth);
+  const dispatch = useDispatch();
   const marker = useRef();
   const gnb = useRef();
   const btnFocus = useRef();
-  const params = useParams();
-  const category = categoryEN2KO[params.topic] ?? "홈";
+  const category = useSelector(selectCategory);
 
   useEffect(() => {
+    console.log("effect---------------------------------------");
     btnFocus.current = Object.values(gnb.current.children).filter(
       (btn) => btn.innerHTML === category
     )[0];
     marker.current.style = `width:${btnFocus.current.offsetWidth}px; left:${btnFocus.current.offsetLeft}px;`;
   }, [width, category]);
+
+  const handleClkBtnGnb = (arg) => {
+    dispatch(setGroup(null));
+    dispatch(setCategory(arg));
+  };
 
   return (
     <>
@@ -29,6 +36,7 @@ function Gnb() {
           className="gnb__item"
           href={process.env.NEXT_PUBLIC_ROUTE_HOME}
           scroll={false}
+          onClick={() => handleClkBtnGnb("홈")}
         >
           홈
         </Link>
@@ -39,19 +47,12 @@ function Gnb() {
               className="gnb__item"
               href={`/${categoryKO2EN[category]}`}
               scroll={false}
+              onClick={() => handleClkBtnGnb(category)}
             >
               {category}
             </Link>
           );
         })}
-        <Link
-          className="gnb__item"
-          href={"/showcase"}
-          onClick={() => handleClkLink("물물교환")}
-          scroll={false}
-        >
-          물물교환
-        </Link>
         <div ref={marker} className="gnb__mark"></div>
       </nav>
     </>

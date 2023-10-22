@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef } from "react";
-import { useRouter } from "next/link";
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import Fetch from "@/util/fetch";
 import socket from "@/util/socket";

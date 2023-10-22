@@ -3,7 +3,7 @@
   height: 22px;
   position: absolute;
   top: 50%;
-  right: 10px;
+  right: 0px;
   transform: translateY(-50%);
   border: none;
   background: url(/image/icon/menu.svg);
@@ -27,8 +27,9 @@
 .menu__content {
   flex-grow: 1;
   width: 100%;
-  border-radius: 4px;
-  background-color: var(--color-smoke-a);
+  border-radius: 30px;
+  box-shadow: -3px -3px 6px var(--color-shadow-lu),
+    3px 3px 6px var(--color-shadow-rd);
 }
 
 .menu__sign {

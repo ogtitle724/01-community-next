@@ -17,7 +17,7 @@ export default function Showcase({ itemPagingData }) {
 
   return (
     <section className="showcase">
-      <div className="showcase__header">
+      <div className="showcase__interface">
         <input
           className="showcase__search"
           onChange={(e) => setSearchTerm(e.target.value)}

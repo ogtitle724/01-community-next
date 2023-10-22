@@ -7,19 +7,11 @@
   inset-block-start: 17vh;
   border: none;
   border-radius: 12px 12px 0 0;
-  opacity: 0;
   background-color: var(--color-body);
-  animation: opacity 0.5s forwards;
-}
-
-@keyframes opacity {
-  100% {
-    opacity: 1;
-  }
 }
 
 .modal::backdrop {
-  background: linear-gradient(0deg, rgb(67, 67, 67) 50%, rgb(33, 33, 33) 100%);
+  background: linear-gradient(0deg, rgb(43, 43, 43) 74%, rgb(0, 0, 0) 100%);
   opacity: 0.75;
 }
 
@@ -29,7 +21,7 @@
   padding: 10px;
   position: relative;
   border-radius: 12px;
-  animation: modalUp 0.5s forwards;
+  animation: modalUp 0.3s forwards;
 }
 
 @keyframes modalUp {

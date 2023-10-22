@@ -7,8 +7,9 @@
   height: 40px;
   padding-left: 10px;
   margin: 20px 0 5px 0;
-  font-size: var(--font-size-lg);
   border: none;
+  font-size: var(--font-size-lg);
+  background-color: var(--color-body);
   color: var(--font-color-dark);
 }
 
@@ -47,17 +48,17 @@
 
 /*ckeditor boarder*/
 .item-upload .ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
-  border: 1px solid var(--color-smoke-a);
+  border: none;
+  border-radius: 12px;
+  box-shadow: -3px -3px 6px var(--color-shadow-lu),
+    3px 3px 6px var(--color-shadow-rd);
 }
 
 /*ckeditor - focused*/
 .item-upload
   .ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
-  border: 1px solid var(--color-smoke-a);
-  box-shadow: none;
-}
-
-/*ckeditor - focused*/
-.item-upload .ck.ck-editor__editable.ck-focused {
   border: none;
+  border-radius: 12px;
+  box-shadow: -3px -3px 6px var(--color-shadow-lu),
+    3px 3px 6px var(--color-shadow-rd);
 }

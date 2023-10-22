@@ -4,8 +4,9 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-radius: 4px;
-  background-color: var(--color-smoke-a);
+  border-radius: 30px;
+  box-shadow: inset 2px 2px 2px var(--color-shadow-rd),
+    inset -2px -2px 2px var(--color-shadow-lu);
 }
 
 .user-board__profile {
@@ -16,8 +17,8 @@
 }
 
 .user-board__profile-img {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   border-radius: 100%;
   background: url(/image/icon/person.svg) var(--color-smoke-a);
   background-size: contain;
@@ -54,6 +55,8 @@
 .user-board__img-clip {
   width: 10px;
   height: 19px;
+  position: relative;
+  bottom: 0.5px;
   display: inline-block;
   background: url(/image/icon/clip.svg);
   background-size: cover;

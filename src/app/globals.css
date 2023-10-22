@@ -27,10 +27,11 @@
   --color-font: black;
   --color-main: rgb(38, 66, 130);
   --color-opposite: rgb(197, 118, 43);
-  --color-body: white;
-  --color-smoke-a: rgb(239, 239, 239);
+  --color-body: rgb(244, 244, 244);
+  --color-smoke-a: rgb(254, 253, 255);
   --color-smoke-b: #cfcfcf;
-  --color-shadow: rgba(8, 66, 130, 0.08);
+  --color-shadow-lu: rgb(252, 252, 252);
+  --color-shadow-rd: #e1e1e1;
   --icon-invert: 0%;
   --icon-invert-b: 100%;
 }
@@ -42,7 +43,8 @@
   --color-body: rgb(43, 43, 43);
   --color-smoke-a: #3b3b3b;
   --color-smoke-b: rgb(82, 82, 82);
-  --color-shadow: rgba(0, 0, 0, 0.239);
+  --color-shadow-lu: rgb(48, 48, 48);
+  --color-shadow-rd: rgb(33, 33, 33);
   --icon-invert: 80%;
   --icon-invert-b: 0%;
 }
