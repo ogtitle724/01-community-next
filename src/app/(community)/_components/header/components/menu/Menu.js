@@ -21,7 +21,7 @@ function MenuBtn() {
       <Modal dialogRef={dialogRef} isForm={true}>
         <div className="menu">
           <div className="menu__sign">
-            <SearchBar />
+            <SearchBar dialogRef={dialogRef} />
             <ThemeToggle />
             {isLogIn ? <UserBoard /> : <Sign />}
           </div>

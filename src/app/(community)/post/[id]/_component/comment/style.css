@@ -174,7 +174,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  gap: 1.5px;
+  gap: 3px;
 }
 
 .comment__btn-wrapper {
@@ -186,13 +186,11 @@
 .comment__btn {
   width: 13px;
   height: 13px;
-  margin: 0 4px;
   border-radius: 100%;
   border: none;
   background-color: transparent;
   font-size: var(--font-size-vsm);
   transition: 0.2s;
-  filter: invert(70%);
 }
 
 .comment__i {
@@ -230,13 +228,14 @@
 }
 
 .comment__btn-dislike {
-  margin-left: 10px;
   transform: translateY(2px);
 }
 
 .comment__span-rec {
-  color: var(--color-smoke-b);
+  width: 20px;
+  color: var(--color-font);
   font-size: var(--font-size-vsm);
+  line-height: var(--font-size-vsm);
 }
 
 .comment__reply {
