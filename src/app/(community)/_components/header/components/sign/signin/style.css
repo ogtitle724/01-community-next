@@ -40,7 +40,7 @@
   border-radius: 100%;
   border: none;
   background-color: var(--color-main);
-  color: var(--color-font);
+  color: whitesmoke;
   font-size: var(--font-size-vsm);
 }
 

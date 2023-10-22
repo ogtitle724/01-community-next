@@ -11,7 +11,7 @@
   border: none;
   border-radius: 100%;
   cursor: pointer;
-  color: var(--color-font);
+  color: whitesmoke;
   background-color: var(--color-opposite);
   font-size: var(--font-size-lg);
   line-height: 18px;

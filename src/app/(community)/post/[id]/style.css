@@ -4,7 +4,6 @@
 
 .content-board {
   width: min(650px, 96%);
-  min-height: 517px;
   height: auto;
   margin: 0px auto;
 }
@@ -30,7 +29,7 @@
 }
 
 .content-board__detail {
-  min-height: 200px;
+  min-height: 100px;
   margin: 15px 0;
   font-size: var(--font-size-md);
 }
@@ -99,4 +98,15 @@ iframe {
   transform: translate(-50%, -50%);
   border-radius: 4px;
   background-color: var(--color-smoke-a);
+}
+
+@media screen and (max-width: 576px) {
+  .content-board__rec-posts {
+    height: 74px;
+  }
+
+  .content-board__rec-post {
+    width: 80px;
+    height: 60px;
+  }
 }
