@@ -12,7 +12,7 @@ export default function Board({ posts, title }) {
   const handleChangeLayout = () => {
     setIsDivide((isDivide) => !isDivide);
   };
-
+  console.log(posts);
   //게시물 없을 경우
   if (posts && !posts.content.length) {
     return (
