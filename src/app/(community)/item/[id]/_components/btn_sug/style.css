@@ -252,6 +252,24 @@
 }
 
 @media screen and (max-width: 576px) {
+  .item-detail__btn-ud {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .item-detail__btn {
+    padding: 6px 18px;
+    display: block;
+    position: relative;
+    background-color: var(--color-main);
+    font-size: var(--font-size-lg);
+    color: var(--color-body);
+    font-weight: 700;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  }
+
   .create-field__img-receive {
     height: 50px;
     gap: 5px;

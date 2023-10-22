@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   align-items: flex-end;
-  gap: 5px;
+  gap: 3px;
 }
 
 .item-detail__btn-like {

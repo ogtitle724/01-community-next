@@ -125,6 +125,12 @@ button {
   filter: invert(var(--icon-invert));
 }
 
+.divider {
+  width: 3px;
+  height: 70%;
+  box-shadow: -1px -1px 2px var(--color-shadow-lu),
+    1px 1px 2px var(--color-shadow-rd);
+}
 .ck.ck-balloon-panel.ck-balloon-panel_position_border-side_right.ck-powered-by-balloon {
   display: none;
 }
