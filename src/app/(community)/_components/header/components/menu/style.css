@@ -20,6 +20,15 @@
   gap: 16px;
 }
 
+.menu__sign {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 .menu .sign {
   margin: 0;
 }
@@ -32,10 +41,16 @@
     3px 3px 6px var(--color-shadow-rd);
 }
 
-.menu__sign {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 20px;
+@media screen and (max-width: 576px) {
+  .menu__sign {
+    gap: 10px;
+  }
+
+  .menu .search-bar {
+    width: 100%;
+  }
+
+  .menu .user-board {
+    width: 280px;
+  }
 }

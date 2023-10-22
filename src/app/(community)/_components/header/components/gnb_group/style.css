@@ -1,5 +1,5 @@
 .gnb-group {
-  width: 80vw;
+  width: 70vw;
   margin-top: 16px;
   position: relative;
   left: 50%;
@@ -34,7 +34,6 @@
 
 @media screen and (max-width: 768px) {
   .gnb-group {
-    width: 100vw;
-    padding: 0 5px;
+    width: 95vw;
   }
 }
