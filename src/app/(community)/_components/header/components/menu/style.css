@@ -44,6 +44,7 @@
 @media screen and (max-width: 576px) {
   .menu__sign {
     gap: 10px;
+    justify-content: center;
   }
 
   .menu .search-bar {
@@ -51,6 +52,7 @@
   }
 
   .menu .user-board {
+    flex-grow: 1;
     width: 280px;
   }
 }
