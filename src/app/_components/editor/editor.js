@@ -3,7 +3,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { useRef } from "react";
 import Fetch from "@/util/fetch";
 
-export default function Editor({ /* ckRef, */ onChange, data, isImg }) {
+export default function Editor({ ckRef, onChange, data, isImg }) {
   let initialData = data ? data : "";
   let ref = useRef();
 
@@ -42,29 +42,6 @@ export default function Editor({ /* ckRef, */ onChange, data, isImg }) {
     };
   };
 
-  const isEndOfText = (position) => {
-    // Check if there's no node after the current position and if there's text just before the position.
-    return (
-      !position.nodeAfter &&
-      position.nodeBefore &&
-      position.nodeBefore.is("text")
-    );
-  };
-
-  const handleCursorPositionChange = (event, editor) => {
-    const selection = editor.model.document.selection;
-    const position = selection.getFirstPosition();
-
-    if (isEndOfText(position)) {
-      editor.model.change((writer) => {
-        writer.insertText(" ", position);
-
-        // Move the cursor back to its original position
-        writer.setSelection(position);
-      });
-    }
-  };
-
   return (
     <CKEditor
       ref={/* ckRef */ ref}
@@ -77,13 +54,6 @@ export default function Editor({ /* ckRef, */ onChange, data, isImg }) {
       onChange={(event, editor) => {
         const data = editor.getData();
         onChange(data);
-        // Attach a selection change event listener
-        editor.model.document.on("change:selection", () =>
-          handleCursorPositionChange(null, editor)
-        );
-      }}
-      onInit={(editor) => {
-        console.log("init");
       }}
     />
   );
