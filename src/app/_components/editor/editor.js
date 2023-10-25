@@ -1,11 +1,9 @@
 import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import { useRef } from "react";
 import Fetch from "@/util/fetch";
 
 export default function Editor({ ckRef, onChange, data, isImg }) {
   let initialData = data ? data : "";
-  let ref = useRef();
 
   function uploadPlugin(editor) {
     editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
@@ -44,7 +42,7 @@ export default function Editor({ ckRef, onChange, data, isImg }) {
 
   return (
     <CKEditor
-      ref={/* ckRef */ ref}
+      ref={ckRef}
       editor={ClassicEditor}
       config={{
         placeholder: "내용을 입력하세요.",
