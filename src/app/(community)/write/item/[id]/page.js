@@ -46,6 +46,7 @@ export default function ItemUpload({ params }) {
 
         setTitle(itemDetail.title);
         setContent(itemDetail.content);
+        setImgs(itemDetail.img_src);
       } catch (err) {
         console.error(err);
         alert("넌 수정 안되는거 알지???");
@@ -85,7 +86,7 @@ export default function ItemUpload({ params }) {
 
   return (
     <section className="item-upload">
-      <ImgReceiver setImgs={setImgs} />
+      <ImgReceiver setImgs={setImgs} imgs={imgs} />
       <input
         type="text"
         className="item-upload__title"

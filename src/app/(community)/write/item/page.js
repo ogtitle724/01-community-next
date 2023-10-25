@@ -25,10 +25,26 @@ export default function ItemUpload() {
         alert("내용을 작성해 주세요!");
         return;
       }
+
+      const formData = new FormData();
+
+      for (let i = 0; i < imgs.length; i++) {
+        formData.append("item", imgs[i]);
+      }
+
+      const res = await fetch("http://localhost:3000/api/img", {
+        body: formData,
+        method: "POST",
+      });
+      const payload = await res.json();
+      const imgSrc = payload.data;
+
       const option = { headers: { "Content-Type": "application/json" } };
       const body = JSON.stringify({
         title,
         content,
+        thumbnail: imgSrc[0],
+        imgSrc,
       });
 
       await Fetch.post(process.env.NEXT_PUBLIC_PATH_ITEM, body, option);

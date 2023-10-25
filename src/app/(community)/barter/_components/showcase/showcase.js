@@ -62,7 +62,7 @@ function ItemCard({ item }) {
           }
         >
           <Image
-            src={item.thumbnail ?? "/image/no-img.png"}
+            src={item.thumb_src ?? "/image/no-img.png"}
             width={180}
             height={135}
             alt="item image"

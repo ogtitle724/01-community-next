@@ -2,6 +2,7 @@ import Fetch from "@/util/fetch";
 import ServerError from "../../_components/error/Error";
 import BtnInterface from "./_components/btn_interface/btnInterface";
 import BtnSug from "./_components/btn_sug/btnSug";
+import ImgWrapper from "./_components/img_wrapper/ImgWrapper";
 import { sanitize } from "@/util/secure";
 import "./style.css";
 
@@ -15,9 +16,12 @@ export default async function ItemDetailPage({ params }) {
 
     return (
       <main className="item-detail__main">
-        {false ? <i></i> : <div className="item-detail__no-img"></div>}
+        {itemDetail?.img_src?.length ? (
+          <ImgWrapper itemDetail={itemDetail} />
+        ) : (
+          <div className="item-detail__no-img"></div>
+        )}
         <h2 className="item-detail__title">{itemDetail.title}</h2>
-
         <div
           className="item-detail__description"
           dangerouslySetInnerHTML={{ __html: sanitize(itemDetail.content) }}

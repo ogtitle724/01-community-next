@@ -65,7 +65,7 @@ class Socket {
 
     this.socket.addEventListener("close", () => {
       if (!this.intentionalClose) {
-        console.log("socket => CLOSED");
+        console.log(`SOCKET => CLOSED ${new Date().toString()}`);
         console.log("reconnecting...");
         setTimeout(() => this.connect(senderId, senderNick), 1000);
       }

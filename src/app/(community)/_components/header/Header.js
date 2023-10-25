@@ -26,7 +26,7 @@ function Header() {
             className="header__logo"
             href={process.env.NEXT_PUBLIC_ROUTE_HOME}
           >
-            {width < 480 ? <i className="header__logo-img"></i> : "CLiPmArKET"}
+            {"CLiPmArKET"}
           </Link>
           {width > 1200 ? (
             <>

@@ -3,6 +3,7 @@
   position: relative;
   margin: 0px auto;
   position: relative;
+  overflow-x: hidden;
 }
 
 .item-detail__no-img {
@@ -110,6 +111,11 @@
     width: 480px;
   }
 
+  .item-detail__img {
+    width: 480px;
+    height: 360px;
+  }
+
   .item-detail__no-img {
     width: 480px;
     height: 360px;
@@ -120,6 +126,13 @@
   .item-detail__main {
     margin: 0 auto 30px auto;
     width: 100%;
+  }
+
+  .item-detail__img {
+    width: 92vw;
+    height: calc(92vw * 0.75);
+    margin: 0;
+    border-radius: 0;
   }
 
   .item-detail__no-img {
