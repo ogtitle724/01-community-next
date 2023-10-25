@@ -22,7 +22,7 @@ function Gnb() {
         (btn) => btn.innerHTML === category
       )[0];
       marker.current.style = `width:${btnFocus.current.offsetWidth}px; left:${btnFocus.current.offsetLeft}px;`;
-    }, 100);
+    }, 200);
   }, [width, category]);
 
   const handleClkBtnGnb = (arg) => {
