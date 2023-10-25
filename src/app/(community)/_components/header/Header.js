@@ -11,12 +11,14 @@ import Sign from "./components/sign/Sign";
 import UserBoard from "./components/user_board/UserBoard";
 import MenuBtn from "./components/menu/Menu";
 import GnbGroup from "./components/gnb_group/GnbGroup";
+import { useParams } from "next/navigation";
 import "./style.css";
 
 function Header() {
   console.log("HAEDER");
   const isLogIn = useSelector(selectIsLogIn);
   const width = useSelector(selectWidth);
+  const params = useParams();
 
   return (
     <>
@@ -42,7 +44,7 @@ function Header() {
         </section>
         <Gnb />
       </header>
-      <GnbGroup />
+      {params.topic && <GnbGroup />}
     </>
   );
 }

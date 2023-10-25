@@ -17,7 +17,6 @@ function Gnb() {
   const category = useSelector(selectCategory);
 
   useEffect(() => {
-    console.log("effect---------------------------------------");
     btnFocus.current = Object.values(gnb.current.children).filter(
       (btn) => btn.innerHTML === category
     )[0];
