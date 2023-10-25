@@ -1,0 +1,100 @@
+.mypage {
+  --btn-width: 160px;
+  --gap: 20px;
+  width: 100%;
+  min-height: 80vh;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+
+.mypage__btn {
+  width: var(--btn-width);
+  height: calc(var(--btn-width) * 0.5);
+  position: relative;
+  border-radius: 12px;
+  box-shadow: -3px -3px 6px var(--color-shadow-lu),
+    3px 3px 6px var(--color-shadow-rd);
+  transition: 0.1s box-shadow;
+  background-color: var(--color-body);
+}
+
+.mypage__btn:nth-child(1)::before {
+  content: "";
+  display: block;
+  width: 30%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  background: no-repeat url(/image/icon/person-stand-filled.svg);
+  filter: invert(var(--icon-invert));
+}
+
+.mypage__btn:nth-child(2)::before {
+  content: "";
+  display: block;
+  width: 30%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  background: no-repeat url(/image/icon/document-filled.svg);
+  filter: invert(var(--icon-invert));
+}
+
+.mypage__btn:nth-child(3)::before {
+  content: "";
+  display: block;
+  width: 30%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  background: no-repeat url(/image/icon/chatbox-ellipses-filled.svg);
+  filter: invert(var(--icon-invert));
+}
+
+.mypage__btn:nth-child(4)::before {
+  content: "";
+  display: block;
+  width: 30%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  background: no-repeat url(/image/icon/cart-filled.svg);
+  filter: invert(var(--icon-invert));
+}
+
+.mypage__btn:hover {
+  box-shadow: -1.5px -1.5px 4px var(--color-shadow-lu),
+    1.5px 1.5px 4px var(--color-shadow-rd);
+}
+
+.mypage__btn:focus {
+  box-shadow: inset 2px 2px 2px var(--color-shadow-rd),
+    inset -2px -2px 2px var(--color-shadow-lu);
+  filter: brightness(0.98);
+}
+
+.mypage__btn:active {
+  box-shadow: inset 3px 3px 6px var(--color-shadow-rd),
+    inset -3px -3px 6px var(--color-shadow-lu);
+}
+
+.mypage__content {
+  width: calc(var(--btn-width) * 4 + var(--gap) * 3);
+  height: calc(var(--btn-width) * 3);
+  position: relative;
+  border-radius: 12px;
+  box-shadow: -3px -3px 6px var(--color-shadow-lu),
+    3px 3px 6px var(--color-shadow-rd);
+}

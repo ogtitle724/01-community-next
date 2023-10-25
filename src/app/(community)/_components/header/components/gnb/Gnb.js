@@ -17,10 +17,12 @@ function Gnb() {
   const category = useSelector(selectCategory);
 
   useEffect(() => {
-    btnFocus.current = Object.values(gnb.current.children).filter(
-      (btn) => btn.innerHTML === category
-    )[0];
-    marker.current.style = `width:${btnFocus.current.offsetWidth}px; left:${btnFocus.current.offsetLeft}px;`;
+    setTimeout(() => {
+      btnFocus.current = Object.values(gnb.current.children).filter(
+        (btn) => btn.innerHTML === category
+      )[0];
+      marker.current.style = `width:${btnFocus.current.offsetWidth}px; left:${btnFocus.current.offsetLeft}px;`;
+    }, 100);
   }, [width, category]);
 
   const handleClkBtnGnb = (arg) => {
