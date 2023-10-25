@@ -8,6 +8,7 @@ import { sanitize } from "@/util/secure";
 import "./style.css";
 
 export default async function PostDetailPage({ params }) {
+  console.log("CONTENT");
   const postId = params.id;
 
   try {

@@ -66,6 +66,11 @@
   border-bottom: 1px dashed var(--color-smoke-b);
   cursor: pointer;
   list-style: none;
+  background-color: var(--color-body);
+}
+
+.board-item:nth-child(1) {
+  border-top: 1px dashed var(--color-smoke-b);
 }
 
 .board-item:hover {
