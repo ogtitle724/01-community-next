@@ -14,7 +14,14 @@ export default async function HomePage(props) {
       { next: { revalidate: 0 } }
     );
     const postData = await res.json();
-    return <Board posts={postData} title={category ?? "홈"}></Board>;
+
+    return (
+      <Board
+        posts={postData}
+        title={category ?? "홈"}
+        isThumbnail={true}
+      ></Board>
+    );
   } catch (err) {
     console.error(err);
     return <ServerError />;

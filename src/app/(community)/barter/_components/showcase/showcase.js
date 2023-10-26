@@ -58,15 +58,12 @@ function ItemCard({ item }) {
       >
         <div
           className={
-            "item-card__img" + (item.thumbnail ? "" : " item-card__no-img")
+            "item-card__img" + (item.img_src ? "" : " item-card__no-img")
           }
         >
-          <Image
-            src={item.thumb_src ?? "/image/no-img.png"}
-            width={180}
-            height={135}
-            alt="item image"
-          />
+          {item.img_src && (
+            <Image src={item.img_src} layout="fill" alt="item image" />
+          )}
         </div>
         <h3 className="item-card__title">{item.title}</h3>
         <div className="item-card__indicator">

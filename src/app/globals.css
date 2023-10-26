@@ -29,7 +29,7 @@
   --color-main: rgb(38, 66, 130);
   --color-opposite: rgb(197, 118, 43);
   --color-body: rgb(244, 244, 244);
-  --color-smoke-a: rgb(254, 253, 255);
+  --color-smoke-a: rgb(233, 233, 233);
   --color-smoke-b: #cfcfcf;
   --color-shadow-lu: rgb(252, 252, 252);
   --color-shadow-rd: #e1e1e1;
@@ -71,6 +71,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-body);
+}
+
+img {
+  width: min(630px, 90%);
+  height: auto;
 }
 
 input {
