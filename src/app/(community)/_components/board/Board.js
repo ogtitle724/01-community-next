@@ -96,7 +96,7 @@ function Post({ post, isShowImg }) {
             <Image
               src={post.thumb_src}
               alt="post thumbnail"
-              layout="fill"
+              fill={true}
             ></Image>
           )}
         </div>

@@ -22,8 +22,8 @@ export default function Slider() {
     if (slider.current && container.current) {
       const p = params.current;
       p.sliderWidth = slider.current.offsetWidth;
-      p.foldWidth = p.sliderWidth * 0.09;
-      p.imgWidth = p.sliderWidth - (p.foldWidth + 10) * 3;
+      p.foldWidth = p.sliderWidth * 0.13;
+      p.imgWidth = p.sliderWidth - (p.foldWidth + 20) * 3;
       p.imgHeight = p.imgWidth * (3 / 4);
 
       Object.values(container.current.children).forEach((ele, idx) => {
@@ -53,7 +53,9 @@ export default function Slider() {
             <Image
               className="slider__img"
               src={"/image/sample1.jpeg"}
-              layout="fill"
+              fill={true}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
               alt="today best"
             />
             <div
@@ -76,8 +78,10 @@ export default function Slider() {
             <Image
               className="slider__img"
               src={"/image/sample2.jpg"}
-              layout="fill"
+              fill={true}
               alt="today best"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
             />
             <div
               className="slider__cover"
@@ -99,8 +103,10 @@ export default function Slider() {
             <Image
               className="slider__img"
               src={"/image/sample3.jpeg"}
-              layout="fill"
+              fill={true}
               alt="today best"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
             />
             <div
               className="slider__cover"
@@ -122,8 +128,10 @@ export default function Slider() {
             <Image
               className="slider__img"
               src={"/image/sample4.jpg"}
-              layout="fill"
+              fill={true}
               alt="today best"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
             />
             <div
               className="slider__cover"

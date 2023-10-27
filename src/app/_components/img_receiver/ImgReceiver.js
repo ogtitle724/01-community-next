@@ -64,8 +64,7 @@ export default function ImgReceiver({ setImgs, imgs }) {
             <Image
               src={imgContainer[i] && imgs[i]}
               alt="imgs"
-              width={0}
-              height={0}
+              fill={true}
               className="img-receiver__img"
             ></Image>
             <button

@@ -6,7 +6,7 @@
 
 .slider__container {
   display: flex;
-  gap: 10px;
+  gap: 20px;
 }
 
 .slider__item {
@@ -45,14 +45,13 @@
 }
 
 .slider__title {
-  width: 75%;
+  width: 70%;
   height: fit-content;
-  padding: 0 20px 30px 0;
   position: absolute;
-  right: 0px;
-  bottom: 0px;
+  right: 20px;
+  bottom: 20px;
   font-weight: 300;
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: right;
   color: white;
   font-family: "Giants-Bold";
@@ -73,14 +72,16 @@
 
 @media screen and (max-width: 768px) {
   .slider__title {
-    font-size: 1.6rem;
-    padding: 0 10px 10px 0;
+    font-size: 1.8rem;
+    right: 10px;
+    bottom: 20px;
   }
 }
 
 @media screen and (max-width: 576px) {
   .slider__title {
     font-size: 1.3rem;
-    padding: 0 10px 10px 0;
+    right: 7px;
+    bottom: 15px;
   }
 }

@@ -62,7 +62,7 @@ function ItemCard({ item }) {
           }
         >
           {item.img_src && (
-            <Image src={item.img_src} layout="fill" alt="item image" />
+            <Image src={item.img_src} fill={true} alt="item image" />
           )}
         </div>
         <h3 className="item-card__title">{item.title}</h3>

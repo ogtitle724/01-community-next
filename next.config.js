@@ -5,9 +5,13 @@ const nextConfig = {
     logging: "verbose",
   },
   images: {
-    domains: [
-      "clipmarket.s3.ap-northeast-2.amazonaws.com",
-      "clipmarket-post-images.s3.ap-northeast-2.amazonaws.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   /* experimental: {
