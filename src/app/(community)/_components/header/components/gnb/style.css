@@ -15,8 +15,8 @@
 .gnb__item {
   position: relative;
   cursor: pointer;
-  font-size: var(--font-size-sm);
-  line-height: var(--font-size-sm);
+  font-size: var(--font-size-md);
+  line-height: var(--font-size-md);
   text-align: center;
   color: var(--color-font);
 }

@@ -24,7 +24,7 @@
 .board__btn {
   width: 20px;
   height: 20px;
-  position: 0relative;
+  position: relative;
 }
 
 .board__btn-img {
@@ -246,7 +246,7 @@
 }
 
 .board-empty {
-  height: 70vh;
+  height: 60vh;
   border-radius: 30px;
   box-shadow: -2px -2px 3px var(--color-shadow-lu),
     2px 2px 4px var(--color-shadow-rd);
