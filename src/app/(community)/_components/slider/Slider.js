@@ -91,7 +91,7 @@ export default function Slider() {
                 data-value={1}
                 onClick={handleClkImg}
               >
-                I'm pretty much fucked.
+                I am pretty much fucked.
               </span>
             </div>
           </div>
