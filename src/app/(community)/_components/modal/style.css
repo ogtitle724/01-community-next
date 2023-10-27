@@ -40,5 +40,5 @@
   top: 3px;
   right: 3px;
   background-image: url(/image/icon/close.svg);
-  filter: invert(70%);
+  filter: invert(var(--icon-invert));
 }

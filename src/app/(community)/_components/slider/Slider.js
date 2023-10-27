@@ -18,8 +18,6 @@ export default function Slider() {
     foldWidth: null,
   };
 
-  console.log(focusIdx);
-
   useEffect(() => {
     if (slider.current && container.current) {
       const p = params.current;
