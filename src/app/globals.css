@@ -24,6 +24,16 @@
   }
 }
 
+@media screen and (max-width: 576px) {
+  :root {
+    --font-size-title: 20px;
+    --font-size-lg: 15px;
+    --font-size-md: 14px;
+    --font-size-sm: 12px;
+    --font-size-vsm: 10px;
+  }
+}
+
 :root[color-theme="light"] {
   --color-font: black;
   --color-main: rgb(38, 66, 130);
@@ -31,7 +41,7 @@
   --color-body: rgb(244, 244, 244);
   --color-smoke-a: rgb(233, 233, 233);
   --color-smoke-b: #cfcfcf;
-  --color-shadow-lu: rgb(252, 252, 252);
+  --color-shadow-lu: rgb(255, 255, 255);
   --color-shadow-rd: #e1e1e1;
   --icon-invert: 0%;
   --icon-invert-b: 100%;
@@ -44,8 +54,8 @@
   --color-body: rgb(43, 43, 43);
   --color-smoke-a: #3b3b3b;
   --color-smoke-b: rgb(82, 82, 82);
-  --color-shadow-lu: rgb(48, 48, 48);
-  --color-shadow-rd: rgb(33, 33, 33);
+  --color-shadow-lu: rgb(66, 66, 66);
+  --color-shadow-rd: rgb(22, 22, 22);
   --icon-invert: 80%;
   --icon-invert-b: 0%;
 }

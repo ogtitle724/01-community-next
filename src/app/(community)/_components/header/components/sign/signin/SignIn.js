@@ -1,5 +1,5 @@
 "use client";
-import { memo, useState } from "react";
+import { memo, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   login,
@@ -18,6 +18,7 @@ function SignIn() {
   const [uid, setUid] = useState("");
   const [pwd, setPwd] = useState("");
   const [isFail, setIsFail] = useState(false);
+  const btn = useRef();
 
   const handleClickBtnLogIn = async (e) => {
     e.preventDefault();
@@ -72,8 +73,17 @@ function SignIn() {
     }
   };
 
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      btn.current.click();
+    }
+  };
+
   return (
-    <fieldset className={"signin" + (isFail ? " signin--fail" : "")}>
+    <fieldset
+      onKeyDown={handleEnter}
+      className={"signin" + (isFail ? " signin--fail" : "")}
+    >
       <input
         value={uid}
         className="signin__input"
@@ -101,7 +111,11 @@ function SignIn() {
         }}
       />
 
-      <button className="signin__btn-submit" onClick={handleClickBtnLogIn}>
+      <button
+        ref={btn}
+        className="signin__btn-submit"
+        onClick={handleClickBtnLogIn}
+      >
         ✔
       </button>
     </fieldset>

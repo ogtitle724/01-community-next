@@ -32,14 +32,14 @@
 .item-detail__title {
   margin: 30px 0 12px 0;
   padding-left: 7px;
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   font-weight: 700;
 }
 
 .item-detail__description {
   min-height: 100px;
   margin: 10px 0;
-  padding: 10px;
+  padding: 10px 13px;
   border-radius: 12px;
   font-size: var(--font-size-sm);
   font-weight: 500;
@@ -48,7 +48,7 @@
 }
 
 .suged-list {
-  margin: 30px 0;
+  margin: 30px 0 10px 0;
 }
 
 .suged-list__title {
@@ -61,7 +61,7 @@
 .suged-list__ul {
   width: 100%;
   height: 160px;
-  padding: 10px;
+  padding: 10px 15px;
   display: inline-block;
   border-radius: 12px;
   box-shadow: inset 2px 2px 2px var(--color-shadow-rd),

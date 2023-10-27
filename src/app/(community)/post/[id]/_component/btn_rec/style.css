@@ -8,8 +8,8 @@
   align-items: center;
   gap: 12px;
   border-radius: 4px;
-  box-shadow: -2px -2px 3px var(--color-shadow-lu),
-    2px 2px 3px var(--color-shadow-rd);
+  box-shadow: -1.5px -1.5px 2px var(--color-shadow-lu),
+    1.5px 1.5px 2px var(--color-shadow-rd);
 }
 
 .content-board__btn {

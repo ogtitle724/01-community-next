@@ -132,10 +132,10 @@ function SugForm({ dialogRef, itemDetail }) {
   return (
     <Modal dialogRef={dialogRef}>
       <div className="sug-form" onSubmit={handleClkBtnSubmit}>
+        <button className="sug-form__btn-new" onClick={handleClkBtnCreate}>
+          + 새로 만들기
+        </button>
         <ul className="sug-form__items">
-          <button className="sug-from__btn-new" onClick={handleClkBtnCreate}>
-            + 새로 만들기
-          </button>
           {contents.length ? (
             contents.map((sugedItem, idx) => {
               return (

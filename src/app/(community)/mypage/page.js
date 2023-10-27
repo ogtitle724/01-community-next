@@ -1,9 +1,36 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./style.css";
+import { useSelector } from "react-redux";
+import { selectUser } from "@/redux/slice/signSlice";
 
 export default function Mypage() {
-  const [focus, setFocus] = useState("개인정보");
+  const [focus, setFocus] = useState("profile");
+  const [btns, setBtns] = useState();
+  const content = useMemo(() => {
+    return {
+      profile: <Profile />,
+      post: <Post />,
+      comment: <Comment />,
+      barter: <Barter />,
+    };
+  }, []);
+
+  useEffect(() => {
+    const temp = Object.keys(content).map((value, idx) => {
+      return (
+        <button
+          key={"mypage-btn_" + idx}
+          className={
+            "mypage__btn" + (value === focus ? " mypage__btn--focus" : "")
+          }
+          onClick={handleClkBtn}
+          value={value}
+        ></button>
+      );
+    });
+    setBtns(temp);
+  }, [content, focus]);
 
   const handleClkBtn = (e) => {
     e.preventDefault();
@@ -12,27 +39,119 @@ export default function Mypage() {
 
   return (
     <div className="mypage">
-      <button
-        className="mypage__btn"
-        onClick={handleClkBtn}
-        value="개인정보"
-      ></button>
-      <button
-        className="mypage__btn"
-        onClick={handleClkBtn}
-        value="작성한 게시물"
-      ></button>
-      <button
-        className="mypage__btn"
-        onClick={handleClkBtn}
-        value="작성한 댓글"
-      ></button>
-      <button
-        className="mypage__btn"
-        onClick={handleClkBtn}
-        value="스토어"
-      ></button>
-      <div className="mypage__content"></div>
+      {btns}
+      <div className="mypage__content">{content[focus]}</div>
     </div>
+  );
+}
+
+function Profile() {
+  const user = useSelector(selectUser);
+
+  return (
+    <div className="mypage__profile-wrapper">
+      <div>
+        <span>{"아이디: "}</span>
+        <span>{"test1"}</span>
+      </div>
+      <div>
+        <span>{"닉네임: "}</span>
+        <span>{"Nick네임"}</span>
+      </div>
+      <div>
+        <span>{"클립: "}</span>
+        <span>{"120c"}</span>
+      </div>
+      <div>
+        <span>{"이메일: "}</span>
+        <span>{"sample213@gmail.com"}</span>
+      </div>
+      <div>
+        <span>{"물품: "}</span>
+        <span>{`4/5`}</span>
+        <span className="mypage__sub-data">{` (거래중/거래완료)`}</span>
+      </div>
+      <div className="mypage__divider"></div>
+      <div className="mypage__profile-container">
+        <p className="mypage__profile-container-title">작성한 게시물</p>
+        <div className="mypage__profile-items"></div>
+      </div>
+      <div className="mypage__profile-container">
+        <p className="mypage__profile-container-title">작성한 댓글</p>
+        <div className="mypage__profile-items"></div>
+      </div>
+    </div>
+  );
+}
+
+function Post() {
+  const user = useSelector(selectUser);
+
+  return (
+    <form className="mypage__posts">
+      <span></span>
+      <span>✏️</span>
+      <span>👣</span>
+      <span>👍/👎</span>
+      <span>✔️</span>
+      <>
+        <span>1.</span>
+        <div className="mypage__posts-title">
+          <span>제목제목제목</span>
+        </div>
+        <span>30</span>
+        <span>5/2</span>
+
+        <input className="mypage__radio" type="radio" value={"value"}></input>
+      </>
+    </form>
+  );
+}
+
+function Comment() {
+  const user = useSelector(selectUser);
+
+  return (
+    <form className="mypage__posts">
+      <span></span>
+      <span>✏️</span>
+      <span>📩</span>
+      <span>👍/👎</span>
+      <span>✔️</span>
+      <>
+        <span>1.</span>
+        <div className="mypage__posts-title">
+          <span>제목제목제목</span>
+        </div>
+        <span>30</span>
+        <span>5/2</span>
+
+        <input className="mypage__radio" type="radio" value={"value"}></input>
+      </>
+    </form>
+  );
+}
+
+function Barter() {
+  const user = useSelector(selectUser);
+
+  return (
+    <form className="mypage__posts">
+      <span></span>
+      <span>📦</span>
+      <span>📥</span>
+      <span>❤️</span>
+      <span>✔</span>
+      <>
+        <span>1.</span>
+        <div className="mypage__posts-title">
+          <span>제목제목제목</span>
+        </div>
+        <span>3</span>
+        <span>12</span>
+
+        <input className="mypage__radio" type="radio" value={"value"}></input>
+      </>
+    </form>
   );
 }

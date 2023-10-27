@@ -1,15 +1,24 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import timeConverter from "@/util/time_converter";
 import "./style.css";
+import { useSelector } from "react-redux";
+import { selectWidth } from "@/redux/slice/pageSlice";
 
 export default function Board({ posts, title, isThumbnail }) {
   console.log("BOARD");
   const [isDivide, setIsDivide] = useState(false);
   const [isShowImg, setIsShowImg] = useState(isThumbnail);
+  const width = useSelector(selectWidth);
+
+  useEffect(() => {
+    if (width < 768 && isDivide) {
+      setIsDivide(false);
+    }
+  }, [isDivide, width]);
 
   const handleClkBtnLayout = () => {
     setIsDivide((isDivide) => !isDivide);
@@ -37,13 +46,15 @@ export default function Board({ posts, title, isThumbnail }) {
       <section className="board">
         <h2 className="board__title">{title}</h2>
         <div className="board__btn-wrapper">
-          <button
-            className={
-              "board__btn" +
-              (isDivide ? " board__btn-grid" : " board__btn-list")
-            }
-            onClick={handleClkBtnLayout}
-          ></button>
+          {width > 768 && (
+            <button
+              className={
+                "board__btn" +
+                (isDivide ? " board__btn-grid" : " board__btn-list")
+              }
+              onClick={handleClkBtnLayout}
+            ></button>
+          )}
           <button
             className={
               "board__btn" +

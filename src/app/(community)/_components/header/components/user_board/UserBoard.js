@@ -71,15 +71,10 @@ function UserBoard() {
 
   return (
     <div className="user-board">
-      <div className="user-board__profile">
-        <i
-          className="user-board__profile-img"
-          onClick={handleNavigateMypage}
-        ></i>
-        <p className="user-board__nickname" onClick={handleNavigateMypage}>
-          {user.nick ?? "unknown"}
-        </p>
-      </div>
+      <button className="user-board__profile" onClick={handleNavigateMypage}>
+        <i className="user-board__profile-img"></i>
+        <p className="user-board__nickname">{user.nick ?? "unknown"}</p>
+      </button>
       <div className="divider"></div>
       <div className="user-board__clip">
         <i className="user-board__img-clip icon"></i>

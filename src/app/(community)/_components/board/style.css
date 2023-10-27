@@ -130,13 +130,14 @@
 
 .board-item__data {
   display: flex;
-  align-items: flex-start;
-  gap: 5px;
+  align-items: flex-end;
+  gap: 3px;
 }
 
 .board-item__data span {
-  width: 20px;
+  width: fit-content;
   font-size: var(--font-size-vsm);
+  line-height: var(--font-size-vsm);
 }
 
 .board-item__category {
@@ -165,8 +166,8 @@
 
 .board-item__date {
   position: absolute;
-  right: 6px;
-  bottom: 5.5px;
+  right: 10px;
+  top: 10px;
   font-size: var(--font-size-vsm);
 }
 
@@ -247,8 +248,8 @@
 .board-empty {
   height: 70vh;
   border-radius: 30px;
-  box-shadow: -3px -3px 6px var(--color-shadow-lu),
-    3px 3px 6px var(--color-shadow-rd);
+  box-shadow: -2px -2px 3px var(--color-shadow-lu),
+    2px 2px 4px var(--color-shadow-rd);
 }
 
 .board-empty__notif {
@@ -270,12 +271,6 @@
     right: 5px;
     border: none;
     filter: invert(60%);
-  }
-
-  .board-item__view::before,
-  .board-item__like::before,
-  .board-item__comment::before {
-    margin-right: 3px;
   }
 
   .board__nav-btn {

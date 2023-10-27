@@ -85,8 +85,8 @@
   position: relative;
   border-radius: 4px;
   background-color: var(--color-body);
-  box-shadow: -3px -3px 6px var(--color-shadow-lu),
-    3px 3px 6px var(--color-shadow-rd);
+  box-shadow: -1.5px -1.5px 4px var(--color-shadow-lu),
+    2px 2px 3px var(--color-shadow-rd);
 }
 
 .item-card__a {
