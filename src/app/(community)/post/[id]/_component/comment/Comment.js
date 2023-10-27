@@ -73,13 +73,6 @@ export default function CommentBoard({ postId, comments }) {
   return (
     <section className="comment-board">
       <form className="comment-board__form">
-        {target ? (
-          <span className="comment-board__form-target">
-            {"🔗" + target.targetNick}
-          </span>
-        ) : (
-          ""
-        )}
         <CKEditor
           ref={editorRef}
           editor={ClassicEditor}

@@ -52,7 +52,7 @@
   right: 0px;
   bottom: 0px;
   font-weight: 300;
-  font-size: 30px;
+  font-size: 2rem;
   text-align: right;
   color: white;
   font-family: "Giants-Bold";
@@ -67,7 +67,7 @@
 
 @media screen and (max-width: 576px) {
   .slider__title {
-    font-size: 14px;
+    font-size: 1.5rem;
     padding: 0 10px 10px 0;
   }
 }
