@@ -45,23 +45,29 @@
 }
 
 .slider__title {
-  width: fit-content;
-  max-height: 50%;
+  width: 70%;
+  height: fit-content;
   padding: 0 20px 30px 0;
   position: absolute;
   right: 0px;
   bottom: 0px;
   font-weight: 300;
-  font-size: 40px;
+  font-size: 30px;
   text-align: right;
   color: white;
   font-family: "Giants-Bold";
 
   text-overflow: ellipsis;
-  overflow: hidden;
   word-break: keep-all;
-
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 576px) {
+  .slider__title {
+    font-size: 14px;
+    padding: 0 10px 10px 0;
+  }
 }
