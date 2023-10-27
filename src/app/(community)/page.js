@@ -1,7 +1,8 @@
 import Board from "./_components/board/Board";
 import Fetch from "@/util/fetch";
-import { categoryEN2KO } from "@/config/config";
+import Slider from "./_components/slider/Slider";
 import ServerError from "./_components/error/Error";
+import { categoryEN2KO } from "@/config/config";
 
 export default async function HomePage(props) {
   const category = categoryEN2KO[props.params.topic];
@@ -16,11 +17,14 @@ export default async function HomePage(props) {
     const postData = await res.json();
 
     return (
-      <Board
-        posts={postData}
-        title={category ?? "홈"}
-        isThumbnail={true}
-      ></Board>
+      <>
+        <Slider />
+        <Board
+          posts={postData}
+          title={category ?? "홈"}
+          isThumbnail={true}
+        ></Board>
+      </>
     );
   } catch (err) {
     console.error(err);
