@@ -6,7 +6,7 @@
 
 .slider__container {
   display: flex;
-  gap: 20px;
+  gap: 10px;
 }
 
 .slider__item {

@@ -24,8 +24,8 @@ export default function Slider() {
     if (slider.current && container.current) {
       const p = params.current;
       p.sliderWidth = slider.current.offsetWidth;
-      p.foldWidth = p.sliderWidth * 0.06;
-      p.imgWidth = p.sliderWidth - (p.foldWidth + 20) * 3;
+      p.foldWidth = p.sliderWidth * 0.09;
+      p.imgWidth = p.sliderWidth - (p.foldWidth + 10) * 3;
       p.imgHeight = p.imgWidth * (3 / 4);
 
       Object.values(container.current.children).forEach((ele, idx) => {

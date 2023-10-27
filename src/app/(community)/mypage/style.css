@@ -151,14 +151,11 @@
 }
 
 .mypage__posts * {
-  font-size: var(--font-size-sm);
-}
-
-.mypage__posts-title {
-  width: 100%;
+  font-size: var(--font-size-vsm);
 }
 
 .mypage__posts-content {
+  justify-self: stretch;
   max-width: 70vw;
   white-space: nowrap;
   text-overflow: ellipsis;
