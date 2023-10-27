@@ -91,13 +91,15 @@ function Post() {
     <form className="mypage__posts">
       <span></span>
       <span>✏️</span>
-      <span>👣</span>
+      <span>👀</span>
       <span>👍/👎</span>
       <span>✔️</span>
       <>
         <span>1.</span>
         <div className="mypage__posts-title">
-          <span>제목제목제목</span>
+          <span className="mypage__posts-content">
+            새로운 취미 시작! 집에서 즐기는 수제 캔들 만들기
+          </span>
         </div>
         <span>30</span>
         <span>5/2</span>
@@ -121,7 +123,9 @@ function Comment() {
       <>
         <span>1.</span>
         <div className="mypage__posts-title">
-          <span>제목제목제목</span>
+          <div className="mypage__posts-content">
+            글 쓰기도 제대로 못하면서 왜 여기서 글을 올리는 거야?
+          </div>
         </div>
         <span>30</span>
         <span>5/2</span>
@@ -139,13 +143,13 @@ function Barter() {
     <form className="mypage__posts">
       <span></span>
       <span>📦</span>
-      <span>📥</span>
+      <span>♻️</span>
       <span>❤️</span>
       <span>✔</span>
       <>
         <span>1.</span>
         <div className="mypage__posts-title">
-          <span>제목제목제목</span>
+          <span className="mypage__posts-content">팔아.요 장농?</span>
         </div>
         <span>3</span>
         <span>12</span>

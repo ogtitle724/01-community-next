@@ -158,6 +158,13 @@
   width: 100%;
 }
 
+.mypage__posts-content {
+  max-width: 70vw;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .mypage__radio {
   appearance: none;
   width: 16px;
@@ -176,6 +183,10 @@
   .mypage {
     grid-template-rows: 40px 1fr;
     gap: 10px;
+  }
+
+  .mypage__content {
+    height: 60vh;
   }
 
   .mypage__btn {
@@ -203,7 +214,10 @@
   }
 
   .mypage__content {
-    margin-top: 6px;
-    border-radius: 10px;
+    padding: 5px 10px;
+  }
+
+  .mypage__posts-content {
+    max-width: 40vw;
   }
 }

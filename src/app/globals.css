@@ -27,8 +27,8 @@
 @media screen and (max-width: 576px) {
   :root {
     --font-size-title: 20px;
-    --font-size-lg: 15px;
-    --font-size-md: 14px;
+    --font-size-lg: 17px;
+    --font-size-md: 15px;
     --font-size-sm: 12px;
     --font-size-vsm: 10px;
   }
