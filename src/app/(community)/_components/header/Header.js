@@ -30,7 +30,7 @@ function Header() {
           >
             {"CLiPmArKET"}
           </Link>
-          {width > 1200 ? (
+          {width > 1024 ? (
             <>
               <SearchBar />
               <ThemeToggle />

@@ -22,8 +22,8 @@
 }
 
 .gnb__item:nth-last-child(2) {
-  width: 48px;
-  height: 20px;
+  width: 52px;
+  height: 22px;
   font-size: 0;
   border-radius: 12px;
   overflow: hidden;
@@ -36,7 +36,7 @@
   display: block;
   position: absolute;
   top: -20px;
-  left: -10px;
+  left: -5px;
   background: linear-gradient(
     142deg,
     rgba(42, 42, 213, 1) 8%,
@@ -58,14 +58,14 @@
 
 .gnb__item:nth-last-child(2)::after {
   content: "store";
-  width: 42px;
-  height: 14px;
+  width: 46px;
+  height: 16px;
   display: block;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: var(--font-size-vsm);
+  font-size: var(--font-size-sm);
   color: var(--color-font);
   border-radius: 12px;
   background-color: var(--color-body);
