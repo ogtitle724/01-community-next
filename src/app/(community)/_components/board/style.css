@@ -16,44 +16,44 @@
   align-items: center;
   gap: 5px;
   position: absolute;
-  top: 2px;
+  top: 0px;
   right: 5px;
   filter: invert(var(--icon-invert));
 }
 
 .board__btn {
-  width: 23px;
-  height: 23px;
-  position: relative;
+  width: 20px;
+  height: 20px;
+  position: 0relative;
 }
 
 .board__btn-img {
-  background: url(/image/icon/image.svg);
+  background: url(/image/icon/image.svg) no-repeat;
 }
 
 .board__btn-default {
-  background: url(/image/icon/image.svg);
+  background: url(/image/icon/image.svg) no-repeat;
 }
 
 .board__btn-default::after {
   content: "";
   display: block;
-  width: 115%;
+  width: 120%;
   height: 0px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotateZ(45deg);
   border-radius: 4px;
-  border: 1px solid black;
+  border-top: 1.5px solid black;
 }
 
 .board__btn-grid {
-  background: url(/image/icon/grid.svg);
+  background: url(/image/icon/grid.svg) no-repeat;
 }
 
 .board__btn-list {
-  background: url(/image/icon/list.svg);
+  background: url(/image/icon/list.svg) no-repeat;
 }
 
 .board__ul {
