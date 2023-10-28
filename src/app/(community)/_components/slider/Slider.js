@@ -22,8 +22,8 @@ export default function Slider() {
     if (slider.current && container.current) {
       const p = params.current;
       p.sliderWidth = slider.current.offsetWidth;
-      p.foldWidth = p.sliderWidth * 0.13;
-      p.imgWidth = p.sliderWidth - (p.foldWidth + 20) * 3;
+      p.foldWidth = p.sliderWidth * 0.06;
+      p.imgWidth = p.sliderWidth - (p.foldWidth + 4) * 4;
       p.imgHeight = p.imgWidth * (3 / 4);
 
       Object.values(container.current.children).forEach((ele, idx) => {
@@ -148,6 +148,68 @@ export default function Slider() {
             </div>
           </div>
         </div>
+        <div className="slider__item">
+          <div className="slider__img-wrapper">
+            <Image
+              className="slider__img"
+              src={"/image/sample1.jpeg"}
+              fill={true}
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
+              alt="today best"
+            />
+            <div
+              className="slider__cover"
+              data-value={4}
+              onClick={handleClkImg}
+            >
+              <span
+                className="slider__title"
+                data-value={4}
+                onClick={handleClkImg}
+              >
+                4K 울트라 HD 리퀴드 메탈릭 월페이퍼
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="slider__btn-wrapper">
+        <button
+          className={
+            "slider__btn" + (focusIdx == 0 ? " slider__btn--focus" : "")
+          }
+          data-value={0}
+          onClick={handleClkImg}
+        ></button>
+        <button
+          className={
+            "slider__btn" + (focusIdx == 1 ? " slider__btn--focus" : "")
+          }
+          data-value={1}
+          onClick={handleClkImg}
+        ></button>
+        <button
+          className={
+            "slider__btn" + (focusIdx == 2 ? " slider__btn--focus" : "")
+          }
+          data-value={2}
+          onClick={handleClkImg}
+        ></button>
+        <button
+          className={
+            "slider__btn" + (focusIdx == 3 ? " slider__btn--focus" : "")
+          }
+          data-value={3}
+          onClick={handleClkImg}
+        ></button>
+        <button
+          className={
+            "slider__btn" + (focusIdx == 4 ? " slider__btn--focus" : "")
+          }
+          data-value={4}
+          onClick={handleClkImg}
+        ></button>
       </div>
     </section>
   );

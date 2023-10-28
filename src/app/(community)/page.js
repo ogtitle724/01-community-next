@@ -21,7 +21,7 @@ export default async function HomePage(props) {
         <Slider />
         <Board
           posts={postData}
-          title={category ?? "홈"}
+          title={category ?? "BEST"}
           isThumbnail={true}
         ></Board>
       </>
