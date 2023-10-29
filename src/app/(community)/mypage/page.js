@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
+import Fetch from "@/util/fetch";
 import "./style.css";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/slice/signSlice";
@@ -14,6 +15,20 @@ export default function Mypage() {
       comment: <Comment />,
       barter: <Barter />,
     };
+  }, []);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const res = await Fetch.get("/user/comments");
+        const data = await res.json();
+        console.log(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchUserData();
   }, []);
 
   useEffect(() => {
@@ -93,7 +108,7 @@ function Post() {
       <span>✏️</span>
       <span>👀</span>
       <span>👍/👎</span>
-      <span>✔️</span>
+      <span>✔</span>
       <>
         <span>1.</span>
         <div className="mypage__posts-content">
@@ -117,7 +132,7 @@ function Comment() {
       <span>✏️</span>
       <span>📩</span>
       <span>👍/👎</span>
-      <span>✔️</span>
+      <span>✔</span>
       <>
         <span>1.</span>
         <div className="mypage__posts-content">

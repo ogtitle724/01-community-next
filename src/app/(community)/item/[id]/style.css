@@ -42,7 +42,6 @@
   padding: 10px 13px;
   border-radius: 12px;
   font-size: var(--font-size-sm);
-  font-weight: 500;
   box-shadow: inset 2px 2px 2px var(--color-shadow-rd),
     inset -2px -2px 3px var(--color-shadow-lu);
 }
@@ -103,7 +102,6 @@
 
 .suged-item__nick {
   font-size: var(--font-size-sm);
-  font-weight: 500;
 }
 
 @media screen and (max-width: 768px) {

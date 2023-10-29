@@ -71,7 +71,6 @@
   border: none;
   border-radius: 12px;
   font-size: var(--font-size-md);
-  font-weight: 500;
   color: var(--color-font);
   background-color: transparent;
   box-shadow: inset 2px 2px 3px var(--color-shadow-rd),
@@ -102,7 +101,6 @@
   right: 0px;
   border-radius: 0 12px 12px 0;
   font-size: var(--font-size-vsm);
-  font-weight: 500;
   color: var(--color-body);
   background-color: var(--color-main);
 }

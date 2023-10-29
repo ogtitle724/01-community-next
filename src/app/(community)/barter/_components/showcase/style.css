@@ -47,7 +47,6 @@
   border: none;
   background-color: var(--color-body);
   font-size: var(--font-size-vsm);
-  font-weight: 500;
   color: var(--color-font);
   text-align: center;
 }
@@ -71,7 +70,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  font-weight: 500;
   font-size: var(--font-size-title);
   color: var(--color-font);
 }
@@ -127,7 +125,6 @@
   text-align: center;
   overflow: hidden;
   font-size: var(--font-size-sm);
-  font-weight: 500;
   color: var(--color-font);
 }
 
