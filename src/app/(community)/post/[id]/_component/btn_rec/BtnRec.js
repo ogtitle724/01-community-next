@@ -35,18 +35,22 @@ export default function BtnRec(props) {
       <button
         className="content-board__btn content-board__btn-like"
         onClick={() => handleClickRecommend(1)}
+        aria-label="추천"
       >
         <i
           className={
             "content-board__img-like" +
             (props.rec_state === 1 ? " content-board__img-like--active" : "")
           }
+          role="button"
+          aria-label="추천"
         ></i>
         <span className="content-board__span">{props.rec_cnt}</span>
       </button>
       <button
         className="content-board__btn content-board__btn-dislike"
         onClick={() => handleClickRecommend(-1)}
+        aria-label="비추천"
       >
         <span className="content-board__span">{props.dec_cnt}</span>
         <i
@@ -56,6 +60,8 @@ export default function BtnRec(props) {
               ? " content-board__img-dislike--active"
               : "")
           }
+          role="button"
+          aria-label="비추천"
         ></i>
       </button>
     </div>

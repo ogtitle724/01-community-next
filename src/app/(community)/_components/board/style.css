@@ -7,23 +7,23 @@
 
 .board__title {
   padding-left: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   font-size: var(--font-size-md);
 }
 
 .board__btn-wrapper {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   position: absolute;
-  top: 0px;
+  top: -0px;
   right: 5px;
   filter: invert(var(--icon-invert));
 }
 
 .board__btn {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   position: relative;
 }
 
@@ -45,7 +45,7 @@
   left: 50%;
   transform: translate(-50%, -50%) rotateZ(45deg);
   border-radius: 4px;
-  border-top: 1.5px solid black;
+  border-top: 2px solid black;
 }
 
 .board__btn-grid {
@@ -58,6 +58,10 @@
 
 .board__ul {
   position: relative;
+}
+
+.board__ul li {
+  list-style: none;
 }
 
 .board__ul--grid {

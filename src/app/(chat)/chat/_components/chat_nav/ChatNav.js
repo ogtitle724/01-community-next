@@ -74,12 +74,14 @@ export default function ChatNav({
               (isShowNav ? " chatnav__btn--show" : " chatnav__btn--hide")
             }
             onClick={handleClkBtnShowNav}
+            aria-label="채팅목록 펼치기/닫기"
           ></button>
         )}
         <nav className="chatnav__gnb">
           <button
             className="chatnav__btn-home"
             onClick={handleClkBtnHome}
+            aria-label="홈 화면으로 이동"
           ></button>
           <ThemeToggle />
           <input

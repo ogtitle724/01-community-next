@@ -210,6 +210,7 @@ function SignUp({ dialogRef }) {
           className={"signup__btn-auth"}
           onClick={handleClickBtnAuth}
           disabled={isAuthBtnDisabled || !checkEmail(email)}
+          aria-label="이메일 인증코드 전송"
         >
           {count ? `${~~(count / 60)} : ${count % 60}` : "인증"}
         </button>
@@ -234,6 +235,7 @@ function SignUp({ dialogRef }) {
             }
             onClick={handleClickBtnConfrim}
             disabled={isCodeValid}
+            aria-label="이메일 인증코드 확인"
           >
             {isCodeValid ? "✔" : "확인"}
           </button>
@@ -285,6 +287,7 @@ function SignUp({ dialogRef }) {
           )
         }
         onClick={handleClickBtnSignUp}
+        aria-label="회원가입 양식 제출"
       >
         회원 가입
       </button>

@@ -17,6 +17,7 @@ function MenuBtn() {
       <button
         className="btn-menu"
         onClick={() => dialogRef.current.showModal()}
+        aria-label="메뉴"
       ></button>
       <Modal dialogRef={dialogRef} isForm={true}>
         <div className="menu">

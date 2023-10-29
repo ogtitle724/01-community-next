@@ -71,7 +71,11 @@ function UserBoard() {
 
   return (
     <div className="user-board">
-      <button className="user-board__profile" onClick={handleNavigateMypage}>
+      <button
+        className="user-board__profile"
+        onClick={handleNavigateMypage}
+        aria-label="navigation to mypage"
+      >
         <i className="user-board__profile-img"></i>
         <p className="user-board__nickname">{user.nick ?? "unknown"}</p>
       </button>
@@ -84,12 +88,18 @@ function UserBoard() {
       <button
         className="user-board__btn-write icon"
         onClick={handleClickBtnWrite}
+        aria-label="navigate to write page"
       ></button>
       <button
         className="user-board__btn-add icon"
         onClick={handleClkBtnAddItem}
+        aria-label="navigate to add item page"
       ></button>
-      <button className="user-board__btn-chat icon" onClick={handleClkBtnChat}>
+      <button
+        className="user-board__btn-chat icon"
+        onClick={handleClkBtnChat}
+        aria-label="navigate to chat page"
+      >
         {alarmCnt ? (
           <div className="user-board__alram-cnt">{alarmCnt}</div>
         ) : (
@@ -99,10 +109,15 @@ function UserBoard() {
       <button
         className="user-board__btn-alram icon"
         onCanPlayThrough={handleClkBtnAlarm}
+        aria-label="open alarm modal"
       >
         <div className="user-board__alram-cnt">3</div>
       </button>
-      <button className="user-board__btn-logout" onClick={handleClickLogOut}>
+      <button
+        className="user-board__btn-logout"
+        onClick={handleClickLogOut}
+        aria-label="logout"
+      >
         ✖
       </button>
     </div>

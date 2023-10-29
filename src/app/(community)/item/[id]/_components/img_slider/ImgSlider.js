@@ -44,6 +44,7 @@ export default function ImgSlider({ itemDetail }) {
                   }
                   value={idx}
                   onClick={handleClkBtn}
+                  aria-label={`${idx}번째 이미지 보이기`}
                 ></button>
               );
               return (

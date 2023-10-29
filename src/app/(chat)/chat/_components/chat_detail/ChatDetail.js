@@ -119,15 +119,18 @@ export default function ChatDetail({
           <button
             className="chat-detail__btn-scroll chat-detail__btn-top"
             onClick={handleClkBtnToTop}
+            aria-label="채팅방 상단으로 이동"
           ></button>
           <button
             className="chat-detail__btn-scroll chat-detail__btn-bottom"
             onClick={handleClkBtnToBottom}
+            aria-label="채팅방 하단으로 이동"
           ></button>
         </div>
         <button
           className="chat-detail__btn-submit"
           onClick={handleClkBtnSubmit}
+          aria-label="채팅 보내기"
         ></button>
       </section>
     </main>

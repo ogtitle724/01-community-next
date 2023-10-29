@@ -15,9 +15,10 @@ export default function BtnInterface({ itemDetail }) {
       <button
         className="item-detail__btn-like"
         onClick={handleClkBtnLike}
+        aria-label="아이템 찜"
       ></button>
       <span className="item-detail__figure">99+</span>
-      <button className="item-detail__btn-chat"></button>
+      <i className="item-detail__btn-chat"></i>
       <span className="item-detail__figure">99+</span>
       <div className="item-detail__static-wrapper">
         <span className="item-detail__nick">{itemDetail.user_nick}</span>

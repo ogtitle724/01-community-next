@@ -115,6 +115,7 @@ function SignIn() {
         ref={btn}
         className="signin__btn-submit"
         onClick={handleClickBtnLogIn}
+        aria-label="로그인"
       >
         ✔
       </button>

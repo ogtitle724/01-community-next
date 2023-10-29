@@ -53,6 +53,7 @@ export default function Board({ posts, title, isThumbnail }) {
                 (isDivide ? " board__btn-grid" : " board__btn-list")
               }
               onClick={handleClkBtnLayout}
+              aria-label="게시글 목록 레이아웃 변경"
             ></button>
           )}
           <button
@@ -61,13 +62,16 @@ export default function Board({ posts, title, isThumbnail }) {
               (isShowImg ? " board__btn-img" : " board__btn-default")
             }
             onClick={handleClkBtnShowImg}
+            aria-label="이미지 노출 여부 변경"
           ></button>
         </div>
 
         <ul className={"board__ul" + (isDivide ? " board__ul--grid" : "")}>
           {posts.content.map((post, idx) => {
             return (
-              <Post key={"post_" + idx} post={post} isShowImg={isShowImg} />
+              <li key={"post_" + idx}>
+                <Post post={post} isShowImg={isShowImg} />
+              </li>
             );
           })}
         </ul>
@@ -146,36 +150,39 @@ function Nav({ posts }) {
 
   return (
     <ul className="board__nav">
-      <button
+      <li
         className="board__nav-btn board__nav-btn-direction"
         onClick={handleClkPrev}
+        aria-label="게시글 목록 네비게이션바 변경(-10)"
       >
         {"◂"}
-      </button>
+      </li>
       {navItems.current
         .slice(navPage * 10, navPage * 10 + 10)
         .map((ele, idx) => {
           return (
-            <Link
-              key={"navItem_" + idx}
-              className={
-                "board__nav-btn" +
-                (page === ele || (ele === 1 && !page)
-                  ? " board__nav-btn--focus"
-                  : "")
-              }
-              href={path + (ele - 1 ? `?group=${group}&page=${ele}` : "")}
-            >
-              {ele}
-            </Link>
+            <li className="board__nav-btn" key={"navItem_" + idx}>
+              <Link
+                className={
+                  "board__nav-btn" +
+                  (page === ele || (ele === 1 && !page)
+                    ? " board__nav-btn--focus"
+                    : "")
+                }
+                href={path + (ele - 1 ? `?group=${group}&page=${ele}` : "")}
+              >
+                {ele}
+              </Link>
+            </li>
           );
         })}
-      <button
+      <li
         className="board__nav-btn board__nav-btn-direction"
         onClick={handleClkNext}
+        aria-label="게시글 목록 네비게이션바 변경(+10)"
       >
         {"▸"}
-      </button>
+      </li>
     </ul>
   );
 }

@@ -70,6 +70,7 @@ export default function ImgReceiver({ setImgs, imgs }) {
             <button
               className="img-receiver__btn-delete"
               onClick={(e) => handleClkBtnDel(e, i)}
+              aria-label="이미지 삭제"
             >
               ✖
             </button>

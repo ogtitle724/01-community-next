@@ -41,6 +41,7 @@ export default function Mypage() {
           }
           onClick={handleClkBtn}
           value={value}
+          aria-label={`마이페이지 하위 카테고리 ${value}로 변경`}
         ></button>
       );
     });

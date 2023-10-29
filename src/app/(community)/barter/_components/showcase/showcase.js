@@ -22,7 +22,10 @@ export default function Showcase({ itemPagingData }) {
           className="showcase__search"
           onChange={(e) => setSearchTerm(e.target.value)}
         ></input>
-        <button className="showcase__btn-search"></button>
+        <button
+          className="showcase__btn-search"
+          aria-label="물품 검색"
+        ></button>
         <select
           className="showcase__select-order"
           onChange={(e) => setOrder(e.target.value)}
@@ -44,6 +47,7 @@ export default function Showcase({ itemPagingData }) {
       <button
         className="showcase__btn-to-top"
         onClick={handleClickBtnToTop}
+        aria-label="페이지 상단으로 이동"
       ></button>
     </section>
   );

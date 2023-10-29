@@ -109,6 +109,7 @@ export default function CommentBoard({ postId, comments }) {
             className="comment-board__btn"
             onClick={() => handleClkBtnOk()}
             disabled={!content}
+            aria-label="댓글 등록"
           >
             ✔
           </button>
@@ -116,6 +117,7 @@ export default function CommentBoard({ postId, comments }) {
             type="button"
             className="comment-board__btn"
             onMouseDown={() => handleClkBtnCancel()}
+            aria-label="취소"
           >
             ✖
           </button>
@@ -283,12 +285,14 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
               <button
                 className="comment-board__btn"
                 onClick={handleClkBtnUpdate}
+                aria-label="댓글 등록"
               >
                 ✔
               </button>
               <button
                 className="comment-board__btn"
                 onClick={handleClkBtnCancel}
+                aria-label="취소"
               >
                 ✖
               </button>
@@ -312,6 +316,7 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
             <button
               className="comment__btn comment__btn-like"
               onClick={() => handleClkRec(1)}
+              aria-label="추천"
             >
               <i className="comment__i comment__i-like"></i>
             </button>
@@ -321,6 +326,7 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
             <button
               className="comment__btn comment__btn-dislike"
               onClick={() => handleClkRec(-1)}
+              aria-label="비추천"
             >
               <i className="comment__i comment__i-dislike"></i>
             </button>
@@ -334,12 +340,14 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
                 <button
                   className="comment__btn comment__btn-edit"
                   onClick={() => handleClickBtnEdit()}
+                  aria-label="댓글 수정"
                 >
                   <i className="comment__i comment__i-edit"></i>
                 </button>
                 <button
                   className="comment__btn comment__btn-delete"
                   onClick={() => handleClickBtnDelete()}
+                  aria-label="댓글 삭제"
                 >
                   <i className="comment__i comment__i-delete"></i>
                 </button>
@@ -349,6 +357,7 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
               className="comment__btn comment__btn-reply"
               onClick={() => handleClickBtnReply()}
               onMouseDown={(e) => e.preventDefault()}
+              aria-label="대댓글 작성"
             >
               <i
                 className={

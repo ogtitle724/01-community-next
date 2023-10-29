@@ -73,6 +73,7 @@ export default function Slider() {
           }
           data-value={idx}
           onClick={handleClkImg}
+          aria-label={`${idx + 1}번째 배너 노출`}
         ></button>
       );
       tempImgs.push(

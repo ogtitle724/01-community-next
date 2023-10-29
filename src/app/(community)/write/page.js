@@ -22,6 +22,8 @@ export default function WritePage({ params }) {
   const [category, setCategory] = useState("유머");
   const [group, setGroup] = useState("");
 
+  console.log(body);
+
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
     window.addEventListener("error", (e) => {

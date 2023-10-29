@@ -42,7 +42,11 @@ export default function SearchBar({ dialogRef }) {
         autoComplete="off"
         placeholder=" · · · · "
       />
-      <button className="search-bar__btn" onClick={handleOnSubmit}></button>
+      <button
+        className="search-bar__btn"
+        onClick={handleOnSubmit}
+        aria-label="검색"
+      ></button>
     </div>
   );
 }

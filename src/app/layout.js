@@ -43,9 +43,12 @@ const Giants = localFont({
 
 export default function RootLayout({ children }) {
   return (
-    <html className={[Giants.variable, GmarketSans.variable].join(" ")}>
+    <html
+      lang="ko"
+      className={[Giants.variable, GmarketSans.variable].join(" ")}
+    >
       <body>
-        <GoogleAnalytics />
+        {/* <GoogleAnalytics /> */}
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
