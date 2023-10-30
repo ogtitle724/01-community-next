@@ -86,7 +86,10 @@ function Post({ post, isShowImg }) {
 
   return (
     <Link
-      className="board-item"
+      className={
+        "board-item" +
+        (isShowImg ? " board-item--show-img" : " board-item--hide-img")
+      }
       href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${post.id}`}
     >
       {isShowImg && (
@@ -109,6 +112,7 @@ function Post({ post, isShowImg }) {
         <span className="board-item__category">
           {post.tbl + (post.grp ? `/${post.grp}` : "")}
         </span>
+        <span className="board-item__date">{time} </span>
         <h3 className="board-item__title">{post.title}</h3>
         <div className="board-item__data-wrapper">
           <div className="board-item__data board-item__view">
@@ -121,7 +125,6 @@ function Post({ post, isShowImg }) {
             <span>{post.comment_cnt}</span>
           </div>
           <span className="board-item__nick">{post.nick}</span>
-          <span className="board-item__date">{time} </span>
         </div>
       </div>
     </Link>

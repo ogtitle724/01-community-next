@@ -14,7 +14,7 @@ export default async function TopicPage(props) {
       process.env.NEXT_PUBLIC_PATH_PAGING +
       `/${category}?page=${page - 1}&size=30`;
 
-    if (group) path += `group=${group}`;
+    if (group) path += `&group=${group}`;
 
     console.log("group:", group);
 

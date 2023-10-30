@@ -19,7 +19,7 @@
 
 .signup__input {
   width: 100%;
-  height: 27px;
+  height: 34px;
   border: none;
   padding: 7px 5px 5px 10px;
   padding-left: 10px;
@@ -94,13 +94,13 @@
 
 .signup__btn-auth {
   width: 39px;
-  height: 27px;
+  height: 34px;
   margin-left: 8px;
   position: absolute;
   top: 0px;
   right: 0px;
   border-radius: 0 12px 12px 0;
-  font-size: var(--font-size-vsm);
+  font-size: var(--font-size-sm);
   color: var(--color-body);
   background-color: var(--color-main);
 }

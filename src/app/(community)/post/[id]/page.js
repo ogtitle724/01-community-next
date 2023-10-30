@@ -17,7 +17,7 @@ export default async function PostDetailPage({ params }) {
       { next: { revalidate: 0 } }
     );
     const postDetail = await res.json();
-    console.log(postDetail.content);
+    console.log(postDetail);
 
     return (
       <>

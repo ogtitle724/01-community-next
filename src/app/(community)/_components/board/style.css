@@ -92,15 +92,22 @@
 .board-item {
   width: 100%;
   padding: 6px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
   position: relative;
   border-bottom: 1px dashed var(--color-smoke-b);
   cursor: pointer;
   list-style: none;
   background-color: var(--color-body);
+}
+
+.board-item--show-img {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.board-item--hide-img {
+  display: block;
 }
 
 .board-item__img-wrapper {
@@ -128,8 +135,15 @@
 }
 
 .board-item__data-wrapper {
+  margin-top: 10px;
   display: flex;
   gap: 10px;
+}
+
+.board-item--hide-img .board-item__data-wrapper {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .board-item__data {
@@ -154,7 +168,7 @@
 }
 
 .board-item__title {
-  margin: 8px 0 10px 0;
+  margin-top: 8px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

@@ -15,7 +15,6 @@ const s3 = new S3Client({
 export async function POST(request) {
   const formData = await request.formData();
   const src = [];
-  console.log(formData);
 
   try {
     for (let [name, value] of formData) {

@@ -34,7 +34,7 @@ function SignUp({ dialogRef }) {
   }, [count, isClickBtnAuth]);
 
   const handleCheckDuplication = useCallback(async (value, type) => {
-    if (value.length >= 3) {
+    if (value.length >= 2) {
       try {
         const option = { headers: { "Content-Type": "application/json" } };
         let body;

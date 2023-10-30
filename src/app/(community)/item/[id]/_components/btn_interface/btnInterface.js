@@ -17,7 +17,7 @@ export default function BtnInterface({ itemDetail }) {
         onClick={handleClkBtnLike}
         aria-label="아이템 찜"
       ></button>
-      <span className="item-detail__figure">99+</span>
+      <span className="item-detail__figure">{itemDetail.wishlist_cnt}</span>
       <i className="item-detail__btn-chat"></i>
       <span className="item-detail__figure">99+</span>
       <div className="item-detail__static-wrapper">
