@@ -1,8 +1,9 @@
 import Board from "./_components/board/Board";
 import Fetch from "@/util/fetch";
-import Slider from "./_components/slider/Slider";
 import ServerError from "./_components/error/Error";
 import { categoryEN2KO } from "@/config/config";
+import dynamic from "next/dynamic";
+const Slider = dynamic(() => import("./_components/slider/Slider"));
 
 export default async function HomePage(props) {
   const category = categoryEN2KO[props.params.topic];

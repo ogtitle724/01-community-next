@@ -92,6 +92,7 @@ export default function Slider() {
               fill={true}
               alt="today best"
               quality={60}
+              loading="eager"
             />
             <div
               className="slider__cover"

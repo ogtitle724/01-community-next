@@ -5,7 +5,7 @@ export const checkUid = (uid) => {
 };
 
 export const checkNick = (nick) => {
-  const pattern = /^[0-9a-zA-Zㄱ-ㅎ가-힣]{3,8}$/i;
+  const pattern = /^[0-9a-zA-Zㄱ-ㅎ가-힣]{2,8}$/i;
   if (pattern.test(nick)) return true;
   else return false;
 };

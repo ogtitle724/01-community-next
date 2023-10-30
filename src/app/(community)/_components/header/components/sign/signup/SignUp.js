@@ -180,7 +180,7 @@ function SignUp({ dialogRef }) {
         </p>
       </SectionInput>
       <SectionInput
-        placeholder={"닉네임 (3~8자 한글/영문/숫자)"}
+        placeholder={"닉네임 (2~8자 한글/영문/숫자)"}
         target={nick}
         handleOnChange={(e) => {
           setNick(e.target.value);

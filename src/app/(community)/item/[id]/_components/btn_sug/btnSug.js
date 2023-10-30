@@ -131,7 +131,7 @@ function SugForm({ dialogRef, itemDetail }) {
 
   return (
     <Modal dialogRef={dialogRef}>
-      <div className="sug-form" onSubmit={handleClkBtnSubmit}>
+      <div className="sug-form">
         <button className="sug-form__btn-new" onClick={handleClkBtnCreate}>
           + 새로 만들기
         </button>
@@ -156,7 +156,9 @@ function SugForm({ dialogRef, itemDetail }) {
           <button className="sug-form__btn" onClick={handleClkBtnCancel}>
             취 소
           </button>
-          <button className="sug-form__btn">확 인</button>
+          <button className="sug-form__btn" onClick={handleClkBtnSubmit}>
+            확 인
+          </button>
         </div>
       </div>
     </Modal>
