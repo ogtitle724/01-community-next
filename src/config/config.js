@@ -1,35 +1,3 @@
-/* export const categories = [
-  "유머",
-  "게임·스포츠",
-  "연예·방송",
-  "여행",
-  "취미",
-  "경제·금융",
-  "시사·이슈",
-];
-
-export const categoriesKO2EN = {
-  유머: "humor",
-  "게임·스포츠": "entertain",
-  "연예·방송": "brodcast",
-  여행: "travel",
-  취미: "hobby",
-  "경제·금융": "economic",
-  "시사·이슈": "issue",
-  물물교환: "barter",
-};
-
-export const categoriesEN2KO = {
-  humor: "유머",
-  entertain: "게임·스포츠",
-  brodcast: "연예·방송",
-  travel: "여행",
-  hobby: "취미",
-  economic: "경제·금융",
-  issue: "시사·이슈",
-  barter: "물물교환",
-};
- */
 export const categories = {
   유머: ["이슈", "공포미스테리", "정치시사"],
   일상: [
@@ -115,4 +83,48 @@ export const categoryKO2EN = {
   스포츠: "sports",
   연예: "entertain",
   물물교환: "barter",
+};
+
+export const meta = {
+  title:
+    "클립마켓 | clipmarket | 커뮤니티 | 유머/이슈/일상 | 물물교환/중고거래",
+  description:
+    "당신을 위한 하꼬 커뮤니티, <클립마켓>을 당신의 이야기로 채워주세요",
+  alternates: {
+    canonical: "https://www.bayclip.com/",
+    languages: {
+      "ko-KR": "/ko-KR",
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+  },
+  openGraph: {
+    title:
+      "클립마켓 | clipmarket | 커뮤니티 | 유머/이슈/일상 | 물물교환/중고거래",
+    description:
+      "당신을 위한 하꼬 커뮤니티, <클립마켓>을 당신의 이야기로 채워주세요",
+    url: "https:www.bayclip.com/",
+    siteName: "클립마켓",
+    images: [
+      {
+        url: null,
+        width: 800,
+        height: 600,
+        alt: "img",
+      },
+    ],
+    locale: "ko-KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title:
+      "클립마켓 | clipmarket | 커뮤니티 | 유머/이슈/일상 | 물물교환/중고거래",
+    description:
+      "당신을 위한 하꼬 커뮤니티, <클립마켓>을 당신의 이야기로 채워주세요",
+    images: ["you_url_here"],
+  },
 };

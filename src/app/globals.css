@@ -113,10 +113,9 @@ button {
 }
 
 .divider {
-  width: 3px;
-  height: 70%;
-  box-shadow: -1px -1px 2px var(--color-shadow-lu),
-    1px 1px 2px var(--color-shadow-rd);
+  width: 1.5px;
+  height: 60%;
+  background-color: var(--color-font);
 }
 .ck.ck-balloon-panel.ck-balloon-panel_position_border-side_right.ck-powered-by-balloon {
   display: none;

@@ -5,54 +5,87 @@ import BtnRec from "./_component/btn_rec/BtnRec";
 import BtnUd from "./_component/btn_ud/BtnUd";
 import timeConverter from "@/util/time_converter";
 import { sanitize } from "@/util/secure";
+import { cache } from "react";
+import { deleteTags } from "@/util/textProcess";
+import { meta } from "@/config/config";
 import "./style.css";
 
-export default async function PostDetailPage({ params }) {
-  console.log("CONTENT");
-  const postId = params.id;
-
+const getData = cache(async (path) => {
   try {
-    const res = await Fetch.get(
-      process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`,
-      { next: { revalidate: 0 } }
-    );
-    const postDetail = await res.json();
-    console.log(postDetail);
+    const res = await Fetch.get(path, { next: { revalidate: 0 } });
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+});
 
+export const generateMetadata = cache(async ({ params }) => {
+  const path = process.env.NEXT_PUBLIC_PATH_POST + `/${params.id}`;
+  const postData = await getData(path);
+  const pageMetaData = JSON.parse(JSON.stringify(meta));
+
+  if (postData) {
+    const metaTitle = `${postData.title} | ${
+      postData.tbl
+        ? postData.tbl + (postData.grp ? `/${postData.grp}` : "")
+        : "카테고리 없음"
+    } | 클립마켓`;
+    console.log(metaTitle);
+    const metaDescription = deleteTags(postData.content.slice(0, 250));
+    const metaUrl = process.env.NEXT_PUBLIC_DOMAIN_CLI + path;
+
+    pageMetaData.title = metaTitle;
+    pageMetaData.description = metaDescription;
+    pageMetaData.alternates.canonical = metaUrl;
+    pageMetaData.openGraph.title = metaTitle;
+    pageMetaData.openGraph.description = metaDescription;
+    pageMetaData.openGraph.url = metaUrl;
+    pageMetaData.twitter.title = metaTitle;
+    pageMetaData.twitter.description = metaDescription;
+  }
+
+  return pageMetaData;
+});
+
+export default async function PostDetailPage({ params }) {
+  const path = process.env.NEXT_PUBLIC_PATH_POST + `/${params.id}`;
+  const postData = await getData(path);
+
+  if (postData) {
     return (
       <>
         <section className="content-board">
           <article className="content-board__content">
             <h2 className="content-board__title">
-              {postDetail.title}
-              <BtnUd writerId={postDetail.user_id} postId={postDetail.id} />
+              {postData.title}
+              <BtnUd writerId={postData.user_id} postId={postData.id} />
             </h2>
             <div className="content-board__info-wrapper">
               <span className="content-board__date">
-                {timeConverter(postDetail.wr_date)}
+                {timeConverter(postData.wr_date)}
               </span>
               <div>
                 <span className="content-board__category">
-                  {postDetail.tbl
-                    ? postDetail.tbl +
-                      (postDetail.grp ? `/${postDetail.grp}` : "")
+                  {postData.tbl
+                    ? postData.tbl + (postData.grp ? `.${postData.grp}` : "")
                     : "카테고리 없음"}
                 </span>
                 <span> | </span>
                 <span className="content-board__writer">
-                  {postDetail.user_nick}
+                  {postData.user_nick}
                 </span>
               </div>
             </div>
             <div
               className="content-board__detail"
-              dangerouslySetInnerHTML={{ __html: sanitize(postDetail.content) }}
+              dangerouslySetInnerHTML={{ __html: sanitize(postData.content) }}
             ></div>
             <BtnRec
-              postId={postDetail.id}
-              rec_state={postDetail.recommend_state}
-              rec_cnt={postDetail.recommend_cnt}
-              dec_cnt={postDetail.decommend_cnt}
+              postId={postData.id}
+              rec_state={postData.recommend_state}
+              rec_cnt={postData.recommend_cnt}
+              dec_cnt={postData.decommend_cnt}
             />
             <section className="content-board__related">
               <h3 className="content-board__title-related">추천 컨텐츠</h3>
@@ -73,11 +106,10 @@ export default async function PostDetailPage({ params }) {
             </section>
           </article>
         </section>
-        <CommentBoard postId={postDetail.id} comments={postDetail.comments} />
+        <CommentBoard postId={postData.id} comments={postData.comments} />
       </>
     );
-  } catch (err) {
-    console.error(err);
+  } else {
     return <ServerError />;
   }
 }

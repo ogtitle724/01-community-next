@@ -37,37 +37,21 @@
 .img-slider__btn-wrapper {
   width: fit-content;
   height: fit-content;
-  margin: 10px 0;
-  margin-left: auto;
-  padding: 6px 10px;
+  margin: 10px auto;
   display: flex;
-  justify-content: flex-end;
-  gap: 5px;
-  border-radius: 12px;
-  box-shadow: inset 2px 2px 2px var(--color-shadow-rd),
-    inset -2px -2px 3px var(--color-shadow-lu);
+  justify-content: space-between;
+  gap: 11px;
 }
 
 .img-slider__btn {
-  width: 20px;
-  height: 20px;
-  opacity: 0.7;
-  border-radius: 12px;
-  box-shadow: -1px -1px 1px 1px var(--color-shadow-lu),
-    1px 1px 1px 1px var(--color-shadow-rd);
-  background-color: var(--colo-body);
+  width: 18px;
+  height: 10px;
+  border-radius: 4px;
+  background-color: var(--color-smoke-b);
 }
 
 .img-slider__btn--focus {
-  width: 22px;
-  height: 22px;
-  box-shadow: inset 1px 1px 1.5px 1px var(--color-shadow-rd),
-    inset -1px -1px 1.5px 1px var(--color-shadow-lu);
-}
-
-.img-slider__btn:active {
-  box-shadow: inset 3px 3px 6px var(--color-shadow-rd),
-    inset -3px -3px 6px var(--color-shadow-lu);
+  background-color: var(--color-main);
 }
 
 @media screen and (max-width: 768px) {

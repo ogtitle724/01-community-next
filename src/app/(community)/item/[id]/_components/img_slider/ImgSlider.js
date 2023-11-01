@@ -38,6 +38,7 @@ export default function ImgSlider({ itemDetail }) {
             {itemDetail.img_src.map((src, idx) => {
               btns.push(
                 <button
+                  key={"img-slider-" + idx}
                   className={
                     "img-slider__btn" +
                     (btnFoucs == idx ? " img-slider__btn--focus" : "")

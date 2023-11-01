@@ -87,8 +87,8 @@ function SugForm({ dialogRef, itemDetail }) {
       }
     };
 
-    fetchUserItems();
-  }, []);
+    if (user) fetchUserItems();
+  }, [user]);
 
   const handleClkBtnSubmit = (e) => {
     e.preventDefault();

@@ -1,6 +1,25 @@
 import Fetch from "@/util/fetch";
 import ServerError from "../_components/error/Error";
 import Showcase from "./_components/showcase/showcase";
+import { meta } from "@/config/config";
+
+export const generateMetadata = async () => {
+  const metaTitle = `TRADE YOUR ITEM! | 클립마켓`;
+  const metaDescription = `당신의 잡동사니 누군가에겐 쓸모가 있다!`;
+  const metaUrl = "https://www.bayclip.com/barter";
+  const pageMetaData = JSON.parse(JSON.stringify(meta));
+
+  pageMetaData.title = metaTitle;
+  pageMetaData.description = metaDescription;
+  pageMetaData.alternates.canonical = metaUrl;
+  pageMetaData.openGraph.title = metaTitle;
+  pageMetaData.openGraph.description = metaDescription;
+  pageMetaData.openGraph.url = metaUrl;
+  pageMetaData.twitter.title = metaTitle;
+  pageMetaData.twitter.description = metaDescription;
+
+  return pageMetaData;
+};
 
 export default async function showCasePage({ searchParams }) {
   const order = searchParams?.order ?? "최신순";

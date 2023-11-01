@@ -78,7 +78,7 @@
   transform: translateX(-50%);
   display: flex;
   justify-content: space-between;
-  gap: 15px;
+  gap: 11px;
 }
 
 .slider__btn {

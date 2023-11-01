@@ -18,12 +18,10 @@ function Gnb() {
 
   useEffect(() => {
     if (gnb.current) {
-      setTimeout(() => {
-        btnFocus.current = Object.values(gnb.current.children).filter(
-          (btn) => btn.innerHTML === category
-        )[0];
-        marker.current.style = `width:${btnFocus.current.offsetWidth}px; left:${btnFocus.current.offsetLeft}px;`;
-      }, 250);
+      btnFocus.current = Object.values(gnb.current.children).filter(
+        (btn) => btn.innerHTML === category
+      )[0];
+      marker.current.style = `width:${btnFocus.current.offsetWidth}px; left:${btnFocus.current.offsetLeft}px;`;
     }
   }, [width, category]);
 

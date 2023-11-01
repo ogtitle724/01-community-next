@@ -24,3 +24,7 @@ export function getTitle(content) {
 
   return content;
 }
+
+export function deleteTags(content) {
+  return content.replace(/<.+?>/g, " ");
+}

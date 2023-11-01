@@ -2,9 +2,25 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Fetch from "@/util/fetch";
 import "./style.css";
-import { useSelector } from "react-redux";
-import { selectUser } from "@/redux/slice/signSlice";
 import Link from "next/link";
+
+export const generateMetadata = async () => {
+  const metaTitle = `마이페이지 | 클립마켓`;
+  const metaUrl = "https://www.bayclip.com/mypage";
+
+  meta.title = metaTitle;
+  meta.alternates.canonical = metaUrl;
+  meta.robots = {
+    index: false,
+    folow: false,
+    nocahch: ture,
+  };
+  meta.openGraph.title = metaTitle;
+  meta.openGraph.url = metaUrl;
+  meta.twitter.title = metaTitle;
+
+  return meta;
+};
 
 export default function Mypage() {
   const [focus, setFocus] = useState("profile");
@@ -23,22 +39,18 @@ export default function Mypage() {
     const fetchUserData = async () => {
       try {
         const tempData = {};
-        let res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_USER);
-        let data = await res.json();
-        tempData.user = data;
 
-        res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_USER + `/posts`);
-        data = await res.json();
-        tempData.posts = data;
-
-        res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_USER + `/comments`);
-        data = await res.json();
-        tempData.comments = data;
-
-        res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_USER + `/items`);
-        data = await res.json();
-        tempData.items = data;
-
+        tempData.user = await Fetch.getData(process.env.NEXT_PUBLIC_PATH_USER);
+        tempData.posts = await Fetch.getData(
+          process.env.NEXT_PUBLIC_PATH_USER + `/posts`
+        );
+        tempData.comments = await Fetch.getData(
+          process.env.NEXT_PUBLIC_PATH_USER + `/comments`
+        );
+        tempData.items = await Fetch.getData(
+          process.env.NEXT_PUBLIC_PATH_USER + `/items`
+        );
+        console.log(tempData);
         setData(tempData);
       } catch (err) {
         console.error(err);
@@ -80,7 +92,7 @@ export default function Mypage() {
 }
 
 function Profile({ data }) {
-  const { user, posts, comments } = data;
+  const { user, posts, comments, items } = data;
 
   return (
     <div className="mypage__profile-wrapper">
@@ -102,7 +114,7 @@ function Profile({ data }) {
       </div>
       <div>
         <span>{"물품: "}</span>
-        <span>{`${user.item_sale}/${item_fin}`}</span>
+        <span>{`${items.sale}/${items.total}`}</span>
         <span className="mypage__sub-data">{` (거래중/거래완료)`}</span>
       </div>
       <div className="mypage__divider"></div>
