@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
 import Fetch from "@/util/fetch";
-import "./style.css";
 import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { sanitize } from "@/util/secure";
+import "./style.css";
 
 export const generateMetadata = async () => {
   const metaTitle = `마이페이지 | 클립마켓`;
@@ -25,38 +26,27 @@ export const generateMetadata = async () => {
 export default function Mypage() {
   const [focus, setFocus] = useState("profile");
   const [btns, setBtns] = useState();
-  const [data, setData] = useState({});
+  const [data, setData] = useState();
   const content = useMemo(() => {
     return {
       profile: <Profile data={data} />,
-      posts: <Post data={data.posts} />,
-      comments: <Comment data={data.comments} />,
-      items: <Barter data={data.items} />,
+      posts: <Post data={data?.posts} />,
+      comments: <Comment data={data?.comments} />,
+      items: <Barter data={data?.items} />,
     };
   }, [data]);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const tempData = {};
-
-        tempData.user = await Fetch.getData(process.env.NEXT_PUBLIC_PATH_USER);
-        tempData.posts = await Fetch.getData(
-          process.env.NEXT_PUBLIC_PATH_USER + `/posts`
-        );
-        tempData.comments = await Fetch.getData(
-          process.env.NEXT_PUBLIC_PATH_USER + `/comments`
-        );
-        tempData.items = await Fetch.getData(
-          process.env.NEXT_PUBLIC_PATH_USER + `/items`
-        );
-        console.log(tempData);
-        setData(tempData);
+        let res, data;
+        res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_USER);
+        data = await res.json();
+        setData(data);
       } catch (err) {
         console.error(err);
       }
     };
-
     fetchUserData();
   }, []);
 
@@ -74,6 +64,7 @@ export default function Mypage() {
         ></button>
       );
     });
+
     setBtns(temp);
   }, [content, focus]);
 
@@ -86,12 +77,13 @@ export default function Mypage() {
   return (
     <div className="mypage">
       {btns}
-      <div className="mypage__content">{content[focus]}</div>
+      <div className="mypage__content">{data && content[focus]}</div>
     </div>
   );
 }
 
 function Profile({ data }) {
+  if (!data) return;
   const { user, posts, comments, items } = data;
 
   return (
@@ -119,14 +111,23 @@ function Profile({ data }) {
       </div>
       <div className="mypage__divider"></div>
       <div className="mypage__profile-container">
-        <p className="mypage__profile-container-title">작성한 게시물</p>
+        <p className="mypage__profile-container-title">
+          작성한 게시물
+          <span className="mypage__sub-data">
+            (제목/조회수/댓글/추천/비추천)
+          </span>
+        </p>
         <div className="mypage__profile-items">
-          {posts.map((post, idx) => {
+          {posts.content.map((post, idx) => {
             return (
               <li key={"mypage-post-" + idx}>
-                <Link>
+                <Link
+                  href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${post.id}`}
+                  className="mypage__profile-link"
+                >
                   <span>{post.title}</span>
                   <span>{post.view_cnt}</span>
+                  <span>{post.comment_cnt}</span>
                   <span>{post.recommend_cnt}</span>
                   <span>{post.decommend_cnt}</span>
                 </Link>
@@ -136,13 +137,25 @@ function Profile({ data }) {
         </div>
       </div>
       <div className="mypage__profile-container">
-        <p className="mypage__profile-container-title">작성한 댓글</p>
+        <p className="mypage__profile-container-title">
+          작성한 댓글(내용/대댓글/추천/비추천)
+        </p>
         <div className="mypage__profile-items">
-          {comments.map((comment, idx) => {
+          {comments.content.map((comment, idx) => {
             return (
               <li key={"mypage-comment-" + idx}>
-                <Link>
-                  <span>{comment.content}</span>
+                <Link
+                  href={
+                    process.env.NEXT_PUBLIC_ROUTE_POST + `/${comment.postId}`
+                  }
+                  className="mypage__profile-link"
+                >
+                  <span
+                    className="mypage__profile-comment-content"
+                    dangerouslySetInnerHTML={{
+                      __html: sanitize(comment.content),
+                    }}
+                  ></span>
                   <span>{comment.reply_cnt}</span>
                   <span>{comment.recommend_cnt}</span>
                   <span>{comment.decommend_cnt}</span>
@@ -157,6 +170,7 @@ function Profile({ data }) {
 }
 
 function Post({ data }) {
+  if (!data) return;
   const posts = data;
 
   return (
@@ -165,11 +179,16 @@ function Post({ data }) {
       <span>✏️</span>
       <span>👀</span>
       <span>👍/👎</span>
-      {posts.map((post, idx) => {
+      {posts.content.map((post, idx) => {
         return (
           <>
             <span>{idx}</span>
-            <Link className="mypage__posts-content">{post.title}</Link>
+            <Link
+              href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${post.id}`}
+              className="mypage__posts-content"
+            >
+              {post.title}
+            </Link>
             <span>{post.view_cnt}</span>
             <span>{`${post.recommend_cnt}/${post.decommend_cnt}`}</span>
           </>
@@ -179,7 +198,8 @@ function Post({ data }) {
   );
 }
 
-function Comment() {
+function Comment({ data }) {
+  if (!data) return;
   const comments = data;
 
   return (
@@ -188,11 +208,18 @@ function Comment() {
       <span>✏️</span>
       <span>📩</span>
       <span>👍/👎</span>
-      {comments.map((comment, idx) => {
+      {comments.content.map((comment, idx) => {
         return (
           <>
             <span>{idx}</span>
-            <Link className="mypage__posts-content">{comment.content}</Link>
+            <Link
+              href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${comment.postId}`}
+              className="mypage__posts-content"
+            >
+              <span
+                dangerouslySetInnerHTML={{ __html: sanitize(comment.content) }}
+              ></span>
+            </Link>
             <span>{comment.reply_cnt}</span>
             <span>{`${comment.recommend_cnt}/${comment.decommend_cnt}`}</span>
           </>
@@ -203,6 +230,7 @@ function Comment() {
 }
 
 function Barter({ data }) {
+  if (!data) return;
   const items = data;
 
   return (
@@ -211,13 +239,18 @@ function Barter({ data }) {
       <span>📦</span>
       <span>♻️</span>
       <span>❤️</span>
-      {items.map((item, idx) => {
+      {items.content.map((item, idx) => {
         return (
           <>
             <span>{idx}</span>
-            <Link className="mypage__posts-content">{item.title}</Link>
-            <span>{item.sug_cnt}</span>
-            <span>{item.interested_cnt}</span>
+            <Link
+              href={process.env.NEXT_ROUTE_ITEM + `/${item.id}`}
+              className="mypage__posts-content"
+            >
+              {item.title}
+            </Link>
+            <span>{item.deals_cnt}</span>
+            <span>{item.dib_cnt}</span>
           </>
         );
       })}
