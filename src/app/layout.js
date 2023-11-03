@@ -39,6 +39,7 @@ const Giants = localFont({
 });
 
 export default function RootLayout({ children }) {
+  console.log(process.env.NEXT_PUBLIC_URL_SVR);
   return (
     <html
       lang="ko"

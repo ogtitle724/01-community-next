@@ -28,7 +28,7 @@ export const generateMetadata = async (props) => {
   const postData = await getData(path);
 
   const metaTitle = `${category}${group ? "." + group : ""} | 클립마켓`;
-  const metaUrl = "https://www.bayclip.com/" + props.params.topic;
+  const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + props.params.topic;
   const metaDescription = postData.content
     .reduce((acc, cur, idx) => {
       return (acc += `${idx + 1})${cur.title} `);

@@ -32,10 +32,13 @@ export default function ItemUpload() {
         formData.append("item", imgs[i]);
       }
 
-      const res = await fetch("http://localhost:3000/api/img", {
-        body: formData,
-        method: "POST",
-      });
+      const res = await fetch(
+        process.env.NEXT_PUBLIC_URL_CLI + process.env.NEXT_PUBLIC_API_IMG,
+        {
+          body: formData,
+          method: "POST",
+        }
+      );
       const payload = await res.json();
       const imgSrc = payload.data;
 
