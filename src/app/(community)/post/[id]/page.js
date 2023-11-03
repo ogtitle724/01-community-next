@@ -33,7 +33,7 @@ export const generateMetadata = cache(async ({ params }) => {
     } | 클립마켓`;
     console.log(metaTitle);
     const metaDescription = deleteTags(postData.content.slice(0, 250));
-    const metaUrl = process.env.NEXT_PUBLIC_DOMAIN_CLI + path;
+    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + path;
 
     pageMetaData.title = metaTitle;
     pageMetaData.description = metaDescription;

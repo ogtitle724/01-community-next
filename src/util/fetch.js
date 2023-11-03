@@ -7,7 +7,7 @@ class Fetch {
         Accept: "application/json, text/plain, */*",
       },
     };
-    this.domain = process.env.NEXT_PUBLIC_DOMAIN;
+    this.domain = process.env.NEXT_PUBLIC_URL_SVR;
   }
 
   //intercept response and set auth header

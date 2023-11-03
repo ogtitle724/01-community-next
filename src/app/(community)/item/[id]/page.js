@@ -28,7 +28,7 @@ export const generateMetadata = cache(async ({ params }) => {
   if (itemData) {
     const metaTitle = `${itemData.title} | 클립마켓 스토어 | 물물교환/중고거래 `;
     const metaDescription = deleteTags(itemData.content.slice(0, 250));
-    const metaUrl = process.env.NEXT_PUBLIC_DOMAIN_CLI + path;
+    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + path;
 
     pageMetaData.title = metaTitle;
     pageMetaData.description = metaDescription;

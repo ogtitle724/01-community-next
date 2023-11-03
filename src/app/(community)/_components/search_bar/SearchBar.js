@@ -15,7 +15,7 @@ export default function SearchBar({ dialogRef }) {
         if (dialogRef.current) dialogRef.current.close();
       }
     });
-  }, []);
+  }, [dialogRef]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();

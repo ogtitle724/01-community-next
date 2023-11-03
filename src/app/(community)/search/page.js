@@ -26,7 +26,7 @@ export const generateMetadata = cache(async ({ searchParams }) => {
 
   if (postData) {
     const metaTitle = `'${term}'관련 게시물 | 클립마켓`;
-    const metaUrl = process.env.NEXT_PUBLIC_DOMAIN_CLI + path;
+    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + path;
     const metaDescription = postData.content.reduce((acc, cur, idx) => {
       return (acc += `${idx + 1})` + cur.title + " ");
     }, "");
