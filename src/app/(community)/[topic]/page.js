@@ -35,6 +35,7 @@ export const generateMetadata = async (props) => {
     }, "")
     .slice(0, 160);
   const pageMetaData = JSON.parse(JSON.stringify(meta));
+  console.log(pageMetaData);
 
   pageMetaData.title = metaTitle;
   pageMetaData.description = metaDescription;
