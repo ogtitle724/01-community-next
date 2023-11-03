@@ -1,27 +1,9 @@
 "use client";
 import Fetch from "@/util/fetch";
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { sanitize } from "@/util/secure";
 import "./style.css";
-
-export const generateMetadata = async () => {
-  const metaTitle = `마이페이지 | 클립마켓`;
-  const metaUrl = "https://www.bayclip.com/mypage";
-
-  meta.title = metaTitle;
-  meta.alternates.canonical = metaUrl;
-  meta.robots = {
-    index: false,
-    folow: false,
-    nocahch: ture,
-  };
-  meta.openGraph.title = metaTitle;
-  meta.openGraph.url = metaUrl;
-  meta.twitter.title = metaTitle;
-
-  return meta;
-};
 
 export default function Mypage() {
   const [focus, setFocus] = useState("profile");
