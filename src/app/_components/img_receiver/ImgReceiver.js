@@ -62,7 +62,7 @@ export default function ImgReceiver({ setImgs, imgs }) {
         eles.push(
           <div className="img-receiver__img-wrapper" key={i}>
             <Image
-              src={imgContainer[i] && imgs[i]}
+              src={imgContainer[i] ?? imgs[i]}
               alt="imgs"
               fill={true}
               className="img-receiver__img"

@@ -43,7 +43,6 @@
   width: 24px;
   height: 24px;
   position: relative;
-  transform: translateY(2px);
   border-radius: 100%;
   background-image: url(/image/icon/home.svg);
   background-size: 80%;

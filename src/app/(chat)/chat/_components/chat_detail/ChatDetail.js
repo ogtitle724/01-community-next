@@ -20,8 +20,22 @@ export default function ChatDetail({
 }) {
   const [inputData, setInputData] = useState("");
   const chatWrapper = useRef();
+  const submitBtn = useRef();
   const user = useSelector(selectUser);
   const ckRef = useRef();
+
+  /* useEffect(() => {
+    window.addEventListener("keyup", (e) => {
+      if (
+        e.key === "Enter" &&
+        ckRef.current &&
+        ckRef.current.editor.editing.view.document.isFocused
+      ) {
+        console.log("enter");
+        submitBtn.current.click();
+      }
+    });
+  }, []); */
 
   useEffect(() => {
     const offsetHeight = chatWrapper.current.offsetHeight;
@@ -128,6 +142,7 @@ export default function ChatDetail({
           ></button>
         </div>
         <button
+          ref={submitBtn}
           className="chat-detail__btn-submit"
           onClick={handleClkBtnSubmit}
           aria-label="채팅 보내기"

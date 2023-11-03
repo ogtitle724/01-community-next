@@ -9,7 +9,7 @@ export default function SearchBar({ dialogRef }) {
   const searchInput = useRef();
 
   useEffect(() => {
-    searchInput.current.addEventListener("keyDown", (e) => {
+    searchInput.current.addEventListener("keyup", (e) => {
       if (e.key === "Enter") {
         activeButton();
         if (dialogRef.current) dialogRef.current.close();
