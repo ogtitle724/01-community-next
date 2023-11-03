@@ -49,7 +49,7 @@ export default function ItemUpload() {
 
       await Fetch.post(process.env.NEXT_PUBLIC_PATH_ITEM, body, option);
       router.refresh();
-      router.push(process.env.NEXT_PUBLIC_ROUTE_SHOWCASE);
+      router.push(process.env.NEXT_PUBLIC_ROUTE_BARTER);
     } catch (err) {
       console.error(err);
     }
