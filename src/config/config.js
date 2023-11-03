@@ -91,7 +91,7 @@ export const meta = {
   description:
     "당신을 위한 하꼬 커뮤니티, <클립마켓>을 당신의 이야기로 채워주세요",
   alternates: {
-    canonical: "https://www.bayclip.com/",
+    canonical: process.env.NEXT_PUBLIC_URL_CLI,
     languages: {
       "ko-KR": "/ko-KR",
     },
@@ -114,7 +114,7 @@ export const meta = {
       "클립마켓 | clipmarket | 커뮤니티 | 유머/이슈/일상 | 물물교환/중고거래",
     description:
       "당신을 위한 하꼬 커뮤니티, <클립마켓>을 당신의 이야기로 채워주세요",
-    url: "https://www.bayclip.com/",
+    url: process.env.NEXT_PUBLIC_URL_CLI,
     siteName: "클립마켓",
     images: [
       {

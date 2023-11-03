@@ -6,7 +6,7 @@ import { meta } from "@/config/config";
 export const generateMetadata = async () => {
   const metaTitle = `TRADE YOUR ITEM! | 클립마켓`;
   const metaDescription = `당신의 잡동사니 누군가에겐 쓸모가 있다!`;
-  const metaUrl = "https://www.bayclip.com/barter";
+  const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + "/barter";
   const pageMetaData = JSON.parse(JSON.stringify(meta));
 
   pageMetaData.title = metaTitle;
