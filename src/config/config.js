@@ -86,6 +86,7 @@ export const categoryKO2EN = {
 };
 
 export const meta = {
+  metadataBase: new URL("https://www.clipmk.com"),
   title:
     "클립마켓 | clipmarket | 커뮤니티 | 유머/이슈/일상 | 물물교환/중고거래",
   description:

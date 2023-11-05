@@ -27,25 +27,26 @@ export const generateMetadata = async (props) => {
   if (group) path += `&group=${group}`;
   const postData = await getData(path);
 
-  const metaTitle = `${category}${group ? "." + group : ""} | 클립마켓`;
-  const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + `/${props.params.topic}`;
-  const metaDescription = postData.content
-    .reduce((acc, cur, idx) => {
-      return (acc += `${idx + 1})${cur.title} `);
-    }, "")
-    .slice(0, 160);
-  const pageMetaData = JSON.parse(JSON.stringify(meta));
-  console.log(pageMetaData);
+  if (postData) {
+    const metaTitle = `${category}${group ? "." + group : ""} | 클립마켓`;
+    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + `/${props.params.topic}`;
+    const metaDescription = postData.content
+      .reduce((acc, cur, idx) => {
+        return (acc += `${idx + 1})${cur.title} `);
+      }, "")
+      .slice(0, 160);
+    const pageMetaData = JSON.parse(JSON.stringify(meta));
 
-  pageMetaData.title = metaTitle;
-  pageMetaData.description = metaDescription;
-  pageMetaData.alternates.canonical = metaUrl;
-  pageMetaData.robots = { index: true, follow: true, nocache: true };
-  pageMetaData.openGraph.title = metaTitle;
-  pageMetaData.openGraph.description = metaDescription;
-  pageMetaData.openGraph.url = metaUrl;
-  pageMetaData.twitter.title = metaTitle;
-  pageMetaData.twitter.description = metaDescription;
+    pageMetaData.title = metaTitle;
+    pageMetaData.description = metaDescription;
+    pageMetaData.alternates.canonical = metaUrl;
+    pageMetaData.robots = { index: true, follow: true, nocache: true };
+    pageMetaData.openGraph.title = metaTitle;
+    pageMetaData.openGraph.description = metaDescription;
+    pageMetaData.openGraph.url = metaUrl;
+    pageMetaData.twitter.title = metaTitle;
+    pageMetaData.twitter.description = metaDescription;
+  }
 
   return pageMetaData;
 };
