@@ -27,7 +27,7 @@ export async function POST(request) {
         Key,
         Body,
       };
-
+      console.log(putParams);
       s3.send(new PutObjectCommand(putParams));
       src.push(url);
       console.log("img upload!");
