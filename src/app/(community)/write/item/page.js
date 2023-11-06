@@ -41,6 +41,7 @@ export default function ItemUpload() {
       );
       const payload = await res.json();
       const imgSrc = payload.data;
+      console.log("imgsrc:", imgSrc);
 
       const option = { headers: { "Content-Type": "application/json" } };
       const body = JSON.stringify({

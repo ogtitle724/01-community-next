@@ -30,6 +30,7 @@ export async function POST(request) {
 
       s3.send(new PutObjectCommand(putParams));
       src.push(url);
+      console.log("img upload!");
     }
 
     return NextResponse.json({ data: src }, { status: 200 });
