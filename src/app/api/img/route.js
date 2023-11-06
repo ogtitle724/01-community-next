@@ -21,7 +21,7 @@ export async function POST(request) {
       console.log(name, value);
       const Key = `item/${uuidv4()}`;
       const url = `https://${Bucket}.s3.${Region}.amazonaws.com/${Key}`;
-      const Body = await value.arrayBuffer();
+      const Body = value;
       const putParams = {
         Bucket,
         Key,
