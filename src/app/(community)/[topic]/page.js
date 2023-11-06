@@ -26,6 +26,7 @@ export const generateMetadata = async (props) => {
     `/${category}?page=${page - 1}&size=30`;
   if (group) path += `&group=${group}`;
   const postData = await getData(path);
+  const pageMetaData = JSON.parse(JSON.stringify(meta));
 
   if (postData) {
     const metaTitle = `${category}${group ? "." + group : ""} | 클립마켓`;
@@ -35,7 +36,6 @@ export const generateMetadata = async (props) => {
         return (acc += `${idx + 1})${cur.title} `);
       }, "")
       .slice(0, 160);
-    const pageMetaData = JSON.parse(JSON.stringify(meta));
 
     pageMetaData.title = metaTitle;
     pageMetaData.description = metaDescription;
