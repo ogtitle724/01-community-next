@@ -39,7 +39,9 @@ export default function ItemUpload() {
           method: "POST",
         }
       );
+      console.log(res);
       const payload = await res.json();
+      console.log(payload);
       const imgSrc = payload.data;
       console.log("imgsrc:", imgSrc);
 

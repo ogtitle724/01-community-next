@@ -15,6 +15,12 @@ const s3 = new S3Client({
 export async function POST(request) {
   const formData = await request.formData();
   const src = [];
+  console.log("route-----------------------");
+  console.log({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_KEY_ID,
+  });
+  console.log(s3);
 
   try {
     for (let [name, value] of formData) {
