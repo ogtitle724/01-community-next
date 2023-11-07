@@ -3,6 +3,7 @@ import ServerError from "../../_components/error/Error";
 import BtnInterface from "./_components/btn_interface/btnInterface";
 import BtnSug from "./_components/btn_sug/btnSug";
 import ImgSlider from "./_components/img_slider/ImgSlider";
+import Link from "next/link";
 import { cache } from "react";
 import { sanitize } from "@/util/secure";
 import { meta } from "@/config/config";
@@ -61,13 +62,30 @@ export default async function ItemDetailPage({ params }) {
         <div className="suged-list">
           <h3 className="suged-list__title">제안된 거래</h3>
           <ul className="suged-list__ul">
-            <li className="suged-item">
-              <div className="suged-item__img"></div>
-              <span className="suged-item__title">
-                아이폰 13프로 맥스 스그 s급
+            {itemData.deals.content.length ? (
+              itemData.deals.content.map((deal, idx) => {
+                return (
+                  <li
+                    key={`item-${itemData.id}-deal-${idx}`}
+                    className="suged-item"
+                  >
+                    <div className="suged-item__img"></div>
+                    <span className="suged-item__title">
+                      <Link
+                        href={process.env.NEXT_PUBLIC_PATH_ITEM + `/${deal.id}`}
+                      >
+                        {deal.title}
+                      </Link>
+                    </span>
+                    <span className="suged-item__nick">{"닉네임이 없다"}</span>
+                  </li>
+                );
+              })
+            ) : (
+              <span className="suged-list__no-data">
+                {"첫 거래를 제안해주세요!"}
               </span>
-              <span className="suged-item__nick">샘플유접</span>
-            </li>
+            )}
           </ul>
         </div>
         <BtnSug itemDetail={itemData} />

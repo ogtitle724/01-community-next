@@ -90,23 +90,31 @@ function SugForm({ dialogRef, itemDetail }) {
     if (user) fetchUserItems();
   }, [user]);
 
-  const handleClkBtnSubmit = (e) => {
+  const handleClkBtnSubmit = async (e) => {
     e.preventDefault();
 
     if (selectedItem) {
-      socket.send({
-        action: "suggest",
-        senderId: JSON.stringify(user.id),
-        senderNick: user.nick,
-        itemId: JSON.stringify(itemDetail.id),
-        receiverId: JSON.stringify(itemDetail.user_id),
-        receiverNick: itemDetail.user_nick,
-        sugItemId: JSON.stringify(selectedItem.id),
-        sugItemImg: null,
-        date: new Date().getTime(),
-      });
+      try {
+        socket.send({
+          action: "suggest",
+          senderId: JSON.stringify(user.id),
+          senderNick: user.nick,
+          itemId: JSON.stringify(itemDetail.id),
+          receiverId: JSON.stringify(itemDetail.user_id),
+          receiverNick: itemDetail.user_nick,
+          sugItemId: JSON.stringify(selectedItem.id),
+          sugItemImg: null,
+          date: new Date().getTime(),
+        });
 
-      dialogRef.current.close();
+        await Fetch.post(
+          process.env.NEXT_PUBLIC_PATH_ITEM +
+            `/${itemDetail.id}/suggest/${selectedItem.id}`
+        );
+        dialogRef.current.close();
+      } catch (err) {
+        console.error(err);
+      }
     } else {
       alert("제안할 물건을 선택해주세요");
     }

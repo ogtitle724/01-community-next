@@ -53,7 +53,7 @@ export default function ImgSlider({ itemDetail }) {
                   key={"img-slider__" + idx}
                   className={"img-slider__img-wrapper"}
                 >
-                  <Image alt="item-img" src={src} fill={true} />
+                  {/* <Image alt="item-img" src={src} fill={true} /> */}
                 </div>
               );
             })}

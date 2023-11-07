@@ -19,7 +19,7 @@ export async function POST(request) {
   try {
     for (let [name, value] of formData) {
       console.log(name, value);
-      const Key = `item/${uuidv4()}`;
+      const Key = `${uuidv4()}`;
       const url = `https://${Bucket}.s3.${Region}.amazonaws.com/${Key}`;
       const Body = value;
       const putParams = {
@@ -35,6 +35,7 @@ export async function POST(request) {
 
     return NextResponse.json({ data: src }, { status: 200 });
   } catch (err) {
+    console.error(err);
     return NextResponse.json({ message: `${err}` }, { status: 400 });
   }
 }
