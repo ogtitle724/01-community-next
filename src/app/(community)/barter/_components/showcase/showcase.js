@@ -65,9 +65,9 @@ function ItemCard({ item }) {
             "item-card__img" + (item.img_src ? "" : " item-card__no-img")
           }
         >
-          {/* {item.img_src && (
-            <Image src={item.img_src} fill={true} alt="item image" />
-          )} */}
+          {item.img_src && (
+            <img src={item.img_src} fill={true} alt="item image" />
+          )}
         </div>
         <h3 className="item-card__title">{item.title}</h3>
         <div className="item-card__indicator">

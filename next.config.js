@@ -12,8 +12,6 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
-    ],
-    remotePatterns: [
       {
         protocol: "https",
         hostname: "**.google.com",
