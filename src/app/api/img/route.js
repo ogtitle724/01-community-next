@@ -15,28 +15,21 @@ const s3 = new S3Client({
 export async function POST(request) {
   const formData = await request.formData();
   const src = [];
-  console.log("route-----------------------");
-  console.log({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_KEY_ID,
-  });
-  console.log(s3);
 
   try {
     for (let [name, value] of formData) {
-      console.log(name, value);
-      const Key = `${uuidv4()}`;
+      const date = JSON.stringify(new Date()).slice(1.11);
+      const Key = `items/images/${date}/${uuidv4()}`;
       const url = `https://${Bucket}.s3.${Region}.amazonaws.com/${Key}`;
-      const Body = value;
+      const Body = await value.arrayBuffer();
       const putParams = {
         Bucket,
         Key,
         Body,
       };
-      console.log(putParams);
+
       s3.send(new PutObjectCommand(putParams));
       src.push(url);
-      console.log("img upload!");
     }
 
     return NextResponse.json({ data: src }, { status: 200 });
