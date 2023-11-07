@@ -18,8 +18,10 @@ export async function POST(request) {
 
   try {
     for (let [name, value] of formData) {
-      const date = JSON.stringify(new Date()).slice(1.11);
-      const Key = `items/images/${date}/${uuidv4()}`;
+      const date = new Date();
+      const day = JSON.stringify(date).slice(1, 11);
+      console.log(day);
+      const Key = `items/images/${day}/${uuidv4()}`;
       const url = `https://${Bucket}.s3.${Region}.amazonaws.com/${Key}`;
       const Body = await value.arrayBuffer();
       const putParams = {
