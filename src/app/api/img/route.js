@@ -24,6 +24,7 @@ export async function POST(request) {
       const Key = `items/images/${day}/${uuidv4()}`;
       const url = `https://${Bucket}.s3.${Region}.amazonaws.com/${Key}`;
       const Body = await value.arrayBuffer();
+      console.log(Body);
       const putParams = {
         Bucket,
         Key,
