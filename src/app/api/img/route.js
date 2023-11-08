@@ -18,19 +18,21 @@ export async function POST(request) {
 
   const posts = await Promise.all(
     files.map((file) => {
+      console.log("file:", file);
       return createPresignedPost(s3, {
         Bucket,
         Key: file.key,
-        Condition: [
-          { acl: "public-read" },
-          { "Content-Type": file.contentType },
+        Conditions: [
+          ["content-length-range", 0, 50 * 1000 * 1000], // 0 ~ 50MB
+          ["starts-with", "$Content-Type", "image/"],
         ],
-        Expires: 60,
+        Expires: 500,
       });
     })
   );
   console.log(posts);
-  return NextResponse.json(posts);
+  const res = NextResponse.json(posts);
+  return res;
   /* const formData = await request.formData();
   const src = [];
 

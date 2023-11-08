@@ -43,8 +43,25 @@ export default function ItemUpload() {
       );
 
       const response = await res.json();
+      console.log(response);
 
-      await Promise.all(
+      const formData = new FormData();
+      console.log(response[0].fields.key);
+      formData.append("key", response[0].fields.key);
+      formData.append("Content-Type", imgs[0].type);
+      Object.entries(response[0].fields).forEach(([key, value]) => {
+        if (key !== "key") {
+          formData.append(key, value);
+        }
+      });
+      console.log(formData);
+      formData.append("file", imgs[0]);
+      const uploadRes = await fetch(response[0].url, {
+        method: "POST",
+        body: formData,
+      });
+      console.log(uploadRes);
+      /* await Promise.all(
         response.map(({ url, fields }, idx) => {
           const formData = new FormData();
           formData.append("file", imgs[idx]);
@@ -55,7 +72,7 @@ export default function ItemUpload() {
 
           return fetch(url, { method: "POST", body: formData });
         })
-      );
+      ); */
 
       /* const res = await fetch(
         process.env.NEXT_PUBLIC_URL_CLI + process.env.NEXT_PUBLIC_API_IMG,
