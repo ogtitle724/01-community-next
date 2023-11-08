@@ -14,14 +14,19 @@ const s3 = new S3Client({
 });
 
 export async function POST(request) {
+  //이미지 key, type값 수신
   const files = await request.json();
 
+  //복수의 이미지 key, type 데이터와 promise.all을 통해 presignedPost생성
   const posts = await Promise.all(
     files.map((file) => {
-      console.log("file:", file);
+      const date = new Date();
+      const day = JSON.stringify(date).slice(1, 11);
+      const Key = `items/images/${day}/${uuidv4()}`;
+
       return createPresignedPost(s3, {
         Bucket,
-        Key: file.key,
+        Key,
         Conditions: [
           ["content-length-range", 0, 50 * 1000 * 1000], // 0 ~ 50MB
           ["starts-with", "$Content-Type", "image/"],
@@ -30,34 +35,7 @@ export async function POST(request) {
       });
     })
   );
-  console.log(posts);
+  //각 presignedPost는 key, field attr를 보유
   const res = NextResponse.json(posts);
   return res;
-  /* const formData = await request.formData();
-  const src = [];
-
-  try {
-    for (let [name, value] of formData) {
-      const date = new Date();
-      const day = JSON.stringify(date).slice(1, 11);
-      console.log(day);
-      const Key = `items/images/${day}/${uuidv4()}`;
-      const url = `https://${Bucket}.s3.${Region}.amazonaws.com/${Key}`;
-      const Body = await value.arrayBuffer();
-      console.log(Body);
-      const putParams = {
-        Bucket,
-        Key,
-        Body,
-      };
-
-      s3.send(new PutObjectCommand(putParams));
-      src.push(url);
-    }
-
-    return NextResponse.json({ data: src }, { status: 200 });
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json({ message: `${err}` }, { status: 400 });
-  }*/
 }

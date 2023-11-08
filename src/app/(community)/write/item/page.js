@@ -26,76 +26,57 @@ export default function ItemUpload() {
         return;
       }
 
-      const b = [];
+      //aws createPreSignedPost를 이용해 클라이언트 사이드에서 s3업로드
+      const preSignedArgs = [];
+      const preSignedUrl = [];
 
+      //next api로 이미지의 key, type 전달
       for (let i = 0; i < imgs.length; i++) {
-        b.push({ key: imgs[i].name, contentType: imgs[i].type });
-        //formData.append("item", imgs[i]);
+        preSignedArgs.push({ key: imgs[i].name, contentType: imgs[i].type });
       }
 
       const res = await fetch(
         process.env.NEXT_PUBLIC_URL_CLI + process.env.NEXT_PUBLIC_API_IMG,
         {
-          body: JSON.stringify(b),
+          body: JSON.stringify(preSignedArgs),
           method: "POST",
           headers: { "Content-Type": "application/json" },
         }
       );
 
       const response = await res.json();
-      console.log(response);
 
-      const formData = new FormData();
-      console.log(response[0].fields.key);
-      formData.append("key", response[0].fields.key);
-      formData.append("Content-Type", imgs[0].type);
-      Object.entries(response[0].fields).forEach(([key, value]) => {
-        if (key !== "key") {
-          formData.append(key, value);
-        }
-      });
-      console.log(formData);
-      formData.append("file", imgs[0]);
-      const uploadRes = await fetch(response[0].url, {
-        method: "POST",
-        body: formData,
-      });
-      console.log(uploadRes);
-      /* await Promise.all(
+      //res로 받은 presigned posts를 promise.all을 통해 순차적으로 fetch
+      await Promise.all(
         response.map(({ url, fields }, idx) => {
+          //할당된 url에는 formdata를 body에 담아 전송하며 각 formData는 아래와 같은 순서로 key-value를 할당
           const formData = new FormData();
-          formData.append("file", imgs[idx]);
+          formData.append("key", fields.key);
+          formData.append("Content-Type", imgs[idx].type);
 
           Object.entries(fields).forEach(([key, value]) => {
-            formData.append(key, value);
+            if (key !== "key") {
+              formData.append(key, value);
+            }
           });
 
+          formData.append("file", imgs[idx]);
+          preSignedUrl.push(url);
           return fetch(url, { method: "POST", body: formData });
         })
-      ); */
-
-      /* const res = await fetch(
-        process.env.NEXT_PUBLIC_URL_CLI + process.env.NEXT_PUBLIC_API_IMG,
-        {
-          body: {formData},
-          method: "POST",
-        }
       );
-
-      const payload = await res.json();
-      const imgSrc = payload.data;
 
       const option = { headers: { "Content-Type": "application/json" } };
       const body = JSON.stringify({
         title,
         content,
-        thumbnail: imgSrc[0],
-        imgSrc,
+        thumbnail: preSignedUrl[0],
+        imgSrc: preSignedUrl,
       });
 
       await Fetch.post(process.env.NEXT_PUBLIC_PATH_ITEM, body, option);
       router.refresh();
-      router.push(process.env.NEXT_PUBLIC_ROUTE_BARTER);*/
+      router.push(process.env.NEXT_PUBLIC_ROUTE_BARTER);
     } catch (err) {
       console.error(err);
     }
