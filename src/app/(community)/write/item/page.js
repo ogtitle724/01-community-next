@@ -61,7 +61,7 @@ export default function ItemUpload() {
           });
 
           formData.append("file", imgs[idx]);
-          preSignedUrl.push(url);
+          preSignedUrl.push(url + fields.key);
           return fetch(url, { method: "POST", body: formData });
         })
       );

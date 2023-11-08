@@ -101,6 +101,11 @@
   height: 135px;
   margin-top: 10px;
   position: relative;
+  background-color: var(--color-smoke-a);
+}
+
+.item-card__img img {
+  object-fit: contain;
 }
 
 .item-card__no-img::after {
