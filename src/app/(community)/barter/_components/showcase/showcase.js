@@ -54,7 +54,6 @@ export default function Showcase({ itemPagingData }) {
 }
 
 function ItemCard({ item }) {
-  console.log(item);
   return (
     <section className="item-card">
       <Link
@@ -67,13 +66,7 @@ function ItemCard({ item }) {
           }
         >
           {item.img_src && (
-            <Image
-              src={
-                "https://clipmarket.s3.ap-northeast-2.amazonaws.com/items/images/2023-11-08/800d3051-bc6d-4389-9528-8c29678c57b9"
-              }
-              fill={true}
-              alt="item image"
-            />
+            <Image src={item.img_src} fill={true} alt="item image" />
           )}
         </div>
         <h3 className="item-card__title">{item.title}</h3>

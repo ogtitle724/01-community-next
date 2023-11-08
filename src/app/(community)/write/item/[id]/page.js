@@ -18,7 +18,7 @@ export default function ItemUpload({ params }) {
   const [content, setContent] = useState("");
   const user = useSelector(selectUser);
   const router = useRouter();
-  const intialImgs = useRef();
+  const initialImgs = useRef();
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function ItemUpload({ params }) {
         setTitle(itemDetail.title);
         setContent(itemDetail.content);
         setImgs(itemDetail.img_src);
-        intialImgs.current = itemDetail.img_src.slice();
+        initialImgs.current = itemDetail.img_src.slice();
       } catch (err) {
         console.error(err);
         alert("넌 수정 안되는거 알지???");
@@ -71,6 +71,11 @@ export default function ItemUpload({ params }) {
       }
 
       //TODO: 여기서 현재 imgs랑 비교해서 삭제 하면될듯(initialImgs)
+      initialImgs.current.forEach((img, idx) => {
+        if (imgs.includes(img)) {
+          //여기서 삭제 수행
+        }
+      });
 
       //aws createPreSignedPost를 이용해 클라이언트 사이드에서 s3업로드
       const preSignedArgs = [];

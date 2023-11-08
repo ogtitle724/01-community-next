@@ -19,6 +19,11 @@
   width: var(--img-width);
   height: var(--img-height);
   position: relative;
+  background-color: var(--color-smoke-a);
+}
+
+.img-slider__img-wrapper img {
+  object-fit: contain;
 }
 
 .img-slider__no-img::before {
