@@ -66,7 +66,14 @@ function ItemCard({ item }) {
           }
         >
           {item.img_src && (
-            <img src={item.img_src} fill={true} alt="item image" />
+            <img
+              src={
+                "https://clipmarket.s3.ap-northeast-2.amazonaws.com/items/images/2023-11-07/797ea0f8-53ea-4bb4-bf1a-031767a19d38"
+              }
+              width={"180"}
+              height={"135"}
+              alt="item image"
+            />
           )}
         </div>
         <h3 className="item-card__title">{item.title}</h3>

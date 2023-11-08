@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 import { v4 as uuidv4 } from "uuid";
 
 const Region = process.env.AWS_REGION;
@@ -13,7 +14,24 @@ const s3 = new S3Client({
 });
 
 export async function POST(request) {
-  const formData = await request.formData();
+  const files = await request.json();
+
+  const posts = await Promise.all(
+    files.map((file) => {
+      return createPresignedPost(s3, {
+        Bucket,
+        Key: file.key,
+        Condition: [
+          { acl: "public-read" },
+          { "Content-Type": file.contentType },
+        ],
+        Expires: 60,
+      });
+    })
+  );
+  console.log(posts);
+  return NextResponse.json(posts);
+  /* const formData = await request.formData();
   const src = [];
 
   try {
@@ -39,5 +57,5 @@ export async function POST(request) {
   } catch (err) {
     console.error(err);
     return NextResponse.json({ message: `${err}` }, { status: 400 });
-  }
+  }*/
 }

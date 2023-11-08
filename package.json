@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.441.0",
+    "@aws-sdk/s3-presigned-post": "^3.445.0",
     "@ckeditor/ckeditor5-react": "^6.1.0",
     "@react-native-async-storage/async-storage": "^1.19.3",
     "@reduxjs/toolkit": "^1.9.5",
