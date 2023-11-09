@@ -66,6 +66,27 @@ export default function ItemUpload({ params }) {
     fetchDataAndUpdate();
   }, [params?.id, router, user]);
 
+  useEffect(() => {
+    const getDistrict = async () => {
+      try {
+        const res = await fetch(`/district/${city}.json`);
+        setDistricts(await res.json());
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    if (city) {
+      getDistrict();
+    }
+  }, [city]);
+
+  useEffect(() => {
+    if (district) {
+      setDongs(Object.keys(districts[district]));
+    }
+  }, [district, districts]);
+
   const handleClkBtnUpload = async () => {
     //TODO: 수정시 S3에서 기존 데이터 삭제
     try {
