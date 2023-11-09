@@ -1,9 +1,10 @@
 "use client";
 import dynamic from "next/dynamic";
-import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import ImgReceiver from "@/app/_components/img_receiver/ImgReceiver";
 import Fetch from "@/util/fetch";
+import ImgReceiver from "@/app/_components/img_receiver/ImgReceiver";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { district as Districts } from "@/config/config";
 import "./style.css";
 
 const Editor = dynamic(() => import("@components/editor/editor"), {
@@ -14,7 +15,33 @@ export default function ItemUpload() {
   const [imgs, setImgs] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [city, setCity] = useState("");
+  const [districts, setDistricts] = useState();
+  const [district, setDistrict] = useState();
+  const [dongs, setDongs] = useState();
+  const [dong, setDong] = useState();
   const router = useRouter();
+
+  useEffect(() => {
+    const getDistrict = async () => {
+      try {
+        const res = await fetch(`/district/${city}.json`);
+        setDistricts(await res.json());
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    if (city) {
+      getDistrict();
+    }
+  }, [city]);
+
+  useEffect(() => {
+    if (district) {
+      setDongs(Object.keys(districts[district]));
+    }
+  }, [district, districts]);
 
   const handleClkBtnUpload = async () => {
     try {
@@ -82,6 +109,24 @@ export default function ItemUpload() {
     }
   };
 
+  const handleSelectCity = (e) => {
+    setCity(e.target.value);
+    setDistrict("");
+    setDistricts("");
+    setDong("");
+    setDongs("");
+  };
+
+  const handleSelectDistrict = (e) => {
+    setDistrict(e.target.value);
+    setDong("");
+    setDongs("");
+  };
+
+  const handleSelectDong = (e) => {
+    setDong(e.target.value);
+  };
+
   return (
     <section className="item-upload">
       <ImgReceiver setImgs={setImgs} />
@@ -93,9 +138,58 @@ export default function ItemUpload() {
         onChange={(e) => setTitle(e.target.value)}
       ></input>
       <Editor onChange={setContent} isImg={false} />
-      <button className="item-upload__btn-submit" onClick={handleClkBtnUpload}>
-        완료
-      </button>
+      <section className="item-upload__btn-wrapper">
+        <select
+          name="category-city"
+          className="item-upload__select"
+          onChange={(e) => handleSelectCity(e)}
+        >
+          <option value={""}>{"시/도"}</option>
+          {Districts.map((group, idx) => {
+            return (
+              <option key={"select-opt-category-grp" + idx} value={group}>
+                {group}
+              </option>
+            );
+          })}
+        </select>
+        <select
+          name="category-city"
+          className="item-upload__select"
+          onChange={(e) => handleSelectDistrict(e)}
+        >
+          <option value={""}>{"시/군/구"}</option>
+          {districts &&
+            Object.keys(districts).map((group, idx) => {
+              return (
+                <option key={"select-opt-category-grp" + idx} value={group}>
+                  {group}
+                </option>
+              );
+            })}
+        </select>
+        <select
+          name="category-city"
+          className="item-upload__select"
+          onChange={(e) => handleSelectDong(e)}
+        >
+          <option value={""}>{"읍/면/동"}</option>
+          {dongs &&
+            dongs.map((group, idx) => {
+              return (
+                <option key={"select-opt-category-grp" + idx} value={group}>
+                  {group}
+                </option>
+              );
+            })}
+        </select>
+        <button
+          className="item-upload__btn-submit"
+          onClick={handleClkBtnUpload}
+        >
+          완료
+        </button>
+      </section>
     </section>
   );
 }

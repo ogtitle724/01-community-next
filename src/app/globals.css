@@ -73,7 +73,9 @@ img {
   height: auto;
 }
 
-input {
+input,
+select,
+button {
   font-family: var(--font-GmarketSans);
   font-weight: 500;
   -webkit-font-smoothing: antialiased;

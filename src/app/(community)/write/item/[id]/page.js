@@ -1,12 +1,13 @@
 "use client";
+import Fetch from "@/util/fetch";
 import dynamic from "next/dynamic";
+import ImgReceiver from "@/app/_components/img_receiver/ImgReceiver";
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import ImgReceiver from "@/app/_components/img_receiver/ImgReceiver";
-import Fetch from "@/util/fetch";
-import "./style.css";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/slice/signSlice";
+import { district as Districts } from "@/config/config";
+import "./style.css";
 
 const Editor = dynamic(() => import("@components/editor/editor"), {
   ssr: false,
@@ -16,6 +17,12 @@ export default function ItemUpload({ params }) {
   const [imgs, setImgs] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [city, setCity] = useState("");
+  const [districts, setDistricts] = useState();
+  const [district, setDistrict] = useState();
+  const [dongs, setDongs] = useState();
+  const [dong, setDong] = useState();
+
   const user = useSelector(selectUser);
   const router = useRouter();
   const initialImgs = useRef();
@@ -137,6 +144,24 @@ export default function ItemUpload({ params }) {
     }
   };
 
+  const handleSelectCity = (e) => {
+    setCity(e.target.value);
+    setDistrict("");
+    setDistricts("");
+    setDong("");
+    setDongs("");
+  };
+
+  const handleSelectDistrict = (e) => {
+    setDistrict(e.target.value);
+    setDong("");
+    setDongs("");
+  };
+
+  const handleSelectDong = (e) => {
+    setDong(e.target.value);
+  };
+
   return (
     <section className="item-upload">
       <ImgReceiver setImgs={setImgs} imgs={imgs} />
@@ -148,9 +173,58 @@ export default function ItemUpload({ params }) {
         onChange={(e) => setTitle(e.target.value)}
       ></input>
       <Editor onChange={setContent} data={content} isImg={false} />
-      <button className="item-upload__btn-submit" onClick={handleClkBtnUpload}>
-        완료
-      </button>
+      <section className="item-upload__btn-wrapper">
+        <select
+          name="category-city"
+          className="item-upload__select"
+          onChange={(e) => handleSelectCity(e)}
+        >
+          <option value={""}>{"시/도"}</option>
+          {Districts.map((group, idx) => {
+            return (
+              <option key={"select-opt-category-grp" + idx} value={group}>
+                {group}
+              </option>
+            );
+          })}
+        </select>
+        <select
+          name="category-city"
+          className="item-upload__select"
+          onChange={(e) => handleSelectDistrict(e)}
+        >
+          <option value={""}>{"시/군/구"}</option>
+          {districts &&
+            Object.keys(districts).map((group, idx) => {
+              return (
+                <option key={"select-opt-category-grp" + idx} value={group}>
+                  {group}
+                </option>
+              );
+            })}
+        </select>
+        <select
+          name="category-city"
+          className="item-upload__select"
+          onChange={(e) => handleSelectDong(e)}
+        >
+          <option value={""}>{"읍/면/동"}</option>
+          {dongs &&
+            dongs.map((group, idx) => {
+              return (
+                <option key={"select-opt-category-grp" + idx} value={group}>
+                  {group}
+                </option>
+              );
+            })}
+        </select>
+        <button
+          className="item-upload__btn-submit"
+          onClick={handleClkBtnUpload}
+        >
+          완료
+        </button>
+      </section>
     </section>
   );
 }
