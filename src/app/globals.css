@@ -47,6 +47,25 @@
   --icon-invert-b: 0%;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-font: rgb(195, 195, 195);
+    --color-main: rgb(197, 118, 43);
+    --color-opposite: rgb(38, 66, 130);
+    --color-body: rgb(43, 43, 43);
+    --color-smoke-a: #3b3b3b;
+    --color-smoke-b: rgb(82, 82, 82);
+    --color-shadow-lu: rgb(66, 66, 66);
+    --color-shadow-rd: rgb(22, 22, 22);
+    --icon-invert: 80%;
+    --icon-invert-b: 0%;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -61,7 +80,7 @@
 
 body {
   min-height: 100vh;
-  font-family: var(--font-GmarketSans);
+  font-family: var(--font-noto);
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -76,14 +95,28 @@ img {
 input,
 select,
 button {
-  font-family: var(--font-GmarketSans);
+  font-family: var(--font-noto);
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+}
+
+input {
+  border: none;
+}
+
 input::placeholder {
-  font-family: var(--font-GmarketSans);
+  font-family: var(--font-noto);
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,22 +125,6 @@ input::placeholder {
 span,
 p {
   cursor: default;
-}
-
-button {
-  border-radius: 4px;
-  color: var(--color-body);
-  background-color: transparent;
-  border: none;
-}
-
-.btn-close {
-  width: 22px;
-  height: 22px;
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  background: url(/image/icon/close.svg);
 }
 
 .icon {
@@ -119,6 +136,56 @@ button {
   height: 60%;
   background-color: var(--color-font);
 }
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center--x {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.center--y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.span--t {
+  line-height: calc(var(--font-size-title) + 4px);
+  font-size: var(--font-size-title);
+  font-weight: 900;
+}
+
+.span--l {
+  line-height: calc(var(--font-size-lg) + 4px);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.span--m {
+  line-height: calc(var(--font-size-md) + 4px);
+  font-size: var(--font-size-md);
+  font-weight: 500;
+}
+
+.span--s {
+  line-height: calc(var(--font-size-sm) + 4px);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.span--s {
+  line-height: calc(var(--font-size-vsm) + 4px);
+  font-size: var(--font-size-vsm);
+  font-weight: 300;
+}
+
 .ck.ck-balloon-panel.ck-balloon-panel_position_border-side_right.ck-powered-by-balloon {
   display: none;
 }

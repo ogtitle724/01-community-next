@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { selectCategory, setCategory, setGroup } from "@/redux/slice/pageSlice";
 import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
-import { categories, categoryKO2EN } from "@/config/config";
+import { categories, categoryKO2EN } from "@/config/category";
 import "./style.css";
 
 function Gnb() {

@@ -7,15 +7,16 @@ export default function SearchBar({ dialogRef }) {
   const [searchTerm, setsearchTerm] = useState("");
   const router = useRouter();
   const searchInput = useRef();
+  const btnSubmit = useRef();
 
   useEffect(() => {
     searchInput.current.addEventListener("keyup", (e) => {
       if (e.key === "Enter") {
-        activeButton();
-        if (dialogRef.current) dialogRef.current.close();
+        btnSubmit.current.click();
+        if (dialogRef && dialogRef.current) dialogRef.current.close();
       }
     });
-  }, [dialogRef]);
+  }, [btnSubmit, dialogRef]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -43,6 +44,7 @@ export default function SearchBar({ dialogRef }) {
         placeholder=" · · · · "
       />
       <button
+        ref={btnSubmit}
         className="search-bar__btn"
         onClick={handleOnSubmit}
         aria-label="검색"

@@ -1,8 +1,8 @@
 import Board from "../_components/board/Board";
 import ServerError from "../_components/error/Error";
 import Fetch from "@/util/fetch";
-import { categoryEN2KO } from "@/config/config";
-import { meta } from "@/config/config";
+import { categoryEN2KO } from "@/config/category";
+import { metaData } from "@/config/metadata";
 import { cache } from "react";
 
 const getData = cache(async (path) => {
@@ -20,17 +20,17 @@ export const generateMetadata = async (props) => {
   const querys = props.searchParams;
   const group = querys.group;
   const page = querys.page ?? 1;
+  const pageMetaData = structuredClone(metaData);
 
   let path =
     process.env.NEXT_PUBLIC_PATH_PAGING +
     `/${category}?page=${page - 1}&size=30`;
   if (group) path += `&group=${group}`;
   const postData = await getData(path);
-  const pageMetaData = JSON.parse(JSON.stringify(meta));
 
   if (postData) {
-    const metaTitle = `${category}${group ? "." + group : ""} | 클립마켓`;
-    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + `/${props.params.topic}`;
+    const metaTitle = `${category}${group ? "." + group : ""}`;
+    const metaUrl = `/${props.params.topic}`;
     const metaDescription = postData.content
       .reduce((acc, cur, idx) => {
         return (acc += `${idx + 1})${cur.title} `);

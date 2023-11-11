@@ -6,7 +6,7 @@ import ImgSlider from "./_components/img_slider/ImgSlider";
 import Link from "next/link";
 import { cache } from "react";
 import { sanitize } from "@/util/secure";
-import { meta } from "@/config/config";
+import { metaData } from "@/config/metadata";
 import { deleteTags } from "@/util/textProcess";
 import "./style.css";
 
@@ -24,12 +24,12 @@ export const generateMetadata = cache(async ({ params }) => {
   const itemId = params.id;
   const path = process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemId}`;
   const itemData = await getData(path);
-  const pageMetaData = JSON.parse(JSON.stringify(meta));
+  const pageMetaData = structuredClone(metaData);
 
   if (itemData) {
-    const metaTitle = `${itemData.title} | 클립마켓 스토어 | 물물교환/중고거래 `;
+    const metaTitle = `${itemData.title} | 물물교환/중고거래 `;
     const metaDescription = deleteTags(itemData.content.slice(0, 250));
-    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + path;
+    const metaUrl = path;
 
     pageMetaData.title = metaTitle;
     pageMetaData.description = metaDescription;

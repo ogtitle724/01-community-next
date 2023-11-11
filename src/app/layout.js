@@ -1,50 +1,21 @@
 import ReduxProvider from "@/redux/reduxProvider";
-import "./globals.css";
 import GoogleAnalytics from "./GoogleAnalytics";
-import localFont from "next/font/local";
-import { meta } from "@/config/config";
+import { Noto_Sans_KR } from "next/font/google";
+import { metaData } from "@/config/metadata";
+import "./globals.css";
 
-export const metadata = meta;
+metaData.metadataBase = new URL(process.env.NEXT_PUBLIC_URL_CLI);
+export const metadata = metaData;
 
-const GmarketSans = localFont({
-  variable: "--font-GmarketSans",
-  src: [
-    {
-      path: "./assets/fonts/GmarketSansTTFLight.ttf",
-      weight: "300",
-    },
-    {
-      path: "./assets/fonts/GmarketSansTTFMedium.ttf",
-      weight: "500",
-    },
-    {
-      path: "./assets/fonts/GmarketSansTTFBold.ttf",
-      weight: "700",
-    },
-  ],
-});
-
-const Giants = localFont({
-  variable: "--font-Giants",
-  src: [
-    {
-      path: "./assets/fonts/Giants-Regular.ttf",
-      weight: "300",
-    },
-    {
-      path: "./assets/fonts/Giants-Bold.ttf",
-      weight: "500",
-    },
-  ],
+const NOTO = Noto_Sans_KR({
+  weight: ["300", "500", "700", "900"],
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export default function RootLayout({ children }) {
-  console.log(process.env.NEXT_PUBLIC_URL_SVR);
   return (
-    <html
-      lang="ko"
-      className={[Giants.variable, GmarketSans.variable].join(" ")}
-    >
+    <html lang="ko" className={NOTO.variable}>
       <body>
         <GoogleAnalytics />
         <ReduxProvider>{children}</ReduxProvider>

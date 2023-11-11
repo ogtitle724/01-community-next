@@ -1,11 +1,9 @@
 import Board from "./_components/board/Board";
 import Fetch from "@/util/fetch";
 import ServerError from "./_components/error/Error";
-import { categoryEN2KO } from "@/config/config";
+import { categoryEN2KO } from "@/config/category";
 import dynamic from "next/dynamic";
-import { meta } from "@/config/config";
 
-export const metadata = JSON.parse(JSON.stringify(meta));
 const Slider = dynamic(() => import("./_components/slider/Slider"));
 
 export default async function HomePage(props) {

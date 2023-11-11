@@ -28,7 +28,7 @@ function Header() {
             className="header__logo"
             href={process.env.NEXT_PUBLIC_ROUTE_HOME}
           >
-            {"CLiPmArKET"}
+            {process.env.NEXT_PUBLIC_TITLE}
           </Link>
           {width > 1024 ? (
             <>

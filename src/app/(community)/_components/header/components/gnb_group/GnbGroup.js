@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { memo } from "react";
-import { categories, categoryKO2EN } from "@/config/config";
+import { categories, categoryKO2EN } from "@/config/category";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCategory, selectGroup, setGroup } from "@/redux/slice/pageSlice";
 import "./style.css";

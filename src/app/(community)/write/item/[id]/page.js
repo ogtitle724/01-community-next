@@ -6,7 +6,7 @@ import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/slice/signSlice";
-import { district as Districts } from "@/config/config";
+import { district as Districts } from "@/config/district";
 import "./style.css";
 
 const Editor = dynamic(() => import("@components/editor/editor"), {

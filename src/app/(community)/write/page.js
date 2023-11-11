@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectIsLogIn, selectUser } from "@/redux/slice/signSlice";
-import { categories, categoryKO2EN } from "@/config/config";
+import { categories, categoryKO2EN } from "@/config/category";
 import "./style.css";
 
 const Editor = dynamic(() => import("@components/editor/editor"), {

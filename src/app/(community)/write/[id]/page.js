@@ -4,7 +4,7 @@ import Fetch from "@/util/fetch";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { categories } from "@/config/config";
+import { categories } from "@/config/category";
 import { selectIsLogIn, selectUser } from "@/redux/slice/signSlice";
 import "./style.css";
 

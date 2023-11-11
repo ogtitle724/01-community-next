@@ -7,7 +7,7 @@ import timeConverter from "@/util/time_converter";
 import { sanitize } from "@/util/secure";
 import { cache } from "react";
 import { deleteTags } from "@/util/textProcess";
-import { meta } from "@/config/config";
+import { metaData } from "@/config/metadata";
 import "./style.css";
 
 const getData = cache(async (path) => {
@@ -23,17 +23,14 @@ const getData = cache(async (path) => {
 export const generateMetadata = cache(async ({ params }) => {
   const path = process.env.NEXT_PUBLIC_PATH_POST + `/${params.id}`;
   const postData = await getData(path);
-  const pageMetaData = JSON.parse(JSON.stringify(meta));
+  const pageMetaData = structuredClone(metaData);
 
   if (postData) {
     const metaTitle = `${postData.title} | ${
-      postData.tbl
-        ? postData.tbl + (postData.grp ? `/${postData.grp}` : "")
-        : "카테고리 없음"
-    } | 클립마켓`;
-    console.log(metaTitle);
+      postData.tbl + (postData.grp ? `/${postData.grp}` : "")
+    }`;
     const metaDescription = deleteTags(postData.content.slice(0, 250));
-    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + path;
+    const metaUrl = path;
 
     pageMetaData.title = metaTitle;
     pageMetaData.description = metaDescription;

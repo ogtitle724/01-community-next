@@ -4,7 +4,7 @@ import Fetch from "@/util/fetch";
 import ImgReceiver from "@/app/_components/img_receiver/ImgReceiver";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { district as Districts } from "@/config/config";
+import { district as Districts } from "@/config/district";
 import "./style.css";
 
 const Editor = dynamic(() => import("@components/editor/editor"), {

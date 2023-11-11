@@ -1,13 +1,13 @@
 import Fetch from "@/util/fetch";
 import ServerError from "../_components/error/Error";
 import Showcase from "./_components/showcase/showcase";
-import { meta } from "@/config/config";
+import { metaData } from "@/config/metadata";
 
 export const generateMetadata = async () => {
-  const metaTitle = `TRADE YOUR ITEM! | 클립마켓`;
+  const pageMetaData = structuredClone(metaData);
+  const metaTitle = `중고거래/물물교환`;
   const metaDescription = `당신의 잡동사니 누군가에겐 쓸모가 있다!`;
-  const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + "/barter";
-  const pageMetaData = JSON.parse(JSON.stringify(meta));
+  const metaUrl = "/barter";
 
   pageMetaData.title = metaTitle;
   pageMetaData.description = metaDescription;
