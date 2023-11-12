@@ -45,14 +45,14 @@ export default function BtnRec(props) {
           role="button"
           aria-label="추천"
         ></i>
-        <span className="content-board__span">{props.rec_cnt}</span>
+        <span className="content-board__span text--m">{props.rec_cnt}</span>
       </button>
       <button
         className="content-board__btn content-board__btn-dislike"
         onClick={() => handleClickRecommend(-1)}
         aria-label="비추천"
       >
-        <span className="content-board__span">{props.dec_cnt}</span>
+        <span className="content-board__span text--m">{props.dec_cnt}</span>
         <i
           className={
             "content-board__img-dislike" +

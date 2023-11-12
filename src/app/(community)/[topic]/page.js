@@ -30,7 +30,7 @@ export const generateMetadata = async (props) => {
 
   if (postData) {
     const metaTitle = `${category}${group ? "." + group : ""}`;
-    const metaUrl = `/${props.params.topic}`;
+    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + `/${props.params.topic}`;
     const metaDescription = postData.content
       .reduce((acc, cur, idx) => {
         return (acc += `${idx + 1})${cur.title} `);

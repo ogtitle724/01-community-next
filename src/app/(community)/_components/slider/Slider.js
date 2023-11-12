@@ -121,10 +121,11 @@ export default function Slider() {
 
   return (
     <section ref={slider} className="slider">
+      <h2 hidden>이미지 슬라이더</h2>
       <div ref={container} className="slider__container">
         {imgs}
       </div>
-      <div className="slider__btn-wrapper">{btns}</div>
+      <div className="slider__btn-wrapper center--x">{btns}</div>
     </section>
   );
 }

@@ -32,7 +32,6 @@
 
 .signup__input::placeholder {
   font-size: var(--font-size-sm);
-  color: var(--color-font);
 }
 
 .signup__input:focus {
@@ -66,12 +65,11 @@
 
 .signup__input-auth {
   width: 120px;
-  height: 27px;
+  height: 34px;
   padding-left: 10px;
   border: none;
   border-radius: 12px;
   font-size: var(--font-size-md);
-  color: var(--color-font);
   background-color: transparent;
   box-shadow: inset 2px 2px 3px var(--color-shadow-rd),
     inset -2px -2px 3px var(--color-shadow-lu);
@@ -94,7 +92,7 @@
 
 .signup__btn-auth {
   width: 39px;
-  height: 34px;
+  height: 32px;
   margin-left: 8px;
   position: absolute;
   top: 0px;
@@ -115,7 +113,6 @@
   height: 40px;
   margin-top: 30px;
   border-radius: 12px;
-  color: var(--color-font);
   font-size: var(--font-size-lg);
   font-weight: 700;
   transition: 0.1s;

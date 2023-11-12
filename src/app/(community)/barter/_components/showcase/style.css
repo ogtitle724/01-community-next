@@ -46,8 +46,6 @@
   border-radius: 12px;
   border: none;
   background-color: var(--color-body);
-  font-size: var(--font-size-vsm);
-  color: var(--color-font);
   text-align: center;
 }
 
@@ -66,12 +64,7 @@
 .showcase__no-data {
   width: 100%;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   text-align: center;
-  font-size: var(--font-size-title);
-  color: var(--color-font);
 }
 
 .item-card {
@@ -129,19 +122,6 @@
   text-overflow: ellipsis;
   text-align: center;
   overflow: hidden;
-  font-size: var(--font-size-sm);
-  color: var(--color-font);
-}
-
-.item-card__info {
-  width: var(--item-card-width);
-  height: 60px;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-size: var(--font-size-vsm);
-  border-radius: 12px;
 }
 
 .item-card__indicator {
@@ -172,9 +152,7 @@
 .item-card__n-chat {
   margin-left: 2px;
   margin-right: 10px;
-  font-size: 12px;
   line-height: 12px;
-  color: var(--color-font);
 }
 
 .item-card__n-chat {
@@ -184,7 +162,6 @@
 .item-card__nick {
   position: absolute;
   right: 5px;
-  font-size: var(--font-size-sm);
 }
 
 .showcase__btn-to-top {
@@ -192,8 +169,6 @@
   height: 45px;
   position: fixed;
   bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
   border-radius: 100%;
   background-color: var(--color-body);
   box-shadow: 0 0 3px var(--color-shadow);

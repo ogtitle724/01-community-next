@@ -106,7 +106,7 @@ export default function CommentBoard({ postId, comments }) {
         <div className={"comment-board__btn-wrapper"}>
           <button
             type="button"
-            className="comment-board__btn"
+            className="comment-board__btn btn--m"
             onClick={() => handleClkBtnOk()}
             disabled={!content}
             aria-label="댓글 등록"
@@ -115,7 +115,7 @@ export default function CommentBoard({ postId, comments }) {
           </button>
           <button
             type="button"
-            className="comment-board__btn"
+            className="comment-board__btn btn--m"
             onMouseDown={() => handleClkBtnCancel()}
             aria-label="취소"
           >
@@ -255,15 +255,15 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
         (target?.targetCommentId === comment.id ? " comment-target" : "")
       }
     >
-      <span className="comment__info">
+      <div className="comment__info">
         <div className="comment__profile-img"></div>
-        <span className="comment__nickname">{comment.user_nick}</span>
-        <span className="comment__date">{timeDisplay}</span>
-      </span>
+        <span className="comment__nickname text--s">{comment.user_nick}</span>
+        <span className="comment__date text--s">{timeDisplay}</span>
+      </div>
       <div className="comment__content">
         {!isEdit && cName ? (
-          <span className="comment__reply-target">
-            {comment.parent_nick ? "@." + comment.parent_nick : "🔗targetNick"}
+          <span className="comment__reply-target text--vs">
+            {comment.parent_nick ? "@ " + comment.parent_nick : "🔗targetNick"}
           </span>
         ) : (
           ""
@@ -300,7 +300,7 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
           </>
         ) : (
           <span
-            className="comment__descripition"
+            className="comment__descripition text--s"
             dangerouslySetInnerHTML={{ __html: sanitize(comment.content) }}
           ></span>
         )}
@@ -318,9 +318,9 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
               onClick={() => handleClkRec(1)}
               aria-label="추천"
             >
-              <i className="comment__i comment__i-like"></i>
+              <i className="comment__i comment__i-like icon"></i>
             </button>
-            <span className="comment__span-rec">
+            <span className="comment__span-rec text--s">
               {comment.recommend_cnt ? comment.recommend_cnt : "0"}
             </span>
             <button
@@ -328,9 +328,9 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
               onClick={() => handleClkRec(-1)}
               aria-label="비추천"
             >
-              <i className="comment__i comment__i-dislike"></i>
+              <i className="comment__i comment__i-dislike icon"></i>
             </button>
-            <span className="comment__span-rec">
+            <span className="comment__span-rec text--s">
               {comment.decommend_cnt ? comment.decommend_cnt : "0"}
             </span>
           </div>
@@ -342,14 +342,14 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
                   onClick={() => handleClickBtnEdit()}
                   aria-label="댓글 수정"
                 >
-                  <i className="comment__i comment__i-edit"></i>
+                  <i className="comment__i comment__i-edit icon"></i>
                 </button>
                 <button
                   className="comment__btn comment__btn-delete"
                   onClick={() => handleClickBtnDelete()}
                   aria-label="댓글 삭제"
                 >
-                  <i className="comment__i comment__i-delete"></i>
+                  <i className="comment__i comment__i-delete icon"></i>
                 </button>
               </>
             )}
@@ -361,7 +361,7 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
             >
               <i
                 className={
-                  target?.targetCommentId === comment.id
+                  "icon" + target?.targetCommentId === comment.id
                     ? "comment__i comment__i-close"
                     : "comment__i comment__i-reply"
                 }

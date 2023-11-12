@@ -40,7 +40,7 @@
   background-repeat: no-repeat;
   background-size: 18px;
   background-position: center top 8px;
-  filter: invert(var(--icon-invert));
+  filter: invert(90%);
   z-index: 2;
 }
 
@@ -50,6 +50,7 @@
   left: 50%;
   transform: translateX(-50%) scale(0.7);
   font-size: var(--font-size-vsm);
+  color: whitesmoke;
 }
 
 .img-receiver__default-img,

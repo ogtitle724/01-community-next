@@ -3,7 +3,6 @@ import Board from "../_components/board/Board";
 import ServerError from "../_components/error/Error";
 import { cache } from "react";
 import { metaData } from "@/config/metadata";
-import "./style.css";
 
 const getData = cache(async (path) => {
   try {
@@ -26,7 +25,7 @@ export const generateMetadata = cache(async ({ searchParams }) => {
 
   if (postData) {
     const metaTitle = `'${term}'관련 게시물`;
-    const metaUrl = path;
+    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + path;
     const metaDescription = postData.content.reduce((acc, cur, idx) => {
       return (acc += `${idx + 1})` + cur.title + " ");
     }, "");

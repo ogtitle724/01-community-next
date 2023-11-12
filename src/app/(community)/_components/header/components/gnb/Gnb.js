@@ -34,7 +34,7 @@ function Gnb() {
     <>
       <nav ref={gnb} className="gnb">
         <Link
-          className="gnb__item"
+          className="gnb__item text--m"
           href={process.env.NEXT_PUBLIC_ROUTE_HOME}
           scroll={false}
           onClick={() => handleClkBtnGnb("홈")}
@@ -45,7 +45,7 @@ function Gnb() {
           return (
             <Link
               key={"gnb-category_" + idx}
-              className="gnb__item"
+              className="gnb__item text--m"
               href={`/${categoryKO2EN[category]}`}
               scroll={false}
               onClick={() => handleClkBtnGnb(category)}

@@ -5,7 +5,7 @@
 .comment-board .ck.ck-editor__editable:not(.ck-editor__nested-editable) {
   width: 100%;
   min-width: 260px;
-  height: 26px;
+  height: 36px;
   padding: 6px 10px;
   border-radius: 4px !important;
   border: 1px solid var(--color-smoke-a) !important;
@@ -67,9 +67,8 @@
 
 .comment-board__btn {
   width: 60px;
-  min-height: 18px;
+  height: 25px;
   background-color: var(--color-opposite);
-  color: var(--color-font);
 }
 
 .comment__default {
@@ -99,7 +98,6 @@
 
 .comment__info {
   position: relative;
-  font-size: var(--font-size-vsm);
   display: flex;
   align-items: flex-end;
   gap: 4px;
@@ -114,19 +112,12 @@
 
 .comment__nickname {
   margin-left: 2px;
-  font-size: var(--font-size-sm);
   font-weight: 700;
 }
 
 .comment__date {
   position: absolute;
   right: 4px;
-  color: var(--color-font);
-}
-
-.comment__detail {
-  margin: 7px 0;
-  font-size: var(--font-size-sm);
 }
 
 .comment__content img {
@@ -145,18 +136,6 @@
   align-items: center;
   gap: 6px;
   background-color: pink;
-}
-
-.comment__edit-btn {
-  flex-grow: 1;
-  height: 18px;
-  background-color: var(---color);
-  font-size: var(--font-size-vsm);
-}
-
-.comment__descripition {
-  line-height: 20px;
-  font-size: var(--font-size-sm);
 }
 
 .comment__interface {
@@ -190,7 +169,6 @@
   border-radius: 100%;
   border: none;
   background-color: transparent;
-  font-size: var(--font-size-vsm);
   transition: 0.2s;
 }
 
@@ -201,7 +179,6 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  filter: invert(var(--icon-invert));
 }
 
 .comment__i-like {
@@ -236,9 +213,7 @@
   width: 20px;
   height: fit-content;
   position: relative;
-  top: 2px;
-  color: var(--color-font);
-  font-size: var(--font-size-sm);
+  top: 1px;
 }
 
 .comment__reply {
@@ -250,11 +225,11 @@
 .comment__reply::before {
   content: "⤷";
   position: absolute;
-  left: -12px;
-  top: 10px;
+  left: -15px;
+  top: 6px;
   font-size: var(--font-size-title);
-  font-weight: 700;
-  scale: 1.2;
+  font-weight: 900;
+  scale: 1.4;
   color: var(--main-color);
   background-color: transparent;
 }
@@ -273,9 +248,6 @@
     rgba(188, 94, 151, 1) 56%,
     rgba(247, 133, 10, 1) 100%
   );
-  font-size: 10px;
-  line-height: 20px;
-  font-size: var(--font-size-vsm);
   color: white;
 }
 

@@ -16,8 +16,6 @@
   border-radius: 12px;
   list-style: none;
   transition: width 0.3s;
-  /*   box-shadow: -2px -2px 3px var(--color-shadow-lu),
-    2px 2px 4px var(--color-shadow-rd); */
   overflow: hidden;
   background: linear-gradient(
     0deg,
@@ -58,9 +56,7 @@
   font-size: 2.5rem;
   text-align: right;
   color: white;
-  font-family: var(--font-Giants);
-  font-weight: 300;
-
+  font-weight: 700;
   text-overflow: ellipsis;
   word-break: keep-all;
   display: -webkit-box;
@@ -72,10 +68,7 @@
 .slider__btn-wrapper {
   width: fit-content;
   height: fit-content;
-  position: absolute;
-  left: 50%;
   bottom: -26px;
-  transform: translateX(-50%);
   display: flex;
   justify-content: space-between;
   gap: 11px;

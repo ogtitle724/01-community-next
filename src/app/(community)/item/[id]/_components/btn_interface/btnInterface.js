@@ -19,24 +19,26 @@ export default function BtnInterface({ itemDetail }) {
   };
 
   return (
-    <div className="item-detail__info">
+    <section className="item-detail__info">
       <button
-        className="item-detail__btn-like"
+        className="item-detail__btn-like icon"
         onClick={handleClkBtnLike}
         aria-label="아이템 찜"
       ></button>
-      <span className="item-detail__figure">{itemDetail.dib_cnt}</span>
-      <i className="item-detail__btn-chat"></i>
-      <span className="item-detail__figure">
+      <span className="item-detail__figure text--m">{itemDetail.dib_cnt}</span>
+      <i className="item-detail__btn-chat icon"></i>
+      <span className="item-detail__figure text--m">
         {itemDetail.deals.content.length}
       </span>
       <div className="item-detail__static-wrapper">
-        <span className="item-detail__nick">{itemDetail.user_nick}</span>
+        <span className="item-detail__nick text--m">
+          {itemDetail.user_nick}
+        </span>
         <div className="item-detail__wrapper-border">|</div>
-        <span className="item-detail__time">
+        <span className="item-detail__time text--m">
           {timeConverter(itemDetail.wr_date)}
         </span>
       </div>
-    </div>
+    </section>
   );
 }

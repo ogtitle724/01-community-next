@@ -7,7 +7,7 @@ export const generateMetadata = async () => {
   const pageMetaData = structuredClone(metaData);
   const metaTitle = `중고거래/물물교환`;
   const metaDescription = `당신의 잡동사니 누군가에겐 쓸모가 있다!`;
-  const metaUrl = "/barter";
+  const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + "/barter";
 
   pageMetaData.title = metaTitle;
   pageMetaData.description = metaDescription;

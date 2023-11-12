@@ -14,5 +14,4 @@
   margin: 5px auto;
   display: block;
   background: url(/image/icon/cloud-offline.svg);
-  filter: invert(var(--icon-invert));
 }

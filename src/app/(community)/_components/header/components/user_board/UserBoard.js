@@ -77,12 +77,12 @@ function UserBoard() {
         aria-label="navigation to mypage"
       >
         <i className="user-board__profile-img"></i>
-        <p className="user-board__nickname">{user.nick ?? "unknown"}</p>
+        <p className="user-board__nickname text--s">{user.nick ?? "unknown"}</p>
       </button>
       <div className="divider"></div>
       <div className="user-board__clip">
         <i className="user-board__img-clip icon"></i>
-        <span>123</span>
+        <span className="text--s">123</span>
       </div>
       <div className="divider"></div>
       <button
@@ -96,7 +96,7 @@ function UserBoard() {
         aria-label="navigate to add item page"
       ></button>
       <button
-        className="user-board__btn-chat icon"
+        className="user-board__btn-chat"
         onClick={handleClkBtnChat}
         aria-label="navigate to chat page"
       >
@@ -107,14 +107,14 @@ function UserBoard() {
         )}
       </button>
       <button
-        className="user-board__btn-alram icon"
+        className="user-board__btn-alram"
         onCanPlayThrough={handleClkBtnAlarm}
         aria-label="open alarm modal"
       >
         <div className="user-board__alram-cnt">3</div>
       </button>
       <button
-        className="user-board__btn-logout"
+        className="user-board__btn-logout text--vs"
         onClick={handleClickLogOut}
         aria-label="logout"
       >

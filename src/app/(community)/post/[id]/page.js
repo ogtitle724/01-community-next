@@ -30,7 +30,7 @@ export const generateMetadata = cache(async ({ params }) => {
       postData.tbl + (postData.grp ? `/${postData.grp}` : "")
     }`;
     const metaDescription = deleteTags(postData.content.slice(0, 250));
-    const metaUrl = path;
+    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + path;
 
     pageMetaData.title = metaTitle;
     pageMetaData.description = metaDescription;
@@ -54,30 +54,28 @@ export default async function PostDetailPage({ params }) {
       <>
         <section className="content-board">
           <article className="content-board__content">
-            <h2 className="content-board__title">
-              {postData.title}
-              <BtnUd writerId={postData.user_id} postId={postData.id} />
-            </h2>
+            <h1 className="content-board__title text--l">{postData.title}</h1>
             <div className="content-board__info-wrapper">
-              <span className="content-board__date">
-                {timeConverter(postData.wr_date)}
-              </span>
               <div>
-                <span className="content-board__category">
+                <span className="content-board__category text--vs">
                   {postData.tbl
                     ? postData.tbl + (postData.grp ? `.${postData.grp}` : "")
                     : "카테고리 없음"}
                 </span>
-                <span> | </span>
-                <span className="content-board__writer">
+                <span className="text--vs"> | </span>
+                <span className="content-board__writer text--vs">
                   {postData.user_nick}
                 </span>
               </div>
+              <span className="content-board__date text--vs">
+                {timeConverter(postData.wr_date)}
+              </span>
             </div>
-            <div
-              className="content-board__detail"
+            <BtnUd writerId={postData.user_id} postId={postData.id} />
+            <section
+              className="content-board__detail text--m"
               dangerouslySetInnerHTML={{ __html: sanitize(postData.content) }}
-            ></div>
+            ></section>
             <BtnRec
               postId={postData.id}
               rec_state={postData.recommend_state}
@@ -85,19 +83,21 @@ export default async function PostDetailPage({ params }) {
               dec_cnt={postData.decommend_cnt}
             />
             <section className="content-board__related">
-              <h3 className="content-board__title-related">추천 컨텐츠</h3>
+              <h2 className="content-board__title-related text--s">
+                추천 컨텐츠
+              </h2>
               <div className="content-board__rec-posts">
                 <div className="content-board__rec-post">
-                  <div className="content-board__rec-post-img"></div>
+                  <div className="content-board__rec-post-img center"></div>
                 </div>
                 <div className="content-board__rec-post">
-                  <div className="content-board__rec-post-img"></div>
+                  <div className="content-board__rec-post-img center"></div>
                 </div>
                 <div className="content-board__rec-post">
-                  <div className="content-board__rec-post-img"></div>
+                  <div className="content-board__rec-post-img center"></div>
                 </div>
                 <div className="content-board__rec-post">
-                  <div className="content-board__rec-post-img"></div>
+                  <div className="content-board__rec-post-img center"></div>
                 </div>
               </div>
             </section>

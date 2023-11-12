@@ -39,14 +39,9 @@
   height: 83%;
   border: none;
   border-radius: 4px;
-  text-align: center;
+  text-align: end;
   font-size: var(--font-size-md);
-  color: var(--color-font);
   background-color: var(--color-body);
-}
-
-.item-upload__btn-wrapper select:hover {
-  filter: brightness(0.97);
 }
 
 .item-upload__btn-wrapper select:focus {
@@ -58,9 +53,10 @@
 }
 
 .item-upload__btn-submit {
-  margin: 0px 10px 0 20px;
-  color: var(--color-font);
+  width: fit-content;
+  margin: 0px 10px;
   font-size: var(--font-size-md);
+  font-weight: 500;
 }
 
 .item-upload .ck.ck-editor {

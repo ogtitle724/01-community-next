@@ -42,11 +42,11 @@ export default function BtnUd({ writerId, postId }) {
   return (
     isWriter && (
       <div className="ud">
-        <span className="ud__btn ud__span" onClick={handleClickUpdate}>
+        <span className="ud__btn text--vs" onClick={handleClickUpdate}>
           수정
         </span>
-        <span className=" ud__span">|</span>
-        <span className="ud__btn ud__span" onClick={handleClickDelete}>
+        <span className=" text--vs">|</span>
+        <span className="ud__btn text--vs" onClick={handleClickDelete}>
           삭제
         </span>
       </div>

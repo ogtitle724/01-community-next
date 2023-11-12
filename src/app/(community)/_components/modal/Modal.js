@@ -10,7 +10,7 @@ export default function Modal({ dialogRef, children, isForm }) {
   return (
     <dialog ref={dialogRef} className="modal">
       <button
-        className="modal__btn-close"
+        className="modal__btn-close icon"
         onClick={handleClkBtnClose}
         aria-label="모달창 닫기"
       ></button>
@@ -19,7 +19,7 @@ export default function Modal({ dialogRef, children, isForm }) {
           {children}
         </form>
       ) : (
-        <div className="modal-container">{children}</div>
+        <section className="modal-container">{children}</section>
       )}
     </dialog>
   );

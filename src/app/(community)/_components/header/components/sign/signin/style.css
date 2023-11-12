@@ -26,10 +26,6 @@
   font-size: 12px;
 }
 
-.signin__input::placeholder {
-  color: var(--color-font);
-}
-
 .signin__input:focus {
   outline: none;
 }

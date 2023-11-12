@@ -12,10 +12,8 @@
 .gnb__item {
   position: relative;
   cursor: pointer;
-  font-size: var(--font-size-md);
-  line-height: var(--font-size-md);
   text-align: center;
-  color: var(--color-font);
+  font-weight: 700;
 }
 
 .gnb__item:nth-last-child(2) {
@@ -63,6 +61,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: var(--font-size-sm);
+  line-height: var(--font-size-sm);
   color: var(--color-font);
   border-radius: 12px;
   background-color: var(--color-body);

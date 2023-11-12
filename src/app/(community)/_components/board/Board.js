@@ -31,11 +31,9 @@ export default function Board({ posts, title, isThumbnail }) {
   if (posts && !posts.content.length) {
     return (
       <section className="board">
-        <h2 className="board__title">{title}</h2>
+        <h1 className="board__title">{title}</h1>
         <div className="board-empty">
-          <span className="board-empty__notif">
-            {"첫 게시물을 등록해 주세요!"}
-          </span>
+          <span className="center text--t">{"첫 게시물을 등록해 주세요!"}</span>
         </div>
       </section>
     );
@@ -44,28 +42,29 @@ export default function Board({ posts, title, isThumbnail }) {
   return (
     <>
       <section className="board">
-        <h2 className="board__title">{title}</h2>
-        <div className="board__btn-wrapper">
-          {width > 768 && (
+        <section className="board__header">
+          <h1 className="board__title">{title}</h1>
+          <div className="board__btn-wrapper">
+            {width > 768 && (
+              <button
+                className={
+                  "board__btn icon" +
+                  (isDivide ? " board__btn-grid" : " board__btn-list")
+                }
+                onClick={handleClkBtnLayout}
+                aria-label="게시글 목록 레이아웃 변경"
+              ></button>
+            )}
             <button
               className={
-                "board__btn" +
-                (isDivide ? " board__btn-grid" : " board__btn-list")
+                "board__btn icon" +
+                (isShowImg ? " board__btn-img" : " board__btn-default")
               }
-              onClick={handleClkBtnLayout}
-              aria-label="게시글 목록 레이아웃 변경"
+              onClick={handleClkBtnShowImg}
+              aria-label="이미지 노출 여부 변경"
             ></button>
-          )}
-          <button
-            className={
-              "board__btn" +
-              (isShowImg ? " board__btn-img" : " board__btn-default")
-            }
-            onClick={handleClkBtnShowImg}
-            aria-label="이미지 노출 여부 변경"
-          ></button>
-        </div>
-
+          </div>
+        </section>
         <ul className={"board__ul" + (isDivide ? " board__ul--grid" : "")}>
           {posts.content.map((post, idx) => {
             return (
@@ -108,23 +107,23 @@ function Post({ post, isShowImg }) {
           )}
         </div>
       )}
-      <div>
-        <span className="board-item__category">
+      <div className="board-item__wrapper">
+        <span className="board-item__category text--vs">
           {post.tbl + (post.grp ? `/${post.grp}` : "")}
         </span>
-        <span className="board-item__date">{time} </span>
-        <h3 className="board-item__title">{post.title}</h3>
+        <span className="board-item__date text--vs">{time} </span>
+        <span className="board-item__title text--m">{post.title}</span>
         <div className="board-item__data-wrapper">
           <div className="board-item__data board-item__view">
-            <span>{post.view_cnt}</span>
+            <span className="text--vs">{post.view_cnt}</span>
           </div>
           <div className="board-item__data board-item__like">
-            <span>{post.recommend_cnt}</span>
+            <span className="text--vs">{post.recommend_cnt}</span>
           </div>
           <div className="board-item__data board-item__comment">
-            <span>{post.comment_cnt}</span>
+            <span className="text--vs">{post.comment_cnt}</span>
           </div>
-          <span className="board-item__nick">{post.nick}</span>
+          <span className="board-item__nick text--vs">{post.nick}</span>
         </div>
       </div>
     </Link>

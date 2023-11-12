@@ -5,7 +5,7 @@ export const metaData = {
   },
   description: process.env.DESCRIPTION,
   alternates: {
-    canonical: "/",
+    canonical: process.env.NEXT_PUBLIC_URL_CLI,
     languages: {
       "ko-KR": "/ko-KR",
       "en-US": "/en-US",
@@ -14,7 +14,7 @@ export const metaData = {
   openGraph: {
     title: process.env.TITLE,
     description: process.env.DESCRIPTION,
-    url: "/",
+    url: process.env.NEXT_PUBLIC_URL_CLI,
     siteName: process.env.SITENAME,
     images: [
       {

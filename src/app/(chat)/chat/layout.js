@@ -3,7 +3,7 @@ import { metaData } from "@/config/metadata";
 const pageMetaData = structuredClone(metaData);
 const metaTitle = "클립챗";
 const metaDescription = "클립챗을 통해 거래 일정을 잡으세요!";
-const metaUrl = "/chat";
+const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + "/chat";
 
 pageMetaData.title = metaTitle;
 pageMetaData.description = metaDescription;

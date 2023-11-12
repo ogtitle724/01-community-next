@@ -72,31 +72,31 @@ function Profile({ data }) {
   return (
     <div className="mypage__profile-wrapper">
       <div>
-        <span>{"아이디: "}</span>
-        <span>{user.uid}</span>
+        <span className="text--m">{"아이디: "}</span>
+        <span className="text--m">{user.uid}</span>
       </div>
       <div>
-        <span>{"닉네임: "}</span>
-        <span>{user.nick}</span>
+        <span className="text--m">{"닉네임: "}</span>
+        <span className="text--m">{user.nick}</span>
       </div>
       <div>
-        <span>{"클립: "}</span>
-        <span>{user.point}</span>
+        <span className="text--m">{"클립: "}</span>
+        <span className="text--m">{user.point}</span>
       </div>
       <div>
-        <span>{"이메일: "}</span>
-        <span>{user.email}</span>
+        <span className="text--m">{"이메일: "}</span>
+        <span className="text--m">{user.email}</span>
       </div>
       <div>
-        <span>{"물품: "}</span>
-        <span>{`${items.sale}/${items.total}`}</span>
-        <span className="mypage__sub-data">{` (거래중/거래완료)`}</span>
+        <span className="text--m">{"물품: "}</span>
+        <span className="text--m">{`${items.sale}/${items.total}`}</span>
+        <span className="mypage__sub-data text--vs">{` (거래중/거래완료)`}</span>
       </div>
       <div className="mypage__divider"></div>
       <div className="mypage__profile-container">
-        <p className="mypage__profile-container-title">
+        <p className="mypage__profile-container-title text--m">
           작성한 게시물
-          <span className="mypage__sub-data">
+          <span className="mypage__sub-data text--vs">
             (제목/조회수/댓글/추천/비추천)
           </span>
         </p>
@@ -108,11 +108,11 @@ function Profile({ data }) {
                   href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${post.id}`}
                   className="mypage__profile-link"
                 >
-                  <span>{post.title}</span>
-                  <span>{post.view_cnt}</span>
-                  <span>{post.comment_cnt}</span>
-                  <span>{post.recommend_cnt}</span>
-                  <span>{post.decommend_cnt}</span>
+                  <span className="text--s">{post.title}</span>
+                  <span className="text--s">{post.view_cnt}</span>
+                  <span className="text--s">{post.comment_cnt}</span>
+                  <span className="text--s">{post.recommend_cnt}</span>
+                  <span className="text--s">{post.decommend_cnt}</span>
                 </Link>
               </li>
             );
@@ -159,21 +159,21 @@ function Post({ data }) {
   return (
     <form className="mypage__posts">
       <span></span>
-      <span>✏️</span>
-      <span>👀</span>
-      <span>👍/👎</span>
+      <span className="text--m">✏️</span>
+      <span className="text--m">👀</span>
+      <span className="text--m">👍/👎</span>
       {posts.content.map((post, idx) => {
         return (
           <>
-            <span>{idx}</span>
+            <span className="text--vs">{idx}</span>
             <Link
               href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${post.id}`}
-              className="mypage__posts-content"
+              className="mypage__posts-content text--vs"
             >
               {post.title}
             </Link>
-            <span>{post.view_cnt}</span>
-            <span>{`${post.recommend_cnt}/${post.decommend_cnt}`}</span>
+            <span className="text--vs">{post.view_cnt}</span>
+            <span className="text--vs">{`${post.recommend_cnt}/${post.decommend_cnt}`}</span>
           </>
         );
       })}
@@ -188,23 +188,24 @@ function Comment({ data }) {
   return (
     <form className="mypage__posts">
       <span></span>
-      <span>✏️</span>
-      <span>📩</span>
-      <span>👍/👎</span>
+      <span className="text--vs">✏️</span>
+      <span className="text--vs">📩</span>
+      <span className="text--vs">👍/👎</span>
       {comments.content.map((comment, idx) => {
         return (
           <>
-            <span>{idx}</span>
+            <span className="text--vs">{idx}</span>
             <Link
               href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${comment.postId}`}
-              className="mypage__posts-content"
+              className="mypage__posts-content text--vs"
             >
               <span
+                className="text--vs"
                 dangerouslySetInnerHTML={{ __html: sanitize(comment.content) }}
               ></span>
             </Link>
-            <span>{comment.reply_cnt}</span>
-            <span>{`${comment.recommend_cnt}/${comment.decommend_cnt}`}</span>
+            <span className="text--vs">{comment.reply_cnt}</span>
+            <span className="text--vs">{`${comment.recommend_cnt}/${comment.decommend_cnt}`}</span>
           </>
         );
       })}
@@ -219,21 +220,21 @@ function Barter({ data }) {
   return (
     <form className="mypage__posts">
       <span></span>
-      <span>📦</span>
-      <span>♻️</span>
-      <span>❤️</span>
+      <span className="text--vs">📦</span>
+      <span className="text--vs">♻️</span>
+      <span className="text--vs">❤️</span>
       {items.content.map((item, idx) => {
         return (
           <>
-            <span>{idx}</span>
+            <span className="text--vs">{idx}</span>
             <Link
               href={process.env.NEXT_ROUTE_ITEM + `/${item.id}`}
-              className="mypage__posts-content"
+              className="mypage__posts-content text--vs"
             >
               {item.title}
             </Link>
-            <span>{item.deals_cnt}</span>
-            <span>{item.dib_cnt}</span>
+            <span className="text--vs">{item.deals_cnt}</span>
+            <span className="text--vs">{item.dib_cnt}</span>
           </>
         );
       })}

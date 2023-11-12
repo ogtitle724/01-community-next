@@ -32,8 +32,6 @@
 .item-detail__title {
   margin: 30px 0 12px 0;
   padding-left: 7px;
-  font-size: var(--font-size-md);
-  font-weight: 700;
 }
 
 .item-detail__description {
@@ -41,7 +39,6 @@
   margin: 10px 0;
   padding: 10px 13px;
   border-radius: 12px;
-  font-size: var(--font-size-sm);
   box-shadow: inset 2px 2px 2px var(--color-shadow-rd),
     inset -2px -2px 3px var(--color-shadow-lu);
 }
@@ -54,7 +51,6 @@
   display: inline-block;
   margin: 12px 0;
   padding-left: 7px;
-  font-size: var(--font-size-md);
 }
 
 .suged-list__ul {
@@ -78,8 +74,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: var(--font-size-md);
-  color: var(--color-font);
 }
 
 .suged-item {
@@ -106,12 +100,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-}
-
-.suged-item__nick {
-  font-size: var(--font-size-sm);
 }
 
 @media screen and (max-width: 768px) {

@@ -1,5 +1,6 @@
 export default function timeConverter(wr_date, isChat = false) {
   const date = new Date(wr_date);
+  let timeDisplay;
 
   if (isChat) {
     return (timeDisplay = date.toString().slice(16, 21));
@@ -9,7 +10,6 @@ export default function timeConverter(wr_date, isChat = false) {
   console.log(now, date, now.getTime(), date.getTime());
   const diffMinutes = ~~((now.getTime() - date.getTime()) / (1000 * 60));
   console.log(diffMinutes);
-  let timeDisplay;
 
   if (diffMinutes < 60) {
     timeDisplay = `${diffMinutes}분전`;

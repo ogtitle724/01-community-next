@@ -29,7 +29,7 @@ export const generateMetadata = cache(async ({ params }) => {
   if (itemData) {
     const metaTitle = `${itemData.title} | 물물교환/중고거래 `;
     const metaDescription = deleteTags(itemData.content.slice(0, 250));
-    const metaUrl = path;
+    const metaUrl = process.env.NEXT_PUBLIC_URL_CLI + path;
 
     pageMetaData.title = metaTitle;
     pageMetaData.description = metaDescription;
@@ -53,14 +53,14 @@ export default async function ItemDetailPage({ params }) {
     return (
       <main className="item-detail__main">
         <ImgSlider itemDetail={itemData} />
-        <h2 className="item-detail__title">{itemData.title}</h2>
-        <div
-          className="item-detail__description"
+        <h1 className="item-detail__title text--l">{itemData.title}</h1>
+        <section
+          className="item-detail__description text--m"
           dangerouslySetInnerHTML={{ __html: sanitize(itemData.content) }}
-        ></div>
+        ></section>
         <BtnInterface itemDetail={itemData} />
-        <div className="suged-list">
-          <h3 className="suged-list__title">제안된 거래</h3>
+        <section className="suged-list">
+          <span className="suged-list__title text--l">제안된 거래</span>
           <ul className="suged-list__ul">
             {itemData.deals.content.length ? (
               itemData.deals.content.map((deal, idx) => {
@@ -70,24 +70,26 @@ export default async function ItemDetailPage({ params }) {
                     className="suged-item"
                   >
                     <div className="suged-item__img"></div>
-                    <span className="suged-item__title">
+                    <span className="suged-item__title text--m">
                       <Link
                         href={process.env.NEXT_PUBLIC_PATH_ITEM + `/${deal.id}`}
                       >
                         {deal.title}
                       </Link>
                     </span>
-                    <span className="suged-item__nick">{"닉네임이 없다"}</span>
+                    <span className="suged-item__nick text--m">
+                      {"닉네임이 없다"}
+                    </span>
                   </li>
                 );
               })
             ) : (
-              <span className="suged-list__no-data">
+              <span className="suged-list__no-data text--m">
                 {"첫 거래를 제안해주세요!"}
               </span>
             )}
           </ul>
-        </div>
+        </section>
         <BtnSug itemDetail={itemData} />
       </main>
     );

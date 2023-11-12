@@ -23,7 +23,7 @@
 .header__logo {
   height: auto;
   padding-bottom: 3px;
-  font-weight: 700;
+  font-weight: 900;
   font-size: var(--font-size-title);
   white-space: nowrap;
 }

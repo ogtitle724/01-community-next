@@ -11,7 +11,7 @@
 @media screen and (max-width: 1200px) {
   :root {
     --header-height: 34px;
-    --font-size-title: 18px;
+    --font-size-title: 20px;
   }
 }
 
@@ -108,7 +108,9 @@ button {
   width: 30px;
   height: 30px;
   border: none;
+  border-radius: 4px;
   background-color: transparent;
+  font-weight: 700;
 }
 
 input {
@@ -134,7 +136,7 @@ p {
 .divider {
   width: 1.5px;
   height: 60%;
-  background-color: var(--color-font);
+  background-color: var(--color-smoke-b);
 }
 
 .center {
@@ -156,34 +158,44 @@ p {
   transform: translateY(-50%);
 }
 
-.span--t {
+.btn--l {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.btn--m {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+}
+
+.text--t {
   line-height: calc(var(--font-size-title) + 4px);
   font-size: var(--font-size-title);
   font-weight: 900;
 }
 
-.span--l {
+.text--l {
   line-height: calc(var(--font-size-lg) + 4px);
   font-size: var(--font-size-lg);
   font-weight: 700;
 }
 
-.span--m {
+.text--m {
   line-height: calc(var(--font-size-md) + 4px);
   font-size: var(--font-size-md);
   font-weight: 500;
 }
 
-.span--s {
+.text--s {
   line-height: calc(var(--font-size-sm) + 4px);
   font-size: var(--font-size-sm);
   font-weight: 500;
 }
 
-.span--s {
+.text--vs {
   line-height: calc(var(--font-size-vsm) + 4px);
   font-size: var(--font-size-vsm);
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .ck.ck-balloon-panel.ck-balloon-panel_position_border-side_right.ck-powered-by-balloon {

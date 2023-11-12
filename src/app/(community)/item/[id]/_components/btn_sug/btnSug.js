@@ -50,15 +50,24 @@ export default function BtnSug({ itemDetail }) {
         {user &&
           (isWriter ? (
             <>
-              <button className="item-detail__btn" onClick={handleClkBtnUpdate}>
+              <button
+                className="item-detail__btn btn--m"
+                onClick={handleClkBtnUpdate}
+              >
                 수정
               </button>
-              <button className="item-detail__btn" onClick={handleClkBtnDelete}>
+              <button
+                className="item-detail__btn btn--m"
+                onClick={handleClkBtnDelete}
+              >
                 삭제
               </button>
             </>
           ) : (
-            <button className="item-detail__btn" onClick={handleClkBtnSug}>
+            <button
+              className="item-detail__btn btn--m"
+              onClick={handleClkBtnSug}
+            >
               제안하기
             </button>
           ))}
@@ -140,7 +149,10 @@ function SugForm({ dialogRef, itemDetail }) {
   return (
     <Modal dialogRef={dialogRef}>
       <div className="sug-form">
-        <button className="sug-form__btn-new" onClick={handleClkBtnCreate}>
+        <button
+          className="sug-form__btn-new btn--m"
+          onClick={handleClkBtnCreate}
+        >
           + 새로 만들기
         </button>
         <ul className="sug-form__items">
@@ -157,14 +169,22 @@ function SugForm({ dialogRef, itemDetail }) {
               );
             })
           ) : (
-            <p className="sug-form__no-item">제안할 물건을 생성해주세요!</p>
+            <p className="sug-form__no-item text--m">
+              제안할 물건을 생성해주세요!
+            </p>
           )}
         </ul>
         <div className="sug-form__btn-wrapper">
-          <button className="sug-form__btn" onClick={handleClkBtnCancel}>
+          <button
+            className="sug-form__btn text--m"
+            onClick={handleClkBtnCancel}
+          >
             취 소
           </button>
-          <button className="sug-form__btn" onClick={handleClkBtnSubmit}>
+          <button
+            className="sug-form__btn text--m"
+            onClick={handleClkBtnSubmit}
+          >
             확 인
           </button>
         </div>
@@ -189,8 +209,8 @@ function ItemList({ handleClkItem, sugedItem, idx }) {
           value="id1"
         ></input>
         <i className="sug-form__item-img"></i>
-        <span className="sug-form__item-title">{sugedItem.title}</span>
-        <span className="sug-form__item-nick">{sugedItem.nick}</span>
+        <span className="sug-form__item-title text--m">{sugedItem.title}</span>
+        <span className="sug-form__item-nick text--m">{sugedItem.nick}</span>
       </label>
     </li>
   );

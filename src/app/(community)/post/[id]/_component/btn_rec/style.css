@@ -1,12 +1,12 @@
 .content-board__btn-wrapper {
-  width: 150px;
+  width: 136px;
   height: 33px;
   margin: 0 auto;
   margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 0px;
   border-radius: 4px;
   box-shadow: -1.5px -1.5px 2px var(--color-shadow-lu),
     1.5px 1.5px 2px var(--color-shadow-rd);
@@ -20,7 +20,6 @@
   justify-content: center;
   align-items: center;
   gap: 3px;
-  font-size: var(--font-size-sm);
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -39,12 +38,12 @@
 
 .content-board__img-like {
   background-image: url(/image/icon/thumbs-up-sharp.svg);
-  bottom: 2px;
+  bottom: 1px;
 }
 
 .content-board__img-dislike {
   background-image: url(/image/icon/thumbs-down-sharp.svg);
-  bottom: -2px;
+  bottom: -1px;
 }
 
 .content-board__img-dislike--active,
@@ -54,8 +53,6 @@
 
 .content-board__span {
   width: 30px;
-  color: var(--color-font);
-  font-size: var(--font-size-md);
   text-align: center;
   cursor: pointer;
 }

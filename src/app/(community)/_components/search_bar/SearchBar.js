@@ -30,10 +30,10 @@ export default function SearchBar({ dialogRef }) {
   };
 
   return (
-    <div onSubmit={(e) => handleOnSubmit(e)} className="search-bar">
+    <section onSubmit={(e) => handleOnSubmit(e)} className="search-bar">
       <input
         ref={searchInput}
-        className="search-bar__input"
+        className="search-bar__input text--s"
         name="searchTerm"
         type="text"
         value={searchTerm}
@@ -49,6 +49,6 @@ export default function SearchBar({ dialogRef }) {
         onClick={handleOnSubmit}
         aria-label="검색"
       ></button>
-    </div>
+    </section>
   );
 }

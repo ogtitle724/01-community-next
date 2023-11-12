@@ -23,7 +23,7 @@ function GnbGroup() {
             <Link
               key={"gnb-group_" + idx}
               className={
-                "gnb-group__item" +
+                "gnb-group__item text--vs" +
                 (group === grp ? " gnb-group__item--cur" : "")
               }
               href={`/${categoryKO2EN[category]}?group=${group}`}
