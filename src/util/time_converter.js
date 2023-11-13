@@ -5,8 +5,9 @@ export default function timeConverter(wr_date, isChat = false) {
   if (isChat) {
     return (timeDisplay = date.toString().slice(16, 21));
   }
-
   const now = new Date();
+  console.log("now", now);
+  console.log("postdate", date);
   const diffMinutes = ~~((now.getTime() - date.getTime()) / (1000 * 60));
 
   if (diffMinutes < 60) {
