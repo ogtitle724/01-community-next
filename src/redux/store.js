@@ -5,7 +5,6 @@ import storageSession from "redux-persist/lib/storage/session";
 
 import signReducer from "./slice/signSlice.js";
 import pageReducer from "./slice/pageSlice.js";
-import chatReducer from "./slice/chatSlice.js";
 
 const signPersistConfig = {
   key: "local",
@@ -24,13 +23,11 @@ const chatPersistConfig = {
 
 const persistedSignReducer = persistReducer(signPersistConfig, signReducer);
 const persistedPageReducer = persistReducer(pagePersistConfig, pageReducer);
-const persistedChatReducer = persistReducer(chatPersistConfig, chatReducer);
 
 const store = configureStore({
   reducer: {
     sign: persistedSignReducer,
     page: persistedPageReducer,
-    chat: persistedChatReducer,
   },
 });
 

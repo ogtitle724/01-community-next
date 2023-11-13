@@ -25,7 +25,7 @@ function Header() {
       <header className="header">
         <section className="header__interface">
           <Link
-            className="header__logo"
+            className="header__logo text--t"
             href={process.env.NEXT_PUBLIC_ROUTE_HOME}
           >
             {process.env.NEXT_PUBLIC_TITLE}
@@ -33,7 +33,7 @@ function Header() {
           {width > 1024 ? (
             <>
               <SearchBar />
-              <ThemeToggle />
+              {/* <ThemeToggle /> */}
               <div className="sign-pre">
                 {isLogIn ? <UserBoard /> : <Sign />}
               </div>

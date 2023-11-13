@@ -6,6 +6,17 @@
   --font-size-md: 16px;
   --font-size-sm: 14px;
   --font-size-vsm: 12px;
+
+  --color-font: black;
+  --color-main: rgb(38, 66, 130);
+  --color-opposite: rgb(197, 118, 43);
+  --color-body: rgb(244, 244, 244);
+  --color-smoke-a: rgb(233, 233, 233);
+  --color-smoke-b: #cfcfcf;
+  --color-shadow-lu: rgb(255, 255, 255);
+  --color-shadow-rd: #e1e1e1;
+  --icon-invert: 0%;
+  --icon-invert-b: 100%;
 }
 
 @media screen and (max-width: 1200px) {
@@ -21,7 +32,7 @@
   }
 }
 
-:root[color-theme="light"] {
+/* :root[color-theme="light"] {
   --color-font: black;
   --color-main: rgb(38, 66, 130);
   --color-opposite: rgb(197, 118, 43);
@@ -45,7 +56,7 @@
   --color-shadow-rd: rgb(22, 22, 22);
   --icon-invert: 80%;
   --icon-invert-b: 0%;
-}
+} */
 
 @media (prefers-color-scheme: dark) {
   :root {

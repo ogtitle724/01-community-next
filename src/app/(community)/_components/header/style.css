@@ -23,13 +23,7 @@
 .header__logo {
   height: auto;
   padding-bottom: 3px;
-  font-weight: 900;
-  font-size: var(--font-size-title);
   white-space: nowrap;
-}
-
-.header__logo:hover {
-  filter: brightness(1.5);
 }
 
 .header__btn-menu {

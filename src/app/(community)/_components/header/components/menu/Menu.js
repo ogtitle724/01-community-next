@@ -23,7 +23,7 @@ function MenuBtn() {
         <div className="menu">
           <div className="menu__sign">
             <SearchBar dialogRef={dialogRef} />
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             {isLogIn ? <UserBoard /> : <Sign />}
           </div>
           <div className="menu__content"></div>

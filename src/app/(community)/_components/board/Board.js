@@ -33,7 +33,9 @@ export default function Board({ posts, title, isThumbnail }) {
       <section className="board">
         <h1 className="board__title">{title}</h1>
         <div className="board-empty">
-          <span className="center text--t">{"첫 게시물을 등록해 주세요!"}</span>
+          <span className="board-empty__noti center text--l">
+            {"첫 게시물을 등록해 주세요!"}
+          </span>
         </div>
       </section>
     );

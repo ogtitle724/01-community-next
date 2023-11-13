@@ -6,19 +6,10 @@ import { logout, setUser, setLoginDeadline } from "./slice/signSlice";
 import { setWidth } from "./slice/pageSlice";
 
 export default function ReduxProvider({ children }) {
-  //css color-theme setting => using redux state makes an mismatch error when initial rendering
   const handleInitialSetting = () => {
-    const root = document.documentElement;
-
-    //set dark mode
-    let states = store.getState();
-    let isDarkMode = states.sign.isDarkMode;
-    root.setAttribute("color-theme", isDarkMode ? "dark" : "light");
-
-    //check whether the login state expired or not
-    let loginDeadline = states.sign.loginDeadline;
-
-    let now = new Date();
+    const states = store.getState();
+    const loginDeadline = states.sign.loginDeadline;
+    const now = new Date();
 
     if (new Date(loginDeadline) <= now) {
       store.dispatch(logout());
