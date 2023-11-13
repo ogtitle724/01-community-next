@@ -76,4 +76,7 @@ export const metaData = {
     address: false,
     telephone: false,
   },
+  other: {
+    "google-site-verification": "g2QNUQioOSVhibeq1m4sAntQTiBwJtFRgnUD-rlmfQo",
+  },
 };
