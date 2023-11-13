@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { memo } from "react";
+import { useRouter } from "next/navigation";
 import { categories, categoryKO2EN } from "@/config/category";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCategory, selectGroup, setGroup } from "@/redux/slice/pageSlice";
@@ -10,9 +11,14 @@ function GnbGroup() {
   const category = useSelector(selectCategory);
   const grp = useSelector(selectGroup);
   const dispatch = useDispatch();
+  const router = useRouter();
 
-  const handleClkBtnGroup = (arg) => {
+  const handleClkBtnGroup = (e, arg) => {
+    e.preventDefault();
+
     dispatch(setGroup(arg));
+    router.refresh();
+    router.push(`/${categoryKO2EN[category]}?group=${arg}`);
   };
 
   if (category) {
@@ -27,7 +33,7 @@ function GnbGroup() {
                 (group === grp ? " gnb-group__item--cur" : "")
               }
               href={`/${categoryKO2EN[category]}?group=${group}`}
-              onClick={() => handleClkBtnGroup(group)}
+              onClick={(e) => handleClkBtnGroup(e, group)}
             >
               {group}
             </Link>

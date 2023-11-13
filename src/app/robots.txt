@@ -1,5 +1,5 @@
 User-Agent: *
 Allow: /
-Disallow: /private/
+Disallow: /chat/
 
-Sitemap: https://acme.com/sitemap.xml
+Sitemap: https://clipmk.com/sitemap.xml

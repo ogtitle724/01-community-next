@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
 import timeConverter from "@/util/time_converter";
-import "./style.css";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { selectWidth } from "@/redux/slice/pageSlice";
+import "./style.css";
 
 export default function Board({ posts, title, isThumbnail }) {
   console.log("BOARD");
@@ -26,7 +25,6 @@ export default function Board({ posts, title, isThumbnail }) {
       setIsDivide(false);
     }
   }, [isDivide, width]);
-
   const handleClkBtnLayout = () => {
     setIsDivide((isDivide) => !isDivide);
   };
@@ -146,6 +144,7 @@ function Nav({ posts }) {
   const searchParams = useSearchParams();
   const page = +searchParams.get("page");
   const group = searchParams.get("group");
+  const router = useRouter;
 
   navItems.current = Array(posts.totalPages)
     .fill(1)
@@ -157,6 +156,12 @@ function Nav({ posts }) {
 
   const handleClkNext = () => {
     if (navPage < ~~(posts.totalPages / 10)) setNavPage(navPage + 1);
+  };
+
+  const handleClkNav = (e) => {
+    e.preventDefault();
+    router.refresh();
+    router.push(`/${path + query}`);
   };
 
   return (
@@ -171,6 +176,7 @@ function Nav({ posts }) {
       {navItems.current
         .slice(navPage * 10, navPage * 10 + 10)
         .map((ele, idx) => {
+          const query = ele - 1 ? `?group=${group}&page=${ele}` : "";
           return (
             <li className="board__nav-btn" key={"navItem_" + idx}>
               <Link
@@ -180,7 +186,8 @@ function Nav({ posts }) {
                     ? " board__nav-btn--focus"
                     : "")
                 }
-                href={path + (ele - 1 ? `?group=${group}&page=${ele}` : "")}
+                href={path + query}
+                onClick={(e) => handleClkNav(e, query)}
               >
                 {ele}
               </Link>
