@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectIsLogIn, selectUser } from "@/redux/slice/signSlice";
 import { categories, categoryKO2EN } from "@/config/category";
+import action from "@/util/revalidate";
 import "./style.css";
 
 const Editor = dynamic(() => import("@components/editor/editor"), {
@@ -66,7 +67,8 @@ export default function WritePage({ params }) {
     try {
       const path = process.env.NEXT_PUBLIC_PATH_POST;
       await Fetch.post(path, payload, option);
-      router.refresh();
+      //router.refresh();
+      action();
       router.push(`/${categoryKO2EN[category]}`);
     } catch (err) {
       console.error(err);

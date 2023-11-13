@@ -49,15 +49,20 @@ class Fetch {
   }
 
   async get(path, options = {}) {
-    if (this.isChange) {
+    return this.request(path, {
+      ...options,
+      next: { tags: ["get"] },
+      method: "GET",
+    });
+    /* if (this.isChange) {
       return this.request(path, {
         ...options,
         next: { revalidate: 0 },
         method: "GET",
       });
     } else {
-      return this.request(path, { ...options, method: "GET" });
-    }
+      return this.request(path, { ...options, next: { revalidate: 1000 * 60 }, method: "GET" });
+    } */
   }
 
   async post(path, data, options = {}) {
@@ -101,6 +106,7 @@ class Fetch {
     setTimeout(() => {
       this.isChange = false;
     }, 1000);
+
     return;
   }
 }

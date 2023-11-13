@@ -3,6 +3,9 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     logging: "verbose",
+    serverActions: {
+      bodySizeLimit: "2mb",
+    },
   },
   images: {
     remotePatterns: [

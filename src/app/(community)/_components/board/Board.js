@@ -88,6 +88,7 @@ export default function Board({ posts, title, isThumbnail }) {
 }
 
 function Post({ post, isShowImg }) {
+  console.log(post.wr_date);
   const time = timeConverter(post.wr_date);
 
   return (

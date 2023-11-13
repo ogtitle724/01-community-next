@@ -6,8 +6,7 @@ export default function timeConverter(wr_date, isChat = false) {
     return (timeDisplay = date.toString().slice(16, 21));
   }
   const now = new Date();
-  console.log("now", now);
-  console.log("postdate", date);
+
   const diffMinutes = ~~((now.getTime() - date.getTime()) / (1000 * 60));
 
   if (diffMinutes < 60) {
@@ -19,7 +18,9 @@ export default function timeConverter(wr_date, isChat = false) {
   } else {
     timeDisplay = JSON.stringify(date).slice(1, 11);
   }
-  console.log(diffMinutes);
 
   return timeDisplay;
 }
+
+/* const kstDate = utcDate.toLocaleString('en-US', { timeZone: 'Asia/Seoul' })
+console.log(kstDate); */
