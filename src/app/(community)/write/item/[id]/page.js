@@ -32,10 +32,8 @@ export default function ItemUpload({ params }) {
     const getUpdateData = async () => {
       const postId = params?.id;
       try {
-        const res = await Fetch.get(
-          process.env.NEXT_PUBLIC_PATH_ITEM + `/${postId}`,
-          { next: { revalidate: 0 } }
-        );
+        const path = process.env.NEXT_PUBLIC_PATH_ITEM + `/${postId}`;
+        const res = await Fetch.get(path);
         const itemDetail = await res.json();
         return itemDetail;
       } catch (err) {

@@ -16,11 +16,6 @@ const pagePersistConfig = {
   storage: storageSession,
 };
 
-const chatPersistConfig = {
-  key: "session",
-  storage: storageSession,
-};
-
 const persistedSignReducer = persistReducer(signPersistConfig, signReducer);
 const persistedPageReducer = persistReducer(pagePersistConfig, pageReducer);
 

@@ -4,7 +4,6 @@ import { memo } from "react";
 import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
 import { selectIsLogIn } from "@/redux/slice/signSlice";
-import ThemeToggle from "@components/theme_toggle/ThemeToggle";
 import Gnb from "./components/gnb/Gnb";
 import SearchBar from "../search_bar/SearchBar";
 import Sign from "./components/sign/Sign";
@@ -33,7 +32,6 @@ function Header() {
           {width > 1024 ? (
             <>
               <SearchBar />
-              {/* <ThemeToggle /> */}
               <div className="sign-pre">
                 {isLogIn ? <UserBoard /> : <Sign />}
               </div>

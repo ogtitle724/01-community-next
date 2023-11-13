@@ -60,9 +60,7 @@ function SignIn() {
 
   const silentRenew = async () => {
     try {
-      await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGIN_SILENCE, {
-        next: { revalidate: 0 },
-      });
+      await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGIN_SILENCE);
       setTimeout(silentRenew, process.env.NEXT_PUBLIC_TOKEN_REGENERATE_TIME);
       console.log("silent refresh(token)");
     } catch (err) {

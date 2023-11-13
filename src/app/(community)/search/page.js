@@ -6,7 +6,7 @@ import { metaData } from "@/config/metadata";
 
 const getData = cache(async (path) => {
   try {
-    const res = await Fetch.get(path, { next: { revalidate: 0 } });
+    const res = await Fetch.get(path);
     return await res.json();
   } catch (err) {
     console.error(err);

@@ -1,3 +1,5 @@
+import { settings } from "eslint-config-next";
+
 class Fetch {
   constructor() {
     this.defaultOptions = {
@@ -8,6 +10,7 @@ class Fetch {
       },
     };
     this.domain = process.env.NEXT_PUBLIC_URL_SVR;
+    this.isChange = false;
   }
 
   //intercept response and set auth header
@@ -48,10 +51,19 @@ class Fetch {
   }
 
   async get(path, options = {}) {
-    return this.request(path, { ...options, method: "GET" });
+    if (this.isChange) {
+      return this.request(path, {
+        ...options,
+        next: { revalidate: 0 },
+        method: "GET",
+      });
+    } else {
+      return this.request(path, { ...options, method: "GET" });
+    }
   }
 
   async post(path, data, options = {}) {
+    this;
     return this.request(path, {
       ...options,
       method: "POST",
@@ -77,6 +89,13 @@ class Fetch {
 
   async delete(path, options = {}) {
     return this.request(path, { ...options, method: "DELETE" });
+  }
+
+  async dataChange() {
+    this.isChange = true;
+    setTimeout(() => {
+      this.isChange = false;
+    }, 1000);
   }
 }
 

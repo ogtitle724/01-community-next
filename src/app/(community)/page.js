@@ -12,10 +12,9 @@ export default async function HomePage(props) {
   const page = querys.page ?? 1;
 
   try {
-    const res = await Fetch.get(
-      process.env.NEXT_PUBLIC_PATH_PAGING + `/best?page=${page - 1}&size=30`,
-      { next: { revalidate: 0 } }
-    );
+    const path =
+      process.env.NEXT_PUBLIC_PATH_PAGING + `/best?page=${page - 1}&size=30`;
+    const res = await Fetch.get(path);
     const postData = await res.json();
 
     return (

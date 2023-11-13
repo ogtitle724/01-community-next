@@ -35,9 +35,7 @@ function UserBoard() {
     e.preventDefault();
 
     try {
-      await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGOUT, {
-        next: { revalidate: 0 },
-      });
+      await Fetch.get(process.env.NEXT_PUBLIC_PATH_LOGOUT);
       delete Fetch.defaultOptions.headers["Authorization"];
       dispatch(logout());
       dispatch(setUser({ user: null }));

@@ -26,10 +26,8 @@ export default function WritePage({ params }) {
     const getUpdateData = async () => {
       const postId = params?.id;
       try {
-        const res = await Fetch.get(
-          process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`,
-          { next: { revalidate: 0 } }
-        );
+        const path = process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`;
+        const res = await Fetch.get(path);
         const postDetail = await res.json();
         return postDetail;
       } catch (err) {

@@ -2,9 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
-import Link from "next/link";
 import socket from "@/util/socket";
-import ThemeToggle from "@components/theme_toggle/ThemeToggle";
 import timeConverter from "@/util/time_converter";
 import { sanitize } from "@/util/secure";
 import "./style.css";
@@ -83,7 +81,6 @@ export default function ChatNav({
             onClick={handleClkBtnHome}
             aria-label="홈 화면으로 이동"
           ></button>
-          <ThemeToggle />
           <input
             placeholder="검색"
             className="chatnav__search"
