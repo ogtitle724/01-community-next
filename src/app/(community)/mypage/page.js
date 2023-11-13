@@ -24,7 +24,6 @@ export default function Mypage() {
         let res, data;
         res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_USER);
         data = await res.json();
-        console.log(data);
         setData(data);
       } catch (err) {
         console.error(err);

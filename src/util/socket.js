@@ -19,7 +19,7 @@ class Socket {
 
   setListeners(senderId, senderNick = null) {
     this.socket.addEventListener("open", () => {
-      console.log("socket => OPEN");
+      console.log("SOCKET // OPEN");
 
       if (senderNick) {
         const checkCreateUser = (e) => {

@@ -2,11 +2,10 @@
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
-import "./style.css";
 import { useEffect, useRef, useState } from "react";
+import "./style.css";
 
 export default function ImgSlider({ itemDetail }) {
-  console.log(itemDetail);
   const slider = useRef();
   const container = useRef();
   const width = useSelector(selectWidth);

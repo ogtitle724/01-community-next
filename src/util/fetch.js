@@ -27,10 +27,6 @@ class Fetch {
 
   async request(path, options = {}) {
     const url = this.domain + path;
-    console.log(
-      "\n----------------------------------------------------------\n"
-    );
-    console.log(url);
     const newOptions = JSON.parse(JSON.stringify(this.defaultOptions));
 
     Object.keys(options).forEach((attr) => {

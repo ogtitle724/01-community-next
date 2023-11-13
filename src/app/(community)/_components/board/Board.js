@@ -13,12 +13,6 @@ export default function Board({ posts, title, isThumbnail }) {
   const [isDivide, setIsDivide] = useState(false);
   const [isShowImg, setIsShowImg] = useState(isThumbnail);
   const width = useSelector(selectWidth);
-  const router = useRouter();
-
-  useEffect(() => {
-    console.log("ref-----------------------------");
-    router.refresh();
-  }, [router]);
 
   useEffect(() => {
     if (width < 768 && isDivide) {
@@ -88,7 +82,6 @@ export default function Board({ posts, title, isThumbnail }) {
 }
 
 function Post({ post, isShowImg }) {
-  console.log(post.wr_date);
   const time = timeConverter(post.wr_date);
 
   return (

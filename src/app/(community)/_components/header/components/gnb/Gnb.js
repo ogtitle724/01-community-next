@@ -32,7 +32,6 @@ function Gnb() {
 
     dispatch(setGroup(null));
     dispatch(setCategory(arg));
-    router.refresh();
     router.push(`/${arg === "홈" ? "" : categoryKO2EN[arg]}`);
   };
 

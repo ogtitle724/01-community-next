@@ -200,6 +200,7 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
 
     try {
       await Fetch.patch(path, body, option);
+      reva;
       router.refresh();
     } catch (err) {
       console.error(err);

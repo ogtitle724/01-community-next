@@ -46,7 +46,6 @@ export default function ItemUpload({ params }) {
     const fetchDataAndUpdate = async () => {
       try {
         const itemDetail = await getUpdateData();
-        console.log(itemDetail, user);
 
         if (itemDetail.user_id !== user.id) throw new Error("No permission");
 

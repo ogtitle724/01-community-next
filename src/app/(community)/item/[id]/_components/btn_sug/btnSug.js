@@ -17,7 +17,6 @@ export default function BtnSug({ itemDetail }) {
 
   useEffect(() => {
     if (user && user.id === itemDetail.user_id) setIsWriter(true);
-    console.log(isWriter);
   }, [isWriter, itemDetail.user_id, user]);
 
   const handleClkBtnSug = () => dialogRef.current.showModal();
@@ -133,10 +132,7 @@ function SugForm({ dialogRef, itemDetail }) {
     dialogRef.current.close();
   };
 
-  const handleClkItem = (sugedItem) => {
-    setSelectedItem(sugedItem);
-    console.log(sugedItem);
-  };
+  const handleClkItem = (sugedItem) => setSelectedItem(sugedItem);
 
   const handleClkBtnCreate = (e) => {
     e.preventDefault();

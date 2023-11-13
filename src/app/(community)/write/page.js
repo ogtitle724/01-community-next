@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectIsLogIn, selectUser } from "@/redux/slice/signSlice";
+import {
+  setCategory as setCtg,
+  setGroup as setGrp,
+} from "@/redux/slice/pageSlice";
 import { categories, categoryKO2EN } from "@/config/category";
 import "./style.css";
 
@@ -68,11 +72,11 @@ export default function WritePage({ params }) {
       const path = process.env.NEXT_PUBLIC_PATH_POST;
       await Fetch.post(path, payload, option);
 
-      dispatch(setCategory(category));
-      if (group) dispatch(setGroup(group));
+      dispatch(setCtg(category));
+      if (group) dispatch(setGrp(group));
 
       router.push(
-        `/${categoryKO2EN[category] + group ? `?group=${group}` : ""}`
+        `/${categoryKO2EN[category] + (group ? `?group=${group}` : "")}`
       );
     } catch (err) {
       console.error(err);

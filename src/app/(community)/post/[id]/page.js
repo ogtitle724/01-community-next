@@ -50,8 +50,6 @@ export default async function PostDetailPage({ params }) {
   const postData = await getData(path);
 
   if (postData) {
-    console.log(postData.wr_date);
-    console.log("wr", timeConverter(postData.wr_date));
     return (
       <>
         <section className="content-board">

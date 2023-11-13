@@ -56,7 +56,6 @@ export default function Slider() {
       p.current.sliderWidth -
       (p.current.foldWidth + p.current.gap) * (p.current.length - 1);
     p.current.imgHeight = p.current.imgWidth * (3 / 4);
-    console.log(p.current.imgWidth, p.current.imgHeight);
   }, [width]);
 
   useEffect(() => {
