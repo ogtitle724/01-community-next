@@ -68,7 +68,7 @@
 }
 
 .item-card {
-  --item-card-width: 180px;
+  --item-card-width: 160px;
   --item-card-padding: 3px;
   width: var(--item-card-width);
   height: calc(var(--item-card-width) * 1.2);
@@ -90,15 +90,15 @@
 }
 
 .item-card__img {
-  width: 180px;
-  height: 135px;
+  width: var(--item-card-width);
+  height: calc(var(--item-card-width) * 3 / 4);
   margin-top: 10px;
   position: relative;
   background-color: var(--color-smoke-a);
 }
 
 .item-card__img img {
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .item-card__no-img::after {
@@ -125,7 +125,7 @@
 }
 
 .item-card__indicator {
-  width: 180px;
+  width: var(--item-card-width);
   padding: 5px;
   position: relative;
   display: flex;
@@ -133,16 +133,16 @@
 }
 
 .item-card__i-like {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   display: inline-block;
   background: url(/image/icon/heart.svg) no-repeat center;
   filter: invert(var(--icon-invert));
 }
 
 .item-card__i-chat {
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   display: inline-block;
   background: url(/image/icon/chatbubble.svg) no-repeat center;
   filter: invert(var(--icon-invert));

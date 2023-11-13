@@ -1,6 +1,6 @@
 "use client";
-import Link from "next/link";
-import { memo } from "react";
+import { useRouter } from "next/navigation";
+import { memo, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
 import { selectIsLogIn } from "@/redux/slice/signSlice";
@@ -18,17 +18,41 @@ function Header() {
   const isLogIn = useSelector(selectIsLogIn);
   const width = useSelector(selectWidth);
   const params = useParams();
+  const header = useRef();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (header && header.current) {
+      const wheelEvent = (e) => {
+        if (e.deltaY >= 0) {
+          header.current.style.top = `-${header.current.offsetHeight}px`;
+        } else {
+          header.current.style.top = "0px";
+        }
+      };
+
+      window.addEventListener("wheel", wheelEvent);
+
+      return () => window.removeEventListener("wheel", wheelEvent);
+    }
+  }, []);
+
+  const handleClkLogo = () => {
+    router.refresh();
+    router.push("/");
+  };
 
   return (
     <>
-      <header className="header">
+      <header ref={header} className="header">
         <section className="header__interface">
-          <Link
+          <a
             className="header__logo text--t"
             href={process.env.NEXT_PUBLIC_ROUTE_HOME}
+            onClick={handleClkLogo}
           >
             {process.env.NEXT_PUBLIC_TITLE}
-          </Link>
+          </a>
           {width > 1024 ? (
             <>
               <SearchBar />

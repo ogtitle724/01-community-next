@@ -1,5 +1,3 @@
-import { settings } from "eslint-config-next";
-
 class Fetch {
   constructor() {
     this.defaultOptions = {
@@ -63,7 +61,8 @@ class Fetch {
   }
 
   async post(path, data, options = {}) {
-    this;
+    this.dataChange();
+
     return this.request(path, {
       ...options,
       method: "POST",
@@ -72,6 +71,8 @@ class Fetch {
   }
 
   async put(path, data, options = {}) {
+    this.dataChange();
+
     return this.request(path, {
       ...options,
       method: "PUT",
@@ -80,6 +81,8 @@ class Fetch {
   }
 
   async patch(path, data, options = {}) {
+    this.dataChange();
+
     return this.request(path, {
       ...options,
       method: "PATCH",
@@ -88,6 +91,8 @@ class Fetch {
   }
 
   async delete(path, options = {}) {
+    this.dataChange();
+
     return this.request(path, { ...options, method: "DELETE" });
   }
 
@@ -96,6 +101,7 @@ class Fetch {
     setTimeout(() => {
       this.isChange = false;
     }, 1000);
+    return;
   }
 }
 

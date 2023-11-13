@@ -172,6 +172,12 @@
   gap: 3px;
 }
 
+.board-item__data span {
+  margin-left: 1px;
+  position: relative;
+  top: 1px;
+}
+
 .board-item__nick {
   display: block;
   position: relative;

@@ -32,32 +32,6 @@
   }
 }
 
-/* :root[color-theme="light"] {
-  --color-font: black;
-  --color-main: rgb(38, 66, 130);
-  --color-opposite: rgb(197, 118, 43);
-  --color-body: rgb(244, 244, 244);
-  --color-smoke-a: rgb(233, 233, 233);
-  --color-smoke-b: #cfcfcf;
-  --color-shadow-lu: rgb(255, 255, 255);
-  --color-shadow-rd: #e1e1e1;
-  --icon-invert: 0%;
-  --icon-invert-b: 100%;
-}
-
-:root[color-theme="dark"] {
-  --color-font: rgb(195, 195, 195);
-  --color-main: rgb(197, 118, 43);
-  --color-opposite: rgb(38, 66, 130);
-  --color-body: rgb(43, 43, 43);
-  --color-smoke-a: #3b3b3b;
-  --color-smoke-b: rgb(82, 82, 82);
-  --color-shadow-lu: rgb(66, 66, 66);
-  --color-shadow-rd: rgb(22, 22, 22);
-  --icon-invert: 80%;
-  --icon-invert-b: 0%;
-} */
-
 @media (prefers-color-scheme: dark) {
   :root {
     --color-font: rgb(195, 195, 195);
@@ -91,7 +65,6 @@
 
 body {
   min-height: 100vh;
-  font-family: var(--font-noto);
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -106,7 +79,6 @@ img {
 input,
 select,
 button {
-  font-family: var(--font-noto);
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -129,7 +101,6 @@ input {
 }
 
 input::placeholder {
-  font-family: var(--font-noto);
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

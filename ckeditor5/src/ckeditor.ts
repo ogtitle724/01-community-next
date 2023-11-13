@@ -6,13 +6,12 @@
 import { ClassicEditor } from '@ckeditor/ckeditor5-editor-classic';
 
 import { Alignment } from '@ckeditor/ckeditor5-alignment';
-import { Bold } from '@ckeditor/ckeditor5-basic-styles';
+import { Bold, Italic, Underline } from '@ckeditor/ckeditor5-basic-styles';
 import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
-import { FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font';
+import { FontColor, FontSize } from '@ckeditor/ckeditor5-font';
 import { Heading } from '@ckeditor/ckeditor5-heading';
 import { HorizontalLine } from '@ckeditor/ckeditor5-horizontal-line';
-import { GeneralHtmlSupport } from '@ckeditor/ckeditor5-html-support';
 import {
 	AutoImage,
 	Image,
@@ -24,11 +23,11 @@ import {
 	ImageUpload
 } from '@ckeditor/ckeditor5-image';
 import { Indent, IndentBlock } from '@ckeditor/ckeditor5-indent';
-import { List, ListProperties, TodoList } from '@ckeditor/ckeditor5-list';
-import { MediaEmbed, MediaEmbedToolbar } from '@ckeditor/ckeditor5-media-embed';
+import { AutoLink, Link, LinkImage } from '@ckeditor/ckeditor5-link';
+import { List, ListProperties } from '@ckeditor/ckeditor5-list';
+import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { PasteFromOffice } from '@ckeditor/ckeditor5-paste-from-office';
-import { Style } from '@ckeditor/ckeditor5-style';
 import {
 	Table,
 	TableCaption,
@@ -46,13 +45,12 @@ class Editor extends ClassicEditor {
 	public static override builtinPlugins = [
 		Alignment,
 		AutoImage,
+		AutoLink,
 		BlockQuote,
 		Bold,
 		Essentials,
 		FontColor,
-		FontFamily,
 		FontSize,
-		GeneralHtmlSupport,
 		Heading,
 		HorizontalLine,
 		Image,
@@ -64,13 +62,14 @@ class Editor extends ClassicEditor {
 		ImageUpload,
 		Indent,
 		IndentBlock,
+		Italic,
+		Link,
+		LinkImage,
 		List,
 		ListProperties,
 		MediaEmbed,
-		MediaEmbedToolbar,
 		Paragraph,
 		PasteFromOffice,
-		Style,
 		Table,
 		TableCaption,
 		TableCellProperties,
@@ -78,7 +77,7 @@ class Editor extends ClassicEditor {
 		TableProperties,
 		TableToolbar,
 		TextTransformation,
-		TodoList
+		Underline
 	];
 
 	public static override defaultConfig = {
@@ -86,25 +85,25 @@ class Editor extends ClassicEditor {
 			items: [
 				'heading',
 				'|',
-				'style',
-				'|',
 				'fontSize',
 				'fontColor',
-				'fontFamily',
 				'bold',
+				'italic',
+				'underline',
+				'|',
 				'blockQuote',
 				'horizontalLine',
-				'|',
 				'bulletedList',
 				'numberedList',
+				'|',
 				'alignment',
 				'outdent',
 				'indent',
 				'|',
-				'imageUpload',
 				'imageInsert',
 				'mediaEmbed',
-				'insertTable'
+				'insertTable',
+				'link'
 			]
 		},
 		language: 'ko',
@@ -114,7 +113,8 @@ class Editor extends ClassicEditor {
 				'toggleImageCaption',
 				'imageStyle:inline',
 				'imageStyle:block',
-				'imageStyle:side'
+				'imageStyle:side',
+				'linkImage'
 			]
 		},
 		table: {

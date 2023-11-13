@@ -74,12 +74,12 @@ function ItemCard({ item }) {
         <h3 className="item-card__title text--m">{item.title}</h3>
         <div className="item-card__indicator">
           <i className="item-card__i-like"></i>
-          <span className="item-card__n-like text--s">
+          <span className="item-card__n-like text--vs">
             {item.wishlist_cnt ?? 0}
           </span>
           <i className="item-card__i-chat"></i>
-          <span className="item-card__n-chat text--s">99+</span>
-          <span className="item-card__nick text--s">{item.nick}</span>
+          <span className="item-card__n-chat text--vs">99+</span>
+          <span className="item-card__nick text--vs">{item.nick}</span>
         </div>
       </Link>
     </section>

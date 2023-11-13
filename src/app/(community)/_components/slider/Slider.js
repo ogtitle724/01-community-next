@@ -68,6 +68,7 @@ export default function Slider() {
 
       tempBtns.push(
         <button
+          key={"slider-btn-" + idx}
           className={
             "slider__btn" + (focusIdx == idx ? " slider__btn--focus" : "")
           }

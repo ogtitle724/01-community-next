@@ -7,7 +7,7 @@ import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
 
 import Fetch from "@/util/fetch";
 import timeConverter from "@/util/time_converter";
-import { selectIsDarkMode, selectUser } from "@/redux/slice/signSlice";
+import { selectUser } from "@/redux/slice/signSlice";
 import { sanitize } from "@/util/secure";
 import { changeP2Span, deleteEnter } from "@/util/textProcess";
 import "./style.css";
@@ -159,7 +159,6 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
   const [isEdit, setIsEdit] = useState(false);
   const [isWriter, setIsWriter] = useState(false);
   const [content, setContent] = useState("");
-  const isDarkMode = useSelector(selectIsDarkMode);
   const timeDisplay = timeConverter(comment.wr_date);
   const user = useSelector(selectUser);
   const router = useRouter();
@@ -306,12 +305,7 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
         )}
       </div>
       {!isEdit && !comment.del_date && (
-        <div
-          className={
-            "comment__interface" +
-            (isDarkMode ? " comment__interface--dark" : "")
-          }
-        >
+        <div className="comment__interface">
           <div className="comment__rec-wrapper">
             <button
               className="comment__btn comment__btn-like"

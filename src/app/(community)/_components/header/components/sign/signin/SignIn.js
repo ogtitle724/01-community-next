@@ -48,8 +48,6 @@ function SignIn() {
       dispatch(setUser({ user }));
       dispatch(setLoginDeadline({ deadline: afterAWeek.toString() }));
       setTimeout(silentRenew, process.env.NEXT_PUBLIC_TOKEN_REGENERATE_TIME);
-
-      dispatch(chatConnect({ sign: true }));
     } catch (err) {
       setIsFail(true);
       setTimeout(() => setIsFail(false), 3000);

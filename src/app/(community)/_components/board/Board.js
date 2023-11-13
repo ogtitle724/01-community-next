@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import timeConverter from "@/util/time_converter";
 import "./style.css";
 import { useSelector } from "react-redux";
@@ -139,6 +139,7 @@ function Nav({ posts }) {
   const searchParams = useSearchParams();
   const page = +searchParams.get("page");
   const group = searchParams.get("group");
+  const router = useRouter();
 
   navItems.current = Array(posts.totalPages)
     .fill(1)
@@ -150,6 +151,11 @@ function Nav({ posts }) {
 
   const handleClkNext = () => {
     if (navPage < ~~(posts.totalPages / 10)) setNavPage(navPage + 1);
+  };
+
+  const handleClkBtnNav = (arg) => {
+    router.refresh();
+    router.push(path + (ele - 1 ? `?group=${group}&page=${ele}` : ""));
   };
 
   return (
@@ -166,17 +172,17 @@ function Nav({ posts }) {
         .map((ele, idx) => {
           return (
             <li className="board__nav-btn" key={"navItem_" + idx}>
-              <Link
+              <a
                 className={
                   "board__nav-btn" +
                   (page === ele || (ele === 1 && !page)
                     ? " board__nav-btn--focus"
                     : "")
                 }
-                href={path + (ele - 1 ? `?group=${group}&page=${ele}` : "")}
+                onClick={handleClkBtnNav(group)}
               >
                 {ele}
-              </Link>
+              </a>
             </li>
           );
         })}
