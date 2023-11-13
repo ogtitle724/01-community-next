@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { memo, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { selectCategory, setCategory, setGroup } from "@/redux/slice/pageSlice";
@@ -16,7 +15,6 @@ function Gnb() {
   const gnb = useRef();
   const btnFocus = useRef();
   const category = useSelector(selectCategory);
-  const router = useRouter();
 
   useEffect(() => {
     if (gnb.current) {
@@ -28,28 +26,32 @@ function Gnb() {
   }, [width, category]);
 
   const handleClkBtnGnb = (arg) => {
-    console.log("dd");
     dispatch(setGroup(null));
     dispatch(setCategory(arg));
-    router.refresh();
-    router.push(`/${arg ? categoryKO2EN[arg] : ""} `);
   };
 
   return (
     <>
       <nav ref={gnb} className="gnb">
-        <a className="gnb__item text--m" onClick={() => handleClkBtnGnb("")}>
+        <Link
+          className="gnb__item text--m"
+          href={process.env.NEXT_PUBLIC_ROUTE_HOME}
+          scroll={false}
+          onClick={() => handleClkBtnGnb("홈")}
+        >
           홈
-        </a>
+        </Link>
         {Object.keys(categories).map((category, idx) => {
           return (
-            <a
+            <Link
               key={"gnb-category_" + idx}
               className="gnb__item text--m"
+              href={`/${categoryKO2EN[category]}`}
+              scroll={false}
               onClick={() => handleClkBtnGnb(category)}
             >
               {category}
-            </a>
+            </Link>
           );
         })}
         <div ref={marker} className="gnb__mark"></div>

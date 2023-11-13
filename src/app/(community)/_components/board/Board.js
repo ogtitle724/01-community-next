@@ -2,7 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import timeConverter from "@/util/time_converter";
 import "./style.css";
 import { useSelector } from "react-redux";
@@ -13,6 +14,12 @@ export default function Board({ posts, title, isThumbnail }) {
   const [isDivide, setIsDivide] = useState(false);
   const [isShowImg, setIsShowImg] = useState(isThumbnail);
   const width = useSelector(selectWidth);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log("ref-----------------------------");
+    router.refresh();
+  }, [router]);
 
   useEffect(() => {
     if (width < 768 && isDivide) {
@@ -139,7 +146,6 @@ function Nav({ posts }) {
   const searchParams = useSearchParams();
   const page = +searchParams.get("page");
   const group = searchParams.get("group");
-  const router = useRouter();
 
   navItems.current = Array(posts.totalPages)
     .fill(1)
@@ -151,11 +157,6 @@ function Nav({ posts }) {
 
   const handleClkNext = () => {
     if (navPage < ~~(posts.totalPages / 10)) setNavPage(navPage + 1);
-  };
-
-  const handleClkBtnNav = (arg) => {
-    router.refresh();
-    router.push(path + (ele - 1 ? `?group=${group}&page=${ele}` : ""));
   };
 
   return (
@@ -172,17 +173,17 @@ function Nav({ posts }) {
         .map((ele, idx) => {
           return (
             <li className="board__nav-btn" key={"navItem_" + idx}>
-              <a
+              <Link
                 className={
                   "board__nav-btn" +
                   (page === ele || (ele === 1 && !page)
                     ? " board__nav-btn--focus"
                     : "")
                 }
-                onClick={handleClkBtnNav(group)}
+                href={path + (ele - 1 ? `?group=${group}&page=${ele}` : "")}
               >
                 {ele}
-              </a>
+              </Link>
             </li>
           );
         })}

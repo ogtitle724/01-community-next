@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { memo } from "react";
 import { categories, categoryKO2EN } from "@/config/category";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,12 +10,9 @@ function GnbGroup() {
   const category = useSelector(selectCategory);
   const grp = useSelector(selectGroup);
   const dispatch = useDispatch();
-  const router = useRouter();
 
   const handleClkBtnGroup = (arg) => {
     dispatch(setGroup(arg));
-    router.refresh();
-    router.push(`/${categoryKO2EN[category]}?group=${arg}`);
   };
 
   if (category) {
@@ -23,16 +20,17 @@ function GnbGroup() {
       <nav className="gnb-group">
         {categories[category]?.map((group, idx) => {
           return (
-            <a
+            <Link
               key={"gnb-group_" + idx}
               className={
                 "gnb-group__item text--vs" +
                 (group === grp ? " gnb-group__item--cur" : "")
               }
+              href={`/${categoryKO2EN[category]}?group=${group}`}
               onClick={() => handleClkBtnGroup(group)}
             >
               {group}
-            </a>
+            </Link>
           );
         })}
       </nav>

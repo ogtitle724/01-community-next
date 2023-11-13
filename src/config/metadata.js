@@ -78,5 +78,6 @@ export const metaData = {
   },
   other: {
     "google-site-verification": "g2QNUQioOSVhibeq1m4sAntQTiBwJtFRgnUD-rlmfQo",
+    "naver-site-verification": "b329f51688325a1772316f4d1c1bdfeaa952ad22",
   },
 };

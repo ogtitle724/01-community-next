@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { memo, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { selectWidth } from "@/redux/slice/pageSlice";
@@ -19,7 +19,6 @@ function Header() {
   const width = useSelector(selectWidth);
   const params = useParams();
   const header = useRef();
-  const router = useRouter();
 
   useEffect(() => {
     if (header && header.current) {
@@ -37,22 +36,16 @@ function Header() {
     }
   }, []);
 
-  const handleClkLogo = () => {
-    router.refresh();
-    router.push("/");
-  };
-
   return (
     <>
       <header ref={header} className="header">
         <section className="header__interface">
-          <a
+          <Link
             className="header__logo text--t"
             href={process.env.NEXT_PUBLIC_ROUTE_HOME}
-            onClick={handleClkLogo}
           >
             {process.env.NEXT_PUBLIC_TITLE}
-          </a>
+          </Link>
           {width > 1024 ? (
             <>
               <SearchBar />
