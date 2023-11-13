@@ -282,14 +282,14 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
             />
             <div className="comment-board__btn-wrapper">
               <button
-                className="comment-board__btn"
+                className="comment-board__btn btn--m"
                 onClick={handleClkBtnUpdate}
                 aria-label="댓글 등록"
               >
                 ✔
               </button>
               <button
-                className="comment-board__btn"
+                className="comment-board__btn btn--m"
                 onClick={handleClkBtnCancel}
                 aria-label="취소"
               >

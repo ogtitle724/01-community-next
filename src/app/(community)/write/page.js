@@ -66,6 +66,7 @@ export default function WritePage({ params }) {
     try {
       const path = process.env.NEXT_PUBLIC_PATH_POST;
       await Fetch.post(path, payload, option);
+      router.refresh();
       router.push(`/${categoryKO2EN[category]}`);
     } catch (err) {
       console.error(err);

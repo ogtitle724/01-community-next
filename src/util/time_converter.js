@@ -18,5 +18,7 @@ export default function timeConverter(wr_date, isChat = false) {
   } else {
     timeDisplay = JSON.stringify(date).slice(1, 11);
   }
+  console.log(diffMinutes);
+
   return timeDisplay;
 }
