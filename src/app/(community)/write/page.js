@@ -3,10 +3,9 @@ import dynamic from "next/dynamic";
 import Fetch from "@/util/fetch";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectIsLogIn, selectUser } from "@/redux/slice/signSlice";
 import { categories, categoryKO2EN } from "@/config/category";
-import action from "@/util/revalidate";
 import "./style.css";
 
 const Editor = dynamic(() => import("@components/editor/editor"), {
@@ -22,6 +21,7 @@ export default function WritePage({ params }) {
   const [body, setBody] = useState("");
   const [category, setCategory] = useState("유머");
   const [group, setGroup] = useState("");
+  const dispatch = useDispatch();
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
@@ -67,9 +67,13 @@ export default function WritePage({ params }) {
     try {
       const path = process.env.NEXT_PUBLIC_PATH_POST;
       await Fetch.post(path, payload, option);
-      //router.refresh();
-      action();
-      router.push(`/${categoryKO2EN[category]}`);
+
+      dispatch(setCategory(category));
+      if (group) dispatch(setGroup(group));
+
+      router.push(
+        `/${categoryKO2EN[category] + group ? `?group=${group}` : ""}`
+      );
     } catch (err) {
       console.error(err);
       alert("게시글 작성 혹은 수정을 완료하지 못했습니다.");

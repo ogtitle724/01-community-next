@@ -23,11 +23,6 @@ const nextConfig = {
       },
     ],
   },
-  /* experimental: {
-    logging: {
-      level: 'verbose'
-    }
-  } */
 };
 
 module.exports = nextConfig;

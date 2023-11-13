@@ -1,3 +1,5 @@
+import revalidate from "./revalidate";
+
 class Fetch {
   constructor() {
     this.defaultOptions = {
@@ -54,20 +56,10 @@ class Fetch {
       next: { tags: ["get"] },
       method: "GET",
     });
-    /* if (this.isChange) {
-      return this.request(path, {
-        ...options,
-        next: { revalidate: 0 },
-        method: "GET",
-      });
-    } else {
-      return this.request(path, { ...options, next: { revalidate: 1000 * 60 }, method: "GET" });
-    } */
   }
 
   async post(path, data, options = {}) {
-    this.dataChange();
-
+    revalidate();
     return this.request(path, {
       ...options,
       method: "POST",
@@ -76,8 +68,7 @@ class Fetch {
   }
 
   async put(path, data, options = {}) {
-    this.dataChange();
-
+    revalidate();
     return this.request(path, {
       ...options,
       method: "PUT",
@@ -86,8 +77,7 @@ class Fetch {
   }
 
   async patch(path, data, options = {}) {
-    this.dataChange();
-
+    revalidate();
     return this.request(path, {
       ...options,
       method: "PATCH",
@@ -96,18 +86,8 @@ class Fetch {
   }
 
   async delete(path, options = {}) {
-    this.dataChange();
-
+    revalidate();
     return this.request(path, { ...options, method: "DELETE" });
-  }
-
-  async dataChange() {
-    this.isChange = true;
-    setTimeout(() => {
-      this.isChange = false;
-    }, 1000);
-
-    return;
   }
 }
 

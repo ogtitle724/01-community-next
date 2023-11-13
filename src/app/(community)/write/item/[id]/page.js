@@ -156,7 +156,6 @@ export default function ItemUpload({ params }) {
         body,
         option
       );
-      router.refresh();
       router.back();
     } catch (err) {
       console.error(err);
