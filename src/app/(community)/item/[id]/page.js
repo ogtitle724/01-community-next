@@ -9,6 +9,7 @@ import { sanitize } from "@/util/secure";
 import { metaData } from "@/config/metadata";
 import { deleteTags } from "@/util/textProcess";
 import "./style.css";
+import revalidate from "@/util/revalidate";
 
 const getData = cache(async (path) => {
   try {
@@ -48,6 +49,7 @@ export default async function ItemDetailPage({ params }) {
   const itemId = params.id;
   const path = process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemId}`;
   const itemData = await getData(path);
+  revalidate();
 
   if (itemData) {
     return (
