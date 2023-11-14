@@ -9,6 +9,7 @@ import { cache } from "react";
 import { deleteTags } from "@/util/textProcess";
 import { metaData } from "@/config/metadata";
 import "./style.css";
+import revalidate from "@/util/revalidate";
 
 const getData = cache(async (path) => {
   try {
@@ -46,6 +47,7 @@ export const generateMetadata = cache(async ({ params }) => {
 });
 
 export default async function PostDetailPage({ params }) {
+  revalidate();
   const path = process.env.NEXT_PUBLIC_PATH_POST + `/${params.id}`;
   const postData = await getData(path);
 
