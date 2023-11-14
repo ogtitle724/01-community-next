@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import Fetch from "@/util/fetch";
+import revalidate from "@/util/revalidate";
 import ImgReceiver from "@/app/_components/img_receiver/ImgReceiver";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -102,6 +103,7 @@ export default function ItemUpload() {
       });
 
       await Fetch.post(process.env.NEXT_PUBLIC_PATH_ITEM, body, option);
+      revalidate();
       router.push(process.env.NEXT_PUBLIC_ROUTE_BARTER);
     } catch (err) {
       console.error(err);

@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import {
   login,
   logout,
-  chatConnect,
   setLoginDeadline,
   setUser,
 } from "@/redux/slice/signSlice";
@@ -22,6 +21,7 @@ function SignIn() {
 
   const handleClickBtnLogIn = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
 
     try {
       const body = { uid, pwd };
@@ -76,7 +76,7 @@ function SignIn() {
   };
 
   return (
-    <fieldset
+    <section
       onKeyDown={handleEnter}
       className={"signin" + (isFail ? " signin--fail" : "")}
     >
@@ -115,7 +115,7 @@ function SignIn() {
       >
         ✔
       </button>
-    </fieldset>
+    </section>
   );
 }
 

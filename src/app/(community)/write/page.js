@@ -1,6 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import Fetch from "@/util/fetch";
+import revalidate from "@/util/revalidate";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -75,6 +76,7 @@ export default function WritePage({ params }) {
       dispatch(setCtg(category));
       if (group) dispatch(setGrp(group));
 
+      revalidate();
       router.push(
         `/${categoryKO2EN[category] + (group ? `?group=${group}` : "")}`
       );

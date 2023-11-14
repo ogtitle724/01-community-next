@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectUser } from "@/redux/slice/signSlice";
+import revalidate from "@/util/revalidate";
 import Fetch from "@/util/fetch";
 import socket from "@/util/socket";
 import Modal from "@/app/(community)/_components/modal/Modal";
@@ -117,6 +118,7 @@ function SugForm({ dialogRef, itemDetail }) {
           process.env.NEXT_PUBLIC_PATH_ITEM +
             `/${itemDetail.id}/suggest/${selectedItem.id}`
         );
+        revalidate();
         dialogRef.current.close();
       } catch (err) {
         console.error(err);

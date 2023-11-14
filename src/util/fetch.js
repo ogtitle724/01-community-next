@@ -10,7 +10,7 @@ class Fetch {
       },
     };
     this.domain = process.env.NEXT_PUBLIC_URL_SVR;
-    this.isChange = false;
+    this.reqCount = 1000;
   }
 
   //intercept response and set auth header
@@ -39,11 +39,18 @@ class Fetch {
       }
     });
 
-    let res = await fetch(url, newOptions);
-    if (!res.ok) throw Error(`${res.status} ${res.statusText}`);
+    if (this.reqCount) {
+      this.reqCount--;
+      let res = await fetch(url, newOptions);
+      if (!res.ok) throw Error(`${res.status} ${res.statusText}`);
 
-    res = await this.interceptRes(res);
-    return res;
+      res = await this.interceptRes(res);
+      return res;
+    } else {
+      setTimeout(() => {
+        this.reqCount = 1000;
+      }, 1000 * 60 * 5);
+    }
   }
 
   async get(path, options = {}) {
@@ -55,7 +62,6 @@ class Fetch {
   }
 
   async post(path, data, options = {}) {
-    revalidate();
     return this.request(path, {
       ...options,
       method: "POST",

@@ -79,7 +79,9 @@ function SignUp({ dialogRef }) {
 
   const handleClickBtnConfrim = useCallback(
     async (e) => {
+      console.log("click---------------------------------");
       e.preventDefault();
+      e.stopPropagation();
 
       try {
         const option = { headers: { "Content-Type": "application/json" } };
@@ -102,6 +104,8 @@ function SignUp({ dialogRef }) {
   const handleClickBtnAuth = useCallback(
     async (e) => {
       e.preventDefault();
+      e.stopPropagation();
+      console.log("click2----------------------------");
 
       setIsClickBtnAuth(true);
       setIsAuthBtnDisabled(true);
@@ -208,7 +212,7 @@ function SignUp({ dialogRef }) {
       >
         <button
           className={"signup__btn-auth"}
-          onClick={handleClickBtnAuth}
+          onClick={(e) => handleClickBtnAuth(e)}
           disabled={isAuthBtnDisabled || !checkEmail(email)}
           aria-label="이메일 인증코드 전송"
         >

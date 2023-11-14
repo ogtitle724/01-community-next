@@ -1,12 +1,12 @@
 "use client";
+import revalidate from "@/util/revalidate";
+import Fetch from "@/util/fetch";
+import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
+import timeConverter from "@/util/time_converter";
 import { Fragment, useRef, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "ckeditor5-custom-build/build/ckeditor";
-
-import Fetch from "@/util/fetch";
-import timeConverter from "@/util/time_converter";
 import { selectUser } from "@/redux/slice/signSlice";
 import { sanitize } from "@/util/secure";
 import { changeP2Span, deleteEnter } from "@/util/textProcess";
@@ -43,8 +43,9 @@ export default function CommentBoard({ postId, comments }) {
 
       try {
         await Fetch.post(path, JSON.stringify(payload), option);
-        let ck = editorRef.current.editor;
+        revalidate();
 
+        let ck = editorRef.current.editor;
         ck.setData("댓글을 입력해주세요...");
         setTarget(null);
         setContent("");
