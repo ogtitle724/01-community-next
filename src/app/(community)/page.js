@@ -3,6 +3,7 @@ import Fetch from "@/util/fetch";
 import ServerError from "./_components/error/Error";
 import { categoryEN2KO } from "@/config/category";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const Slider = dynamic(() => import("./_components/slider/Slider"));
 
@@ -20,6 +21,11 @@ export default async function HomePage(props) {
     return (
       <>
         <Slider />
+        <section className="announce">
+          <Link className="center--y text--m announce__a " href={"/"}>
+            📢 사이트 이용안내
+          </Link>
+        </section>
         <Board
           posts={postData}
           title={category ?? "BEST"}

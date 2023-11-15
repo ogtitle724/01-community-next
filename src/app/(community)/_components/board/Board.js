@@ -138,7 +138,7 @@ function Nav({ posts }) {
   const searchParams = useSearchParams();
   const page = +searchParams.get("page");
   const group = searchParams.get("group");
-  const router = useRouter;
+  const router = useRouter();
 
   navItems.current = Array(posts.totalPages)
     .fill(1)
@@ -152,10 +152,12 @@ function Nav({ posts }) {
     if (navPage < ~~(posts.totalPages / 10)) setNavPage(navPage + 1);
   };
 
-  const handleClkNav = (e) => {
+  const handleClkNav = (e, query) => {
+    e.preventDefault();
+    console.log(path, query);
     e.preventDefault();
     router.refresh();
-    router.push(`/${path + query}`);
+    router.push(`${path + query}`);
   };
 
   return (
@@ -170,7 +172,8 @@ function Nav({ posts }) {
       {navItems.current
         .slice(navPage * 10, navPage * 10 + 10)
         .map((ele, idx) => {
-          const query = ele - 1 ? `?group=${group}&page=${ele}` : "";
+          const query =
+            ele - 1 ? `?${group ? `group=${group}` : ""}&page=${ele}` : "";
           return (
             <li className="board__nav-btn" key={"navItem_" + idx}>
               <Link
