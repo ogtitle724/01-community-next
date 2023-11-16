@@ -26,6 +26,10 @@ const imgData = [
     src: "/image/sample1.jpeg",
     title: "4K 울트라 HD 리퀴드 메탈릭 월페이퍼",
   },
+  {
+    src: "/image/sample3.jpeg",
+    title: " 로스 산토스는 찬란한 햇빛을 받으며 거대하게 뻗은 대도시입니다.",
+  },
 ];
 
 export default function Slider() {
@@ -40,8 +44,8 @@ export default function Slider() {
   if (!p.current) {
     p.current = {
       length: imgData.length,
-      foldedRatio: 0.08,
-      gap: 5,
+      foldedRatio: 0.09,
+      gap: 8,
       sliderWidth: null,
       imgHeight: null,
       imgWidth: null,
