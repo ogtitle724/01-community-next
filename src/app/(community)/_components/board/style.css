@@ -181,6 +181,7 @@
 .board-item__nick {
   display: block;
   position: relative;
+  top: 1.5px;
 }
 
 .board-item__date {
