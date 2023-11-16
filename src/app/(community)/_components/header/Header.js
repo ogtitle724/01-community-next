@@ -56,7 +56,7 @@ function Header() {
             href={process.env.NEXT_PUBLIC_ROUTE_HOME}
             onClick={(e) => handleClkLogo(e)}
           >
-            {"clipMK"}
+            {"ClipMK"}
           </Link>
           {width > 1024 ? (
             <>

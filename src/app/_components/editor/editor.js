@@ -3,7 +3,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Fetch from "@/util/fetch";
 
 export default function Editor({ ckRef, onChange, data, isImg }) {
-  let initialData = data ? data : "";
+  let initialData = data ? data : " ";
 
   function uploadPlugin(editor) {
     editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
@@ -51,6 +51,7 @@ export default function Editor({ ckRef, onChange, data, isImg }) {
       data={initialData}
       onChange={(event, editor) => {
         const data = editor.getData();
+        console.log(data);
         onChange(data);
       }}
     />
