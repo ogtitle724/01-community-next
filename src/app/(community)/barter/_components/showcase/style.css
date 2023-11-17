@@ -78,6 +78,7 @@
   background-color: var(--color-body);
   box-shadow: -1.5px -1.5px 4px var(--color-shadow-lu),
     2px 2px 3px var(--color-shadow-rd);
+  list-style: none;
 }
 
 .item-card__a {

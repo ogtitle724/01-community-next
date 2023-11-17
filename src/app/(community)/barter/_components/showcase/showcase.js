@@ -21,6 +21,7 @@ export default function Showcase({ itemPagingData }) {
         <input
           className="showcase__search"
           onChange={(e) => setSearchTerm(e.target.value)}
+          aria-label="search"
         ></input>
         <button
           className="showcase__btn-search"
@@ -30,9 +31,15 @@ export default function Showcase({ itemPagingData }) {
           className="showcase__select-order text--vs"
           onChange={(e) => setOrder(e.target.value)}
         >
-          <option value="최신순">최신순</option>
-          <option value="등록일순">등록일순</option>
-          <option value="인기순">인기순</option>
+          <option value="최신순" aria-label="최신순">
+            최신순
+          </option>
+          <option value="등록일순" aria-label="최신순">
+            등록일순
+          </option>
+          <option value="인기순" aria-label="최신순">
+            인기순
+          </option>
         </select>
       </section>
       <ul className="showcase__item-wrapper">
@@ -57,7 +64,7 @@ export default function Showcase({ itemPagingData }) {
 
 function ItemCard({ item }) {
   return (
-    <section className="item-card">
+    <li className="item-card">
       <Link
         className="item-card__a"
         href={process.env.NEXT_PUBLIC_ROUTE_ITEM + `/${item.id}`}
@@ -82,6 +89,6 @@ function ItemCard({ item }) {
           <span className="item-card__nick text--vs">{item.nick}</span>
         </div>
       </Link>
-    </section>
+    </li>
   );
 }

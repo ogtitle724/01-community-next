@@ -50,7 +50,12 @@ export default async function PostDetailPage({ params }) {
   revalidate();
   const path = process.env.NEXT_PUBLIC_PATH_POST + `/${params.id}`;
   const postData = await getData(path);
-
+  console.log(postData.content);
+  postData.content = postData.content.replaceAll(
+    "<img",
+    `<img alt="게시글 [${postData.title}]에 포함된 이미지" `
+  );
+  console.log(postData.content);
   if (postData) {
     return (
       <>

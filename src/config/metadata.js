@@ -7,8 +7,8 @@ export const metaData = {
   alternates: {
     canonical: process.env.NEXT_PUBLIC_URL_CLI,
     languages: {
-      "en-US": "/en-US",
-      "ko-KR": "/ko-KR",
+      "en-US": process.env.NEXT_PUBLIC_URL_CLI,
+      "ko-KR": process.env.NEXT_PUBLIC_URL_CLI,
     },
   },
   openGraph: {
