@@ -16,6 +16,7 @@ export default function WritePage({ params }) {
   const router = useRouter();
   const user = useSelector(selectUser);
   const isLogIn = useSelector(selectIsLogIn);
+  const [postDetail, setPostDetail] = useState("");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [category, setCategory] = useState("유머");
@@ -42,9 +43,9 @@ export default function WritePage({ params }) {
         const postDetail = await getUpdateData();
 
         if (postDetail.user_id !== user.id) throw new Error("No permission");
-
+        setPostDetail(postDetail);
         setTitle(postDetail.title);
-        setCategory(postDetail.category);
+        setCategory(postDetail.tbl);
         setBody(postDetail.content);
       } catch (err) {
         console.error(err);
@@ -104,8 +105,9 @@ export default function WritePage({ params }) {
     });
 
     try {
-      const path = process.env.NEXT_PUBLIC_PATH_POST + `/${postId}`;
+      const path = process.env.NEXT_PUBLIC_PATH_POST + `/${postDetail.id}`;
       await Fetch.patch(path, payload, option);
+      router.refresh();
       router.back();
     } catch (err) {
       console.error(err);
@@ -143,7 +145,7 @@ export default function WritePage({ params }) {
             className="write-page__select"
             onChange={(e) => handleSelectGroup(e)}
           >
-            <option value={""}>{"옵션/선택사항"}</option>
+            <option value={""}>{"카테고리"}</option>
             {categories[category].map((group, idx) => {
               return (
                 <option key={"select-opt-category-grp" + idx} value={group}>

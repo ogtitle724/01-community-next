@@ -77,6 +77,7 @@ export default function WritePage({ params }) {
       if (group) dispatch(setGrp(group));
 
       revalidate();
+      router.refresh();
       router.push(
         `/${categoryKO2EN[category] + (group ? `?group=${group}` : "")}`
       );

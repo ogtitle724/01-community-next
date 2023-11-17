@@ -6,7 +6,7 @@
 }
 
 .item-detail__btn {
-  width: 76px;
+  width: fit-content;
   height: 32px;
   padding: 4px 12px;
   margin-right: 3px;
