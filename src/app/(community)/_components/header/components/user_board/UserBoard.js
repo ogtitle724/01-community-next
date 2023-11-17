@@ -109,7 +109,7 @@ function UserBoard() {
         onCanPlayThrough={handleClkBtnAlarm}
         aria-label="open alarm modal"
       >
-        <div className="user-board__alram-cnt">3</div>
+        {/* <div className="user-board__alram-cnt">3</div> */}
       </button>
       <button
         className="user-board__btn-logout text--vs"
