@@ -78,7 +78,7 @@ function ItemCard({ item }) {
             <Image src={item.img_src} fill={true} alt="item image" />
           )}
         </section>
-        <h3 className="item-card__title text--m">{item.title}</h3>
+        <h3 className="item-card__title text--s">{item.title}</h3>
         <div className="item-card__indicator">
           <i className="item-card__i-like"></i>
           <span className="item-card__n-like text--vs">
