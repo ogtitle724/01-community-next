@@ -27,7 +27,6 @@ export default async function showCasePage({ searchParams }) {
   try {
     const res = await Fetch.get(process.env.NEXT_PUBLIC_PATH_ITEM_PAGING);
     const itemPagingData = await res.json();
-
     return <Showcase itemPagingData={itemPagingData} />;
   } catch (err) {
     console.error(err);

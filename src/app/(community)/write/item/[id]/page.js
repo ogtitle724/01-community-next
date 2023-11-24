@@ -148,6 +148,10 @@ export default function ItemUpload({ params }) {
         content,
         thumbnail: preSignedUrl[0],
         imgSrc: preSignedUrl,
+        lv1: city,
+        lv2: district,
+        lv3: dong,
+        code: districts[district][dong],
       });
 
       await Fetch.patch(
