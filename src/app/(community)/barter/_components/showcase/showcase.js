@@ -1,8 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
+import Fetch from "@/util/fetch";
 import Link from "next/link";
 import Image from "next/image";
 import "./style.css";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { selectIsLogIn } from "@/redux/slice/signSlice";
+import { useRouter } from "next/navigation";
+import revalidate from "@/util/revalidate";
 
 export default function Showcase({ itemPagingData }) {
   const [order, setOrder] = useState("최신순");
@@ -63,6 +68,27 @@ export default function Showcase({ itemPagingData }) {
 }
 
 function ItemCard({ item }) {
+  const isLogIn = useSelector(selectIsLogIn);
+  const router = useRouter();
+
+  const handleClkBtnLike = async (e) => {
+    e.preventDefault();
+
+    if (isLogIn) {
+      try {
+        await Fetch.patch(
+          process.env.NEXT_PUBLIC_PATH_ITEM + `/${item.id}/dib`
+        );
+        revalidate();
+        router.refresh();
+      } catch (e) {
+        console.error(e.message);
+      }
+    } else {
+      alert("로그인이 필요합니다.");
+    }
+  };
+
   return (
     <li className="item-card">
       <Link
@@ -80,7 +106,7 @@ function ItemCard({ item }) {
         </section>
         <h3 className="item-card__title text--s">{item.title}</h3>
         <div className="item-card__indicator">
-          <i className="item-card__i-like"></i>
+          <i className="item-card__i-like" onClick={handleClkBtnLike}></i>
           <span className="item-card__n-like text--vs">{item.dib_cnt}</span>
           <i className="item-card__i-chat"></i>
           <span className="item-card__n-chat text--vs">{item.deals_cnt}</span>

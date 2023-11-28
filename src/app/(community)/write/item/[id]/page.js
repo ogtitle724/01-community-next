@@ -14,6 +14,7 @@ const Editor = dynamic(() => import("@components/editor/editor"), {
 });
 
 export default function ItemUpload({ params }) {
+  const prevImgs = useRef();
   const [imgs, setImgs] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -25,7 +26,6 @@ export default function ItemUpload({ params }) {
 
   const user = useSelector(selectUser);
   const router = useRouter();
-  const initialImgs = useRef();
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
@@ -52,10 +52,10 @@ export default function ItemUpload({ params }) {
         setTitle(itemDetail.title);
         setContent(itemDetail.content);
         setImgs(itemDetail.img_src);
-        initialImgs.current = itemDetail.img_src.slice();
+        prevImgs.current = itemDetail.img_src.slice();
       } catch (err) {
         console.error(err);
-        alert("넌 수정 안되는거 알지???");
+        alert("수정 권한이 없습니다");
         router.back();
       }
     };
@@ -85,7 +85,6 @@ export default function ItemUpload({ params }) {
   }, [district, districts]);
 
   const handleClkBtnUpload = async () => {
-    //TODO: 수정시 S3에서 기존 데이터 삭제
     try {
       if (!title.length) {
         alert("제목을 작성을 주세요!");
@@ -94,13 +93,6 @@ export default function ItemUpload({ params }) {
         alert("내용을 작성해 주세요!");
         return;
       }
-
-      //TODO: 여기서 현재 imgs랑 비교해서 삭제 하면될듯(initialImgs)
-      initialImgs.current.forEach((img, idx) => {
-        if (imgs.includes(img)) {
-          //여기서 삭제 수행
-        }
-      });
 
       //aws createPreSignedPost를 이용해 클라이언트 사이드에서 s3업로드
       const preSignedArgs = [];
@@ -151,7 +143,7 @@ export default function ItemUpload({ params }) {
         lv1: city,
         lv2: district,
         lv3: dong,
-        code: districts[district][dong],
+        regionCode: districts[district][dong],
       });
 
       await Fetch.patch(
@@ -159,6 +151,16 @@ export default function ItemUpload({ params }) {
         body,
         option
       );
+
+      await Fetch.delete(
+        process.env.NEXT_PUBLIC_URL_CLI + process.env.NEXT_PUBLIC_API_IMG,
+        {
+          body: JSON.stringify(prevImgs.current),
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
       router.refresh();
       router.back();
     } catch (err) {

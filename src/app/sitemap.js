@@ -6,7 +6,7 @@ export default async function sitemap() {
 
   sitemap.push({
     url: `https://www.clipmk.com`,
-    lastModified: new Date(),
+    lastModified: JSON.stringify(new Date()),
     changeFrequency: "always",
     priority: 1,
   });
@@ -14,7 +14,7 @@ export default async function sitemap() {
   Object.keys(categories).forEach((tbl) => {
     sitemap.push({
       url: `https://www.clipmk.com/${categoryKO2EN[tbl]}`,
-      lastModified: new Date(),
+      lastModified: JSON.stringify(new Date()),
       changeFrequency: "always",
       priority: 0.5,
     });
@@ -22,7 +22,7 @@ export default async function sitemap() {
     categories[tbl].forEach((grp) => {
       sitemap.push({
         url: `https://www.clipmk.com/${categoryKO2EN[tbl]}/${grp}`,
-        lastModified: new Date(),
+        lastModified: JSON.stringify(new Date()),
         changeFrequency: "always",
         priority: 0.5,
       });

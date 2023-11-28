@@ -103,7 +103,7 @@ export default function ItemUpload() {
         lv1: city,
         lv2: district,
         lv3: dong,
-        code: districts[district][dong],
+        regionCode: districts[district][dong],
       });
 
       await Fetch.post(process.env.NEXT_PUBLIC_PATH_ITEM, body, option);

@@ -1,9 +1,9 @@
 import Board from "./_components/board/Board";
 import Fetch from "@/util/fetch";
 import ServerError from "./_components/error/Error";
-import { categoryEN2KO } from "@/config/category";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { categoryEN2KO } from "@/config/category";
 
 const Slider = dynamic(() => import("./_components/slider/Slider"));
 

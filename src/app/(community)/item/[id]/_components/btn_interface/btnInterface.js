@@ -3,18 +3,27 @@ import Fetch from "@/util/fetch";
 import timeConverter from "@/util/time_converter";
 import { useRouter } from "next/navigation";
 import "./style.css";
+import revalidate from "@/util/revalidate";
+import { useSelector } from "react-redux";
+import { selectIsLogIn } from "@/redux/slice/signSlice";
 
 export default function BtnInterface({ itemDetail }) {
   const router = useRouter;
+  const isLogIn = useSelector(selectIsLogIn);
 
   const handleClkBtnLike = async () => {
-    try {
-      await Fetch.patch(
-        process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemDetail.id}/dib`
-      );
-      router.refresh();
-    } catch (err) {
-      console.error(err);
+    if (isLogIn) {
+      try {
+        await Fetch.patch(
+          process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemDetail.id}/dib`
+        );
+        revalidate();
+        router.refresh();
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      alert("로그인이 필요합니다.");
     }
   };
 
