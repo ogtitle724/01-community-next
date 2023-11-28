@@ -46,7 +46,7 @@ AWS.config.update({
   region: process.env.AWS_REGION,
 });
 
-const S3 = AWS.S3();
+const S3 = new AWS.S3();
 
 export async function DELETE(request) {
   const body = await request.json();
