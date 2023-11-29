@@ -151,8 +151,8 @@ export default function ItemUpload({ params }) {
         body,
         option
       );
-
-      await Fetch.delete(
+      console.log("a");
+      await fetch(
         process.env.NEXT_PUBLIC_URL_CLI + process.env.NEXT_PUBLIC_API_IMG,
         {
           body: JSON.stringify(prevImgs.current),
@@ -160,9 +160,10 @@ export default function ItemUpload({ params }) {
           headers: { "Content-Type": "application/json" },
         }
       );
+      console.log("b");
 
-      router.refresh();
       router.back();
+      router.refresh();
     } catch (err) {
       console.error(err);
     }

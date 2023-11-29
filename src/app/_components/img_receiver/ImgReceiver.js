@@ -11,6 +11,10 @@ export default function ImgReceiver({ setImgs, imgs }) {
   const imgWrapper = useRef();
 
   useEffect(() => {
+    if (imgs) setImgContainer([...imgs]);
+  }, [imgs]);
+
+  useEffect(() => {
     if (imgWrapper.current) {
       const wrapperWidth = imgWrapper.current.offsetWidth;
       const imgWidth = ~~((wrapperWidth - 40) / 5);
@@ -58,7 +62,7 @@ export default function ImgReceiver({ setImgs, imgs }) {
   const generateImgs = () => {
     let eles = [];
     for (let i = 0; i < 5; i++) {
-      if ((imgs && imgs.length) || imgContainer?.[i]) {
+      if (imgContainer?.[i]) {
         eles.push(
           <div className="img-receiver__img-wrapper" key={i}>
             <Image

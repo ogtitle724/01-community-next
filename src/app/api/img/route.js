@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import { S3Client } from "@aws-sdk/client-s3";
+import { DeleteObjectsCommand, S3Client } from "@aws-sdk/client-s3";
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 import { v4 as uuidv4 } from "uuid";
-import AWS from "aws-sdk";
 
 const Bucket = process.env.S3_BUCKET;
-const s3 = new S3Client({
+const S3 = new S3Client({
   region: process.env.AWS_REGION,
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -24,7 +23,7 @@ export async function POST(request) {
       const day = JSON.stringify(date).slice(1, 11);
       const Key = `items/images/${day}/${uuidv4()}`;
 
-      return createPresignedPost(s3, {
+      return createPresignedPost(S3, {
         Bucket,
         Key,
         Conditions: [
@@ -40,21 +39,28 @@ export async function POST(request) {
   return res;
 }
 
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_KEY_ID,
-  region: process.env.AWS_REGION,
-});
-
-const S3 = new AWS.S3();
-
 export async function DELETE(request) {
   const body = await request.json();
-  const delSrcs = body.delSrcs;
 
   try {
-    const keys = delSrcs.map((src) => src.match(/\/items\/images.+/)[0]);
-    await Promise.all(keys.map((Key) => S3.deleteObject({ Bucket, Key })));
+    const input = {
+      Bucket,
+      Delete: {
+        Objects: [],
+      },
+    };
+
+    const keys = body.map((src) => src.match(/items\/images.+/)[0]);
+    keys.forEach((Key) => input.Delete.Objects.push({ Key }));
+
+    const command = new DeleteObjectsCommand(input);
+    const response = await S3.send(command);
+
+    if (response.Errors) {
+      return new Response(response.Errors.Message, {
+        status: response.Errors.Code,
+      });
+    }
 
     return new Response("delete complete", { status: 200 });
   } catch (e) {

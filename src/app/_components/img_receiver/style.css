@@ -91,6 +91,7 @@
   line-height: var(--font-size-vsm);
   font-size: var(--font-size-vsm);
   text-align: center;
+  color: whitesmoke;
 }
 
 @media screen and (max-width: 768px) {
