@@ -9,10 +9,8 @@
 
 .gnb-group__item {
   padding: 4px 6px 5px 7px;
-  border-radius: 12px;
-  border-radius: 50px;
-  box-shadow: -1px -1px 2px var(--color-shadow-lu),
-    1px 1px 2px var(--color-shadow-rd);
+  border-radius: 30px;
+  border: 1px solid var(--color-smoke-b);
 }
 
 .gnb-group__item--cur {
@@ -24,7 +22,6 @@
     rgba(188, 94, 151, 1) 56%,
     rgba(247, 133, 10, 1) 100%
   );
-  box-shadow: 0px 4px 3px var(--color-shadow-rd);
   color: whitesmoke;
 }
 

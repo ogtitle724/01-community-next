@@ -42,6 +42,40 @@
   font-size: var(--font-size-md);
 }
 
+.chat:first-child {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat:first-child li {
+  font-size: 12px;
+}
+
+.chat img {
+  width: 240px;
+  height: 180px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.chat a {
+  width: 240px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background-color: whitesmoke;
+  color: var(--color-font);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+  font-weight: 600;
+  box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.6);
+}
+
 .chat--me {
   margin-left: auto;
   align-self: flex-end;

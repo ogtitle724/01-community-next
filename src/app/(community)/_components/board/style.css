@@ -273,8 +273,7 @@
   height: 60vh;
   margin-top: 14px;
   border-radius: 30px;
-  box-shadow: -2px -2px 3px var(--color-shadow-lu),
-    2px 2px 4px var(--color-shadow-rd);
+  border: 1px solid var(--color-smoke-b);
 }
 
 .board-empty__noti {

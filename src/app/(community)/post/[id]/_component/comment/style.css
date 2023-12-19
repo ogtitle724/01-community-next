@@ -49,8 +49,7 @@
   top: 88px;
   padding: 30px 15px 15px 15px;
   border-radius: 12px;
-  box-shadow: -2px -2px 4px var(--color-shadow-lu),
-    2px 2px 4px var(--color-shadow-rd);
+  box-shadow: 0px 1px 4px var(--color-shadow-rd);
   background-color: var(--color-body);
   z-index: 2;
 }

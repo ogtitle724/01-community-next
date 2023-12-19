@@ -4,6 +4,7 @@ import BtnInterface from "./_components/btn_interface/btnInterface";
 import BtnSug from "./_components/btn_sug/btnSug";
 import ImgSlider from "./_components/img_slider/ImgSlider";
 import Link from "next/link";
+import Image from "next/image";
 import { cache } from "react";
 import { sanitize } from "@/util/secure";
 import { metaData } from "@/config/metadata";
@@ -50,7 +51,7 @@ export default async function ItemDetailPage({ params }) {
   const path = process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemId}`;
   const itemData = await getData(path);
   revalidate();
-
+  console.log(itemData);
   if (itemData) {
     return (
       <main className="item-detail__main">
@@ -66,12 +67,19 @@ export default async function ItemDetailPage({ params }) {
           <ul className="suged-list__ul">
             {itemData.deals.content.length ? (
               itemData.deals.content.map((deal, idx) => {
+                console.log(deal);
                 return (
                   <li
                     key={`item-${itemData.id}-deal-${idx}`}
                     className="suged-item"
                   >
-                    <div className="suged-item__img"></div>
+                    <Image
+                      alt={"item-detail-deal-" + idx}
+                      src={itemData.img_src}
+                      width={64}
+                      height={36}
+                      className="suged-item__img"
+                    ></Image>
                     <span className="suged-item__title text--m">
                       <Link
                         href={process.env.NEXT_PUBLIC_PATH_ITEM + `/${deal.id}`}

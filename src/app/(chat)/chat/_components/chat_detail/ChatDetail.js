@@ -1,5 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -8,6 +10,7 @@ import timeConverter from "@/util/time_converter";
 import { selectUser } from "@/redux/slice/signSlice";
 import { sanitize } from "@/util/secure";
 import "./style.css";
+
 const Editor = dynamic(() => import("@components/editor/editor"), {
   ssr: false,
 });
@@ -23,6 +26,8 @@ export default function ChatDetail({
   const submitBtn = useRef();
   const user = useSelector(selectUser);
   const ckRef = useRef();
+
+  console.log(chats);
 
   /* useEffect(() => {
     window.addEventListener("keyup", (e) => {

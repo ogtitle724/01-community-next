@@ -13,7 +13,7 @@ export default function Board({ posts, title, isThumbnail }) {
   const [isDivide, setIsDivide] = useState(false);
   const [isShowImg, setIsShowImg] = useState(isThumbnail);
   const width = useSelector(selectWidth);
-
+  console.log(posts);
   useEffect(() => {
     if (width < 768 && isDivide) {
       setIsDivide(false);
@@ -68,6 +68,7 @@ export default function Board({ posts, title, isThumbnail }) {
         </section>
         <ul className={"board__ul" + (isDivide ? " board__ul--grid" : "")}>
           {posts.content.map((post, idx) => {
+            console.log(post);
             return (
               <li key={"post_" + idx}>
                 <Post post={post} isShowImg={isShowImg} />
@@ -100,11 +101,7 @@ function Post({ post, isShowImg }) {
           }
         >
           {post.img_src && (
-            <Image
-              src={post.thumb_src}
-              alt="post thumbnail"
-              fill={true}
-            ></Image>
+            <Image src={post.img_src} alt="post thumbnail" fill={true}></Image>
           )}
         </div>
       )}

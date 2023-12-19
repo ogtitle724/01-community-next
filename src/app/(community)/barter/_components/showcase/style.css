@@ -14,8 +14,6 @@
   align-items: center;
   gap: 10px;
   border-radius: 12px;
-  box-shadow: -2px -2px 3px var(--color-shadow-lu),
-    2px 2px 3px var(--color-shadow-rd);
 }
 
 .showcase__search {
@@ -25,8 +23,7 @@
   border-radius: 12px;
   border: none;
   background-color: var(--color-body);
-  box-shadow: inset 1.5px 1.5px 2px var(--color-shadow-rd),
-    inset -1.5px -1.5px 2px var(--color-shadow-lu);
+  border: 1px solid var(--color-smoke-b);
 }
 
 .showcase__search:focus {
@@ -47,6 +44,7 @@
   border: none;
   background-color: var(--color-body);
   text-align: center;
+  border: 1px solid var(--color-smoke-b);
 }
 
 .showcase__item-wrapper {
@@ -72,13 +70,13 @@
   --item-card-padding: 3px;
   width: var(--item-card-width);
   height: calc(var(--item-card-width) * 1.2);
-  padding: var(--item-card-padding) 0;
+  padding: 0 0 var(--item-card-padding) 0;
   position: relative;
   border-radius: 4px;
   background-color: var(--color-body);
-  box-shadow: -1.5px -1.5px 4px var(--color-shadow-lu),
-    2px 2px 3px var(--color-shadow-rd);
+  border: 1px solid var(--color-smoke-b);
   list-style: none;
+  overflow: hidden;
 }
 
 .item-card__a {
@@ -93,7 +91,6 @@
 .item-card__img {
   width: var(--item-card-width);
   height: calc(var(--item-card-width) * 3 / 4);
-  margin-top: 10px;
   position: relative;
   background-color: var(--color-smoke-a);
 }
@@ -116,13 +113,17 @@
 }
 
 .item-card__title {
+  flex-grow: 1;
   width: 100%;
-  padding: 5px 8px;
+  padding: 8px 8px 0px 8px;
   display: block;
-  white-space: nowrap;
   text-overflow: ellipsis;
-  text-align: center;
   overflow: hidden;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-align: center;
 }
 
 .item-card__indicator {
@@ -172,7 +173,7 @@
   bottom: 30px;
   border-radius: 100%;
   background-color: var(--color-body);
-  box-shadow: 0 0 3px var(--color-shadow);
+  border: 1px solid var(--color-smoke-b);
 }
 
 .showcase__btn-to-top::before {

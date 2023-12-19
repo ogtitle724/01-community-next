@@ -111,7 +111,8 @@ export default function ItemUpload() {
       router.refresh();
       router.push(process.env.NEXT_PUBLIC_ROUTE_BARTER);
     } catch (err) {
-      console.error(err);
+      alert("글을 작성할 수 없습니다. \n", err.message);
+      console.error(err.message);
     }
   };
 

@@ -22,9 +22,23 @@ export default async function HomePage(props) {
       <>
         <Slider />
         <section className="announce">
-          <Link className="center--y text--m announce__a " href={"/"}>
-            📢 사이트 이용안내
+          <Link className="center--y announce__a " href={"/"}>
+            <p className="announce__title">
+              ⌨ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ뭐여이거
+            </p>
           </Link>
+          <svg
+            width="13"
+            height="14"
+            viewBox="0 0 13 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2.32888 4.82792C8.90753 10.3657 11.3745 26.5834 11.7857 34C11.7857 34 18.7755 24.6056 22.476 18.1779C23.7095 14.2223 23.0813 9.59838 17.1308 4.82792C9.72988 -1.10539 -5.89442 -2.09426 2.32888 4.82792Z"
+              fill="#F4E592"
+            />
+          </svg>
         </section>
         <Board
           posts={postData}

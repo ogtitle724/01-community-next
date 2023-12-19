@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectUser } from "@/redux/slice/signSlice";
+import Image from "next/image";
 import revalidate from "@/util/revalidate";
 import Fetch from "@/util/fetch";
 import socket from "@/util/socket";
@@ -110,7 +111,8 @@ function SugForm({ dialogRef, itemDetail }) {
           receiverId: JSON.stringify(itemDetail.user_id),
           receiverNick: itemDetail.user_nick,
           sugItemId: JSON.stringify(selectedItem.id),
-          sugItemImg: null,
+          sugItemImg: selectedItem.img_src,
+          sugItemTitle: selectedItem.title,
           date: new Date().getTime(),
         });
 
@@ -204,7 +206,13 @@ function ItemList({ handleClkItem, sugedItem, idx }) {
           className="sug-form__radio-btn"
           value="id1"
         ></input>
-        <i className="sug-form__item-img"></i>
+        <Image
+          alt={`suged-item-${sugedItem.title}`}
+          width={64}
+          height={36}
+          src={sugedItem.img_src}
+          className="sug-form__item-img"
+        ></Image>
         <span className="sug-form__item-title text--m">{sugedItem.title}</span>
         <span className="sug-form__item-nick text--m">{sugedItem.nick}</span>
       </label>

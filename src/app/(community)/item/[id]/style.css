@@ -39,8 +39,7 @@
   margin: 10px 0;
   padding: 10px 13px;
   border-radius: 12px;
-  box-shadow: inset 2px 2px 2px var(--color-shadow-rd),
-    inset -2px -2px 3px var(--color-shadow-lu);
+  border: 1px solid var(--color-smoke-b);
 }
 
 .suged-list {
@@ -60,8 +59,8 @@
   position: relative;
   display: inline-block;
   border-radius: 12px;
-  box-shadow: inset 2px 2px 2px var(--color-shadow-rd),
-    inset -2px -2px 3px var(--color-shadow-lu);
+  border: 1px solid var(--color-smoke-b);
+
   overflow-y: scroll;
 }
 
@@ -90,10 +89,11 @@
 }
 
 .suged-item__img {
-  width: 50px;
-  height: 29px;
+  width: 64px;
+  height: 36px;
   border-radius: 4px;
   background-color: var(--color-smoke-a);
+  object-fit: cover;
 }
 
 .suged-item__title {

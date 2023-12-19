@@ -10,11 +10,12 @@
   --color-font: black;
   --color-main: rgb(38, 66, 130);
   --color-opposite: rgb(197, 118, 43);
-  --color-body: rgb(244, 244, 244);
+  --color-body: rgb(255, 255, 255);
   --color-smoke-a: rgb(233, 233, 233);
   --color-smoke-b: #cfcfcf;
   --color-shadow-lu: rgb(255, 255, 255);
   --color-shadow-rd: #e1e1e1;
+  --color-marker: rgb(252, 252, 101);
   --icon-invert: 0%;
   --icon-invert-b: 100%;
 }
@@ -34,14 +35,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-font: rgb(195, 195, 195);
-    --color-main: rgb(197, 118, 43);
+    --color-font: rgb(255, 255, 255);
+    --color-main: rgb(169, 95, 25);
     --color-opposite: rgb(38, 66, 130);
-    --color-body: rgb(43, 43, 43);
+    --color-body: rgb(26, 26, 26);
     --color-smoke-a: #3b3b3b;
     --color-smoke-b: rgb(82, 82, 82);
     --color-shadow-lu: rgb(66, 66, 66);
     --color-shadow-rd: rgb(22, 22, 22);
+    --color-marker: rgb(255, 255, 255);
     --icon-invert: 80%;
     --icon-invert-b: 0%;
   }

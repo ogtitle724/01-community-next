@@ -78,8 +78,7 @@
 .item-upload .ck.ck-editor__main > .ck-editor__editable:not(.ck-focused) {
   border: none;
   border-radius: 12px;
-  box-shadow: -1.5px -1.5px 3px var(--color-shadow-lu),
-    1.5px 1.5px 4px var(--color-shadow-rd);
+  border: 1px solid var(--color-smoke-b);
 }
 
 /*ckeditor - focused*/
@@ -87,6 +86,5 @@
   .ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
   border: none;
   border-radius: 12px;
-  box-shadow: -1.5px -1.5px 3px var(--color-shadow-lu),
-    1.5px 1.5px 4px var(--color-shadow-rd);
+  border: 1px solid var(--color-smoke-b);
 }

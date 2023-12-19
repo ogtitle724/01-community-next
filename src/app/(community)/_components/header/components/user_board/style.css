@@ -5,8 +5,7 @@
   justify-content: space-around;
   align-items: center;
   border-radius: 30px;
-  box-shadow: inset 2px 2px 2px var(--color-shadow-rd),
-    inset -2px -2px 2px var(--color-shadow-lu);
+  background-color: var(--color-body);
 }
 
 .user-board__profile {
@@ -25,7 +24,6 @@
   background: url(/image/icon/person.svg) var(--color-smoke-a);
   background-size: contain;
   background-repeat: no-repeat;
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.16);
   cursor: pointer;
   z-index: 2;
 }

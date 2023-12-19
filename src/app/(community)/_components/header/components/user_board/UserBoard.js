@@ -74,7 +74,7 @@ function UserBoard() {
         onClick={handleNavigateMypage}
         aria-label="navigation to mypage"
       >
-        <i className="user-board__profile-img"></i>
+        {/* <i className="user-board__profile-img"></i> */}
         <p className="user-board__nickname text--s">{user.nick ?? "unknown"}</p>
       </button>
       <div className="divider"></div>

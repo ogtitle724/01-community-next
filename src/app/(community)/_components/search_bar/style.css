@@ -14,8 +14,7 @@
   background-color: transparent;
   border: none;
   border-radius: 30px;
-  box-shadow: inset 2px 2px 2px var(--color-shadow-rd),
-    inset -2px -2px 2px var(--color-shadow-lu);
+  background-color: var(--color-body);
 }
 
 .search-bar__input::placeholder {

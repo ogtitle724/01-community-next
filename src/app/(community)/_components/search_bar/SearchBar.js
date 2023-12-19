@@ -13,7 +13,7 @@ export default function SearchBar({ dialogRef }) {
     searchInput.current.addEventListener("keyup", (e) => {
       if (e.key === "Enter") {
         btnSubmit.current.click();
-        if (dialogRef && dialogRef.current) dialogRef.current.close();
+        if (dialogRef) dialogRef.current.close();
       }
     });
   }, [btnSubmit, dialogRef]);
@@ -25,7 +25,7 @@ export default function SearchBar({ dialogRef }) {
       router.push(
         process.env.NEXT_PUBLIC_ROUTE_SEARCH + `?term=${searchTerm}&page=1`
       );
-      if (dialogRef.current) dialogRef.current.close();
+      if (dialogRef) dialogRef.current.close();
     }
   };
 

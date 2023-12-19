@@ -26,8 +26,7 @@
   border-radius: 12px;
   font-size: var(--font-size-sm);
   background-color: var(--color-body);
-  box-shadow: inset 2px 2px 3px var(--color-shadow-rd),
-    inset -2px -2px 3px var(--color-shadow-lu);
+  border: 1px solid var(--color-smoke-b);
 }
 
 .signup__input::placeholder {
@@ -71,8 +70,7 @@
   border-radius: 12px;
   font-size: var(--font-size-md);
   background-color: transparent;
-  box-shadow: inset 2px 2px 3px var(--color-shadow-rd),
-    inset -2px -2px 3px var(--color-shadow-lu);
+  border: 1px solid var(--color-smoke-b);
 }
 
 .signup__input-auth:focus {
@@ -91,8 +89,8 @@
 }
 
 .signup__btn-auth {
-  width: 39px;
-  height: 32px;
+  width: 46px;
+  height: 34px;
   margin-left: 8px;
   position: absolute;
   top: 0px;
@@ -100,7 +98,7 @@
   border-radius: 0 12px 12px 0;
   font-size: var(--font-size-sm);
   color: var(--color-body);
-  background-color: var(--color-main);
+  background-color: var(--color-smoke-a);
 }
 
 .signup__btn-auth--disable {
@@ -116,13 +114,7 @@
   font-size: var(--font-size-lg);
   font-weight: 700;
   transition: 0.1s;
-  box-shadow: -2px -2px 3px var(--color-shadow-lu),
-    2px 2px 3px var(--color-shadow-rd);
-}
-
-.signup__btn-submit:active {
-  box-shadow: inset 2px 2px 3px var(--color-shadow-rd),
-    inset -2px -2px 3px var(--color-shadow-lu);
+  border: 1px solid var(--color-smoke-b);
 }
 
 .signup__btn:hover {

@@ -72,8 +72,6 @@ iframe {
   align-items: center;
   justify-content: space-evenly;
   border-radius: 12px;
-  box-shadow: inset 1px 1px 2px var(--color-shadow-rd),
-    inset -2px -2px 3px var(--color-shadow-lu);
 }
 
 .content-board__rec-post {
@@ -81,8 +79,6 @@ iframe {
   height: 105px;
   position: relative;
   border-radius: 4px;
-  box-shadow: -2px -2px 3px var(--color-shadow-lu),
-    1px 1px 2px var(--color-shadow-rd);
 }
 
 .content-board__rec-post-img {
