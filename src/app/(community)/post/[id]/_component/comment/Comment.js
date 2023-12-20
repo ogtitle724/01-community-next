@@ -357,9 +357,10 @@ function Comment({ comment, parentId, target, setTarget, cName, ckFocus }) {
             >
               <i
                 className={
-                  "icon" + target?.targetCommentId === comment.id
+                  "icon" +
+                  (target?.targetCommentId === comment.id
                     ? " comment__i comment__i-close"
-                    : " comment__i comment__i-reply"
+                    : " comment__i comment__i-reply")
                 }
               ></i>
             </button>

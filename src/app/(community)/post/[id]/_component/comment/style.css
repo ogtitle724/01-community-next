@@ -69,6 +69,7 @@
   height: 22px;
   padding-bottom: 2px;
   background-color: var(--color-main);
+  color: white;
 }
 
 .comment__default {
