@@ -62,18 +62,17 @@
   transform: translate(-50%, -50%);
   font-size: var(--font-size-sm);
   line-height: var(--font-size-sm);
-  color: white;
+  color: var(--color-font);
   border-radius: 12px;
-  background-color: var(--color-main);
+  background-color: var(--color-body);
 }
 
 .gnb__mark {
   height: 3.5px;
   position: absolute;
   bottom: 0px;
-  border-radius: 2px;
-  background: var(--color-marker);
-  border-bottom: 0.5px solid var(--color-main);
+  border-radius: 2px 2px 0 0;
+  background: var(--color-opposite);
   transition-property: left, width;
   transition-duration: 0.4s;
 }

@@ -5,6 +5,7 @@
   justify-content: space-around;
   align-items: center;
   border-radius: 30px;
+  border: 1px solid var(--color-smoke-b);
   background-color: var(--color-body);
 }
 

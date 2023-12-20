@@ -43,6 +43,7 @@
 }
 
 .chat:first-child {
+  max-width: none;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -73,7 +74,7 @@
   overflow: hidden;
   text-align: center;
   font-weight: 600;
-  box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0px 0px 6px rgba(0, 0, 0, 0.3);
 }
 
 .chat--me {

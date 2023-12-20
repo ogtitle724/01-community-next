@@ -131,9 +131,9 @@ export default function ChatDetail({
       </ul>
       <section className="chat-detail__keyboard">
         <Editor ckRef={ckRef} onChange={setInputData} isImg={false} />
-        <label className="chat-detail__label-input-img">
+        {/* <label className="chat-detail__label-input-img">
           <input type="file" className="chat-detail__input-img"></input>
-        </label>
+        </label> */}
         <div className="chat-detail__btn-wrapper-scroll">
           <button
             className="chat-detail__btn-scroll chat-detail__btn-top"

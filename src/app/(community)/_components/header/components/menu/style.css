@@ -7,7 +7,7 @@
   transform: translateY(-50%);
   border: none;
   background: url(/image/icon/menu.svg);
-  filter: invert(60%);
+  filter: invert(100%);
 }
 
 .menu {
