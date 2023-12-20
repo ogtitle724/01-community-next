@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { memo, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectWidth, setGroup, setCategory } from "@/redux/slice/pageSlice";
@@ -56,7 +57,7 @@ function Header() {
             href={process.env.NEXT_PUBLIC_ROUTE_HOME}
             onClick={(e) => handleClkLogo(e)}
           >
-            {"ClipMK"}
+            {"CLIPmARKET"}
           </Link>
           {width > 1024 ? (
             <>

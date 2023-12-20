@@ -72,7 +72,7 @@
   position: absolute;
   bottom: 0px;
   border-radius: 2px 2px 0 0;
-  background: var(--color-opposite);
+  background: var(--color-marker);
   transition-property: left, width;
   transition-duration: 0.4s;
 }

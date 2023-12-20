@@ -15,8 +15,12 @@ export default async function HomePage(props) {
   try {
     const path =
       process.env.NEXT_PUBLIC_PATH_PAGING + `/best?page=${page - 1}&size=30`;
-    const res = await Fetch.get(path);
+    let res = await Fetch.get(path);
     const postData = await res.json();
+
+    res = await Fetch.get("/board/posts/best?page=1&size=20");
+    const bestData = await res.json();
+    console.log(bestData);
 
     return (
       <>

@@ -9,12 +9,13 @@
 
   --color-font: black;
   --color-main: rgb(0, 22, 74);
-  --color-opposite: rgb(217, 210, 15);
+  --color-opposite: rgb(182, 106, 0);
   --color-body: rgb(255, 255, 255);
   --color-smoke-a: rgb(233, 233, 233);
   --color-smoke-b: #cfcfcf;
   --color-shadow-lu: rgb(255, 255, 255);
   --color-shadow-rd: #e1e1e1;
+  --color-marker: rgb(255, 247, 0);
   --icon-invert: 0%;
   --icon-invert-b: 100%;
 }
@@ -36,12 +37,13 @@
   :root {
     --color-font: rgb(255, 255, 255);
     --color-main: rgb(182, 106, 0);
-    --color-opposite: rgb(212, 191, 39);
+    --color-opposite: rgb(0, 41, 137);
     --color-body: rgb(26, 26, 26);
     --color-smoke-a: #3b3b3b;
     --color-smoke-b: rgb(82, 82, 82);
     --color-shadow-lu: rgb(66, 66, 66);
     --color-shadow-rd: rgb(22, 22, 22);
+    --color-marker: rgb(255, 225, 0);
     --icon-invert: 80%;
     --icon-invert-b: 0%;
   }
@@ -147,7 +149,7 @@ p {
 
 .btn--m {
   font-size: var(--font-size-md);
-  font-weight: 700;
+  font-weight: 500;
 }
 
 .text--t {
