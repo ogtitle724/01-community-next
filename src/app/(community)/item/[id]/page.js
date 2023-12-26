@@ -74,7 +74,7 @@ export default async function ItemDetailPage({ params }) {
                   >
                     <Image
                       alt={"item-detail-deal-" + idx}
-                      src={itemData.img_src}
+                      src={"/image/clip.png"}
                       width={64}
                       height={36}
                       className="suged-item__img"
