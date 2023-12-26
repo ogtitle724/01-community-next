@@ -13,6 +13,8 @@ export default function Showcase({ itemPagingData }) {
   const [order, setOrder] = useState("최신순");
   const [searchTerm, setSearchTerm] = useState(null);
 
+  console.log(itemPagingData);
+
   const handleClickBtnToTop = () => {
     window.scrollTo({
       top: 0,
@@ -101,7 +103,13 @@ function ItemCard({ item }) {
           }
         >
           {item.img_src && (
-            <Image src={item.img_src} fill={true} alt="item image" />
+            <Image
+              src={item.img_src}
+              sizes="(max-width: 1024px) 160px, 120px"
+              fill={true}
+              alt="item image"
+              priority
+            />
           )}
         </section>
         <h3 className="item-card__title text--vs">{item.title}</h3>

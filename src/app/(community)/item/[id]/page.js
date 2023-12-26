@@ -51,7 +51,7 @@ export default async function ItemDetailPage({ params }) {
   const path = process.env.NEXT_PUBLIC_PATH_ITEM + `/${itemId}`;
   const itemData = await getData(path);
   revalidate();
-  console.log(itemData);
+  console.log(itemData.deals);
   if (itemData) {
     return (
       <main className="item-detail__main">
@@ -67,7 +67,6 @@ export default async function ItemDetailPage({ params }) {
           <ul className="suged-list__ul">
             {itemData.deals.content.length ? (
               itemData.deals.content.map((deal, idx) => {
-                console.log(deal);
                 return (
                   <li
                     key={`item-${itemData.id}-deal-${idx}`}
@@ -82,7 +81,9 @@ export default async function ItemDetailPage({ params }) {
                     ></Image>
                     <span className="suged-item__title text--m">
                       <Link
-                        href={process.env.NEXT_PUBLIC_PATH_ITEM + `/${deal.id}`}
+                        href={
+                          process.env.NEXT_PUBLIC_ROUTE_ITEM + `/${deal.id}`
+                        }
                       >
                         {deal.title}
                       </Link>
