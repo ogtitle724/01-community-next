@@ -63,6 +63,7 @@ export default async function TopicPage(props) {
   if (group) path += `&group=${group}`;
 
   const postData = await getData(path);
+  console.log(postData);
 
   if (postData) {
     return (

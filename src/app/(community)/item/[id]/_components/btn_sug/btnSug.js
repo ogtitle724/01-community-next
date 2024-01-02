@@ -210,7 +210,7 @@ function ItemList({ handleClkItem, sugedItem, idx }) {
           alt={`suged-item-${sugedItem.title}`}
           width={64}
           height={36}
-          src={sugedItem.img_src ?? "/image/clip.png"}
+          src={sugedItem.img_src ?? "/image/img_default.png"}
           className="sug-form__item-img"
         ></Image>
         <span className="sug-form__item-title text--m">{sugedItem.title}</span>

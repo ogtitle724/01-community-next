@@ -13,12 +13,13 @@ export default function Board({ posts, title, isThumbnail }) {
   const [isDivide, setIsDivide] = useState(false);
   const [isShowImg, setIsShowImg] = useState(isThumbnail);
   const width = useSelector(selectWidth);
-  console.log(posts);
+
   useEffect(() => {
     if (width < 768 && isDivide) {
       setIsDivide(false);
     }
   }, [isDivide, width]);
+
   const handleClkBtnLayout = () => {
     setIsDivide((isDivide) => !isDivide);
   };
@@ -94,21 +95,21 @@ function Post({ post, isShowImg }) {
       href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${post.id}`}
     >
       {isShowImg && (
-        <div
-          className={
-            "board-item__img-wrapper" +
-            (post.img_src ? "" : " board-item__no-img")
-          }
-        >
-          {post.img_src && (
-            <Image src={post.img_src} alt="post thumbnail" fill={true}></Image>
-          )}
+        <div className={"board-item__img-wrapper"}>
+          <Image
+            src={post.thumbnail || "/image/img_default.svg"}
+            alt="post thumbnail"
+            fill={true}
+          ></Image>
         </div>
       )}
       <div className="board-item__wrapper">
-        <span className="board-item__category text--vs">
-          {post.tbl + (post.grp ? `/${post.grp}` : "")}
-        </span>
+        <div className="board-item__tag-wrapper">
+          <span className="board-item__tag--category text--vs">
+            {post.tbl + (post.grp ? `/${post.grp}` : "")}
+          </span>
+          {post.thumbnail && <i className="board-item__tag--img"></i>}
+        </div>
         <span className="board-item__date text--vs">{time} </span>
         <span className="board-item__title text--m">{post.title}</span>
         <div className="board-item__data-wrapper">
