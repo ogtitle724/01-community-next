@@ -11,12 +11,10 @@ export default function timeConverter(wr_date, isChat = false) {
 
   if (diffMinutes < 60) {
     timeDisplay = `${diffMinutes}분전`;
-  } else if (diffMinutes < 60 * 3) {
+  } else if (diffMinutes < 60 * 24) {
     timeDisplay = `${~~(diffMinutes / 60)}시간전`;
-  } else if (diffMinutes < 60 * 12) {
-    timeDisplay = date.toString().slice(16, 21);
   } else {
-    timeDisplay = JSON.stringify(date).slice(1, 11);
+    timeDisplay = `${~~(diffMinutes / (60 * 24))}일전`;
   }
 
   return timeDisplay;

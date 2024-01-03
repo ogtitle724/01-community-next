@@ -88,10 +88,7 @@ function Post({ post, isShowImg }) {
 
   return (
     <Link
-      className={
-        "board-item" +
-        (isShowImg ? " board-item--show-img" : " board-item--hide-img")
-      }
+      className={"board-item" + (isShowImg ? "" : " board-item--hide-img")}
       href={process.env.NEXT_PUBLIC_ROUTE_POST + `/${post.id}`}
     >
       {isShowImg && (
@@ -103,26 +100,35 @@ function Post({ post, isShowImg }) {
           ></Image>
         </div>
       )}
-      <div className="board-item__wrapper">
-        <div className="board-item__tag-wrapper">
-          <span className="board-item__tag--category text--vs">
-            {post.tbl + (post.grp ? `/${post.grp}` : "")}
-          </span>
-          {post.thumbnail && <i className="board-item__tag--img"></i>}
+      <div
+        className={
+          "board-item__body" + (isShowImg ? "" : " board-item__body--hide-img")
+        }
+      >
+        <div>
+          <div className="board-item__tag-wrapper">
+            <span className="board-item__tag--category text--vs">
+              {post.tbl + (post.grp ? `/${post.grp}` : "")}
+            </span>
+            {post.thumbnail && <i className="board-item__tag--img"></i>}
+          </div>
+          <span className="board-item__title text--m">{post.title}</span>
         </div>
-        <span className="board-item__date text--vs">{time} </span>
-        <span className="board-item__title text--m">{post.title}</span>
-        <div className="board-item__data-wrapper">
-          <div className="board-item__data board-item__view">
-            <span className="text--vs">{post.view_cnt}</span>
+        <div className="board-item__info">
+          <div className="board-item__data-wrapper">
+            <div className="board-item__data board-item__view">
+              <span className="text--vs">{post.view_cnt}</span>
+            </div>
+            <div className="board-item__data board-item__like">
+              <span className="text--vs">{post.recommend_cnt}</span>
+            </div>
+            <div className="board-item__data board-item__comment">
+              <span className="text--vs">{post.comment_cnt}</span>
+            </div>
           </div>
-          <div className="board-item__data board-item__like">
-            <span className="text--vs">{post.recommend_cnt}</span>
-          </div>
-          <div className="board-item__data board-item__comment">
-            <span className="text--vs">{post.comment_cnt}</span>
-          </div>
-          <span className="board-item__nick text--vs">{post.nick}</span>
+          <span className="board-item__date text--vs">
+            {post.nick + " • " + time}{" "}
+          </span>
         </div>
       </div>
     </Link>
