@@ -22,6 +22,7 @@ export default function ItemUpload() {
   const [dongs, setDongs] = useState();
   const [dong, setDong] = useState();
   const router = useRouter();
+  const uploadFlag = useRef(true);
 
   useEffect(() => {
     const getDistrict = async () => {
@@ -45,12 +46,22 @@ export default function ItemUpload() {
   }, [district, districts]);
 
   const handleClkBtnUpload = async () => {
+    if (uploadFlag.current) {
+      uploadFlag.current = false;
+      setTimeout(() => (uploadFlag.current = true), 500);
+    } else {
+      return;
+    }
+
     try {
-      if (!title.length) {
+      if (!title) {
         alert("제목을 작성을 주세요!");
         return;
-      } else if (!content.length) {
+      } else if (!content) {
         alert("내용을 작성해 주세요!");
+        return;
+      } else if (!city) {
+        alert("거래지역을 적어도 하나 설정해 주세요!");
         return;
       }
 
@@ -103,7 +114,7 @@ export default function ItemUpload() {
         lv1: city,
         lv2: district,
         lv3: dong,
-        regionCode: districts[district][dong],
+        regionCode: district && dong && districts[district][dong],
       });
 
       await Fetch.post(process.env.NEXT_PUBLIC_PATH_ITEM, body, option);

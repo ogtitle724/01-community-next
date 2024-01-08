@@ -23,9 +23,9 @@ export default function ItemUpload({ params }) {
   const [district, setDistrict] = useState();
   const [dongs, setDongs] = useState();
   const [dong, setDong] = useState();
-
   const user = useSelector(selectUser);
   const router = useRouter();
+  const uploadFlag = useRef(true);
 
   //prevent "resizeobserver loop limit exceeded" error appearing
   useEffect(() => {
@@ -85,12 +85,22 @@ export default function ItemUpload({ params }) {
   }, [district, districts]);
 
   const handleClkBtnUpload = async () => {
+    if (uploadFlag.current) {
+      uploadFlag.current = false;
+      setTimeout(() => (uploadFlag.current = true), 500);
+    } else {
+      return;
+    }
+
     try {
       if (!title.length) {
         alert("제목을 작성을 주세요!");
         return;
       } else if (!content.length) {
         alert("내용을 작성해 주세요!");
+        return;
+      } else if (!city) {
+        alert("거래지역을 적어도 하나 설정해 주세요!");
         return;
       }
 
@@ -143,7 +153,7 @@ export default function ItemUpload({ params }) {
         lv1: city,
         lv2: district,
         lv3: dong,
-        regionCode: districts[district][dong],
+        regionCode: district && dong && districts[district][dong],
       });
 
       await Fetch.patch(

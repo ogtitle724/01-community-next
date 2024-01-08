@@ -8,6 +8,7 @@ import { useState } from "react";
 import { selectIsLogIn } from "@/redux/slice/signSlice";
 import { useRouter } from "next/navigation";
 import revalidate from "@/util/revalidate";
+import timeConverter from "@/util/time_converter";
 
 export default function Showcase({ itemPagingData }) {
   const [order, setOrder] = useState("최신순");
@@ -73,6 +74,7 @@ function ItemCard({ item }) {
   const isLogIn = useSelector(selectIsLogIn);
   const router = useRouter();
 
+  console.log(item);
   const handleClkBtnLike = async (e) => {
     e.preventDefault();
 
@@ -111,14 +113,30 @@ function ItemCard({ item }) {
               priority
             />
           )}
+          <span className="text--vs item-card__region">
+            {item.region
+              ? item.region.dong ||
+                item.region.district ||
+                item.region.city ||
+                "---"
+              : "•••"}
+          </span>
         </section>
-        <h3 className="item-card__title text--vs">{item.title}</h3>
+        <h3 className="item-card__title text--s">{item.title}</h3>
         <div className="item-card__indicator">
-          <i className="item-card__i-like" onClick={handleClkBtnLike}></i>
-          <span className="item-card__n-like text--vs">{item.dib_cnt}</span>
+          <i
+            className={
+              "item-card__i-like" +
+              (item.dib_state ? " item-card__i-like--clk" : "")
+            }
+            onClick={handleClkBtnLike}
+          ></i>
+          <span className="item-card__n-like text--s">{item.dib_cnt}</span>
           <i className="item-card__i-chat"></i>
-          <span className="item-card__n-chat text--vs">{item.deals_cnt}</span>
-          <span className="item-card__nick text--vs">{item.nick}</span>
+          <span className="item-card__n-chat text--s">{item.deals_cnt}</span>
+          <span className="item-card__nick text--s">
+            {timeConverter(item.wr_date)}
+          </span>
         </div>
       </Link>
     </li>

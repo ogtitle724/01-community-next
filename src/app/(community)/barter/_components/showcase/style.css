@@ -50,13 +50,15 @@
 .showcase__item-wrapper {
   width: 100%;
   height: auto;
+  padding: 0 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 160px);
+  grid-template-columns: repeat(auto-fill, 170px);
   grid-auto-rows: auto;
   justify-content: center;
   justify-items: center;
   align-items: center;
   gap: 15px;
+  row-gap: 24px;
 }
 
 .showcase__no-data {
@@ -66,40 +68,38 @@
 }
 
 .item-card {
-  --item-card-width: 160px;
-  --item-card-padding: 3px;
-  width: var(--item-card-width);
-  height: calc(var(--item-card-width) * 1.2);
+  width: 100%;
   padding: 0 0 var(--item-card-padding) 0;
   position: relative;
   border-radius: 4px;
   background-color: var(--color-body);
-  border: 1px solid var(--color-smoke-b);
   list-style: none;
-  overflow: hidden;
 }
 
 .item-card__a {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .item-card__img {
-  width: var(--item-card-width);
-  height: calc(var(--item-card-width) * 3 / 4);
+  width: 100%;
+  aspect-ratio: 1/1;
   position: relative;
+  border-radius: 4px;
+  overflow: hidden;
   background-color: var(--color-smoke-a);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.2);
 }
 
 .item-card__img img {
   object-fit: cover;
 }
 
-.item-card__no-img::after {
+.item-card__no-img::before {
   content: "";
   width: 100%;
   height: 100%;
@@ -115,36 +115,35 @@
 .item-card__title {
   flex-grow: 1;
   width: 100%;
-  padding: 8px 8px 0px 8px;
   display: block;
   text-overflow: ellipsis;
   overflow: hidden;
-  word-break: break-word;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  text-align: center;
+  white-space: nowrap;
 }
 
 .item-card__indicator {
-  width: var(--item-card-width);
-  padding: 5px;
+  width: 100%;
   position: relative;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .item-card__i-like {
-  width: 14px;
-  height: 14px;
+  width: 19px;
+  height: 19px;
   display: inline-block;
   background: url(/image/icon/heart.svg) no-repeat center;
   filter: invert(var(--icon-invert));
 }
 
+.item-card__i-like--clk {
+  background: url(/image/icon/heart-filled.svg) no-repeat center;
+}
+
 .item-card__i-chat {
-  width: 13px;
-  height: 13px;
+  width: 17px;
+  height: 17px;
   display: inline-block;
   background: url(/image/icon/chatbubble.svg) no-repeat center;
   filter: invert(var(--icon-invert));
@@ -162,8 +161,17 @@
 }
 
 .item-card__nick {
+  margin-left: auto;
+}
+
+.item-card__region {
+  padding: 2px 8px;
   position: absolute;
+  top: 5px;
   right: 5px;
+  background-color: var(--color-body);
+  border-radius: 6px;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
 }
 
 .showcase__btn-to-top {
