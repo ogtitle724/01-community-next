@@ -155,10 +155,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(/image/icon/image.svg);
+  /* background: url(/image/icon/image.svg); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 88%;
+  font-style: normal;
 }
 
 .board-item__title {

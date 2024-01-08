@@ -110,7 +110,9 @@ function Post({ post, isShowImg }) {
             <span className="board-item__tag--category text--vs">
               {post.tbl + (post.grp ? `/${post.grp}` : "")}
             </span>
-            {post.thumbnail && <i className="board-item__tag--img"></i>}
+            {post.thumbnail && (
+              <i className="board-item__tag--img text--m">🌇</i>
+            )}
           </div>
           <span className="board-item__title text--m">{post.title}</span>
         </div>

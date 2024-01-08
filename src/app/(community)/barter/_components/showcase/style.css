@@ -162,6 +162,9 @@
 
 .item-card__nick {
   margin-left: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .item-card__region {
@@ -196,9 +199,10 @@
   filter: invert(70%);
 }
 
-@media screen and (max-width: 576) {
+@media screen and (max-width: 576px) {
   .showcase__item-wrapper {
-    grid-template-columns: repeat(auto-fill, 150px);
+    padding: 0;
+    grid-template-columns: repeat(auto-fill, 155px);
   }
 
   .item-card {
