@@ -48,7 +48,6 @@ export default function ItemUpload() {
   const handleClkBtnUpload = async () => {
     if (uploadFlag.current) {
       uploadFlag.current = false;
-      setTimeout(() => (uploadFlag.current = true), 500);
     } else {
       return;
     }
@@ -125,6 +124,8 @@ export default function ItemUpload() {
       alert("글을 작성할 수 없습니다. \n", err.message);
       console.error(err.message);
     }
+
+    uploadFlag.current = true;
   };
 
   const handleSelectCity = (e) => {

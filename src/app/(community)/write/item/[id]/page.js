@@ -87,7 +87,6 @@ export default function ItemUpload({ params }) {
   const handleClkBtnUpload = async () => {
     if (uploadFlag.current) {
       uploadFlag.current = false;
-      setTimeout(() => (uploadFlag.current = true), 500);
     } else {
       return;
     }
@@ -177,6 +176,8 @@ export default function ItemUpload({ params }) {
     } catch (err) {
       console.error(err);
     }
+
+    uploadFlag.current = true;
   };
 
   const handleSelectCity = (e) => {
