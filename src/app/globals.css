@@ -86,6 +86,10 @@ button {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  cursor: pointer;
+}
+
 button {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -96,6 +100,7 @@ button {
   border-radius: 4px;
   background-color: transparent;
   font-weight: 700;
+  cursor: pointer;
 }
 
 input {

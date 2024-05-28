@@ -67,6 +67,7 @@ export default async function ItemDetailPage({ params }) {
           <ul className="suged-list__ul">
             {itemData.deals.content.length ? (
               itemData.deals.content.map((deal, idx) => {
+                console.log("deal------------", deal);
                 return (
                   <li
                     key={`item-${itemData.id}-deal-${idx}`}
@@ -89,7 +90,7 @@ export default async function ItemDetailPage({ params }) {
                       </Link>
                     </span>
                     <span className="suged-item__nick text--m">
-                      {"닉네임이 없다"}
+                      {deal.nick}
                     </span>
                   </li>
                 );

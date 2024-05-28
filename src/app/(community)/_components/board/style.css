@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.board * {
+  cursor: pointer;
+}
+
 .board__header {
   padding-bottom: 5px;
   display: flex;

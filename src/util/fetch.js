@@ -41,11 +41,17 @@ class Fetch {
 
     if (this.reqCount) {
       this.reqCount--;
-      let res = await fetch(url, newOptions);
-      if (!res.ok) throw Error(`${res.status} ${res.statusText}`);
 
-      res = await this.interceptRes(res);
-      return res;
+      try {
+        let res = await fetch(url, newOptions);
+        if (!res.ok) throw Error(`${res.status} ${res.statusText}`);
+
+        res = await this.interceptRes(res);
+        return res;
+      } catch (err) {
+        console.error("Request error:", err.message);
+        throw err;
+      }
     } else {
       setTimeout(() => {
         this.reqCount = 1000;

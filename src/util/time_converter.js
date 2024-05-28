@@ -1,5 +1,5 @@
 export default function timeConverter(wr_date, isChat = false) {
-  const date = new Date(wr_date);
+  const date = new Date(wr_date + "+09:00");
   let timeDisplay;
 
   if (isChat) {
@@ -13,8 +13,10 @@ export default function timeConverter(wr_date, isChat = false) {
     timeDisplay = `${diffMinutes}분전`;
   } else if (diffMinutes < 60 * 24) {
     timeDisplay = `${~~(diffMinutes / 60)}시간전`;
-  } else {
+  } else if (diffMinutes < 60 * 24 * 11) {
     timeDisplay = `${~~(diffMinutes / (60 * 24))}일전`;
+  } else {
+    timeDisplay = wr_date.slice(5, 10);
   }
 
   return timeDisplay;
