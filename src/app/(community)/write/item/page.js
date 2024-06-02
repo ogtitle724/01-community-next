@@ -23,7 +23,7 @@ export default function ItemUpload() {
   const [dong, setDong] = useState();
   const router = useRouter();
   const uploadFlag = useRef(true);
-
+  console.log(imgs);
   useEffect(() => {
     const getDistrict = async () => {
       try {
@@ -65,7 +65,7 @@ export default function ItemUpload() {
       }
 
       //aws createPreSignedPost를 이용해 클라이언트 사이드에서 s3업로드
-      const preSignedArgs = [];
+      /* const preSignedArgs = [];
       const preSignedUrl = [];
 
       //next api로 이미지의 key, type 전달
@@ -102,21 +102,29 @@ export default function ItemUpload() {
           preSignedUrl.push(url + fields.key);
           return fetch(url, { method: "POST", body: formData });
         })
-      );
+      ); */
 
-      const option = { headers: { "Content-Type": "application/json" } };
+      const formData = new FormData();
+
+      for (let i = 0; i < imgs.length; i++) {
+        formData.append("images", imgs[i]);
+      }
+
+      /* const option = { headers: { "Content-Type": "application/json" } }; */
       const body = JSON.stringify({
         title,
         content,
-        thumbnail: preSignedUrl[0],
-        imgSrc: preSignedUrl,
+        /* thumbnail: preSignedUrl[0],
+        imgSrc: preSignedUrl, */
         lv1: city,
         lv2: district,
         lv3: dong,
         regionCode: district && dong && districts[district][dong],
       });
 
-      await Fetch.post(process.env.NEXT_PUBLIC_PATH_ITEM, body, option);
+      formData.append("body", body);
+
+      await Fetch.post(process.env.NEXT_PUBLIC_PATH_ITEM, formData);
       revalidate();
       router.refresh();
       router.push(process.env.NEXT_PUBLIC_ROUTE_BARTER);
